@@ -61,7 +61,26 @@ MIN_EDGE = 0.05           # alert threshold
 ALERT_MINUTES = (14, 12, 10, 8, 6, 5, 4, 3, 2, 1)
 MIN_PRICE, MAX_PRICE = 0.05, 0.95
 MAX_SPREAD = 0.05
-ALERT_COOLDOWN_SEC = 240   # per contract, per side
+
+# ---------------------------------------------------------------------------
+# One alert per contract, and only for a signal that holds
+# ---------------------------------------------------------------------------
+# You can only take one position per 15-minute contract, so the bot should
+# only ever interrupt you once per contract. It fires at most one alert per
+# ticker, for the whole life of that contract.
+#
+# That raises the question of WHICH moment to fire on. The bot cannot see the
+# future, so it cannot wait for "the best" reading -- that would be
+# look-ahead. What it can do is refuse to fire on a single flicker.
+#
+# CONFIRM_POLLS requires the same side to stay above the threshold for that
+# many consecutive polls before alerting. At a 20-second poll, 3 means the
+# edge has to survive a full minute. This matters because of what we measured:
+# an apparent 12% edge turned out to be $13 of price-feed lag between Coinbase
+# and Kalshi's index. Lag-driven edges collapse within a poll or two. A real
+# mispricing should still be there a minute later.
+ONE_ALERT_PER_CONTRACT = True
+CONFIRM_POLLS = 3
 
 # No edge has survived out-of-sample testing. Until one does, every alert is
 # labelled. Do not flip this by hand -- let --score earn it.
@@ -307,14 +326,18 @@ def watch(quiet=False):
         fh.flush()
 
     tracker = PriceTracker()
-    last_alert = {}
+    alerted = set()        # tickers already alerted on -- never twice
+    streaks = {}           # ticker -> [side, consecutive_polls, peak_edge]
     seen = 0
 
     print("=" * 72)
     print("  KXBTC15M live monitor + forward test")
     print("=" * 72)
     print("  Recording every observation to %s" % PRED_LOG)
-    print("  Alert threshold: %.0f%% edge" % (100 * MIN_EDGE))
+    print("  Alert threshold: %.0f%% edge, held for %d consecutive polls "
+          "(%d sec)" % (100 * MIN_EDGE, CONFIRM_POLLS,
+                        CONFIRM_POLLS * POLL_SECONDS))
+    print("  Alert limit:     one per contract (one trade per 15 min)")
     print("  Phone alerts:    %s"
           % ("ntfy topic '%s'" % NTFY_TOPIC if NTFY_TOPIC
              else "off  (run --setup to enable)"))
@@ -376,18 +399,40 @@ def watch(quiet=False):
                              and MIN_PRICE <= mid <= MAX_PRICE
                              and abs(mins - nearest) < 0.5)
 
-                key = (m.get("ticker"), side)
-                fresh = time.time() - last_alert.get(key, 0) > ALERT_COOLDOWN_SEC
-                fire = tradeable and fresh and not quiet
+                tkr = m.get("ticker")
+
+                # --- confirmation streak ---------------------------------
+                st = streaks.get(tkr)
+                if tradeable:
+                    if st and st[0] == side:
+                        st[1] += 1
+                        st[2] = max(st[2], best)
+                    else:
+                        streaks[tkr] = [side, 1, best]
+                    st = streaks[tkr]
+                else:
+                    # signal broke -- most likely it was feed lag, not an edge
+                    streaks.pop(tkr, None)
+                    st = None
+
+                already = ONE_ALERT_PER_CONTRACT and tkr in alerted
+                confirmed = st is not None and st[1] >= CONFIRM_POLLS
+                fire = confirmed and not already and not quiet
+
+                if st and not confirmed and not already:
+                    print("      %s %s edge %.0f%% -- confirming %d/%d"
+                          % (tkr, side, 100 * best, st[1], CONFIRM_POLLS),
+                          flush=True)
+
                 if fire:
-                    last_alert[key] = time.time()
-                    notify("%s %s  edge %.0f%%" % (m.get("ticker"), side,
-                                                   100 * best),
+                    alerted.add(tkr)
+                    notify("%s %s  edge %.0f%%" % (tkr, side, 100 * best),
                            "model %.0f%% vs price %.0f%%  |  %.0f min left  |  "
-                           "BTC $%.0f vs strike $%.0f"
+                           "BTC $%.0f vs strike $%.0f  |  held %d polls (peak "
+                           "%.0f%%)"
                            % (100 * (p_yes if side == "YES" else 1 - p_yes),
                               100 * (yes_ask if side == "YES" else no_ask),
-                              mins, spot, strike))
+                              mins, spot, strike, st[1], 100 * st[2]))
 
                 writer.writerow({
                     "observed_at": now.isoformat(),
@@ -407,9 +452,16 @@ def watch(quiet=False):
                 seen += 1
 
             fh.flush()
-            print("  %s  BTC $%.0f  vol %.5f/min  %d live contracts  "
-                  "%d observations recorded"
-                  % (now.strftime("%H:%M:%S"), spot, vol, live, seen),
+            live_tickers = {m.get("ticker") for m in markets}
+            for gone in [t for t in streaks if t not in live_tickers]:
+                streaks.pop(gone, None)
+            if len(alerted) > 500:
+                alerted.clear()
+
+            print("  %s  BTC $%.0f  vol %.5f/min  %d live  "
+                  "%d observations  %d alerts sent"
+                  % (now.strftime("%H:%M:%S"), spot, vol, live, seen,
+                     len(alerted)),
                   flush=True)
             time.sleep(POLL_SECONDS)
 
