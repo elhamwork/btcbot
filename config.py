@@ -1,67 +1,29 @@
 """
 Central configuration for the BTC 15-minute Kalshi backtester.
 
-IMPORTANT — DATA MODE
-======================
-This project was built inside a sandboxed research/execution environment whose
-network egress proxy allowlists only a small set of domains (Anthropic infra,
-PyPI, npm, GitHub, JSR, crates.io, Go proxy). All attempts to reach:
-  - Kalshi's API (api.elections.kalshi.com, trading-api.kalshi.com,
-    docs.kalshi.com) -> blocked by the egress proxy (HTTP 403 on CONNECT).
-  - Binance, Coinbase, CoinGecko, Kraken, Bitstamp, Gemini, Yahoo Finance,
-    stooq.com -> all blocked by the egress proxy (HTTP 403 on CONNECT).
-  - Alpha Vantage's *intraday* crypto/equity endpoints (CRYPTO_INTRADAY,
-    TIME_SERIES_INTRADAY) -> reachable, but gated as premium-tier and refuse
-    to return data on the provided API key ("premium endpoint" rate_limit
-    error on every interval tried: 1min, 5min, 15min, 60min).
-were made and documented (see README.md "Data Sources & Limitations" and
-results/reports/data_quality_report.md for the exact commands/errors).
+DATA
+====
+This project runs on REAL market data:
 
-The ONLY real, verifiable market data obtainable in this environment is
-**daily** BTC/USD OHLCV via Alpha Vantage's DIGITAL_CURRENCY_DAILY endpoint
-(free tier), covering 2010-07-17 through the present. That data IS used, and
-IS real (see data/raw/_alphavantage_btc_daily_raw_response.json for the raw
-API response actually retrieved).
+  * Kalshi series KXBTC15M -- the genuine BTC 15-minute binary series.
+    One strike per event, set at spot when the contract opens, 96 contracts
+    per day. Collected via the public (no-account) Kalshi REST API:
+    settled contract metadata plus per-minute yes_bid / yes_ask candlesticks
+    for every contract's full 15-minute life.
 
-Kalshi's 15-minute BTC markets require MINUTE-level BTC price data and real
-Kalshi contract quotes/trades/settlements, neither of which is retrievable
-here. Per the project's explicit instructions, we do NOT fabricate data and
-present it as real. Instead, DATA_MODE below controls two honestly-labeled
-paths:
+  * BTC/USD 1-minute OHLCV from Coinbase (public API).
 
-  DATA_MODE = "real_daily_only"  -> only the real daily BTC series is loaded;
-       no 15-minute backtest is possible from it alone (daily bars cannot
-       support 14-minutes-to-0.5-minutes-remaining decision points).
-
-  DATA_MODE = "synthetic_demo"   -> (used for the actual pipeline run) minute
-       resolution BTC paths are SYNTHESIZED via a documented, seeded
-       geometric Brownian motion calibrated to the REAL realized daily
-       volatility/drift measured from the Alpha Vantage series, and Kalshi
-       15-minute contract quotes are SYNTHESIZED from that synthetic path
-       using a simple, documented, no-look-ahead probability model plus a
-       modeled bid/ask spread. Every synthetic file is named with a
-       "_SYNTHETIC" suffix, every row is tagged is_synthetic=True, and every
-       report generated from this data prominently states, in bold, that
-       results are NOT based on real Kalshi market data and must not be
-       interpreted as evidence of a real trading edge.
-
-This is a demo/placeholder mode whose sole purpose is to prove the pipeline
-(download -> clean -> feature-engineer -> backtest -> report) is architected
-correctly end-to-end, exactly as instructed when real data is unavailable.
+Both cover 2026-08-06 -> 2026-08-20. See results/reports/data_quality_report.md
+for the full audit and KNOWN LIMITATIONS.
 """
 
 import os
-from datetime import time
-
-# ---------------------------------------------------------------------------
-# Data mode
-# ---------------------------------------------------------------------------
-DATA_MODE = os.environ.get("BTCBOT_DATA_MODE", "synthetic_demo")  # or "real_daily_only"
 
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+REAL_DIR = os.path.join(BASE_DIR, "real_data")
 RAW_DIR = os.path.join(BASE_DIR, "data", "raw")
 PROCESSED_DIR = os.path.join(BASE_DIR, "data", "processed")
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
@@ -69,84 +31,121 @@ REPORTS_DIR = os.path.join(RESULTS_DIR, "reports")
 CHARTS_DIR = os.path.join(RESULTS_DIR, "charts")
 TRADES_DIR = os.path.join(RESULTS_DIR, "trades")
 
-REFERENCE_DIR = os.path.join(BASE_DIR, "data", "reference")
-# Real data actually fetched once via the Alpha Vantage MCP tool during this
-# project's research phase (no direct MCP-calling capability exists from a
-# standalone python process in this environment), checked into the repo
-# under data/reference/ (NOT gitignored, unlike data/raw/) so `--download`
-# is reproducible without needing a live MCP session. See README.
-ALPHAVANTAGE_DAILY_RAW_REFERENCE = os.path.join(REFERENCE_DIR, "alphavantage_btc_daily_raw_response.json")
-ALPHAVANTAGE_DAILY_RAW = os.path.join(RAW_DIR, "_alphavantage_btc_daily_raw_response.json")
-BTC_DAILY_REAL_CSV = os.path.join(RAW_DIR, "btc_daily_real.csv")
-BTC_MINUTE_SYNTHETIC_CSV = os.path.join(RAW_DIR, "btc_1min_SYNTHETIC.csv")
-KALSHI_CONTRACTS_SYNTHETIC_CSV = os.path.join(RAW_DIR, "kalshi_15min_contracts_SYNTHETIC.csv")
+CONTRACTS_CSV = os.path.join(REAL_DIR, "kalshi_15m_contracts.csv")
+CANDLES_CSV = os.path.join(REAL_DIR, "kalshi_15m_candlesticks.csv")
+BTC_CSV = os.path.join(REAL_DIR, "btc_1min.csv")
 
-BTC_PROCESSED_CSV = os.path.join(PROCESSED_DIR, "btc_1min_cleaned.csv")
-CONTRACTS_PROCESSED_CSV = os.path.join(PROCESSED_DIR, "kalshi_contracts_cleaned.csv")
-FEATURES_PROCESSED_CSV = os.path.join(PROCESSED_DIR, "features.csv")
+CLEAN_CONTRACTS = os.path.join(PROCESSED_DIR, "contracts_clean.parquet")
+CLEAN_CANDLES = os.path.join(PROCESSED_DIR, "candles_clean.parquet")
+CLEAN_BTC = os.path.join(PROCESSED_DIR, "btc_1min_clean.parquet")
+PANEL = os.path.join(PROCESSED_DIR, "decision_panel.parquet")
 
-DATA_QUALITY_REPORT = os.path.join(REPORTS_DIR, "data_quality_report.md")
-FINAL_REPORT = os.path.join(RESULTS_DIR, "final_report.md")
+for _d in (RAW_DIR, PROCESSED_DIR, REPORTS_DIR, CHARTS_DIR, TRADES_DIR):
+    os.makedirs(_d, exist_ok=True)
+
+SERIES_TICKER = "KXBTC15M"
 
 # ---------------------------------------------------------------------------
-# Synthetic data generation parameters (ONLY used when DATA_MODE == synthetic_demo)
+# Decision points -- minutes remaining before contract close.
+# Candles are 1-minute, so 0.5 minutes is NOT observable. Documented, not faked.
 # ---------------------------------------------------------------------------
-SYNTHETIC_RANDOM_SEED = 42
-SYNTHETIC_START = "2026-08-13T00:00:00Z"   # 7 days of synthetic minute data (small sample)
-SYNTHETIC_DAYS = 7
-SYNTHETIC_MINUTE_INTERVAL_SECONDS = 60
-# Bid/ask spread modeled around the fair YES probability, in probability points.
-SYNTHETIC_SPREAD_CENTS = 0.02  # i.e. 2 cents wide market on a $0-$1 contract, typical of liquid Kalshi 15m markets
+ENTRY_MINUTES_REMAINING = [14, 12, 10, 8, 6, 5, 4, 3, 2, 1]
+UNAVAILABLE_ENTRY_POINTS = [0.5]  # would require sub-minute data
 
 # ---------------------------------------------------------------------------
-# Kalshi 15-minute market mechanics
+# Chronological split (never random -- this is time series)
 # ---------------------------------------------------------------------------
-CONTRACT_DURATION_MINUTES = 15
-# Entry decision points, expressed as minutes-remaining-in-contract at which the
-# strategy is allowed to evaluate/enter a trade. No look-ahead: only data with
-# timestamp <= (window_close - minutes_remaining) may be used at each point.
-ENTRY_MINUTES_REMAINING = [14, 12, 10, 8, 6, 5, 4, 3, 2, 1, 0.5]
-
-# ---------------------------------------------------------------------------
-# Kalshi fee schedule
-# ---------------------------------------------------------------------------
-# Per Kalshi's published general fee schedule (documented in README.md ->
-# "Fee schedule" section; NOTE: could not be re-verified live in this
-# environment because docs.kalshi.com is network-blocked here, so this is
-# taken from Alpha's general knowledge of Kalshi's public fee schedule as of
-# its knowledge cutoff and clearly flagged as UNVERIFIED-LIVE in README).
-# Kalshi's standard trading fee formula: fee = round_up(0.07 * C * P * (1-P))
-# per contract, where C = number of contracts, P = price paid (in dollars,
-# 0 < P < 1). Applied on both entry and exit (maker rebates ignored here).
-KALSHI_FEE_RATE = 0.07
-KALSHI_FEE_ROUND_TO_CENT = True
-FEE_SCHEDULE_VERIFIED_LIVE = False  # see README limitations section
+TRAIN_FRAC = 0.60
+VALIDATION_FRAC = 0.20
+# remainder is the held-out TEST set, untouched while tuning
 
 # ---------------------------------------------------------------------------
 # Strategy / execution assumptions
 # ---------------------------------------------------------------------------
-MIN_EDGE = 0.05                      # minimum model-vs-market edge required to trade
+MIN_EDGE = 0.05
 MIN_EDGE_SWEEP = [0.05, 0.06, 0.07, 0.08, 0.10, 0.12, 0.15]
-POSITION_SIZE_FRACTIONS = [0.005, 0.01, 0.02, 0.05]   # fixed-fractional bankroll sizing options tested
-DEFAULT_POSITION_SIZE_FRACTION = 0.01
+
 STARTING_BANKROLL = 1000.0
+POSITION_FRACTION = 0.01
+POSITION_FRACTION_SWEEP = [0.005, 0.01, 0.02, 0.05]
 
-# Execution price assumption: we only have last/mid trade-derived synthetic
-# quotes (see limitation above) rather than a real limit order book, so YES
-# entries transact at the synthetic yes_ask and NO entries at the synthetic
-# no_ask (ask = fair_prob +/- half spread), documented in README.
-USE_ASK_FOR_ENTRY = True
+# Execution: we BUY, so we pay the ask.
+#   YES costs yes_ask
+#   NO  costs (1 - yes_bid)     [selling YES at the bid == buying NO]
+# No mid-price fills. No assumption of price improvement.
+MAX_SPREAD = 0.05          # skip if ask-bid wider than this
+MIN_PRICE = 0.05           # avoid lottery tickets and near-certainties
+MAX_PRICE = 0.95
+MIN_VOLUME_FP = 0.0        # candle volume filter (0 = off; data has 0% empty)
+SLIPPAGE = 0.00            # extra cents paid beyond the quoted ask
+ONE_TRADE_PER_CONTRACT = True
+
+# Kalshi trading fee: ceil(0.07 * contracts * P * (1-P)) in cents, charged on
+# entry. UNVERIFIED-LIVE: docs.kalshi.com was unreachable from the build
+# environment, so this comes from Kalshi's published general fee formula and
+# has not been confirmed against the live fee schedule. Settlement is assumed
+# free. Raise FEE_RATE to stress-test.
+FEE_RATE = 0.07
+FEE_SCHEDULE_VERIFIED_LIVE = False
+APPLY_FEES = True
 
 # ---------------------------------------------------------------------------
-# Train / validation / test chronological split (fractions of *time*, not rows)
+# Feature engine
 # ---------------------------------------------------------------------------
-TRAIN_FRACTION = 0.6
-VALIDATION_FRACTION = 0.2
-TEST_FRACTION = 0.2
+VOL_WINDOWS = [1, 5, 15]
+MOMENTUM_WINDOWS = [1, 3, 5, 10]
+EMA_SPANS = [9, 21, 50]
+RSI_PERIOD = 14
+ATR_PERIOD = 14
+REL_VOLUME_WINDOW = 20
+WARMUP_MINUTES = 60        # BTC history required before a decision is usable
+
+# Volatility regime cut points (quantiles of realized 5m vol, fit on TRAIN only)
+VOL_REGIME_QUANTILES = [0.25, 0.50, 0.75]
+VOL_REGIME_LABELS = ["LOW", "NORMAL", "HIGH", "EXTREME"]
 
 # ---------------------------------------------------------------------------
-# Baseline model features (Strategy A: heuristic/logistic on minimal features)
+# Feature sets per strategy
 # ---------------------------------------------------------------------------
-BASELINE_FEATURES = ["strike_distance_pct", "minutes_remaining", "realized_vol_5m"]
+FEATURES_BASELINE = [        # Strategy A: distance, time, volatility only
+    "dist_pct", "minutes_remaining", "rv_5m", "z_score",
+]
 
-RANDOM_SEED = 1337
+FEATURES_TECHNICAL = FEATURES_BASELINE + [   # Strategy B
+    "ret_1m", "ret_3m", "ret_5m", "ret_10m",
+    "ema9_rel", "ema21_rel", "ema50_rel",
+    "rsi", "vwap_rel", "rel_volume", "volume_accel",
+    "rv_1m", "rv_15m", "atr_pct",
+]
+
+# ---------------------------------------------------------------------------
+# Analysis buckets
+# ---------------------------------------------------------------------------
+EDGE_BUCKETS = [0.0, 0.05, 0.075, 0.10, 0.15, 1.0]
+EDGE_LABELS = ["0-5%", "5-7.5%", "7.5-10%", "10-15%", "15%+"]
+
+TIME_BUCKETS = [0, 1, 3, 5, 8, 12, 15]
+TIME_LABELS = ["0-1m", "1-3m", "3-5m", "5-8m", "8-12m", "12-15m"]
+
+PRICE_BUCKETS = [0.0, .10, .20, .30, .40, .50, .60, .70, .80, .90, 1.0]
+PRICE_LABELS = ["0-10c", "10-20c", "20-30c", "30-40c", "40-50c",
+                "50-60c", "60-70c", "70-80c", "80-90c", "90-100c"]
+
+BOOTSTRAP_SAMPLES = 10000
+RANDOM_SEED = 7
+
+# ---------------------------------------------------------------------------
+# Overfitting ledger -- every configuration evaluated gets counted.
+# ---------------------------------------------------------------------------
+SEARCH_LOG = os.path.join(REPORTS_DIR, "search_log.csv")
+
+# ---------------------------------------------------------------------------
+# BTC bar clock convention
+# ---------------------------------------------------------------------------
+# Coinbase labels each 1-minute bucket at its START. Adding one minute
+# re-labels bars to BAR-END, so the row labelled T is the bar that ended at T
+# and its close is the last price observable at T. Without this the feature
+# engine reads a price one minute into the future.
+# data/cleaner.py::_check_alignment verifies this against settlement and
+# strike-at-open and fails loudly if it is wrong.
+BTC_BAR_SHIFT_MINUTES = 1

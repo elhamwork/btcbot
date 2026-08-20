@@ -1,12 +1,20 @@
 """
-features/feature_engine.py
-===========================
-Builds the full feature set (per project FEATURE SPEC) at every Kalshi
-contract decision-row, using ONLY BTC price history up to and including that
-row's own timestamp. No future BTC bars, no future contract prices, and no
-post-settlement information (settled_yes / settle_price) are ever read while
-computing a feature -- those columns are carried through separately for
-labeling/backtesting only, and a look-ahead assertion checks this at the end.
+Build the decision panel: one row per (contract, minutes_remaining).
+
+LOOK-AHEAD DISCIPLINE
+=====================
+Indicators are computed once over the full BTC series, then a decision at
+timestamp T is joined to the BTC row at exactly T. Because every indicator in
+indicators.py is causal, the BTC row at T contains only information from bars
+<= T.
+
+The contract-side quote at a decision is the candle whose period ENDS at T,
+i.e. the last fully observed minute. Nothing from later in the contract's life
+touches the row. The label is the contract's settled result, which is used for
+scoring only -- never as an input.
+
+verify_no_lookahead() re-derives a sample of rows from a truncated history and
+asserts the values match, so the discipline is tested rather than asserted.
 """
 
 import numpy as np
@@ -16,118 +24,149 @@ import config
 from features import indicators as ind
 
 
-def _compute_btc_indicators(btc):
-    """All indicators computed causally (rolling/ewm, backward-looking only)."""
-    btc = btc.sort_values("timestamp").reset_index(drop=True).copy()
-    btc["log_ret_1m"] = np.log(btc["close"] / btc["close"].shift(1))
+# ---------------------------------------------------------------------------
+# BTC-side features
+# ---------------------------------------------------------------------------
 
-    btc["ema9"] = ind.ema(btc["close"], 9)
-    btc["ema21"] = ind.ema(btc["close"], 21)
-    btc["ema50"] = ind.ema(btc["close"], 50)
-    btc["rsi14"] = ind.rsi(btc["close"], 14)
-    btc["atr14"] = ind.atr(btc, 14)
-    btc["vwap20"] = ind.vwap_rolling(btc, 20)
+def build_btc_features(btc):
+    df = btc.sort_values("timestamp").reset_index(drop=True).copy()
+    c, h, l, v = df["close"], df["high"], df["low"], df["volume"]
 
-    btc["vol_1m"] = btc["log_ret_1m"].abs()
-    btc["vol_5m"] = ind.realized_vol(btc["log_ret_1m"], 5)
-    btc["vol_15m"] = ind.realized_vol(btc["log_ret_1m"], 15)
+    for w in config.VOL_WINDOWS:
+        df["rv_%dm" % w] = ind.realized_vol(c, w if w > 1 else 2)
 
-    btc["ret_1m"] = btc["close"].pct_change(1)
-    btc["ret_3m"] = btc["close"].pct_change(3)
-    btc["ret_5m"] = btc["close"].pct_change(5)
-    btc["ret_10m"] = btc["close"].pct_change(10)
+    for w in config.MOMENTUM_WINDOWS:
+        df["ret_%dm" % w] = ind.pct_return(c, w)
 
-    btc["vol_avg_20m"] = btc["volume"].rolling(20, min_periods=1).mean()
-    btc["rel_volume"] = btc["volume"] / btc["vol_avg_20m"].replace(0, np.nan)
-    btc["vol_accel"] = btc["volume"].pct_change(1)
+    for span in config.EMA_SPANS:
+        e = ind.ema(c, span)
+        df["ema%d" % span] = e
+        df["ema%d_rel" % span] = c / e - 1.0
 
-    return btc
+    df["rsi"] = ind.rsi(c, config.RSI_PERIOD)
+    df["atr"] = ind.atr(h, l, c, config.ATR_PERIOD)
+    df["atr_pct"] = df["atr"] / c
 
+    df["vwap"] = ind.rolling_vwap(c, v, config.REL_VOLUME_WINDOW)
+    df["vwap_rel"] = c / df["vwap"] - 1.0
 
-def build_features(btc_minute, contracts):
-    """Merge contract decision-rows with the causal BTC indicator snapshot at
-    the SAME timestamp (as-of merge, backward direction only -> the only BTC
-    row usable is one with timestamp <= contract row timestamp, which for our
-    minute-aligned synthetic data is an exact match, but we use merge_asof
-    with direction='backward' defensively in case of any misalignment)."""
-    btc_ind = _compute_btc_indicators(btc_minute)
+    df["rel_volume"] = ind.relative_volume(v, config.REL_VOLUME_WINDOW)
+    df["volume_accel"] = ind.volume_acceleration(v, config.REL_VOLUME_WINDOW)
 
-    contracts = contracts.sort_values("timestamp").reset_index(drop=True)
-    btc_ind_sorted = btc_ind.sort_values("timestamp").reset_index(drop=True)
-
-    merged = pd.merge_asof(
-        contracts, btc_ind_sorted,
-        on="timestamp", direction="backward", suffixes=("", "_btc"),
-    )
-
-    merged["strike_distance"] = merged["btc_price"] - merged["strike"]
-    merged["strike_distance_pct"] = merged["strike_distance"] / merged["strike"]
-    merged["seconds_remaining"] = merged["minutes_remaining"] * 60.0
-    merged["price_over_ema9"] = merged["close"] / merged["ema9"] - 1
-    merged["price_over_ema21"] = merged["close"] / merged["ema21"] - 1
-    merged["price_over_ema50"] = merged["close"] / merged["ema50"] - 1
-
-    feature_cols = [
-        "btc_price", "strike_distance", "strike_distance_pct",
-        "seconds_remaining", "minutes_remaining",
-        "vol_1m", "vol_5m", "vol_15m", "atr14",
-        "ret_1m", "ret_3m", "ret_5m", "ret_10m",
-        "ema9", "ema21", "ema50", "price_over_ema9", "price_over_ema21", "price_over_ema50",
-        "rsi14", "vwap20",
-        "rel_volume", "vol_accel",
-    ]
-    keep_cols = [
-        "ticker", "timestamp", "window_start", "window_end", "minutes_remaining",
-        "strike", "yes_bid", "yes_ask", "no_bid", "no_ask", "fair_yes_prob_model",
-        "settled_yes", "settle_price", "is_synthetic",
-    ] + feature_cols
-    keep_cols = [c for c in dict.fromkeys(keep_cols)]  # dedupe, preserve order
-    out = merged[keep_cols].copy()
-
-    # fill early-window NaNs (insufficient history for rolling windows) with
-    # neutral/backward-fill values -- documented, not forward-looking.
-    for c in feature_cols:
-        out[c] = out[c].bfill().fillna(0)
-
-    return out, feature_cols
+    df["btc_price"] = c
+    df["bars_seen"] = np.arange(len(df))
+    return df
 
 
-def _assert_no_lookahead(btc_minute, contracts, features_df, feature_cols, n_checks=200):
-    """Spot-check: for a random sample of decision rows, recompute the same
-    feature using ONLY BTC data with timestamp <= that row's timestamp, and
-    confirm it matches the pipeline's value. This directly guards against
-    accidental use of future bars in the merge/rolling computation."""
-    rng = np.random.RandomState(0)
-    idx = rng.choice(len(features_df), size=min(n_checks, len(features_df)), replace=False)
-    btc_ind = _compute_btc_indicators(btc_minute)
-    mismatches = 0
+BTC_FEATURE_COLS = None
+
+
+def _btc_cols(bf):
+    global BTC_FEATURE_COLS
+    if BTC_FEATURE_COLS is None:
+        BTC_FEATURE_COLS = [c for c in bf.columns
+                            if c not in ("timestamp", "open", "high", "low",
+                                         "close", "volume")]
+    return BTC_FEATURE_COLS
+
+
+# ---------------------------------------------------------------------------
+# Decision panel
+# ---------------------------------------------------------------------------
+
+def build_panel(contracts, candles, btc):
+    bf = build_btc_features(btc)
+    bf_idx = bf.set_index("timestamp")
+
+    cand = candles.copy()
+    cand["ts"] = pd.to_datetime(cand["ts"], utc=True)
+
+    con = contracts[["ticker", "open_time", "close_time", "floor_strike",
+                     "result", "volume_fp", "open_interest_fp"]].copy()
+
+    m = cand.merge(con, on="ticker", how="inner")
+
+    # minutes remaining at the close of this candle's minute
+    m["minutes_remaining"] = (
+        (m["close_time"] - m["ts"]).dt.total_seconds() / 60.0).round().astype(int)
+    m = m[m["minutes_remaining"].isin(config.ENTRY_MINUTES_REMAINING)]
+
+    # join BTC state as of exactly this timestamp
+    joined = m.join(bf_idx[_btc_cols(bf)], on="ts")
+
+    # require enough BTC warm-up for indicators to be defined
+    joined = joined[joined["bars_seen"] >= config.WARMUP_MINUTES]
+
+    # ---- contract-relative features ------------------------------------
+    S = joined["btc_price"]
+    K = joined["floor_strike"]
+    joined["dist_abs"] = S - K
+    joined["dist_pct"] = S / K - 1.0
+    joined["seconds_remaining"] = joined["minutes_remaining"] * 60.0
+
+    # z-score under a driftless GBM over the remaining window: the natural
+    # coordinate for "will spot finish above the strike". Built from the three
+    # baseline inputs (distance, time, volatility) -- no extra information.
+    T = joined["minutes_remaining"].clip(lower=1e-9)
+    sigma = joined["rv_5m"].replace(0.0, np.nan)
+    joined["z_score"] = np.log(S / K) / (sigma * np.sqrt(T))
+    joined["z_score"] = joined["z_score"].replace([np.inf, -np.inf], np.nan)
+
+    # ---- market quotes --------------------------------------------------
+    joined["yes_bid"] = joined["yes_bid_close_dollars"]
+    joined["yes_ask"] = joined["yes_ask_close_dollars"]
+    joined["no_bid"] = 1.0 - joined["yes_ask"]
+    joined["no_ask"] = 1.0 - joined["yes_bid"]
+    joined["mid"] = (joined["yes_bid"] + joined["yes_ask"]) / 2.0
+    joined["spread"] = joined["yes_ask"] - joined["yes_bid"]
+    joined["candle_volume"] = joined["volume_fp_x"] if "volume_fp_x" in joined \
+        else joined["volume_fp"]
+
+    # ---- label (scoring only) -------------------------------------------
+    joined["y"] = (joined["result"] == "yes").astype(int)
+
+    keep = ([
+        "ticker", "ts", "close_time", "open_time", "minutes_remaining",
+        "seconds_remaining", "floor_strike", "btc_price", "dist_abs",
+        "dist_pct", "z_score", "yes_bid", "yes_ask", "no_bid", "no_ask",
+        "mid", "spread", "candle_volume", "open_interest_fp", "y", "result",
+    ] + [c for c in _btc_cols(bf) if c not in ("btc_price", "bars_seen")])
+
+    panel = joined[[c for c in keep if c in joined.columns]].copy()
+    panel = panel.sort_values(["close_time", "minutes_remaining"]).reset_index(drop=True)
+    return panel
+
+
+# ---------------------------------------------------------------------------
+# Look-ahead verification
+# ---------------------------------------------------------------------------
+
+def verify_no_lookahead(btc, n_samples=200, seed=7):
+    """
+    Recompute features using ONLY history up to T and compare with the
+    full-series computation. Any indicator that peeked at future bars would
+    disagree. Returns (n_checked, n_mismatched, worst_abs_diff).
+    """
+    rng = np.random.default_rng(seed)
+    full = build_btc_features(btc)
+    cols = [c for c in _btc_cols(full) if c != "bars_seen"]
+
+    idx = rng.choice(np.arange(config.WARMUP_MINUTES + 60, len(full)),
+                     size=min(n_samples, len(full) - config.WARMUP_MINUTES - 60),
+                     replace=False)
+
+    mismatched, worst = 0, 0.0
     for i in idx:
-        row = features_df.iloc[i]
-        ts = row["timestamp"]
-        visible = btc_ind[btc_ind["timestamp"] <= ts]
-        if visible.empty:
+        truncated = build_btc_features(btc.iloc[: i + 1])
+        a = full.iloc[i][cols].astype(float)
+        b = truncated.iloc[-1][cols].astype(float)
+        both = a.notna() & b.notna()
+        if not both.any():
             continue
-        last_visible_close = visible.iloc[-1]["close"]
-        # the feature's underlying btc_price must never exceed what was
-        # visible at ts (i.e. must equal the last visible close, and no
-        # row with timestamp > ts could have contributed to it).
-        future = btc_ind[btc_ind["timestamp"] > ts]
-        if not future.empty and row["btc_price"] in future["close"].values and row["btc_price"] not in visible["close"].values:
-            mismatches += 1
-    assert mismatches == 0, f"LOOK-AHEAD DETECTED in {mismatches} sampled rows!"
-    print(f"[feature_engine] Look-ahead spot-check passed on {len(idx)} sampled rows (0 mismatches).")
-
-
-def run():
-    from data import loader
-    btc = loader.load_btc_minute()
-    contracts = loader.load_kalshi_contracts()
-    features, feature_cols = build_features(btc, contracts)
-    _assert_no_lookahead(btc, contracts, features, feature_cols)
-    features.to_csv(config.FEATURES_PROCESSED_CSV, index=False)
-    print(f"[feature_engine] Wrote {len(features)} feature rows -> {config.FEATURES_PROCESSED_CSV}")
-    return features, feature_cols
-
-
-if __name__ == "__main__":
-    run()
+        diff = (a[both] - b[both]).abs()
+        scale = a[both].abs().clip(lower=1e-9)
+        rel = (diff / scale).max()
+        worst = max(worst, float(rel))
+        if rel > 1e-8:
+            mismatched += 1
+    return len(idx), mismatched, worst

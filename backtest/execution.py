@@ -1,31 +1,52 @@
-"""backtest/execution.py -- order pricing & fee model."""
+"""
+Execution assumptions. Deliberately pessimistic where there is doubt.
+
+  * A YES purchase pays `yes_ask`. A NO purchase pays `1 - yes_bid`.
+    We never assume a mid-price fill and never assume price improvement.
+  * Optional fixed slippage is added on top of the quoted ask.
+  * Kalshi's published fee formula is charged on entry.
+  * Settlement pays $1 per winning contract, $0 per loser.
+"""
 
 import math
+
 import config
 
 
-def kalshi_fee(price, contracts):
-    """Kalshi's published per-contract trading fee formula:
-    fee = round_up(0.07 * C * P * (1-P)), applied per side (documented
-    UNVERIFIED-LIVE in README because docs.kalshi.com is network-blocked in
-    this environment; taken from general knowledge of Kalshi's public fee
-    schedule)."""
-    raw = config.KALSHI_FEE_RATE * contracts * price * (1 - price)
-    if config.KALSHI_FEE_ROUND_TO_CENT:
-        return math.ceil(raw * 100) / 100.0
-    return raw
-
-
 def entry_price(row, side):
-    """No real order-book data is available (see README) -- entries transact
-    at the modeled ask (yes_ask for YES, no_ask for NO), per config.USE_ASK_FOR_ENTRY."""
-    if side == "YES":
-        return row["yes_ask"]
-    else:
-        return row["no_ask"]
+    """Cost per contract, including slippage. None if unquotable."""
+    px = row["yes_ask"] if side == "YES" else row["no_ask"]
+    if px is None or not (0.0 < px < 1.0):
+        return None
+    return min(px + config.SLIPPAGE, 0.99)
 
 
-def settle_payout(row, side):
-    """$1 per contract if the side won, else $0 (Kalshi binary settlement)."""
-    won = (row["settled_yes"] == 1 and side == "YES") or (row["settled_yes"] == 0 and side == "NO")
-    return 1.0 if won else 0.0
+def fee(contracts, price):
+    """Kalshi trading fee in dollars: ceil(rate * C * P * (1-P)) cents.
+
+    UNVERIFIED-LIVE -- see config.FEE_SCHEDULE_VERIFIED_LIVE.
+    """
+    if not config.APPLY_FEES or contracts <= 0:
+        return 0.0
+    cents = math.ceil(config.FEE_RATE * contracts * price * (1.0 - price) * 100.0)
+    return cents / 100.0
+
+
+def tradeable(row):
+    """Liquidity / sanity gates. Returns (ok, reason)."""
+    if row["spread"] > config.MAX_SPREAD:
+        return False, "spread"
+    if not (config.MIN_PRICE <= row["mid"] <= config.MAX_PRICE):
+        return False, "price_band"
+    if config.MIN_VOLUME_FP and row.get("candle_volume", 0) < config.MIN_VOLUME_FP:
+        return False, "volume"
+    if row["yes_ask"] <= row["yes_bid"]:
+        return False, "no_spread"
+    return True, ""
+
+
+def settle(side, result, contracts, cost_basis, fees):
+    """Realised P&L in dollars for a settled position."""
+    won = (side == "YES" and result == "yes") or (side == "NO" and result == "no")
+    payout = contracts * 1.0 if won else 0.0
+    return payout - cost_basis - fees, won

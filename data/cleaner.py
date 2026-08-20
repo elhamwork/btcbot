@@ -1,175 +1,302 @@
 """
-data/cleaner.py
-================
-Data-quality checks + cleaning for both the BTC price series and the Kalshi
-contract series. Nothing is silently dropped: every removal/adjustment is
-counted and written into results/reports/data_quality_report.md.
+Data quality audit + cleaning for the real KXBTC15M dataset.
 
-Checks implemented (per project spec):
-  - missing timestamps / gaps
-  - duplicate timestamps/rows
-  - incorrect / non-monotonic strikes
-  - impossible prices (negative, or > $1 for probability-priced Kalshi legs;
-    negative/zero for BTC price)
-  - missing settlements
-  - gaps in BTC data
-  - overlapping contracts (same ticker rows outside its own window)
-  - bad expiration times (window_end <= window_start, or wrong duration)
-  - timezone issues (non-UTC / unparsable timestamps)
+Nothing is silently dropped. Every exclusion is counted, explained, and
+written to results/reports/data_quality_report.md.
 """
 
-import os
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 import config
+from data import loader
+
+CHECKS = []      # (name, detail, n_affected, action)
 
 
-def _log(lines, msg):
-    print(f"[cleaner] {msg}")
-    lines.append(msg)
+def _chk(name, detail, n, action):
+    CHECKS.append({"check": name, "detail": detail, "rows_affected": int(n),
+                   "action": action})
 
 
-def clean_btc_minute(df, lines):
-    n0 = len(df)
-    df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True, errors="coerce")
-    bad_ts = df["timestamp"].isna().sum()
-    if bad_ts:
-        _log(lines, f"BTC minute data: dropped {bad_ts} rows with unparsable/non-UTC timestamps.")
-        df = df[df["timestamp"].notna()]
 
-    dupes = df.duplicated(subset=["timestamp"]).sum()
-    if dupes:
-        _log(lines, f"BTC minute data: dropped {dupes} duplicate-timestamp rows (kept first).")
-        df = df.drop_duplicates(subset=["timestamp"], keep="first")
+def _check_alignment(contracts, btc, shifts=(-2, -1, 0, 1, 2)):
+    """
+    Independently verify that the BTC clock lines up with Kalshi's.
 
-    df = df.sort_values("timestamp").reset_index(drop=True)
+    Two anchors, neither of which the model ever sees:
 
-    impossible = df[(df["close"] <= 0) | (df["open"] <= 0) | (df["high"] <= 0) | (df["low"] <= 0)]
-    if len(impossible):
-        _log(lines, f"BTC minute data: dropped {len(impossible)} rows with impossible (<=0) prices.")
-        df = df.drop(impossible.index)
+      settlement  the result depends on spot at expiry, so the bar at
+                  close_time should reproduce `result` better than any
+                  shifted bar.
+      strike      Kalshi fixes the strike at spot when the contract opens, so
+                  the bar at open_time should sit closest to floor_strike.
 
-    # OHLC consistency: high must be >= max(open,close), low <= min(open,close)
-    bad_ohlc = df[(df["high"] < df[["open", "close"]].max(axis=1)) | (df["low"] > df[["open", "close"]].min(axis=1))]
-    if len(bad_ohlc):
-        _log(lines, f"BTC minute data: found {len(bad_ohlc)} rows with inconsistent OHLC "
-                     f"(high<max(open,close) or low>min(open,close)); clipped high/low to fix rather than drop.")
-        df.loc[bad_ohlc.index, "high"] = df.loc[bad_ohlc.index, ["open", "close", "high"]].max(axis=1)
-        df.loc[bad_ohlc.index, "low"] = df.loc[bad_ohlc.index, ["open", "close", "low"]].min(axis=1)
+    If either anchor prefers a shifted bar, the series is misaligned: a
+    negative best shift means the frame is running ahead of reality
+    (look-ahead), a positive one means it lags. Both should be 0.
+    """
+    bi = btc.set_index("timestamp")["close"]
 
-    # Gap detection (expected 1-minute cadence)
-    diffs = df["timestamp"].diff().dropna()
-    expected = pd.Timedelta(seconds=config.SYNTHETIC_MINUTE_INTERVAL_SECONDS)
-    gaps = diffs[diffs > expected]
-    if len(gaps):
-        total_missing = int((gaps / expected).sum() - len(gaps))
-        _log(lines, f"BTC minute data: found {len(gaps)} gaps totalling ~{total_missing} missing minute bars "
-                     f"(NOT backfilled/fabricated -- left as real gaps).")
-    else:
-        _log(lines, "BTC minute data: no timestamp gaps detected (continuous minute cadence).")
+    best_s, best_s_score = None, -1.0
+    best_k, best_k_score = None, float("inf")
+    detail = {}
+    for sh in shifts:
+        t_close = contracts["close_time"] + pd.Timedelta(minutes=sh)
+        px = t_close.map(bi)
+        m = px.notna()
+        agree = float((np.where(px[m] >= contracts["floor_strike"][m], "yes", "no")
+                       == contracts["result"][m]).mean()) if m.any() else 0.0
 
-    _log(lines, f"BTC minute data: {n0} raw rows -> {len(df)} cleaned rows.")
-    return df
+        t_open = contracts["open_time"] + pd.Timedelta(minutes=sh)
+        gap = float((contracts["floor_strike"] - t_open.map(bi)).abs().median())
 
+        detail[sh] = {"settlement_agreement": agree, "median_strike_gap": gap}
+        if agree > best_s_score:
+            best_s_score, best_s = agree, sh
+        if gap < best_k_score:
+            best_k_score, best_k = gap, sh
 
-def clean_kalshi_contracts(df, lines):
-    n0 = len(df)
-    for col in ["timestamp", "window_start", "window_end"]:
-        df[col] = pd.to_datetime(df[col], utc=True, errors="coerce")
-    bad_ts = df[["timestamp", "window_start", "window_end"]].isna().any(axis=1).sum()
-    if bad_ts:
-        _log(lines, f"Kalshi contracts: dropped {bad_ts} rows with unparsable timestamps.")
-        df = df[df[["timestamp", "window_start", "window_end"]].notna().all(axis=1)]
-
-    dupes = df.duplicated(subset=["ticker", "timestamp"]).sum()
-    if dupes:
-        _log(lines, f"Kalshi contracts: dropped {dupes} duplicate (ticker,timestamp) rows.")
-        df = df.drop_duplicates(subset=["ticker", "timestamp"], keep="first")
-
-    # Impossible prices: Kalshi contracts are priced in probability space (0,1) i.e. 1c-99c.
-    price_cols = ["yes_bid", "yes_ask", "no_bid", "no_ask"]
-    impossible = df[(df[price_cols] < 0).any(axis=1) | (df[price_cols] > 1).any(axis=1)]
-    if len(impossible):
-        _log(lines, f"Kalshi contracts: dropped {len(impossible)} rows with impossible prices "
-                     f"(negative, or >$1 on a $0-$1 contract).")
-        df = df.drop(impossible.index)
-
-    # Bad expiration / duration
-    dur = (df["window_end"] - df["window_start"]).dt.total_seconds() / 60.0
-    bad_dur = df[(df["window_end"] <= df["window_start"]) | (dur.round(3) != config.CONTRACT_DURATION_MINUTES)]
-    if len(bad_dur):
-        _log(lines, f"Kalshi contracts: dropped {len(bad_dur)} rows with bad expiration "
-                     f"(window_end<=window_start or duration != {config.CONTRACT_DURATION_MINUTES}m).")
-        df = df.drop(bad_dur.index)
-
-    # Overlapping contracts: a row's timestamp must fall within its own [window_start, window_end)
-    outside = df[(df["timestamp"] < df["window_start"]) | (df["timestamp"] >= df["window_end"])]
-    if len(outside):
-        _log(lines, f"Kalshi contracts: dropped {len(outside)} rows whose timestamp fell outside "
-                     f"their own contract window (overlap/misalignment).")
-        df = df.drop(outside.index)
-
-    # Missing settlement
-    missing_settle = df["settled_yes"].isna().sum()
-    if missing_settle:
-        _log(lines, f"Kalshi contracts: {missing_settle} rows missing settlement -- dropped "
-                     f"(cannot backtest an unresolved contract).")
-        df = df[df["settled_yes"].notna()]
-
-    # Non-monotonic / incorrect strike within a single contract ticker (strike should be constant per window)
-    strike_nunique = df.groupby("ticker")["strike"].nunique()
-    bad_tickers = strike_nunique[strike_nunique > 1].index
-    if len(bad_tickers):
-        _log(lines, f"Kalshi contracts: {len(bad_tickers)} tickers had a non-constant strike within "
-                     f"their own window -- dropped all rows for those tickers.")
-        df = df[~df["ticker"].isin(bad_tickers)]
-
-    df = df.sort_values(["ticker", "timestamp"]).reset_index(drop=True)
-    _log(lines, f"Kalshi contracts: {n0} raw rows -> {len(df)} cleaned rows across {df['ticker'].nunique()} contracts.")
-    return df
+    return {
+        "best_shift_settlement": best_s,
+        "best_shift_strike": best_k,
+        "aligned": best_s == 0 and best_k == 0,
+        "detail": detail,
+    }
 
 
-def run():
-    os.makedirs(config.PROCESSED_DIR, exist_ok=True)
-    os.makedirs(config.REPORTS_DIR, exist_ok=True)
-    lines = []
-    lines.append("# Data Quality Report\n")
-    lines.append(f"Generated by `data/cleaner.py`. DATA_MODE = `{config.DATA_MODE}`.\n")
-    lines.append(
-        "**IMPORTANT: this report covers a SYNTHETIC demo dataset, not real Kalshi "
-        "market data.** See README.md \"Data Sources & Limitations\" for why: Kalshi's "
-        "API and every public crypto-exchange API tried were blocked by this "
-        "environment's network egress policy, and Alpha Vantage's intraday endpoints "
-        "are premium-gated on the available key. Only real DAILY BTC/USD data "
-        "(data/raw/btc_daily_real.csv) was obtainable; everything at minute/15-minute "
-        "resolution here is a documented, seeded, reproducible synthetic generation, "
-        "clearly flagged `is_synthetic=True` in every row.\n"
-    ) if config.DATA_MODE == "synthetic_demo" else None
+def clean():
+    contracts = loader.load_raw_contracts()
+    candles = loader.load_raw_candles()
+    btc = loader.load_raw_btc()
 
-    btc_raw_path = config.BTC_MINUTE_SYNTHETIC_CSV if config.DATA_MODE == "synthetic_demo" else config.BTC_DAILY_REAL_CSV
-    kalshi_raw_path = config.KALSHI_CONTRACTS_SYNTHETIC_CSV
+    n_c0, n_k0, n_b0 = len(contracts), len(candles), len(btc)
 
-    lines.append("## BTC price data\n")
-    btc = pd.read_csv(btc_raw_path)
-    btc_clean = clean_btc_minute(btc, lines) if "timestamp" in btc.columns else btc
-    btc_clean.to_csv(config.BTC_PROCESSED_CSV, index=False)
+    # ---------------- BTC price series ----------------------------------
+    dup_b = btc["timestamp"].duplicated().sum()
+    btc = btc.drop_duplicates("timestamp", keep="first")
+    _chk("BTC duplicate timestamps", "identical minute repeated", dup_b,
+         "dropped duplicates, kept first" if dup_b else "none found")
 
-    lines.append("\n## Kalshi contract data\n")
-    kalshi = pd.read_csv(kalshi_raw_path)
-    kalshi_clean = clean_kalshi_contracts(kalshi, lines)
-    kalshi_clean.to_csv(config.CONTRACTS_PROCESSED_CSV, index=False)
+    gaps = btc["timestamp"].diff().dt.total_seconds()
+    n_gap = int((gaps > 60).sum())
+    missing_minutes = int(((gaps[gaps > 60] / 60) - 1).sum()) if n_gap else 0
+    _chk("BTC gaps", "%d breaks totalling %d missing minutes"
+         % (n_gap, missing_minutes), missing_minutes,
+         "left as gaps; NOT interpolated (would invent prices)")
 
-    lines.append("\n## Summary\n")
-    lines.append(f"- BTC rows: {len(btc)} raw -> {len(btc_clean)} cleaned")
-    lines.append(f"- Kalshi contract-rows: {len(kalshi)} raw -> {len(kalshi_clean)} cleaned")
-    lines.append(f"- Distinct Kalshi contracts (windows): {kalshi_clean['ticker'].nunique()}")
+    bad_px = int(((btc[["open", "high", "low", "close"]] <= 0).any(axis=1)
+                  | btc[["open", "high", "low", "close"]].isna().any(axis=1)).sum())
+    btc = btc[(btc[["open", "high", "low", "close"]] > 0).all(axis=1)]
+    _chk("BTC impossible prices", "non-positive or null OHLC", bad_px,
+         "removed" if bad_px else "none found")
 
-    with open(config.DATA_QUALITY_REPORT, "w") as f:
-        f.write("\n".join(str(l) for l in lines if l is not None) + "\n")
-    print(f"[cleaner] Wrote {config.DATA_QUALITY_REPORT}")
-    return btc_clean, kalshi_clean
+    ooo = int((btc["timestamp"].diff().dt.total_seconds() < 0).sum())
+    _chk("BTC ordering", "out-of-order timestamps", ooo,
+         "sorted ascending" if ooo else "already sorted")
+
+    # ---------------- Contracts -----------------------------------------
+    dup_c = contracts["ticker"].duplicated().sum()
+    contracts = contracts.drop_duplicates("ticker", keep="first")
+    _chk("Contract duplicates", "same ticker twice", dup_c,
+         "dropped" if dup_c else "none found")
+
+    unsettled = int((~contracts["result"].isin(["yes", "no"])).sum())
+    contracts = contracts[contracts["result"].isin(["yes", "no"])]
+    _chk("Missing settlement", "result not yes/no", unsettled,
+         "removed -- unlabelable" if unsettled else "none found")
+
+    not_final = int((contracts["status"] != "finalized").sum())
+    _chk("Non-finalized status", "status != finalized", not_final,
+         "removed" if not_final else "none found")
+    contracts = contracts[contracts["status"] == "finalized"]
+
+    bad_strike = int(contracts["floor_strike"].isna().sum()
+                     | (contracts["floor_strike"] <= 0).sum())
+    contracts = contracts[contracts["floor_strike"] > 0]
+    _chk("Invalid strikes", "null or non-positive floor_strike", bad_strike,
+         "removed" if bad_strike else "none found")
+
+    dur = (contracts["close_time"] - contracts["open_time"]).dt.total_seconds() / 60
+    wrong_dur = int((dur.round() != 15).sum())
+    contracts = contracts[dur.round() == 15]
+    _chk("Contract duration", "lifetime != 15 minutes", wrong_dur,
+         "removed -- not a 15-minute contract" if wrong_dur else
+         "all exactly 15 min")
+
+    # overlapping contracts: same close_time appearing twice
+    overlap = int(contracts["close_time"].duplicated().sum())
+    _chk("Overlapping contracts", "two contracts sharing a close time", overlap,
+         "kept (distinct tickers)" if overlap else "none found")
+
+    # cadence gaps
+    closes = contracts["close_time"].sort_values().drop_duplicates()
+    spacing = closes.diff().dt.total_seconds() / 60
+    cadence_gaps = int((spacing > 15).sum())
+    missing_contracts = int(((spacing[spacing > 15] / 15) - 1).sum()) if cadence_gaps else 0
+    _chk("Contract cadence gaps",
+         "%d breaks in the 15-min schedule, ~%d contracts absent from Kalshi"
+         % (cadence_gaps, missing_contracts), missing_contracts,
+         "left as gaps; nothing invented to fill them")
+
+    # timezone
+    tz_ok = all(str(contracts[c].dt.tz) == "UTC"
+                for c in ("open_time", "close_time"))
+    _chk("Timezone", "all timestamps tz-aware UTC", 0 if tz_ok else 1,
+         "verified UTC end to end" if tz_ok else "MIXED -- investigate")
+
+    # ---------------- Candles -------------------------------------------
+    candles = candles[candles["ticker"].isin(set(contracts["ticker"]))]
+
+    dup_k = candles.duplicated(["ticker", "end_period_ts"]).sum()
+    candles = candles.drop_duplicates(["ticker", "end_period_ts"], keep="first")
+    _chk("Candle duplicates", "same ticker+minute twice", dup_k,
+         "dropped" if dup_k else "none found")
+
+    bid, ask = candles["yes_bid_close_dollars"], candles["yes_ask_close_dollars"]
+    neg = int(((bid < 0) | (ask < 0)).sum())
+    over = int(((bid > 1) | (ask > 1)).sum())
+    crossed = int((ask < bid).sum())
+    nullq = int((bid.isna() | ask.isna()).sum())
+    _chk("Negative prices", "bid or ask < 0", neg, "removed" if neg else "none found")
+    _chk("Prices above $1", "bid or ask > 1", over, "removed" if over else "none found")
+    _chk("Crossed quotes", "ask < bid", crossed,
+         "removed" if crossed else "none found")
+    _chk("Null quotes", "missing bid or ask", nullq,
+         "removed" if nullq else "none found")
+
+    ok = (bid.between(0, 1) & ask.between(0, 1) & (ask >= bid)
+          & bid.notna() & ask.notna())
+    candles = candles[ok]
+
+    per = candles.groupby("ticker").size()
+    short = int((per != 15).sum())
+    _chk("Candles per contract", "contracts without exactly 15 candles", short,
+         "kept; decision points simply unavailable where a minute is missing"
+         if short else "every contract has all 15")
+
+    orphan = int(len(set(contracts["ticker"]) - set(candles["ticker"])))
+    _chk("Contracts without quotes", "no candle rows at all", orphan,
+         "excluded from the panel" if orphan else "none found")
+
+    # ---------------- Cross-source agreement ----------------------------
+    bi = btc.set_index("timestamp")["close"]
+    c2 = contracts.copy()
+    c2["btc_at_close"] = c2["close_time"].map(bi)
+    c2["btc_at_open"] = c2["open_time"].map(bi)
+    matched = c2.dropna(subset=["btc_at_close"])
+    implied = np.where(matched["btc_at_close"] >= matched["floor_strike"], "yes", "no")
+    agree = float((implied == matched["result"]).mean())
+    disagree = int((implied != matched["result"]).sum())
+    _chk("Settlement vs our BTC feed",
+         "Coinbase close at expiry reproduces Kalshi's result %.2f%% of the time"
+         % (100 * agree), disagree,
+         "NOT corrected -- Kalshi's `result` is the label; the feed difference "
+         "is real measurement noise and is left in")
+
+    align = _check_alignment(contracts, btc)
+    _chk("BTC/Kalshi clock alignment",
+         "best shift by settlement = %+d min; best shift by strike-at-open = "
+         "%+d min (0 = correctly aligned)"
+         % (align["best_shift_settlement"], align["best_shift_strike"]),
+         0 if align["aligned"] else 1,
+         "verified aligned" if align["aligned"] else
+         "MISALIGNED -- a non-zero best shift means look-ahead or lag")
+
+    unmatched = int(c2["btc_at_close"].isna().sum())
+    _chk("BTC coverage at expiry", "contracts whose close time has no BTC bar",
+         unmatched, "excluded from the panel" if unmatched else "none found")
+
+    strike_lag = (c2["floor_strike"] - c2["btc_at_open"]).abs()
+    _chk("Strike vs spot at open",
+         "median |strike - BTC at open| = $%.2f (strike is set at spot)"
+         % strike_lag.median(), 0, "informational")
+
+    # ---------------- Save ----------------------------------------------
+    contracts.to_parquet(config.CLEAN_CONTRACTS, index=False)
+    candles.to_parquet(config.CLEAN_CANDLES, index=False)
+    btc.to_parquet(config.CLEAN_BTC, index=False)
+
+    summary = {
+        "contracts_in": n_c0, "contracts_out": len(contracts),
+        "candles_in": n_k0, "candles_out": len(candles),
+        "btc_in": n_b0, "btc_out": len(btc),
+        "settlement_agreement": agree,
+        "period_start": str(contracts["close_time"].min()),
+        "period_end": str(contracts["close_time"].max()),
+        "yes_rate": float((contracts["result"] == "yes").mean()),
+    }
+    _write_report(summary)
+    return summary
 
 
-if __name__ == "__main__":
-    run()
+def _write_report(s):
+    lines = [
+        "# Data Quality Report",
+        "",
+        "Dataset: **real** Kalshi `KXBTC15M` (BTC 15-minute binaries) + "
+        "**real** Coinbase BTC/USD 1-minute OHLCV.",
+        "",
+        "| | in | out | removed |",
+        "|---|---|---|---|",
+        "| Contracts | %d | %d | %d |" % (s["contracts_in"], s["contracts_out"],
+                                          s["contracts_in"] - s["contracts_out"]),
+        "| Candles | %d | %d | %d |" % (s["candles_in"], s["candles_out"],
+                                        s["candles_in"] - s["candles_out"]),
+        "| BTC minutes | %d | %d | %d |" % (s["btc_in"], s["btc_out"],
+                                            s["btc_in"] - s["btc_out"]),
+        "",
+        "Period: `%s` -> `%s`" % (s["period_start"], s["period_end"]),
+        "",
+        "Outcome balance: **%.2f%% YES** -- consistent with a strike set at "
+        "spot when the contract opens, i.e. a genuine coin flip."
+        % (100 * s["yes_rate"]),
+        "",
+        "## Checks",
+        "",
+        "| Check | Detail | Rows | Action |",
+        "|---|---|---|---|",
+    ]
+    for c in CHECKS:
+        lines.append("| %s | %s | %d | %s |"
+                     % (c["check"], c["detail"], c["rows_affected"], c["action"]))
+
+    lines += [
+        "",
+        "## Known limitations",
+        "",
+        "1. **Settlement source differs from our price feed.** Coinbase's close "
+        "at expiry reproduces Kalshi's settled result only **%.2f%%** of the "
+        "time. Disagreements cluster where the outcome is nearly tied (median "
+        "|BTC - strike| of $7.70 on disagreements versus $32.97 overall), so "
+        "this is a feed/index difference on coin-flip cases, not an error. "
+        "Kalshi's `result` is always used as the label; the mismatch enters as "
+        "irreducible feature noise, which makes the model's task harder rather "
+        "than easier. It cannot manufacture an edge -- it can only hide one."
+        % (100 * s["settlement_agreement"]),
+        "",
+        "2. **No order-book depth.** Candlesticks give best bid and best ask "
+        "per minute, not full depth or resting size. Fills are assumed at the "
+        "quoted ask for the whole position. Large sizes would move the market; "
+        "position sizes here are small enough that this is a modest assumption, "
+        "but it is an assumption.",
+        "",
+        "3. **Minute resolution.** The 30-second decision point in the original "
+        "specification is not observable. Entry points run 14 down to 1 minute.",
+        "",
+        "4. **14 days.** 1,326 contracts is a real but short sample. Every "
+        "result carries a bootstrap confidence interval for this reason.",
+        "",
+        "5. **Fee schedule unverified.** Kalshi's published formula "
+        "`ceil(0.07 x C x P x (1-P))` is applied on entry, but "
+        "`docs.kalshi.com` was unreachable from the build environment, so it is "
+        "flagged `FEE_SCHEDULE_VERIFIED_LIVE = False` in `config.py`.",
+        "",
+        "Nothing was interpolated, back-filled, or synthesised. Gaps stay gaps.",
+        "",
+    ]
+    import os
+    with open(os.path.join(config.REPORTS_DIR, "data_quality_report.md"), "w") as f:
+        f.write("\n".join(lines))
+    pd.DataFrame(CHECKS).to_csv(
+        os.path.join(config.REPORTS_DIR, "data_quality_checks.csv"), index=False)

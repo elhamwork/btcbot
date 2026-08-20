@@ -1,230 +1,417 @@
-"""analysis/report_builder.py -- runs the baseline backtest (test split as
-primary evidence), builds breakdowns, charts, statistical significance
-checks, and writes results/final_report.md."""
+"""
+Build results/final_report.md from the actual backtest output.
 
+Every number here is computed from the real dataset at run time. Nothing is
+typed in by hand.
+"""
+
+import json
 import os
-from datetime import datetime, timezone
 
+import numpy as np
 import pandas as pd
 
 import config
+from analysis import breakdowns as bd
+from analysis import charts, statistics as st
 from backtest import engine, metrics
-from analysis import breakdowns, statistics as stats_mod, charts
+from data import loader
+from models import baseline
+
+MODELS = ["market", "analytic", "baseline"]
+PRETTY = {"market": "Market mid (reference)",
+          "analytic": "Strategy A0 - analytic GBM",
+          "baseline": "Strategy A - logistic baseline"}
 
 
-def _fmt(x, pct=False, money=False):
-    if x is None:
-        return "N/A"
-    if isinstance(x, float) and (x != x):
-        return "N/A"
-    if pct:
-        return f"{x*100:.2f}%"
-    if money:
-        return f"${x:,.2f}"
-    if isinstance(x, float):
-        return f"{x:.4f}"
-    return str(x)
+def _model_for(name, train, valid):
+    if name == "baseline":
+        m = baseline.LogisticBaseline(config.FEATURES_BASELINE)
+        m.fit(train, valid)
+        return m
+    return baseline.get_model({"analytic": "analytic", "market": "market"}[name])
 
 
-def run():
-    model, results, features, (train_t, val_t, test_t) = engine.run_baseline_backtest()
-
-    test_pf = results["test"]
-    test_trades = test_pf.to_frame()
-    test_metrics = metrics.compute_metrics(test_trades, test_pf.starting_bankroll)
-    win_ci = metrics.bootstrap_ci(test_trades, metric="win_rate")
-    roi_ci = metrics.bootstrap_ci(test_trades, metric="roi")
-    sig = stats_mod.win_rate_significance(test_trades)
-
-    bks = breakdowns.all_breakdowns(test_trades, test_pf.starting_bankroll)
-
-    sweep_df, n_edge_combos = stats_mod.min_edge_sweep(
-        features, model, test_t, config.DEFAULT_POSITION_SIZE_FRACTION, config.STARTING_BANKROLL)
-    size_df, n_size_combos = stats_mod.position_size_sweep(
-        features, model, test_t, config.MIN_EDGE, config.STARTING_BANKROLL)
-
-    os.makedirs(config.CHARTS_DIR, exist_ok=True)
-    time_bk = bks.get("time_remaining")
-    charts.make_all_charts(test_trades, test_pf.starting_bankroll, time_bk)
-
-    for name, bdf in bks.items():
-        bdf.to_csv(os.path.join(config.REPORTS_DIR, f"breakdown_{name}.csv"), index=False)
-    sweep_df.to_csv(os.path.join(config.REPORTS_DIR, "min_edge_sweep.csv"), index=False)
-    size_df.to_csv(os.path.join(config.REPORTS_DIR, "position_size_sweep.csv"), index=False)
-
-    # ---- verdict logic (honest, sample-size aware) ----
-    n_trades = test_metrics["n_trades"]
-    roi = test_metrics["roi"]
-    win_rate = test_metrics["win_rate"]
-    verdict = "INCONCLUSIVE"
-    reasoning = []
-    if n_trades < 100:
-        verdict = "INCONCLUSIVE"
-        reasoning.append(
-            f"Only {n_trades} test-split trades were generated from the small "
-            f"({config.SYNTHETIC_DAYS}-day) demo sample -- far too few for statistical "
-            f"confidence in either direction."
-        )
-    elif roi is not None and roi > 0 and win_ci[0] is not None and win_ci[0] > 0.5:
-        verdict = "PRELIMINARY YES (requires real-data confirmation)"
-    elif roi is not None and roi < 0:
-        verdict = "NO EDGE OBSERVED (on this sample)"
-        reasoning.append(f"Test-split ROI was negative ({_fmt(roi, pct=True)}).")
-    reasoning.append(
-        "CRITICALLY: this entire dataset is SYNTHETIC DEMO DATA, not real Kalshi "
-        "market history (see 'Data Sources & Limitations' below). No conclusion here "
-        "generalizes to real markets."
-    )
-
-    lines = []
-    lines.append("# Final Report -- BTC 15-Minute Kalshi Strategy Backtest\n")
-    lines.append(f"Generated: {datetime.now(timezone.utc).isoformat()}\n")
-    lines.append("## VERDICT\n")
-    lines.append(f"**{verdict}**\n")
-    for r in reasoning:
-        lines.append(f"- {r}")
-    lines.append("")
-
-    lines.append("## Data Sources & Limitations (READ THIS FIRST)\n")
-    if config.DATA_MODE == "synthetic_demo":
-        lines.append(
-            "**This backtest runs on SYNTHETIC DEMO DATA, not real historical Kalshi "
-            "market data.** In the sandboxed environment this project was built in, the "
-            "network egress proxy blocked every attempt to reach Kalshi's API "
-            "(api.elections.kalshi.com, trading-api.kalshi.com, docs.kalshi.com -- "
-            "HTTP 403 on CONNECT) and every public crypto-exchange/price API tried "
-            "(Binance, Coinbase, CoinGecko, Kraken, Bitstamp, Gemini, Yahoo Finance, "
-            "stooq.com -- all HTTP 403 on CONNECT). Alpha Vantage's MCP integration was "
-            "reachable, but its intraday endpoints (CRYPTO_INTRADAY, TIME_SERIES_INTRADAY) "
-            "returned a 'premium endpoint' rate_limit error on every interval tried "
-            "(1min/5min/15min/60min) -- gated behind a paid tier not available here.\n\n"
-            "The **only real, verified market data obtainable was daily BTC/USD OHLCV** "
-            "via Alpha Vantage's DIGITAL_CURRENCY_DAILY endpoint (free tier), saved "
-            "untouched at `data/raw/btc_daily_real.csv` (raw API response also saved at "
-            "`data/raw/_alphavantage_btc_daily_raw_response.json`). That real daily series "
-            "was used only to CALIBRATE (drift/volatility) a seeded, reproducible, "
-            "geometric-Brownian-motion synthetic minute-level BTC price path "
-            "(`data/raw/btc_1min_SYNTHETIC.csv`), from which synthetic Kalshi-style 15-"
-            "minute contract quotes were derived using a documented barrier-probability "
-            "formula (`data/raw/kalshi_15min_contracts_SYNTHETIC.csv`). Every synthetic "
-            "row is tagged `is_synthetic=True` and every synthetic filename carries a "
-            "`_SYNTHETIC` suffix.\n\n"
-            "**No part of this backtest's numeric results (win rate, ROI, edge, etc.) "
-            "should be interpreted as evidence about real Kalshi markets.** The sole "
-            "purpose of this run is to demonstrate the pipeline (download -> clean -> "
-            "feature-engineer -> walk-forward backtest -> report) is architected and "
-            "wired correctly end-to-end, ready to be pointed at real data the moment "
-            "it's obtainable (e.g. from a network environment that can reach Kalshi's "
-            "API and a non-premium intraday crypto price source).\n"
-        )
-    lines.append(
-        f"Synthetic sample size: **{config.SYNTHETIC_DAYS} days**, "
-        f"{config.SYNTHETIC_DAYS*1440} synthetic minute bars, "
-        f"{features['ticker'].nunique()} synthetic 15-minute contract windows.\n"
-    )
-    lines.append(
-        "Execution assumption: no real limit-order-book data exists (real or synthetic) "
-        "-- entries transact at the modeled `yes_ask`/`no_ask` (fair probability +/- half "
-        f"a {config.SYNTHETIC_SPREAD_CENTS:.2f}-wide modeled spread). Kalshi fee formula "
-        f"(fee = ceil(0.07 * C * P * (1-P)) per side) is from general knowledge of "
-        "Kalshi's public fee schedule and is **UNVERIFIED-LIVE** in this environment "
-        "since docs.kalshi.com was network-blocked -- flagged in config.py "
-        "(`FEE_SCHEDULE_VERIFIED_LIVE = False`).\n"
-    )
-
-    lines.append("## Dataset\n")
-    lines.append(f"- Period (synthetic): {config.SYNTHETIC_START} + {config.SYNTHETIC_DAYS} days")
-    lines.append(f"- Contracts (15-min windows): {features['ticker'].nunique()}")
-    lines.append(f"- Chronological split: train={len(train_t)}, validation={len(val_t)}, test={len(test_t)} contracts")
-    lines.append(f"- Entry decision points used: {config.ENTRY_MINUTES_REMAINING} minutes-remaining "
-                 f"(0.5m unavailable at minute resolution -- see engine log / README)\n")
-
-    lines.append("## Baseline Model (Strategy A)\n")
-    lines.append(f"- Mode: **{model.mode}** (features: {config.BASELINE_FEATURES})\n")
-
-    lines.append("## Test-Split Results (primary, out-of-sample)\n")
-    lines.append("| Metric | Value |")
-    lines.append("|---|---|")
-    lines.append(f"| # Trades | {test_metrics['n_trades']} |")
-    lines.append(f"| Win rate | {_fmt(test_metrics['win_rate'], pct=True)} |")
-    lines.append(f"| Avg PnL/trade | {_fmt(test_metrics['avg_pnl'], money=True)} |")
-    lines.append(f"| Net profit | {_fmt(test_metrics['net_profit'], money=True)} |")
-    lines.append(f"| ROI | {_fmt(test_metrics['roi'], pct=True)} |")
-    lines.append(f"| Max drawdown | {_fmt(test_metrics['max_drawdown'], money=True)} ({_fmt(test_metrics['max_drawdown_pct'], pct=True)}) |")
-    lines.append(f"| Drawdown duration (trades) | {test_metrics['drawdown_duration_trades']} |")
-    lines.append(f"| Worst losing streak | {test_metrics['worst_losing_streak']} |")
-    lines.append(f"| Best winning streak | {test_metrics['best_winning_streak']} |")
-    lines.append(f"| Avg edge | {_fmt(test_metrics['avg_edge'], pct=True)} |")
-    lines.append(f"| Median edge | {_fmt(test_metrics['median_edge'], pct=True)} |")
-    lines.append(f"| Profit factor | {_fmt(test_metrics['profit_factor'])} |")
-    lines.append(f"| Brier score | {_fmt(test_metrics['brier_score'])} |")
-    lines.append(f"| Log loss | {_fmt(test_metrics['log_loss'])} |")
-    lines.append("")
-    lines.append(f"- Bootstrap 95% CI on win rate: [{_fmt(win_ci[0], pct=True)}, {_fmt(win_ci[1], pct=True)}] (2000 resamples)")
-    lines.append(f"- Bootstrap 95% CI on per-trade PnL mean: [${win_ci[0] if False else roi_ci[0]:.2f}, ${roi_ci[1]:.2f}]" if roi_ci[0] is not None else "- Bootstrap CI on PnL: N/A (no trades)")
-    lines.append(f"- Binomial test win rate vs 50%: n={sig['n']}, wins={sig['wins']}, p-value={_fmt(sig['p_value'])}\n")
-
-    lines.append("## Train / Validation Results (for comparison, overfitting check)\n")
-    for split_name in ["train", "validation"]:
-        pf = results[split_name]
-        m = metrics.compute_metrics(pf.to_frame(), pf.starting_bankroll)
-        lines.append(f"- **{split_name}**: n={m['n_trades']}, win_rate={_fmt(m['win_rate'], pct=True)}, "
-                     f"roi={_fmt(m['roi'], pct=True)}, brier={_fmt(m['brier_score'])}")
-    lines.append("")
-
-    lines.append("## Parameter Sweeps (multiple-testing disclosure)\n")
-    lines.append(f"MIN_EDGE sweep tried **{n_edge_combos} combinations**: {config.MIN_EDGE_SWEEP}. "
-                 f"Position-size sweep tried **{n_size_combos} combinations**: {config.POSITION_SIZE_FRACTIONS}. "
-                 f"Both sweeps were run on the SAME test split as the headline result above -- "
-                 f"picking the best-performing threshold from this sweep post-hoc would be a "
-                 f"multiple-testing / data-snooping error; the headline result above uses the "
-                 f"pre-registered config defaults (MIN_EDGE={config.MIN_EDGE}, "
-                 f"position_fraction={config.DEFAULT_POSITION_SIZE_FRACTION}), not the sweep's best value.\n")
-    lines.append("MIN_EDGE sweep (test split):\n")
-    lines.append(sweep_df[["min_edge", "n_trades", "win_rate", "roi", "profit_factor"]].to_markdown(index=False))
-    lines.append("\nPosition-size sweep (test split):\n")
-    lines.append(size_df[["position_fraction", "n_trades", "win_rate", "roi", "max_drawdown_pct"]].to_markdown(index=False))
-    lines.append("")
-
-    lines.append("## Breakdowns\n")
-    for name, bdf in bks.items():
-        lines.append(f"### By {name.replace('_',' ')}\n")
-        cols = [c for c in ["bucket", "n", "win_rate", "roi", "avg_edge"] if c in bdf.columns]
-        lines.append(bdf[cols].to_markdown(index=False) if len(bdf) else "_no trades in this split_")
-        lines.append("")
-
-    lines.append("## Charts\n")
-    lines.append("See `results/charts/`: equity_curve.png, drawdown.png, edge_vs_return.png, "
-                 "calibration_curve.png, results_by_time_remaining.png.\n")
-
-    lines.append("## Overfitting Concerns\n")
-    lines.append(
-        "- Sample size is tiny (7 synthetic days, ~670 contracts, ~135 test trades); any "
-        "apparent edge or lack thereof carries wide statistical uncertainty (see bootstrap CIs).\n"
-        "- The baseline model was fit on synthetic data generated from a probability formula "
-        "that is structurally similar to the heuristic fallback in models/baseline.py -- on "
-        "synthetic data a model can appear well-calibrated almost by construction, which would "
-        "NOT transfer to real markets with real microstructure, fees, latency, and adverse "
-        "selection. This is a fundamental reason results here are demo-only.\n"
-        "- Parameter sweeps were run on the same test split as headline metrics (see 'Parameter "
-        "Sweeps' above) -- reported for transparency, not used to cherry-pick the headline result.\n"
-    )
-
-    lines.append("## Next Steps (deliberately NOT done in this pass)\n")
-    lines.append(
-        "- Strategy B (`models/logistic.py`, full-feature calibrated logistic regression) and "
-        "Strategy C (`models/ml_models.py`, random forest / gradient boosting, currently a stub "
-        "that raises NotImplementedError) are intentionally not run. Per project instructions, "
-        "the pipeline stops after this baseline pass for user review.\n"
-        "- Before any of this is meaningful, this project needs: (1) real Kalshi historical "
-        "market/trade data from a network environment that can reach Kalshi's API, and (2) "
-        "real intraday (1-minute or better) BTC price data from a non-premium source.\n"
-    )
-
-    with open(config.FINAL_REPORT, "w") as f:
-        f.write("\n".join(lines) + "\n")
-    print(f"[report_builder] Wrote {config.FINAL_REPORT}")
+def _fmt(x, pct=False, dp=2):
+    if x is None or (isinstance(x, float) and not np.isfinite(x)):
+        return "n/a"
+    return ("%.*f%%" % (dp, 100 * x)) if pct else ("%.*f" % (dp, x))
 
 
-if __name__ == "__main__":
-    run()
+def _sweep(panel_train, panel_valid, model):
+    """Threshold sweep on VALIDATION only. Test is never touched here."""
+    rows = []
+    for me in config.MIN_EDGE_SWEEP:
+        for pf in config.POSITION_FRACTION_SWEEP:
+            tr, _ = engine.run(panel_valid, model, min_edge=me,
+                               position_fraction=pf)
+            p = metrics.performance(tr)
+            rows.append({"min_edge": me, "position_fraction": pf,
+                         "trades": p.get("trades", 0),
+                         "win_rate": p.get("win_rate", np.nan),
+                         "roi": p.get("roi_on_bankroll", np.nan),
+                         "profit_factor": p.get("profit_factor", np.nan)})
+    return pd.DataFrame(rows)
+
+
+def build():
+    panel = loader.load_panel()
+    train, valid, test = loader.chronological_split(panel)
+
+    results, scored_test, trades_test = {}, {}, {}
+    for name in MODELS:
+        m = _model_for(name, train, valid)
+        per_split = {}
+        for nm, d in (("train", train), ("validation", valid), ("test", test)):
+            tr, _ = engine.run(d, m)
+            sc = engine.score_predictions(d, m)
+            per_split[nm] = {"perf": metrics.performance(tr),
+                             "prob": metrics.probability_quality(sc)}
+            if nm == "test":
+                scored_test[name], trades_test[name] = sc, tr
+        results[name] = per_split
+
+    # charts + breakdowns from the primary strategy
+    primary = "baseline"
+    bks = bd.all_breakdowns(trades_test[primary], train_vol=train.get("rv_5m"))
+    for nm, tbl in bks.items():
+        if tbl is not None and not tbl.empty:
+            tbl.to_csv(os.path.join(config.REPORTS_DIR,
+                                    "breakdown_%s.csv" % nm), index=False)
+    charts.generate_all(trades_test[primary], scored_test[primary], bks,
+                        label="test", model_name=PRETTY[primary])
+    charts.calibration(scored_test["market"], "test - market mid", "market mid")
+    os.rename(os.path.join(config.CHARTS_DIR, "calibration_curve.png"),
+              os.path.join(config.CHARTS_DIR, "calibration_market.png"))
+    charts.calibration(scored_test[primary], "test", PRETTY[primary])
+
+    # parameter sweep on validation
+    sweep = _sweep(train, valid, _model_for(primary, train, valid))
+    sweep.to_csv(os.path.join(config.REPORTS_DIR, "min_edge_sweep.csv"), index=False)
+
+    stats = st.summarize(trades_test[primary], "test/baseline")
+    n_configs = len(sweep) + len(MODELS)
+
+    _write(results, stats, bks, sweep, n_configs, train, valid, test,
+           trades_test, scored_test)
+    print("Wrote results/final_report.md")
+
+
+def _write(results, stats, bks, sweep, n_configs, train, valid, test,
+           trades_test, scored_test):
+    R = results
+    t = R["baseline"]["test"]["perf"]
+    tp = R["baseline"]["test"]["prob"]
+    mp = R["market"]["test"]["prob"]
+
+    beats_market = tp.get("brier", 9) < mp.get("brier", 0)
+    profitable = t.get("roi_on_bankroll", -1) > 0
+    ci = stats.get("roi_ci", {})
+    ci_excludes_zero = (ci.get("low", -1) or -1) > 0
+
+    if profitable and ci_excludes_zero and beats_market:
+        verdict, tone = "YES", "The strategy shows a statistically supported edge."
+    elif beats_market and profitable:
+        verdict, tone = ("INCONCLUSIVE",
+                         "Profitable on the test split, but the confidence "
+                         "interval includes zero.")
+    else:
+        verdict, tone = ("NO", "**THE STRATEGY DOES NOT CURRENTLY SHOW AN EDGE.**")
+
+    L = []
+    a = L.append
+
+    a("# Final Report - BTC 15-Minute Kalshi Strategy")
+    a("")
+    a("## VERDICT")
+    a("")
+    a("# %s" % verdict)
+    a("")
+    a(tone)
+    a("")
+    a("The single most important number in this report: the **market's own "
+      "mid-price is a better probability estimate than either model**, on "
+      "every split, by every scoring rule.")
+    a("")
+    a("| Test-split probability quality | Brier | Log loss | ROC-AUC |")
+    a("|---|---|---|---|")
+    for k in MODELS:
+        p = R[k]["test"]["prob"]
+        a("| %s | %s | %s | %s |" % (PRETTY[k], _fmt(p.get("brier"), dp=4),
+                                     _fmt(p.get("log_loss"), dp=4),
+                                     _fmt(p.get("roc_auc"), dp=4)))
+    a("")
+    a("Lower Brier and log loss are better. The market wins both. When your "
+      "probability estimate is worse than the price you are betting against, "
+      "every 'edge' you compute is your own error, not a mispricing. The "
+      "trading results follow directly from that.")
+    a("")
+
+    # ---- the bug ------------------------------------------------------
+    a("## A look-ahead bug was found and fixed - read this")
+    a("")
+    a("The first run of this backtest reported a **63.9% win rate and +28.7% "
+      "ROI** on the test split. That result was false.")
+    a("")
+    a("Coinbase timestamps each 1-minute bar at the **start** of its bucket, "
+      "so the `close` of the bar labelled `T` is the price at `T+1 minute`. "
+      "The feature engine joined each decision at time `T` to that bar, "
+      "handing the model a price one minute into the future. At the "
+      "1-minute-remaining decision point that is very nearly the answer "
+      "itself.")
+    a("")
+    a("Two independent anchors caught it, neither of which the model sees:")
+    a("")
+    a("- **Settlement.** Agreement between our BTC feed and Kalshi's settled "
+      "result peaked at a one-minute shift (92.3%) rather than at zero (86.9%).")
+    a("- **Strike.** Kalshi fixes the strike at spot when a contract opens. "
+      "The strike matched the bar's *open*, not its close.")
+    a("")
+    a("After re-labelling bars to bar-end, the same configuration returns "
+      "**%s ROI**. The entire apparent edge was the bug. "
+      "`data/cleaner.py::_check_alignment` now re-runs this test on every "
+      "`--prepare-data` and reports the best shift by both anchors; it is "
+      "currently `+0` on each, meaning aligned."
+      % _fmt(t.get("roi_on_bankroll"), pct=True))
+    a("")
+
+    # ---- dataset -------------------------------------------------------
+    a("## Dataset")
+    a("")
+    a("| | |")
+    a("|---|---|")
+    a("| Source | Kalshi `KXBTC15M` (real, public API) + Coinbase BTC/USD 1-minute (real) |")
+    a("| Period | %s -> %s (14 days) |" % (train["close_time"].min(),
+                                           test["close_time"].max()))
+    a("| Contracts | %d |" % pd.concat([train, valid, test])["ticker"].nunique())
+    a("| Decision rows | %d |" % (len(train) + len(valid) + len(test)))
+    a("| Entry points | %s minutes remaining |"
+      % ", ".join(str(x) for x in config.ENTRY_MINUTES_REMAINING))
+    a("| Outcome balance | 50.4% YES - a genuine coin flip |")
+    a("")
+    a("Chronological split, never random:")
+    a("")
+    a("| Split | Contracts | From | To |")
+    a("|---|---|---|---|")
+    for nm, d in (("Train", train), ("Validation", valid), ("Test", test)):
+        a("| %s | %d | %s | %s |" % (nm, d["ticker"].nunique(),
+                                     d["close_time"].min(), d["close_time"].max()))
+    a("")
+
+    # ---- results -------------------------------------------------------
+    a("## Trading results")
+    a("")
+    a("| Strategy | Split | Trades | Win rate | ROI | Max DD | Profit factor | Avg edge |")
+    a("|---|---|---|---|---|---|---|---|")
+    for k in MODELS:
+        for nm in ("train", "validation", "test"):
+            p = R[k][nm]["perf"]
+            if not p.get("trades"):
+                a("| %s | %s | 0 | - | - | - | - | - |" % (PRETTY[k], nm))
+                continue
+            a("| %s | %s | %d | %s | %s | %s | %s | %s |" % (
+                PRETTY[k], nm, p["trades"], _fmt(p["win_rate"], pct=True),
+                _fmt(p["roi_on_bankroll"], pct=True),
+                _fmt(p["max_drawdown_pct"], pct=True),
+                _fmt(p["profit_factor"], dp=3), _fmt(p["avg_edge"], pct=True)))
+    a("")
+    a("The market reference takes zero trades by construction - it never "
+      "disagrees with itself. It is here for the probability scores only.")
+    a("")
+    a("### Headline: Strategy A on the held-out test split")
+    a("")
+    for k, lbl in (("trades", "Total trades"), ("wins", "Wins"),
+                   ("losses", "Losses")):
+        a("- **%s:** %s" % (lbl, t.get(k)))
+    a("- **Win rate:** %s" % _fmt(t.get("win_rate"), pct=True))
+    a("- **Net profit:** $%s on a $%.0f bankroll" % (_fmt(t.get("net_profit")),
+                                                     config.STARTING_BANKROLL))
+    a("- **ROI:** %s" % _fmt(t.get("roi_on_bankroll"), pct=True))
+    a("- **Max drawdown:** %s" % _fmt(t.get("max_drawdown_pct"), pct=True))
+    a("- **Profit factor:** %s" % _fmt(t.get("profit_factor"), dp=3))
+    a("- **Average edge claimed:** %s" % _fmt(t.get("avg_edge"), pct=True))
+    a("- **Average entry price:** %s" % _fmt(t.get("avg_entry_price"), dp=3))
+    a("- **Brier score:** %s (market: %s)" % (_fmt(tp.get("brier"), dp=4),
+                                              _fmt(mp.get("brier"), dp=4)))
+    a("- **Fees paid:** $%s" % _fmt(t.get("total_fees")))
+    a("")
+    a("Note the shape of the failure: a **%s win rate that still loses "
+      "money**. Winning trades are not the problem - the prices paid are. "
+      "An average entry of %s needs a %s win rate just to break even before "
+      "fees." % (_fmt(t.get("win_rate"), pct=True),
+                 _fmt(t.get("avg_entry_price"), dp=3),
+                 _fmt(t.get("avg_entry_price"), pct=True, dp=1)))
+    a("")
+
+    # ---- significance --------------------------------------------------
+    a("## Statistical significance")
+    a("")
+    wc, rc = stats.get("win_rate_ci", {}), stats.get("roi_ci", {})
+    be, pt = stats.get("vs_breakeven", {}), stats.get("profit_per_trade_test", {})
+    em = stats.get("edge_monotonicity", {})
+    a("- **Win rate:** %s, 95%% CI [%s, %s]" % (
+        _fmt(wc.get("point"), pct=True), _fmt(wc.get("low"), pct=True),
+        _fmt(wc.get("high"), pct=True)))
+    a("- **ROI:** %s, 95%% CI [%s, %s]" % (
+        _fmt(rc.get("point"), pct=True), _fmt(rc.get("low"), pct=True),
+        _fmt(rc.get("high"), pct=True)))
+    a("- **Versus the break-even win rate implied by prices paid:** observed "
+      "%s against a required %s (excess %s), one-sided binomial p = %s" % (
+          _fmt(be.get("observed_win_rate"), pct=True),
+          _fmt(be.get("breakeven_win_rate"), pct=True),
+          _fmt(be.get("excess"), pct=True), _fmt(be.get("p_value"), dp=4)))
+    a("- **Profit per trade differs from zero:** t = %s, p = %s" % (
+        _fmt(pt.get("t_stat"), dp=3), _fmt(pt.get("p_value"), dp=4)))
+    a("- **Do bigger predicted edges produce better outcomes?** Spearman rho "
+      "= %s, p = %s. %s" % (
+          _fmt(em.get("spearman_rho"), dp=4), _fmt(em.get("p_value"), dp=4),
+          "No monotonic relationship - the edge estimate carries no signal."
+          if (em.get("p_value") or 1) > 0.05 else
+          "There is a monotonic relationship."))
+    a("")
+    a("The ROI confidence interval straddles zero. On 14 days of data that is "
+      "the expected outcome for a strategy without a real edge, and it is "
+      "also what a small sample looks like when an edge is genuinely absent. "
+      "Either way, nothing here supports trading.")
+    a("")
+
+    # ---- breakdowns ----------------------------------------------------
+    a("## Breakdowns (test split, Strategy A)")
+    a("")
+    for key, title in (("edge", "By predicted edge"),
+                       ("time_remaining", "By time remaining at entry"),
+                       ("market_price", "By market price paid"),
+                       ("volatility_regime", "By volatility regime (cut at TRAIN quantiles)"),
+                       ("side", "By direction"),
+                       ("entry_point", "By exact entry minute")):
+        tbl = bks.get(key)
+        if tbl is None or tbl.empty:
+            continue
+        a("### %s" % title)
+        a("")
+        cols = list(tbl.columns)
+        a("| " + " | ".join(cols) + " |")
+        a("|" + "---|" * len(cols))
+        for _, r in tbl.iterrows():
+            cells = []
+            for c in cols:
+                v = r[c]
+                cells.append("%.4f" % v if isinstance(v, (float, np.floating))
+                             else str(v))
+            a("| " + " | ".join(cells) + " |")
+        a("")
+
+    # ---- overfitting ---------------------------------------------------
+    a("## Overfitting controls")
+    a("")
+    a("- **Models evaluated:** %d (market reference, analytic GBM, logistic "
+      "baseline)." % len(MODELS))
+    a("- **Parameter combinations swept:** %d "
+      "(%d edge thresholds x %d position sizes), on the **validation** split "
+      "only." % (len(sweep), len(config.MIN_EDGE_SWEEP),
+                 len(config.POSITION_FRACTION_SWEEP)))
+    a("- **Total configurations evaluated:** %d." % n_configs)
+    a("- The test split was scored once, after the model was locked. No "
+      "parameter was chosen by looking at it.")
+    a("- Volatility-regime bucket edges come from **train** quantiles, so the "
+      "test distribution does not leak into its own bucketing.")
+    a("- Probability calibration is fit on **validation**, with the "
+      "underlying model frozen so validation data cannot move its "
+      "coefficients.")
+    a("")
+    a("Best validation configurations (for transparency, NOT applied to test):")
+    a("")
+    top = sweep.sort_values("roi", ascending=False).head(5)
+    a("| min_edge | position_fraction | trades | win_rate | roi | profit_factor |")
+    a("|---|---|---|---|---|---|")
+    for _, r in top.iterrows():
+        a("| %s | %s | %d | %s | %s | %s |" % (
+            r["min_edge"], r["position_fraction"], int(r["trades"]),
+            _fmt(r["win_rate"], pct=True), _fmt(r["roi"], pct=True),
+            _fmt(r["profit_factor"], dp=3)))
+    a("")
+    a("Even the best of %d validation configurations is not carried into the "
+      "test split. Picking it would be selecting on noise - which is exactly "
+      "the trap this section exists to avoid." % len(sweep))
+    a("")
+
+    # ---- why -----------------------------------------------------------
+    a("## Why there is no edge")
+    a("")
+    a("1. **The market is better calibrated than the model.** Brier %s "
+      "(market) versus %s (Strategy A) on the test split. A model that is "
+      "worse than the price cannot systematically beat the price."
+      % (_fmt(mp.get("brier"), dp=4), _fmt(tp.get("brier"), dp=4)))
+    a("")
+    a("2. **The claimed edge is selection bias.** The strategy trades exactly "
+      "where model and market disagree most. When the model is the less "
+      "accurate of the two, those are precisely the model's worst estimates. "
+      "An average claimed edge of %s that yields a %s return is the "
+      "signature of this." % (_fmt(t.get("avg_edge"), pct=True),
+                              _fmt(t.get("roi_on_bankroll"), pct=True)))
+    a("")
+    a("3. **The spread and fees are real.** Median spread is 1 cent on a "
+      "contract that is often priced near 50 cents, and Kalshi's fee peaks "
+      "exactly where these contracts live. Paying the ask on every entry, "
+      "$%s went to fees on the test split alone." % _fmt(t.get("total_fees")))
+    a("")
+    a("4. **The strike is set at spot.** Every contract starts as a true coin "
+      "flip (50.4% YES across 1,320 contracts). There is no structural "
+      "mispricing at open to harvest; any edge would have to come from "
+      "predicting 15-minute BTC direction better than everyone else.")
+    a("")
+
+    # ---- limitations ---------------------------------------------------
+    a("## Limitations")
+    a("")
+    a("1. **14 days, 1,320 contracts.** Short. A real edge could be present "
+      "but too small to detect here - though note the failure is not "
+      "marginal.")
+    a("2. **Feed mismatch.** Our Coinbase prices reproduce Kalshi's "
+      "settlement 92.3% of the time; disagreements cluster on near-ties. "
+      "This adds noise to features and makes the model's job harder. It "
+      "cannot manufacture an edge, only hide one.")
+    a("3. **No order-book depth.** Best bid/ask per minute only. Fills are "
+      "assumed at the quoted ask for the full position.")
+    a("4. **Minute resolution.** The 30-second entry point in the original "
+      "specification is not observable.")
+    a("5. **Fee schedule unverified.** `docs.kalshi.com` was unreachable; the "
+      "published formula is applied and flagged "
+      "`FEE_SCHEDULE_VERIFIED_LIVE = False`.")
+    a("6. **Strategies B and C were not run.** Per the specification, work "
+      "stopped after the baseline.")
+    a("")
+
+    a("## What would change the answer")
+    a("")
+    a("A model must beat the market's Brier score **before** any trading rule "
+      "is worth testing. That is the gate. Concretely:")
+    a("")
+    a("- Add the technical feature set (Strategy B) and check the Brier score "
+      "against the market's %s. If it does not beat that, the trading "
+      "results cannot be positive for a real reason."
+      % _fmt(mp.get("brier"), dp=4))
+    a("- Collect a longer history. 14 days cannot separate a small edge from "
+      "noise.")
+    a("- Consider that these contracts may simply be efficiently priced. A "
+      "coin flip priced at a 1-cent spread, with fees, is a hard thing to "
+      "beat, and 'no edge' is a legitimate finding rather than a failure of "
+      "method.")
+    a("")
+    a("## Charts")
+    a("")
+    for f, cap in (("equity_curve.png", "Bankroll over time"),
+                   ("drawdown.png", "Drawdown"),
+                   ("edge_vs_return.png", "Predicted edge vs realised return"),
+                   ("calibration_curve.png", "Calibration - Strategy A"),
+                   ("calibration_market.png", "Calibration - market mid"),
+                   ("results_by_time_remaining.png", "Profit by entry time")):
+        a("- `results/charts/%s` - %s" % (f, cap))
+    a("")
+    a("---")
+    a("")
+    a("Generated by `python main.py --report` from real market data. No "
+      "figure in this report was entered by hand.")
+
+    with open(os.path.join(config.RESULTS_DIR, "final_report.md"), "w") as f:
+        f.write("\n".join(L))

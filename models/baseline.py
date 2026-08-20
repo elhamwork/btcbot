@@ -1,78 +1,113 @@
 """
-models/baseline.py -- Strategy A: minimal heuristic/logistic model.
+Strategy A -- the baseline probability model.
 
-Uses ONLY {strike_distance_pct, minutes_remaining, realized_vol_5m} as
-specified. If there isn't enough data to fit a stable logistic regression
-(documented check), falls back to a closed-form heuristic: a driftless
-Brownian-motion barrier probability P(BTC finishes above strike | current
-distance, time remaining, recent realized vol), i.e. the same family of
-formula used to generate the synthetic fair price -- but re-estimated
-independently from the *feature columns only* (never reads fair_yes_prob_model
-or settled_yes), so this is a legitimate model input->output mapping, not
-a leak of the synthetic generator's ground truth.
+Two variants, both using ONLY distance-from-strike, time remaining, and
+volatility:
+
+  AnalyticBaseline  no fitting at all. Assumes driftless GBM over the
+                    remaining window and reads P(finish above strike) straight
+                    off the normal CDF. This is the honest null: if a fitted
+                    model cannot beat it, the fitting is adding nothing.
+
+  LogisticBaseline  logistic regression on the same three inputs plus their
+                    natural combination (the z-score), fit on TRAIN only and
+                    probability-calibrated on VALIDATION.
+
+Both output calibrated P(YES); P(NO) = 1 - P(YES).
 """
 
-import math
 import numpy as np
-import pandas as pd
+from scipy.stats import norm
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.frozen import FrozenEstimator
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 import config
 
-FEATURES = config.BASELINE_FEATURES  # ["strike_distance_pct","minutes_remaining","realized_vol_5m"]
-_COLMAP = {"realized_vol_5m": "vol_5m"}  # dataframe column name mapping
 
+class AnalyticBaseline:
+    """P(S_T >= K) under driftless GBM. No parameters are learned."""
 
-def _cols(df):
-    return [_COLMAP.get(f, f) for f in FEATURES]
+    name = "analytic"
 
-
-def heuristic_prob(row):
-    """Closed-form no-fit fallback: Normal CDF barrier-touch probability."""
-    dist_pct = row["strike_distance_pct"]
-    minutes = max(row["minutes_remaining"], 1e-6)
-    vol_5m = max(row["vol_5m"], 1e-6)  # per-minute realized vol estimate (std of 1m log returns over trailing 5m)
-    sigma_t = vol_5m * math.sqrt(minutes)
-    if sigma_t <= 0:
-        return 1.0 if dist_pct > 0 else 0.0
-    d = dist_pct / sigma_t
-    return 0.5 * (1.0 + math.erf(d / math.sqrt(2.0)))
-
-
-class BaselineModel:
-    """Strategy A. Fits sklearn LogisticRegression on the 3 minimal features
-    if there is enough data (>= min_train_rows and >=2 classes present in
-    training split); otherwise documents the fallback and uses the
-    closed-form heuristic instead of overfitting a model to a tiny sample."""
-
-    def __init__(self, min_train_rows=200):
-        self.min_train_rows = min_train_rows
-        self.clf = None
-        self.mode = None  # "logistic" or "heuristic"
-
-    def fit(self, train_df):
-        cols = _cols(train_df)
-        y = train_df["settled_yes"].astype(int)
-        n = len(train_df)
-        n_classes = y.nunique()
-        if n >= self.min_train_rows and n_classes >= 2:
-            X = train_df[cols].values
-            self.clf = LogisticRegression(max_iter=1000)
-            self.clf.fit(X, y)
-            self.mode = "logistic"
-            print(f"[baseline] Fit logistic regression on {n} training rows "
-                  f"(features={FEATURES}).")
-        else:
-            self.mode = "heuristic"
-            print(f"[baseline] Training data too small/insufficiently varied "
-                  f"(n={n}, classes={n_classes}) for a stable fit -- falling back "
-                  f"to closed-form barrier-probability heuristic on the same "
-                  f"3 features. This is documented, not a silently degraded model.")
+    def fit(self, X, y=None):
         return self
 
-    def predict_proba(self, df):
-        cols = _cols(df)
-        if self.mode == "logistic":
-            return self.clf.predict_proba(df[cols].values)[:, 1]
+    def predict_proba_yes(self, df):
+        S = df["btc_price"].to_numpy(float)
+        K = df["floor_strike"].to_numpy(float)
+        T = df["minutes_remaining"].to_numpy(float)
+        sigma = df["rv_5m"].to_numpy(float)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            denom = sigma * np.sqrt(T)
+            z = np.log(S / K) / denom
+            p = norm.cdf(z)
+        # If volatility is undefined or zero, fall back to the sign of the
+        # distance -- the only defensible answer without a vol estimate.
+        p = np.where(np.isfinite(p), p, (S >= K).astype(float))
+        return np.clip(p, 1e-6, 1 - 1e-6)
+
+
+class LogisticBaseline:
+    """Calibrated logistic regression on the baseline feature set."""
+
+    name = "logistic"
+
+    def __init__(self, features=None, C=1.0):
+        self.features = features or config.FEATURES_BASELINE
+        self.C = C
+        self.pipe = None
+
+    def _matrix(self, df):
+        X = df[self.features].to_numpy(float)
+        return np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+
+    def fit(self, train_df, valid_df=None):
+        base = Pipeline([
+            ("scale", StandardScaler()),
+            ("lr", LogisticRegression(C=self.C, max_iter=2000)),
+        ])
+        Xtr, ytr = self._matrix(train_df), train_df["y"].to_numpy(int)
+
+        if valid_df is not None and len(valid_df) >= 100 and valid_df["y"].nunique() > 1:
+            # Fit on TRAIN, then calibrate on VALIDATION only. Freezing the
+            # fitted pipeline keeps the calibrator from refitting it and
+            # letting validation data influence the coefficients.
+            base.fit(Xtr, ytr)
+            self.pipe = CalibratedClassifierCV(
+                FrozenEstimator(base), method="isotonic")
+            self.pipe.fit(self._matrix(valid_df), valid_df["y"].to_numpy(int))
         else:
-            return df.apply(heuristic_prob, axis=1).values
+            base.fit(Xtr, ytr)
+            self.pipe = base
+        return self
+
+    def predict_proba_yes(self, df):
+        p = self.pipe.predict_proba(self._matrix(df))[:, 1]
+        return np.clip(p, 1e-6, 1 - 1e-6)
+
+
+class MarketBaseline:
+    """
+    The market's own mid-price as the probability estimate.
+
+    Included as a reference point: by construction it generates zero edge, so
+    it measures how well the market itself is calibrated. If the market's
+    Brier score beats every model, that is the finding.
+    """
+
+    name = "market"
+
+    def fit(self, X, y=None):
+        return self
+
+    def predict_proba_yes(self, df):
+        return np.clip(df["mid"].to_numpy(float), 1e-6, 1 - 1e-6)
+
+
+def get_model(name):
+    return {"analytic": AnalyticBaseline,
+            "logistic": LogisticBaseline,
+            "market": MarketBaseline}[name]()

@@ -1,179 +1,210 @@
 # BTC 15-Minute Kalshi Strategy Backtester
 
-A research-grade backtesting pipeline to determine, from historical data and
-without look-ahead bias, whether a simple BTC-15-minute Kalshi strategy shows
-a statistically meaningful edge. **This is not a live trading bot.**
+A research backtester for Kalshi's `KXBTC15M` series (BTC 15-minute binary
+contracts). Its only purpose is to answer one question honestly:
 
-## READ THIS FIRST: Data Sources & Limitations
+> Does a BTC 15-minute Kalshi strategy have a statistically meaningful edge
+> after real prices, spreads, fees, and execution assumptions?
 
-This project was built inside a sandboxed execution environment whose network
-egress proxy allowlists only a small set of domains. Every attempt to reach
-real market-data sources was documented, not skipped:
+**Current answer: no.** See [`results/final_report.md`](results/final_report.md).
 
-| Source tried | Result |
+This is not a trading bot. There is no order execution code and none should be
+added until a strategy clears the gate described below.
+
+---
+
+## The headline result
+
+| Test split, probability quality | Brier | Log loss | ROC-AUC |
+|---|---|---|---|
+| **Market mid-price** | **0.1353** | **0.4155** | 0.8901 |
+| Analytic GBM baseline | 0.1418 | 0.4594 | 0.8820 |
+| Logistic baseline (Strategy A) | 0.1483 | 0.5730 | 0.8657 |
+
+The market's own price is a better probability estimate than either model, on
+every split, by every scoring rule. When your estimate is worse than the price
+you are betting against, every "edge" you compute is your own error.
+
+Trading follows directly: 263 trades, 60.08% win rate, **−7.79% ROI**, profit
+factor 0.92. The break-even win rate implied by the prices actually paid was
+60.65%. The strategy won 60.08% of the time. It lost by almost exactly the
+spread.
+
+**The gate:** a model must beat a Brier of 0.1353 before any trading rule
+built on it is worth testing.
+
+---
+
+## A look-ahead bug was found and fixed
+
+The first run reported a 63.9% win rate and **+28.7% ROI**. That was false.
+
+Coinbase timestamps each 1-minute bar at the **start** of its bucket, so the
+`close` of the bar labelled `T` is the price at `T+1`. Joining a decision at
+time `T` to that bar fed the model a price one minute into the future — nearly
+the answer itself at the 1-minute decision point.
+
+Two independent anchors caught it, neither visible to the model:
+
+- **Settlement** agreement peaked at a one-minute shift (92.3%) rather than at
+  zero (86.9%).
+- **The strike**, which Kalshi fixes at spot on open, matched the bar's *open*
+  rather than its close.
+
+Bars are now re-labelled to bar-end (`config.BTC_BAR_SHIFT_MINUTES`), and
+`data/cleaner.py::_check_alignment` re-runs both tests on every
+`--prepare-data`, reporting the best shift by each anchor. Both currently read
+`+0`.
+
+The whole apparent edge was the bug. This is worth stating plainly because it
+is the normal failure mode of backtests, and it produced a result that looked
+excellent rather than obviously broken.
+
+---
+
+## Data
+
+Everything is real. Nothing is simulated, interpolated, or back-filled.
+
+| | |
 |---|---|
-| Kalshi API (`api.elections.kalshi.com`, `trading-api.kalshi.com`, `docs.kalshi.com`) | **Blocked** — HTTP 403 on the proxy CONNECT tunnel for all three domains. Not an auth failure — a network policy block. |
-| Binance, Coinbase, CoinGecko, Kraken, Bitstamp, Gemini | **Blocked** — same HTTP 403 CONNECT pattern for every domain. |
-| Yahoo Finance, stooq.com | **Blocked** — same. |
-| Alpha Vantage MCP — `CRYPTO_INTRADAY`, `TIME_SERIES_INTRADAY` (1min/5min/15min/60min, crypto and equity symbols both tried) | **Reachable but refused**: every call returned `{"error":{"type":"rate_limit","message":"...premium endpoint..."}}`. Gated behind Alpha Vantage's paid tier; not available on the key configured here. |
-| Alpha Vantage MCP — `DIGITAL_CURRENCY_DAILY` | **Works.** Real daily BTC/USD OHLCV, 2010-07-17 through present (free tier). |
+| Kalshi | `KXBTC15M`, public REST API, **no account required** |
+| | 1,320 settled contracts, 19,845 per-minute bid/ask candles |
+| BTC price | Coinbase `BTC-USD`, 1-minute OHLCV, 20,161 bars, 100% coverage |
+| Period | 2026-08-06 → 2026-08-20 (14 days) |
+| Outcome balance | 50.4% YES — a genuine coin flip |
 
-**Consequence:** no real Kalshi contract data, and no real intraday (minute-
-resolution or finer) BTC price data, could be obtained in this environment.
-The *only* real, verifiable market data obtainable was **daily** BTC/USD
-OHLCV.
+`KXBTC15M` runs one contract every 15 minutes with **one strike per event**,
+set at spot when the contract opens. That makes every contract a near
+coin-flip and avoids the deep in/out-of-the-money strike ladder of Kalshi's
+hourly `KXBTCD` series.
 
-Per this project's explicit fallback instructions ("never fabricate data and
-present it as real; if genuinely unobtainable, build the pipeline correctly
-and demonstrate it against whatever real data IS obtainable, using clearly-
-labeled synthetic data only as an honestly-flagged placeholder"), this
-project runs in **`DATA_MODE = "synthetic_demo"`** (see `config.py`):
+### Collecting it
 
-1. **Real** daily BTC/USD data is downloaded and saved untouched:
-   `data/raw/btc_daily_real.csv` (raw API response also kept at
-   `data/raw/_alphavantage_btc_daily_raw_response.json`).
-2. That real series is used *only* to measure real daily drift/volatility,
-   which calibrates a **seeded, reproducible geometric Brownian motion**
-   that generates a **SYNTHETIC** minute-resolution BTC price path:
-   `data/raw/btc_1min_SYNTHETIC.csv`.
-3. **SYNTHETIC** Kalshi-style 15-minute up/down contract quotes are derived
-   from that synthetic path using a documented, no-look-ahead
-   Brownian-barrier probability formula plus a modeled bid/ask spread:
-   `data/raw/kalshi_15min_contracts_SYNTHETIC.csv`.
-
-Every synthetic row carries `is_synthetic=True`; every synthetic filename
-carries a `_SYNTHETIC` suffix; every report this pipeline produces
-(`results/reports/data_quality_report.md`, `results/final_report.md`) states
-this in bold, up front.
-
-**No numeric result in this repository (win rate, ROI, edge, etc.) is
-evidence about real Kalshi markets.** The sole purpose of this pass is to
-prove the pipeline — download → clean → feature-engineer → walk-forward
-backtest → report — is architected and wired correctly end-to-end, ready to
-be re-pointed at real data (`DATA_MODE = "real_daily_only"` plus a real
-Kalshi/intraday-BTC downloader) the moment a network environment that can
-reach those APIs is available.
-
-### Execution & fee assumptions (also documented in `config.py`)
-
-- No real limit-order-book data exists (real or synthetic) here — YES
-  entries transact at the modeled `yes_ask`, NO entries at the modeled
-  `no_ask` (fair probability ± half a small modeled spread).
-- Kalshi's fee formula used (`fee = ceil(0.07 * contracts * price * (1-price))`
-  per side) is taken from general knowledge of Kalshi's public fee schedule.
-  **It is UNVERIFIED-LIVE** in this environment, since `docs.kalshi.com` was
-  network-blocked and could not be re-checked (`config.FEE_SCHEDULE_VERIFIED_LIVE
-  = False`). Verify against Kalshi's current published fee schedule before
-  relying on this for anything beyond architecture demonstration.
-- Entry decision points requested were minutes-remaining
-  `[14,12,10,8,6,5,4,3,2,1,0.5]`. The `0.5` mark is **not available** at
-  minute resolution in this synthetic dataset (would require sub-minute
-  bars, which were not generated) — the backtest engine logs this and
-  proceeds with the 10 whole-minute marks that do exist.
-
-## Project structure
-
-```
-config.py                    All configurable assumptions (fees, edge, sizing, entry points, paths)
-main.py                      CLI entry point
-data/
-  downloader.py               Fetches real daily BTC data + generates labeled synthetic minute/contract data
-  cleaner.py                  Data-quality checks + cleaning -> data_quality_report.md
-  loader.py                   Load processed CSVs into pandas
-  raw/                        Raw downloaded/generated data (gitignored)
-  processed/                  Cleaned data + engineered features (gitignored)
-features/
-  indicators.py                EMA/RSI/ATR/VWAP/realized-vol helpers (all causal/backward-looking)
-  feature_engine.py            Builds the full feature set per decision row + look-ahead spot-check
-models/
-  baseline.py                  Strategy A: heuristic/logistic on {strike distance, time remaining, vol}
-  logistic.py                  Strategy B scaffolding: full-feature calibrated logistic regression (not run yet)
-  ml_models.py                 Strategy C: stub only, raises NotImplementedError (sample too small / synthetic)
-backtest/
-  engine.py                    Walk-forward simulation, chronological train/val/test split
-  execution.py                 Entry pricing + Kalshi fee model
-  portfolio.py                 Bankroll/trade/equity tracking
-  metrics.py                   Win rate, ROI, drawdown, streaks, profit factor, Brier score, log loss, bootstrap CI
-analysis/
-  breakdowns.py                Results by edge/time/price/vol-regime/side
-  statistics.py                Bootstrap CIs, binomial significance test, MIN_EDGE + position-size sweeps
-  charts.py                    matplotlib charts -> results/charts/
-  report_builder.py            Orchestrates the above -> results/final_report.md
-results/
-  reports/                     data_quality_report.md, breakdown CSVs, sweep CSVs
-  charts/                      equity curve, drawdown, edge-vs-return, calibration, results-by-time
-  trades/                      Per-trade CSVs for train/validation/test splits
-  final_report.md              The headline deliverable
-```
-
-## Setup
+Collection is separate from analysis, because the machine that can reach
+Kalshi is often not the machine running the analysis. Each script is
+standard-library only — no `pip install`, no API key, read-only:
 
 ```bash
-python3 -m pip install -r requirements.txt
-cp .env.example .env   # optional; only needed if pointing at real APIs later
+python3 discover_series.py     # which BTC series exist, and their real cadence
+python3 fetch_15m.py           # Kalshi contracts + per-minute bid/ask
+python3 fetch_btc_prices.py    # BTC 1-minute OHLCV from Coinbase
 ```
 
-## Running the pipeline
+They write to `real_data/`. See [`HOW_TO_GET_DATA.md`](HOW_TO_GET_DATA.md) for
+step-by-step instructions.
+
+---
+
+## Usage
 
 ```bash
-python main.py --download        # fetch real daily BTC data + generate labeled synthetic minute/contract data
-python main.py --prepare-data    # clean data, write data_quality_report.md, build features
-python main.py --backtest baseline   # run Strategy A end-to-end, print + save per-split metrics
-python main.py --backtest technical  # NOT IMPLEMENTED in this pass -- exits with an explanation (see below)
-python main.py --backtest ml         # NOT IMPLEMENTED in this pass -- exits with an explanation (see below)
-python main.py --report          # breakdowns, charts, bootstrap CIs, parameter sweeps -> results/final_report.md
+pip install -r requirements.txt
+
+python main.py --download          # status of the collected data files
+python main.py --prepare-data      # clean, audit, verify causality, build panel
+python main.py --backtest baseline # Strategy A (logistic)
+python main.py --backtest analytic # no-fit GBM null
+python main.py --backtest market   # market mid reference (scores only)
+python main.py --report            # charts, statistics, final_report.md
 ```
 
-## Why `--backtest technical` and `--backtest ml` are not implemented yet
+`--backtest technical` and `--backtest ml` intentionally refuse to run. See
+"Not done yet" below.
 
-Per this project's explicit instructions: **stop after the first baseline
-backtest completes successfully end-to-end, so the user can review results
-before continuing to the technical (Strategy B) and ML (Strategy C) variants.**
-`models/logistic.py` is written and ready to be wired in; `models/ml_models.py`
-is a deliberate stub (raises `NotImplementedError`) because the available
-sample (7 days, ~670 contracts) is both too small for a trustworthy random
-forest / gradient boosting fit and — more importantly — synthetic, so any
-apparent ML "edge" would be doubly meaningless. See `results/final_report.md`
-→ "Next Steps".
+---
 
-## No-look-ahead guarantees
+## How look-ahead bias is prevented
 
-- `features/feature_engine.py` merges each Kalshi decision-row with BTC
-  indicators using `pd.merge_asof(..., direction="backward")` — a decision
-  row can only see BTC data at or before its own timestamp.
-- All rolling/EWM indicators (`features/indicators.py`) are backward-looking
-  by construction (pandas `.rolling()` / `.ewm()`).
-- `backtest/engine.py` reads `settled_yes` / `settle_price` **only** at
-  trade-close time to compute PnL — never to decide whether/when to enter.
-- `feature_engine.py` runs an automated spot-check
-  (`_assert_no_lookahead`) after building features, comparing a sample of
-  rows against BTC data restricted to `timestamp <= decision_timestamp`, and
-  the pipeline run in this repo passed it (0 mismatches on 200 sampled rows).
+The rule: at a decision made at time `T`, only information available at `T`.
 
-## Baseline backtest results (synthetic demo data — see limitations above)
+1. **Causal indicators.** Every function in `features/indicators.py` uses
+   trailing windows and recursive EMAs. Nothing is shifted backwards.
+2. **Tested, not asserted.** `verify_no_lookahead()` rebuilds features from a
+   truncated history at 150 random timestamps and compares against the
+   full-series computation. Any peeking shows up as a mismatch. It currently
+   reports a worst relative difference of exactly `0.00e+00`, and
+   `--prepare-data` aborts if that changes.
+3. **Clock alignment.** `_check_alignment()` independently verifies the BTC
+   clock against settlement and strike-at-open — the check that caught the bug
+   above.
+4. **Quotes are as-of.** A decision at `T` uses the candle whose period *ends*
+   at `T`. Nothing later in the contract's life is visible.
+5. **Bankroll causality.** `portfolio.verify_causality()` asserts every trade's
+   stake was sized from the bankroll as it stood before that trade. The
+   backtest aborts on violation.
+6. **Labels are for scoring only.** The settled result never enters a feature.
 
-See `results/final_report.md` for the full breakdown. Headline (test split,
-out-of-sample, `MIN_EDGE=0.05`, `position_fraction=0.01`, `$1000` starting
-bankroll):
+---
 
-- 135 trades, win rate 26.7%, ROI **-33.8%**, profit factor 0.60, Brier
-  score 0.250, bootstrap 95% CI on win rate **[19.3%, 34.1%]**.
-- **Verdict: NO EDGE OBSERVED on this sample** — and, critically, this
-  sample is synthetic demo data, so this result says nothing about real
-  Kalshi markets either way. See `results/final_report.md` for the full
-  reasoning, breakdowns, and overfitting discussion.
+## Execution assumptions
 
-## Honest caveats
+Pessimistic where there is doubt. All configurable in `config.py`.
 
-- **Sample size is tiny** (7 synthetic days). All statistics carry wide
-  confidence intervals; nothing here should be read as a strong conclusion,
-  positive or negative.
-- **All 15-minute/minute-level data is synthetic**, clearly labeled
-  throughout. Real Kalshi data and real intraday BTC data were both
-  genuinely unobtainable in this environment (see table above) — this was
-  not a shortcut taken for convenience.
-- **The Kalshi fee schedule used is unverified-live** in this environment.
-- Parameter sweeps (`MIN_EDGE`, position sizing) were run on the same test
-  split as the headline metrics and are reported for transparency only —
-  the headline result uses pre-registered `config.py` defaults, not the
-  sweep's best value, to avoid a multiple-testing/data-snooping error.
+- YES buys pay `yes_ask`; NO buys pay `1 − yes_bid`. **Never the mid.**
+- Kalshi fee `ceil(0.07 × contracts × P × (1−P))` charged on entry.
+  ⚠️ `FEE_SCHEDULE_VERIFIED_LIVE = False` — `docs.kalshi.com` was unreachable
+  from the build environment, so this is the published formula, unconfirmed.
+- Skip if spread > 5¢, or price outside 5¢–95¢.
+- One trade per contract, so a single contract cannot spawn ten correlated
+  trades.
+- Fixed-fractional sizing, 1% of bankroll, from $1,000.
+
+---
+
+## Overfitting controls
+
+- Chronological splits only: train 60% / validation 20% / test 20%, by contract
+  close time. Never random.
+- 3 models × 28 parameter combinations swept **on validation only**.
+- The test split was scored once, after the model was locked.
+- Calibration is fit on validation with the underlying model frozen.
+- Volatility-regime buckets are cut at **train** quantiles.
+- The best validation configuration was deliberately *not* carried into test.
+
+---
+
+## Project layout
+
+```
+config.py                  all assumptions and thresholds
+main.py                    CLI
+fetch_15m.py               standalone Kalshi collector
+fetch_btc_prices.py        standalone Coinbase collector
+discover_series.py         standalone series discovery
+data/       loader, cleaner (audit), downloader (docs)
+features/   indicators (causal), feature_engine (panel + verification)
+models/     baseline (analytic / logistic / market), logistic + ml (stubs)
+backtest/   engine, execution, portfolio, metrics
+analysis/   breakdowns, statistics, charts, report_builder
+results/    final_report.md, reports/, charts/, trades/
+```
+
+---
+
+## Known limitations
+
+1. **14 days, 1,320 contracts.** Short. A small real edge could hide here —
+   though the observed failure is not marginal.
+2. **Feed mismatch.** Coinbase reproduces Kalshi's settlement 92.3% of the
+   time; disagreements cluster on near-ties, where the two indices differ by a
+   few dollars. This adds feature noise, making the model's job *harder* — it
+   cannot manufacture an edge, only hide one.
+3. **No order-book depth.** Best bid/ask per minute only; fills assumed at the
+   quoted ask for the full position.
+4. **Minute resolution.** The 30-second entry point in the original spec is not
+   observable and is not faked.
+5. **Fee schedule unverified.** See above.
+
+---
+
+## Not done yet
+
+Strategy B (technical features) and Strategy C (ML) are stubs. Per the
+specification, work stopped after the baseline so results could be reviewed
+first. Both stubs document the gate they must clear: **beat a Brier of
+0.1353**, the market's own score, before any trading rule is worth testing.
+
+Before adding model complexity, consider the simpler explanation: a coin flip
+priced with a 1-cent spread plus fees may simply be efficiently priced. "No
+edge" is a legitimate finding, not a failure of method.

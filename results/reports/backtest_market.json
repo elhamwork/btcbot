@@ -1,0 +1,71 @@
+{
+  "train": {
+    "performance": {
+      "trades": 0,
+      "note": "no trades generated"
+    },
+    "probability": {
+      "n": 7926,
+      "brier": 0.13457386380267475,
+      "log_loss": 0.40893657815194023,
+      "roc_auc": 0.8914328375315181,
+      "accuracy": 0.801034569770376,
+      "base_rate": 0.5016401715871814,
+      "mean_prediction": 0.5051468584405753
+    },
+    "skipped": {
+      "no_edge": 7926,
+      "spread": 0,
+      "price_band": 0,
+      "volume": 0,
+      "no_spread": 0,
+      "bankrupt": 0
+    }
+  },
+  "validation": {
+    "performance": {
+      "trades": 0,
+      "note": "no trades generated"
+    },
+    "probability": {
+      "n": 2640,
+      "brier": 0.1519748559659091,
+      "log_loss": 0.45723681865988147,
+      "roc_auc": 0.8623624195772059,
+      "accuracy": 0.7791666666666667,
+      "base_rate": 0.5151515151515151,
+      "mean_prediction": 0.5079748106060606
+    },
+    "skipped": {
+      "no_edge": 2640,
+      "spread": 0,
+      "price_band": 0,
+      "volume": 0,
+      "no_spread": 0,
+      "bankrupt": 0
+    }
+  },
+  "test": {
+    "performance": {
+      "trades": 0,
+      "note": "no trades generated"
+    },
+    "probability": {
+      "n": 2624,
+      "brier": 0.1353453750952744,
+      "log_loss": 0.41552557177383437,
+      "roc_auc": 0.8901419292619447,
+      "accuracy": 0.8071646341463414,
+      "base_rate": 0.4969512195121951,
+      "mean_prediction": 0.5022368521341464
+    },
+    "skipped": {
+      "no_edge": 2624,
+      "spread": 0,
+      "price_band": 0,
+      "volume": 0,
+      "no_spread": 0,
+      "bankrupt": 0
+    }
+  }
+}

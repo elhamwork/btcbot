@@ -1,0 +1,137 @@
+{
+  "train": {
+    "performance": {
+      "trades": 764,
+      "wins": 388,
+      "losses": 376,
+      "win_rate": 0.5078534031413613,
+      "avg_profit": 8.11558762886598,
+      "avg_loss": -8.967728723404257,
+      "net_profit": -223.01800000000014,
+      "roi_on_bankroll": -0.22301800000000013,
+      "roi_on_turnover": -0.033059206186523686,
+      "final_bankroll": 776.982000000001,
+      "max_drawdown_dollars": -504.78799999999865,
+      "max_drawdown_pct": -0.4432879965154336,
+      "drawdown_duration_trades": 690,
+      "return_volatility": 10.16500543577265,
+      "worst_losing_streak": 8,
+      "best_winning_streak": 8,
+      "avg_entry_price": 0.49541753926701576,
+      "avg_edge": 0.1143728112001963,
+      "median_edge": 0.08985787145250795,
+      "avg_holding_minutes": 11.916230366492147,
+      "profit_per_trade": -0.291908376963351,
+      "profit_factor": 0.9338591747121622,
+      "total_fees": 235.57,
+      "turnover": 6746.018
+    },
+    "probability": {
+      "n": 7926,
+      "brier": 0.14634065196150542,
+      "log_loss": 0.5081673471448948,
+      "roc_auc": 0.874097719226753,
+      "accuracy": 0.7877870300277567,
+      "base_rate": 0.5016401715871814,
+      "mean_prediction": 0.4639725719036434
+    },
+    "skipped": {
+      "no_edge": 1105,
+      "spread": 0,
+      "price_band": 8,
+      "volume": 0,
+      "no_spread": 0,
+      "bankrupt": 0
+    }
+  },
+  "validation": {
+    "performance": {
+      "trades": 260,
+      "wins": 134,
+      "losses": 126,
+      "win_rate": 0.5153846153846153,
+      "avg_profit": 7.532395522388059,
+      "avg_loss": -9.13236507936508,
+      "net_profit": -141.33700000000002,
+      "roi_on_bankroll": -0.14133700000000002,
+      "roi_on_turnover": -0.06026298139670335,
+      "final_bankroll": 858.6630000000004,
+      "max_drawdown_dollars": -219.1769999999998,
+      "max_drawdown_pct": -0.2191769999999998,
+      "drawdown_duration_trades": 260,
+      "return_volatility": 9.143358855001617,
+      "worst_losing_streak": 7,
+      "best_winning_streak": 10,
+      "avg_entry_price": 0.5087384615384615,
+      "avg_edge": 0.15055037102807597,
+      "median_edge": 0.11141300101134505,
+      "avg_holding_minutes": 12.553846153846154,
+      "profit_per_trade": -0.5436038461538463,
+      "profit_factor": 0.8771706767662194,
+      "total_fees": 79.41,
+      "turnover": 2345.3369999999995
+    },
+    "probability": {
+      "n": 2640,
+      "brier": 0.17791623307137075,
+      "log_loss": 0.6625268323481247,
+      "roc_auc": 0.8305523322610294,
+      "accuracy": 0.7465909090909091,
+      "base_rate": 0.5151515151515151,
+      "mean_prediction": 0.42686710834574754
+    },
+    "skipped": {
+      "no_edge": 227,
+      "spread": 0,
+      "price_band": 3,
+      "volume": 0,
+      "no_spread": 0,
+      "bankrupt": 0
+    }
+  },
+  "test": {
+    "performance": {
+      "trades": 252,
+      "wins": 128,
+      "losses": 124,
+      "win_rate": 0.5079365079365079,
+      "avg_profit": 10.160218749999999,
+      "avg_loss": -10.078822580645163,
+      "net_profit": 50.733999999999966,
+      "roi_on_bankroll": 0.05073399999999997,
+      "roi_on_turnover": 0.020259029991222963,
+      "final_bankroll": 1050.7340000000013,
+      "max_drawdown_dollars": -184.25999999999954,
+      "max_drawdown_pct": -0.17491266707168845,
+      "drawdown_duration_trades": 200,
+      "return_volatility": 12.201376357820012,
+      "worst_losing_streak": 5,
+      "best_winning_streak": 6,
+      "avg_entry_price": 0.4949087301587302,
+      "avg_edge": 0.10448024003380234,
+      "median_edge": 0.08737124091332987,
+      "avg_holding_minutes": 11.876984126984127,
+      "profit_per_trade": 0.20132539682539669,
+      "profit_factor": 1.04059453949274,
+      "total_fees": 87.02000000000001,
+      "turnover": 2504.266
+    },
+    "probability": {
+      "n": 2624,
+      "brier": 0.14179204410784887,
+      "log_loss": 0.45941751914500717,
+      "roc_auc": 0.8820427240193345,
+      "accuracy": 0.7953506097560976,
+      "base_rate": 0.4969512195121951,
+      "mean_prediction": 0.45687523025750765
+    },
+    "skipped": {
+      "no_edge": 379,
+      "spread": 0,
+      "price_band": 2,
+      "volume": 0,
+      "no_spread": 0,
+      "bankrupt": 0
+    }
+  }
+}

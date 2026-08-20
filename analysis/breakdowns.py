@@ -1,60 +1,91 @@
-"""analysis/breakdowns.py -- results sliced by edge bucket, time-remaining
-bucket, market price bucket, volatility regime, and side."""
+"""
+Result breakdowns.
+
+A single aggregate win rate hides everything interesting. These cuts are where
+a strategy either shows structure or reveals itself as noise.
+"""
 
 import numpy as np
 import pandas as pd
 
-from backtest.metrics import compute_metrics
+import config
 
 
-def _bucket_summary(trades_df, bucket_col, starting_bankroll):
-    rows = []
-    for b, g in trades_df.groupby(bucket_col, observed=True):
-        m = compute_metrics(g, starting_bankroll)
-        m["bucket"] = str(b)
-        m["n"] = len(g)
-        rows.append(m)
-    return pd.DataFrame(rows)
+def _agg(g):
+    return pd.Series({
+        "trades": len(g),
+        "win_rate": g["won"].mean(),
+        "net_profit": g["profit_loss"].sum(),
+        "profit_per_trade": g["profit_loss"].mean(),
+        "avg_edge": g["edge"].mean(),
+        "avg_entry": g["entry_price"].mean(),
+        "roi_on_turnover": (g["profit_loss"].sum() /
+                            (g["stake"].sum() + g["fees"].sum())
+                            if (g["stake"].sum() + g["fees"].sum()) else np.nan),
+    })
 
 
-def by_edge_bucket(trades_df, starting_bankroll, bins=(0.05, 0.07, 0.10, 0.15, 1.0)):
-    t = trades_df.copy()
-    labels = [f"[{bins[i]:.2f},{bins[i+1]:.2f})" for i in range(len(bins) - 1)]
-    t["edge_bucket"] = pd.cut(t["edge"], bins=bins, labels=labels, include_lowest=True)
-    return _bucket_summary(t, "edge_bucket", starting_bankroll)
+def _by(trades, col):
+    if trades.empty:
+        return pd.DataFrame()
+    out = trades.groupby(col, observed=True).apply(_agg, include_groups=False)
+    return out.reset_index()
 
 
-def by_time_remaining(trades_df, starting_bankroll):
-    return _bucket_summary(trades_df, "minutes_remaining", starting_bankroll)
+def by_edge(trades):
+    if trades.empty:
+        return pd.DataFrame()
+    t = trades.copy()
+    t["edge_bucket"] = pd.cut(t["edge"], config.EDGE_BUCKETS,
+                              labels=config.EDGE_LABELS, include_lowest=True)
+    return _by(t, "edge_bucket")
 
 
-def by_market_price_bucket(trades_df, starting_bankroll, bins=(0, 0.2, 0.4, 0.6, 0.8, 1.0)):
-    t = trades_df.copy()
-    labels = [f"[{bins[i]:.1f},{bins[i+1]:.1f})" for i in range(len(bins) - 1)]
-    t["price_bucket"] = pd.cut(t["market_prob_implied"], bins=bins, labels=labels, include_lowest=True)
-    return _bucket_summary(t, "price_bucket", starting_bankroll)
+def by_time_remaining(trades):
+    if trades.empty:
+        return pd.DataFrame()
+    t = trades.copy()
+    t["time_bucket"] = pd.cut(t["minutes_remaining"], config.TIME_BUCKETS,
+                              labels=config.TIME_LABELS, include_lowest=True)
+    return _by(t, "time_bucket")
 
 
-def by_volatility_regime(trades_df, starting_bankroll):
-    t = trades_df.copy()
-    try:
-        t["vol_regime"] = pd.qcut(t["vol_5m"], 3, labels=["low", "mid", "high"], duplicates="drop")
-    except ValueError:
-        t["vol_regime"] = "all"
-    return _bucket_summary(t, "vol_regime", starting_bankroll)
+def by_price(trades):
+    if trades.empty:
+        return pd.DataFrame()
+    t = trades.copy()
+    t["price_bucket"] = pd.cut(t["entry_price"], config.PRICE_BUCKETS,
+                               labels=config.PRICE_LABELS, include_lowest=True)
+    return _by(t, "price_bucket")
 
 
-def by_side(trades_df, starting_bankroll):
-    return _bucket_summary(trades_df, "side", starting_bankroll)
+def by_volatility(trades, train_vol=None):
+    """Volatility regimes cut at TRAIN quantiles -- never at test quantiles,
+    which would leak the test distribution into the bucketing."""
+    if trades.empty or "rv_5m" not in trades:
+        return pd.DataFrame()
+    t = trades.copy()
+    ref = train_vol if train_vol is not None else t["rv_5m"]
+    qs = ref.quantile(config.VOL_REGIME_QUANTILES).tolist()
+    edges = [-np.inf] + qs + [np.inf]
+    t["vol_regime"] = pd.cut(t["rv_5m"], edges, labels=config.VOL_REGIME_LABELS)
+    return _by(t, "vol_regime")
 
 
-def all_breakdowns(trades_df, starting_bankroll):
-    if trades_df is None or len(trades_df) == 0:
-        return {}
+def by_side(trades):
+    return _by(trades, "side") if not trades.empty else pd.DataFrame()
+
+
+def by_entry_point(trades):
+    return _by(trades, "minutes_remaining") if not trades.empty else pd.DataFrame()
+
+
+def all_breakdowns(trades, train_vol=None):
     return {
-        "edge_bucket": by_edge_bucket(trades_df, starting_bankroll),
-        "time_remaining": by_time_remaining(trades_df, starting_bankroll),
-        "market_price_bucket": by_market_price_bucket(trades_df, starting_bankroll),
-        "volatility_regime": by_volatility_regime(trades_df, starting_bankroll),
-        "side": by_side(trades_df, starting_bankroll),
+        "edge": by_edge(trades),
+        "time_remaining": by_time_remaining(trades),
+        "market_price": by_price(trades),
+        "volatility_regime": by_volatility(trades, train_vol),
+        "side": by_side(trades),
+        "entry_point": by_entry_point(trades),
     }
