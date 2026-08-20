@@ -336,19 +336,29 @@ def _to_ts(value):
 def fetch_btc_minutes(start_ms, end_ms, reachable):
     say("\n[5/5] Downloading real 1-minute BTC price history...")
 
+    # Order matters: Binance and Coinbase both paginate over an arbitrary
+    # window, so they can cover the whole period. Kraken caps at ~720 recent
+    # 1-minute bars (~12h), so it is a last resort only -- it must never be
+    # preferred over Coinbase just because it answered first.
+    needed = int((end_ms - start_ms) / 60_000)
+
     if reachable.get("binance"):
         rows = _binance_klines(start_ms, end_ms)
         if rows:
             return rows, "binance"
-    if reachable.get("kraken"):
-        rows = _kraken_ohlc(start_ms)
-        if rows:
-            say("    NOTE: Kraken only serves ~720 recent 1m bars. Coverage is short.")
-            return rows, "kraken"
+        say("    Binance returned nothing (geo-restricted?). Trying Coinbase.")
     if reachable.get("coinbase"):
         rows = _coinbase_candles(start_ms, end_ms)
         if rows:
             return rows, "coinbase"
+    if reachable.get("kraken"):
+        rows = _kraken_ohlc(start_ms)
+        if rows:
+            say("    WARNING: only Kraken was available. It serves ~720 recent")
+            say("    1m bars (%d of the ~%d needed). Coverage will be short and"
+                % (len(rows), needed))
+            say("    the gap will be reported, not filled in.")
+            return rows, "kraken"
 
     say("    No BTC price source reachable. No price file written.")
     return [], None
