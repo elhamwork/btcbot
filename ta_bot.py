@@ -78,6 +78,11 @@ MAX_SPREAD = 0.05
 # be asserting something the data does not support.
 TECH_MAX_TILT = 0.08
 
+# Floor on the per-minute volatility estimate: the 1st percentile observed
+# across 63 days. Prevents a flat stretch of bars from producing a near-zero
+# estimate and a fake 0%/100% probability. See analyse().
+MIN_VOL = 0.0001
+
 EDGE_VALIDATED = False
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -265,6 +270,15 @@ def analyse(closes, vols, strike, minutes_left):
     # This narrows the gap to the market (test Brier 0.1537 -> 0.1496) but does
     # not close it: the market still scores 0.1388.
     vol = realized_vol(closes, 15) or realized_vol(closes, 10) or realized_vol(closes, 5)
+
+    # Safety floor, not a performance tweak. A dead-flat stretch of bars can
+    # drive the estimate to ~0, and the probability then divides by it and
+    # snaps to 0% or 100% -- certainty manufactured out of a rounding error.
+    # The floor is the 1st percentile of observed 15-minute volatility across
+    # 63 days. On validation it costs 0.0001 of Brier (0.1312 -> 0.1313),
+    # which is worth paying to never print a fake certainty.
+    if vol is None or vol < MIN_VOL:
+        vol = MIN_VOL
 
     # ---- part 1: the physics ------------------------------------------
     if vol and minutes_left > 0 and strike > 0:
