@@ -69,6 +69,18 @@ BARS_NEEDED = 120          # enough history for EMA50 + MACD to settle
 MIN_EDGE = 0.05
 CONFIRM_POLLS = 3
 ONE_ALERT_PER_CONTRACT = True
+
+# --daily mode: at most ONE alert per calendar day.
+#
+# With the filters on, roughly 54 setups a day qualify -- far more than anyone
+# wants pinged for. In daily mode the bot stays quiet until it sees a setup
+# clearing DAILY_MIN_EDGE, fires once, and then says nothing until tomorrow.
+#
+# It cannot wait for "the best setup of the day" -- that would require knowing
+# how the rest of the day turns out, which is the look-ahead bug that faked a
+# +28.7% return earlier in this project. Raising the bar and taking the first
+# qualifier is the honest version.
+DAILY_MIN_EDGE = 0.08
 MAX_SPREAD = 0.05
 
 # ---------------------------------------------------------------------------
@@ -493,7 +505,7 @@ FIELDS = ["observed_at", "ticker", "minutes_remaining", "strike", "btc_price",
           "best_side", "best_edge", "alerted"]
 
 
-def one_pass(writer, state, quiet):
+def one_pass(writer, state, quiet, daily=False):
     closes, vols, err = fetch_bars()
     if err or not closes or len(closes) < 60:
         print("  waiting for BTC data (%s)" % (err or "too few bars"), flush=True)
@@ -541,6 +553,21 @@ def one_pass(writer, state, quiet):
     else:
         state["streak"] = sk = {}
 
+    today = datetime.now(timezone.utc).date()
+    if state.get("day") != today:
+        state["day"] = today
+        state["alerted_today"] = False
+    if daily:
+        if state["alerted_today"]:
+            ok = False
+        elif edge < DAILY_MIN_EDGE:
+            if ok:
+                print("     daily mode: holding out for %.0f%% (this is %.0f%%)"
+                      % (100 * DAILY_MIN_EDGE, 100 * edge))
+            ok = False
+        if not ok:
+            state["streak"] = sk = {}
+
     fire = (sk.get("n", 0) >= CONFIRM_POLLS
             and not (ONE_ALERT_PER_CONTRACT and tkr in state["alerted"])
             and not quiet)
@@ -548,6 +575,7 @@ def one_pass(writer, state, quiet):
         print("     confirming %d/%d" % (sk["n"], CONFIRM_POLLS))
     if fire:
         state["alerted"].add(tkr)
+        state["alerted_today"] = True
         notify("%s %s  %+.0f pts" % (tkr, side, 100 * edge),
                "RSI %.0f, %d bull / %d bear | model %.0f%% vs price %.0f%% | "
                "%.0f min | BTC $%.0f vs $%.0f"
@@ -574,6 +602,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--once", action="store_true", help="one reading, then exit")
+    ap.add_argument("--daily", action="store_true",
+                    help="at most one alert per day, at a higher bar")
     ap.add_argument("--quiet", action="store_true", help="no notifications")
     a = ap.parse_args()
 
@@ -591,6 +621,9 @@ def main():
     print("  Alerts: %d%% edge held for %d polls, one per contract"
           % (100 * MIN_EDGE, CONFIRM_POLLS))
     print("  Phone:  %s" % ("ntfy '%s'" % NTFY_TOPIC if NTFY_TOPIC else "off"))
+    if a.daily:
+        print("  Mode:   DAILY -- at most one alert per day, %.0f%% edge bar"
+              % (100 * DAILY_MIN_EDGE))
     if not EDGE_VALIDATED:
         print()
         print("  Measured on 63 days: technical indicators did NOT beat the")
@@ -598,10 +631,11 @@ def main():
         print("  live because it is worth watching, not because it is proven.")
     print()
 
-    state = {"streak": {}, "alerted": set()}
+    state = {"streak": {}, "alerted": set(), "day": None,
+             "alerted_today": False}
     try:
         while True:
-            one_pass(writer, state, a.quiet)
+            one_pass(writer, state, a.quiet, daily=a.daily)
             fh.flush()
             if a.once:
                 break
