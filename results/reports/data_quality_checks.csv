@@ -1,24 +1,24 @@
 check,detail,rows_affected,action
 BTC duplicate timestamps,identical minute repeated,0,none found
-BTC gaps,0 breaks totalling 0 missing minutes,0,left as gaps; NOT interpolated (would invent prices)
+BTC gaps,13 breaks totalling 21 missing minutes,21,left as gaps; NOT interpolated (would invent prices)
 BTC impossible prices,non-positive or null OHLC,0,none found
 BTC ordering,out-of-order timestamps,0,already sorted
 Contract duplicates,same ticker twice,0,none found
 Missing settlement,result not yes/no,0,none found
 Non-finalized status,status != finalized,0,none found
-Invalid strikes,null or non-positive floor_strike,3,removed
+Invalid strikes,null or non-positive floor_strike,7,removed
 Contract duration,lifetime != 15 minutes,0,all exactly 15 min
 Overlapping contracts,two contracts sharing a close time,0,none found
-Contract cadence gaps,"5 breaks in the 15-min schedule, ~21 contracts absent from Kalshi",21,left as gaps; nothing invented to fill them
+Contract cadence gaps,"14 breaks in the 15-min schedule, ~91 contracts absent from Kalshi",91,left as gaps; nothing invented to fill them
 Timezone,all timestamps tz-aware UTC,0,verified UTC end to end
 Candle duplicates,same ticker+minute twice,0,none found
 Negative prices,bid or ask < 0,0,none found
 Prices above $1,bid or ask > 1,0,none found
 Crossed quotes,ask < bid,0,none found
 Null quotes,missing bid or ask,0,none found
-Candles per contract,contracts without exactly 15 candles,0,every contract has all 15
-Contracts without quotes,no candle rows at all,0,none found
-Settlement vs our BTC feed,Coinbase close at expiry reproduces Kalshi's result 92.28% of the time,102,NOT corrected -- Kalshi's `result` is the label; the feed difference is real measurement noise and is left in
-BTC/Kalshi clock alignment,best shift by settlement = +0 min; best shift by strike-at-open = +0 min (0 = correctly aligned),0,verified aligned
-BTC coverage at expiry,contracts whose close time has no BTC bar,1,excluded from the panel
-Strike vs spot at open,median |strike - BTC at open| = $6.10 (strike is set at spot),0,informational
+Candles per contract,contracts without exactly 15 candles,1,kept; decision points simply unavailable where a minute is missing
+Contracts without quotes,no candle rows at all,6,excluded from the panel
+Settlement vs our BTC feed,Coinbase close at expiry reproduces Kalshi's result 94.01% of the time,359,NOT corrected -- Kalshi's `result` is the label; the feed difference is real measurement noise and is left in
+BTC/Kalshi clock alignment,best shift by settlement = -1 min; best shift by strike-at-open = -1 min (0 = correctly aligned),1,MISALIGNED -- a non-zero best shift means look-ahead or lag
+BTC coverage at expiry,contracts whose close time has no BTC bar,0,none found
+Strike vs spot at open,median |strike - BTC at open| = $8.29 (strike is set at spot),0,informational
