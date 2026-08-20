@@ -74,9 +74,20 @@ def _fit_model(name, train, valid):
     if name == "market":
         return baseline.MarketBaseline(), "market-mid"
     if name == "technical":
-        sys.exit("Strategy B (technical) is not enabled yet -- baseline first.")
+        from models import baseline as _b
+        m = _b.LogisticBaseline(config.FEATURES_TECHNICAL)
+        m.fit(train, valid)
+        return m, "logistic-technical"
     if name == "ml":
-        sys.exit("Strategy C (ML) is not enabled yet -- baseline first.")
+        from models import ml_models
+        m = ml_models.DirectClassifier("gb", config.FEATURES_TECHNICAL)
+        m.fit(train, valid)
+        return m, "gradient-boosting"
+    if name == "residual":
+        from models import ml_models
+        m = ml_models.ResidualModel("gb", config.FEATURES_TECHNICAL, shrink=0.5)
+        m.fit(train, valid)
+        return m, "residual-gb"
     sys.exit("unknown strategy: %s" % name)
 
 
@@ -155,6 +166,9 @@ def main():
                     help="baseline | analytic | market | technical | ml")
     ap.add_argument("--report", action="store_true",
                     help="charts, statistics, and results/final_report.md")
+    ap.add_argument("--search", action="store_true",
+                    help="systematic strategy search with the Brier gate "
+                         "and cross-period stability requirement")
     a = ap.parse_args()
 
     if a.download:
@@ -165,6 +179,10 @@ def main():
         cmd_backtest(a.backtest)
     elif a.report:
         cmd_report()
+    elif a.search:
+        from analysis import search as _s
+        df, mb = _s.evaluate()
+        _s.report(df, mb)
     else:
         ap.print_help()
 
