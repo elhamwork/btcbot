@@ -202,6 +202,53 @@ def rel_volume(volumes, window=20):
     return volumes[-1] / avg if avg else None
 
 
+# ---------------------------------------------------------------------------
+# Calibration table
+# ---------------------------------------------------------------------------
+# The raw formula ranks well but is systematically UNDER-confident. Measured
+# across 63 days, and stable in all three time periods independently:
+#
+#     model says   actually happens     train / valid / test
+#       0.0-0.2         ~7%              6.3%   5.9%   8.8%
+#       0.2-0.4         ~32%            32.3%  30.0%  32.7%
+#       0.4-0.6         ~56%            56.0%  53.8%  58.0%
+#       0.6-0.8         ~80%            80.4%  80.4%  79.3%
+#       0.8-1.0         ~96%            97.1%  96.6%  95.8%
+#
+# The 0.6-0.8 row is the clearest: the model says 70, reality is 80. This is
+# not a directional bet sneaking in -- the overall YES rate is 49.7 / 48.6 /
+# 51.0 per period, essentially even. The formula is simply too timid.
+#
+# Fitted with isotonic regression on train+validation; the test split was not
+# used to build it. Applying it improves the test Brier from 0.1481 to 0.1451.
+CAL_X = [0.0000, 0.0250, 0.0500, 0.0750, 0.1000, 0.1250, 0.1500, 0.1750,
+         0.2000, 0.2250, 0.2500, 0.2750, 0.3000, 0.3250, 0.3500, 0.3750,
+         0.4000, 0.4250, 0.4500, 0.4750, 0.5000, 0.5250, 0.5500, 0.5750,
+         0.6000, 0.6250, 0.6500, 0.6750, 0.7000, 0.7250, 0.7500, 0.7750,
+         0.8000, 0.8250, 0.8500, 0.8750, 0.9000, 0.9250, 0.9500, 0.9750,
+         1.0000]
+CAL_Y = [0.0011, 0.0365, 0.0495, 0.0627, 0.0795, 0.1092, 0.1406, 0.1757,
+         0.1977, 0.2338, 0.2663, 0.2950, 0.2991, 0.3439, 0.3439, 0.3800,
+         0.4412, 0.4412, 0.5057, 0.5057, 0.5761, 0.5836, 0.6354, 0.6555,
+         0.6815, 0.7307, 0.7631, 0.7826, 0.8345, 0.8433, 0.8557, 0.8933,
+         0.8980, 0.9106, 0.9340, 0.9441, 0.9567, 0.9712, 0.9872, 0.9872,
+         0.9984]
+
+
+def calibrate(p):
+    """Map a raw model probability onto what actually happened historically."""
+    if p <= CAL_X[0]:
+        return CAL_Y[0]
+    if p >= CAL_X[-1]:
+        return CAL_Y[-1]
+    for i in range(1, len(CAL_X)):
+        if p <= CAL_X[i]:
+            x0, x1 = CAL_X[i - 1], CAL_X[i]
+            y0, y1 = CAL_Y[i - 1], CAL_Y[i]
+            return y0 + (y1 - y0) * (p - x0) / (x1 - x0)
+    return CAL_Y[-1]
+
+
 def norm_cdf(x):
     return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
@@ -283,9 +330,10 @@ def analyse(closes, vols, strike, minutes_left):
     # ---- part 1: the physics ------------------------------------------
     if vol and minutes_left > 0 and strike > 0:
         z = math.log(spot / strike) / (vol * math.sqrt(minutes_left))
-        base = norm_cdf(z)
+        raw = norm_cdf(z)
     else:
-        base = 1.0 if spot >= strike else 0.0
+        raw = 1.0 if spot >= strike else 0.0
+    base = calibrate(raw)
 
     # ---- part 2: the indicators ---------------------------------------
     r = rsi(closes, 14)
@@ -373,7 +421,7 @@ def render(m, mins, base, tech, signals, st):
           % (st["bull"], st["bear"], 100 * TECH_MAX_TILT * st["score"]))
     print()
     print("  PROBABILITY")
-    print("    from distance+time+vol   %5.1f%%" % (100 * base))
+    print("    from distance+time+vol   %5.1f%%  (calibrated)" % (100 * base))
     print("    after technical tilt     %5.1f%%" % (100 * tech))
     print()
     print("  MARKET")
