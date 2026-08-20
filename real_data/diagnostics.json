@@ -1,0 +1,51 @@
+{
+  "attempts": [
+    {
+      "tag": "probe_kalshi",
+      "status": "error",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://api.elections.kalshi.com/trade-api/v2/exchange/status",
+      "ts": "2026-08-20T03:48:41.629147+00:00"
+    },
+    {
+      "tag": "probe_binance",
+      "status": "error",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://api.binance.com/api/v3/time",
+      "ts": "2026-08-20T03:48:42.041693+00:00"
+    },
+    {
+      "tag": "probe_kraken",
+      "status": "error",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://api.kraken.com/0/public/Time",
+      "ts": "2026-08-20T03:48:42.405626+00:00"
+    },
+    {
+      "tag": "probe_coinbase",
+      "status": "error",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://api.exchange.coinbase.com/time",
+      "ts": "2026-08-20T03:48:42.844848+00:00"
+    }
+  ],
+  "samples": {},
+  "started": "2026-08-20T03:48:41.300133+00:00",
+  "finished": "2026-08-20T03:48:42.965223+00:00",
+  "summary": {
+    "days_back": 14,
+    "period_start": "2026-08-06T03:48:41.300818+00:00",
+    "period_end": "2026-08-20T03:48:41.300818+00:00",
+    "reachable": {
+      "kalshi": false,
+      "binance": false,
+      "kraken": false,
+      "coinbase": false
+    },
+    "contracts": 0,
+    "candlesticks": 0,
+    "trades": 0,
+    "btc_minute_bars": 0,
+    "btc_source": null
+  }
+}

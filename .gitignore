@@ -8,5 +8,8 @@ venv/
 *.egg-info/
 .DS_Store
 
-# standalone downloader output
-real_data/
+# Output of fetch_real_data.py / fetch_btc_prices.py.
+# Deliberately NOT ignored: this is the real market data the backtest needs,
+# and committing it is the simplest way to move it from the machine that can
+# reach Kalshi to the one running the analysis. It is public market data.
+# !real_data/
