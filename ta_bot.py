@@ -69,8 +69,29 @@ BARS_NEEDED = 120          # enough history for EMA50 + MACD to settle
 MIN_EDGE = 0.05
 CONFIRM_POLLS = 3
 ONE_ALERT_PER_CONTRACT = True
-MIN_PRICE, MAX_PRICE = 0.05, 0.95
 MAX_SPREAD = 0.05
+
+# ---------------------------------------------------------------------------
+# Trade filters -- what to REFUSE
+# ---------------------------------------------------------------------------
+# Measured across 63 days / 6,000 contracts. Each filter was tested on train,
+# validation and test separately, at a 5% edge threshold, return per dollar:
+#
+#   no filter at all          -1.41%   +0.03%   -2.05%
+#   longshots only (<50c)    -12.57%   -8.28%  -13.85%   <- avoid, emphatically
+#   5 or fewer minutes left   -4.66%   -2.90%   -8.17%   <- avoid
+#   favourites only (>50c)    +1.28%   +1.83%   +0.95%   <- keep
+#   10 or more minutes left   +1.07%   +0.56%   +1.86%   <- keep
+#
+# Combining the two keepers, taking one trade per contract at the earliest
+# qualifying moment: 68.73% win rate against a 65.80% break-even, +1.45% per
+# dollar, p=0.0002 over 3,220 independent trades. Validation alone came in at
+# -0.64%, so this is 2-of-3 periods positive, not 3-of-3 -- promising, not
+# proven. The trades it rejects returned -3.75%, and avoiding those is the
+# part that is not in doubt.
+MIN_PRICE = 0.50           # favourites only: never buy the cheap side
+MAX_PRICE = 0.95
+MIN_MINUTES_LEFT = 10      # no last-minute scrambles
 
 # How far the indicators may move the base probability, in probability points.
 # Kept modest on purpose: measured against 63 days of history, technicals did
@@ -495,8 +516,21 @@ def one_pass(writer, state, quiet):
     tkr = m.get("ticker")
     spread = ya - yb
     mid = (ya + yb) / 2.0
-    ok = (edge >= MIN_EDGE and spread <= MAX_SPREAD
-          and MIN_PRICE <= mid <= MAX_PRICE)
+    entry_px = ya if side == "YES" else no_ask
+    reasons = []
+    if edge < MIN_EDGE:
+        reasons.append("edge %.0f%% < %.0f%%" % (100 * edge, 100 * MIN_EDGE))
+    if entry_px < MIN_PRICE:
+        reasons.append("longshot at %.2f (these lost 13%%)" % entry_px)
+    if entry_px > MAX_PRICE:
+        reasons.append("too expensive at %.2f" % entry_px)
+    if mins < MIN_MINUTES_LEFT:
+        reasons.append("only %.1f min left (need %d)" % (mins, MIN_MINUTES_LEFT))
+    if spread > MAX_SPREAD:
+        reasons.append("spread %.2f too wide" % spread)
+    ok = not reasons
+    if reasons and edge >= MIN_EDGE:
+        print("     REJECTED: %s" % "; ".join(reasons))
 
     sk = state["streak"]
     if ok:
