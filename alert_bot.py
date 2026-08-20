@@ -72,7 +72,19 @@ LOG_DIR = os.path.join(HERE, "forward_test")
 PRED_LOG = os.path.join(LOG_DIR, "predictions.csv")
 SCORE_OUT = os.path.join(LOG_DIR, "forward_test_score.md")
 
-# Optional phone alerts. Leave blank to disable.
+# ---------------------------------------------------------------------------
+# Phone alerts via ntfy.sh
+# ---------------------------------------------------------------------------
+# Put your topic below (or set the NTFY_TOPIC environment variable), install
+# the ntfy app, and subscribe to the same topic. No account, no signup.
+#
+# SECURITY: ntfy.sh topics are PUBLIC. Anyone who guesses or brute-forces the
+# name receives your alerts. Use a long random string, not "btc" or your name.
+# `python3 alert_bot.py --setup` prints a fresh random one.
+NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "")
+NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
+
+# Optional Telegram, if you prefer it. Leave blank to disable.
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
 TELEGRAM_CHAT = os.environ.get("TELEGRAM_CHAT", "")
 
@@ -166,9 +178,33 @@ class PriceTracker:
 # Notifications
 # ---------------------------------------------------------------------------
 
+def _ascii(s):
+    """ntfy sends the title as an HTTP header, which must be latin-1 safe."""
+    return s.encode("ascii", "replace").decode("ascii")
+
+
+def send_ntfy(title, body, tags="chart_with_upwards_trend", priority="default"):
+    """POST to ntfy.sh. Returns (ok, detail)."""
+    if not NTFY_TOPIC:
+        return False, "no topic configured"
+    url = "%s/%s" % (NTFY_SERVER.rstrip("/"), NTFY_TOPIC)
+    req = urllib.request.Request(
+        url, data=body.encode("utf-8"), method="POST",
+        headers={"Title": _ascii(title), "Tags": tags,
+                 "Priority": priority, "Markdown": "no"})
+    try:
+        with urllib.request.urlopen(
+                req, timeout=10, context=ssl.create_default_context()) as r:
+            return r.status < 300, "HTTP %s" % r.status
+    except Exception as e:                                    # noqa: BLE001
+        return False, "%s: %s" % (type(e).__name__, e)
+
+
 def notify(title, message):
     banner = message if EDGE_VALIDATED else ("[NOT VALIDATED] " + message)
     print("\n  *** %s -- %s\n" % (title, banner), flush=True)
+
+    send_ntfy(title, banner)
 
     if sys.platform == "darwin":
         try:
@@ -183,6 +219,56 @@ def notify(title, message):
     if TELEGRAM_TOKEN and TELEGRAM_CHAT:
         get("https://api.telegram.org/bot%s/sendMessage" % TELEGRAM_TOKEN,
             {"chat_id": TELEGRAM_CHAT, "text": "%s\n%s" % (title, banner)})
+
+
+def cmd_setup():
+    """Print a fresh random topic and the steps to use it."""
+    import secrets
+    topic = "btcbot-" + secrets.token_urlsafe(12).replace("-", "").replace("_", "")
+    print("=" * 68)
+    print("  ntfy setup")
+    print("=" * 68)
+    print()
+    print("  1. Install the 'ntfy' app (App Store / Google Play).")
+    print()
+    print("  2. In the app: tap +, and subscribe to this topic:")
+    print()
+    print("        %s" % topic)
+    print()
+    print("  3. Open alert_bot.py, find the line starting NTFY_TOPIC, and")
+    print("     put the topic between the quotes:")
+    print()
+    print('        NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "%s")' % topic)
+    print()
+    print("  4. Test it:   python3 alert_bot.py --test-alert")
+    print()
+    print("  Topics on ntfy.sh are PUBLIC -- anyone who knows the name can")
+    print("  read your alerts. That is why this one is random. Do not")
+    print("  shorten it to something memorable.")
+    print()
+
+
+def cmd_test_alert():
+    print("Configured topic: %s" % (NTFY_TOPIC or "(none -- run --setup)"))
+    ok, detail = send_ntfy(
+        "btcbot test",
+        "If this reached your phone, alerts are working.",
+        tags="white_check_mark")
+    print("  ntfy:      %s (%s)" % ("sent" if ok else "FAILED", detail))
+    if sys.platform == "darwin":
+        notify_ok = True
+        try:
+            subprocess.run(["osascript", "-e",
+                            'display notification "Alerts are working." '
+                            'with title "btcbot test" sound name "Submarine"'],
+                           check=False, capture_output=True, timeout=5)
+        except Exception as e:                                # noqa: BLE001
+            notify_ok = False
+            print("  mac alert: FAILED (%s)" % e)
+        if notify_ok:
+            print("  mac alert: sent (check the top-right of your screen)")
+    if not ok and not NTFY_TOPIC:
+        print("\n  Run `python3 alert_bot.py --setup` first.")
 
 
 # ---------------------------------------------------------------------------
@@ -229,6 +315,9 @@ def watch(quiet=False):
     print("=" * 72)
     print("  Recording every observation to %s" % PRED_LOG)
     print("  Alert threshold: %.0f%% edge" % (100 * MIN_EDGE))
+    print("  Phone alerts:    %s"
+          % ("ntfy topic '%s'" % NTFY_TOPIC if NTFY_TOPIC
+             else "off  (run --setup to enable)"))
     if not EDGE_VALIDATED:
         print()
         print("  NO VALIDATED EDGE EXISTS. Across 105 configurations on 14 days")
@@ -451,8 +540,19 @@ def main():
                     help="record without notifications")
     ap.add_argument("--score", action="store_true",
                     help="fetch settlements and score past predictions")
+    ap.add_argument("--setup", action="store_true",
+                    help="generate an ntfy topic and print setup steps")
+    ap.add_argument("--test-alert", action="store_true",
+                    help="send one test notification and report what worked")
     a = ap.parse_args()
-    score() if a.score else watch(a.quiet)
+    if a.setup:
+        cmd_setup()
+    elif a.test_alert:
+        cmd_test_alert()
+    elif a.score:
+        score()
+    else:
+        watch(a.quiet)
 
 
 if __name__ == "__main__":
