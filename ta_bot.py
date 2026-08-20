@@ -249,7 +249,22 @@ def current_contract():
 def analyse(closes, vols, strike, minutes_left):
     """Return (base_p, tech_p, signals, stats)."""
     spot = closes[-1]
-    vol = realized_vol(closes, 5) or realized_vol(closes, 10)
+    # Volatility over 15 minutes, not 5.
+    #
+    # Measured on 63 days: a 5-minute estimate badly understates what happens
+    # next when the market is quiet. In the calmest fifth of readings, BTC
+    # actually moved 1.98x further than a 5-minute estimate predicted. That
+    # made the model wildly overconfident in exactly those moments -- it would
+    # print "98% NO" while the market said 67%, and the market was right.
+    #
+    # Tested alternatives on validation: 15-minute realised (0.1312) beat
+    # 5-minute (0.1326), and beat every blend with a long-run average, which
+    # made things worse. So recent volatility IS informative; the 5-minute
+    # window was simply too short a sample.
+    #
+    # This narrows the gap to the market (test Brier 0.1537 -> 0.1496) but does
+    # not close it: the market still scores 0.1388.
+    vol = realized_vol(closes, 15) or realized_vol(closes, 10) or realized_vol(closes, 5)
 
     # ---- part 1: the physics ------------------------------------------
     if vol and minutes_left > 0 and strike > 0:
