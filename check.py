@@ -107,6 +107,30 @@ MIN_VOL = 0.0001
 # probability the tool produces.
 COINBASE_TO_BRTI = 5.97
 
+# TESTED AND REJECTED: anchoring to the strike.
+#
+# The strike of each contract is EXACTLY Kalshi's index at open -- verified,
+# 5,982 consecutive pairs, 100% exact match to the penny. So Kalshi hands us
+# its own index for free every 15 minutes, and the obvious move is to anchor
+# to it and let Coinbase supply only the change since:
+#
+#     estimate = strike + (coinbase_now - coinbase_at_open)
+#
+# It is worse. Measured against 5,992 real settlements:
+#
+#     raw Coinbase                      RMS 15.85    outcome match 94.01%
+#     Coinbase + fixed offset (used)    RMS 14.44                  94.74%
+#     anchored to the strike            RMS 19.53                  93.01%
+#
+# 35% worse. The reason: the Coinbase-to-BRTI gap does not persist. Its
+# correlation between contract open and 15 minutes later is 0.083 -- it
+# resets constantly. Anchoring therefore freezes whichever random gap
+# happened to exist at open and carries it for the whole contract, replacing
+# one noisy reading with two.
+#
+# Blending the two helps by 0.05 of RMS at w=0.10, which is nothing, and
+# costs real complexity. Not taken.
+
 # Calibration measured over 63 days: what the formula says, versus what really
 # happened. The formula is systematically under-confident; this corrects it.
 CAL_X = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50,
