@@ -455,6 +455,20 @@ def main():
              "The market exists but has no bid or ask yet.", normal=False)
     strike, yb, ya = float(strike), float(yb), float(ya)
 
+    # An empty order book reports 0 for everything. That is not a price of
+    # zero, it is the absence of a price -- during Kalshi's 3-5 AM ET
+    # maintenance pause, and briefly when a contract first opens, the book is
+    # empty. Without this check the arithmetic treats "buy YES for 0c" as a
+    # free lottery ticket and reports an enormous fake edge.
+    if not (0.0 < ya < 1.0) or not (0.0 <= yb < ya):
+        now = datetime.now(timezone.utc)
+        why = ("Kalshi runs maintenance 3-5 AM ET and the order book empties "
+               "out. You are inside that window now."
+               if 7 <= now.hour < 9 else
+               "The order book is empty -- nobody is quoting this contract "
+               "yet. It usually fills in within a minute of opening.")
+        cant("Every price on this contract is showing 0.", why, normal=False)
+
     spot = closes[-1]
     v = max(vol_per_min(closes) or MIN_VOL, MIN_VOL)
     raw = norm_cdf(math.log(spot / strike) / (v * math.sqrt(max(mins, 0.05))))
