@@ -354,7 +354,8 @@ def answer(verdict, colour_note=""):
     print("  " + "=" * W)
 
 
-def cant(reason, detail=""):
+def cant(reason, detail="", normal=True):
+    """normal=True means 'no edge here'. False means 'no data / market shut'."""
     answer("CAN'T SAY")
     print()
     print("  %s" % reason)
@@ -369,8 +370,13 @@ def cant(reason, detail=""):
         if cur:
             print("  %s" % cur)
     print()
-    print("  This is the normal outcome. Kalshi is usually priced correctly,")
-    print("  and most of the time there is genuinely nothing to say.")
+    if normal:
+        print("  This is the normal outcome. Kalshi is usually priced")
+        print("  correctly, and most of the time there is genuinely")
+        print("  nothing to say.")
+    else:
+        print("  Nothing is wrong with the tool -- there is just no market")
+        print("  to look at. Try again shortly.")
     print()
     sys.exit(0)
 
@@ -422,17 +428,31 @@ def main():
 
     got, err = live()
     if err:
-        cant("Cannot reach the market.", err[:70])
+        if "no BTC" in err:
+            now = datetime.now(timezone.utc)
+            hint = ""
+            # Kalshi pauses trading 03:00-05:00 ET for weekly maintenance,
+            # which is 07:00-09:00 UTC on eastern daylight time.
+            if 7 <= now.hour < 9:
+                hint = ("Kalshi runs scheduled maintenance 3-5 AM ET "
+                        "(you are inside that window now). Trading is paused.")
+            else:
+                hint = ("There is a short gap between one contract closing "
+                        "and the next opening. Wait a minute and re-run.")
+            cant("No BTC 15-minute contract is open right now.", hint,
+                 normal=False)
+        cant("Cannot reach Kalshi.", err[:70], normal=False)
     m, mins = got
 
     closes, vols, err = bars()
     if err:
-        cant("Cannot get a reliable BTC price.", err[:70])
+        cant("Cannot get a reliable BTC price.", err[:70], normal=False)
 
     strike = m.get("floor_strike")
     yb, ya = m.get("yes_bid_dollars"), m.get("yes_ask_dollars")
     if strike is None or yb is None or ya is None:
-        cant("Kalshi is not quoting this contract right now.")
+        cant("Kalshi is not quoting this contract right now.",
+             "The market exists but has no bid or ask yet.", normal=False)
     strike, yb, ya = float(strike), float(yb), float(ya)
 
     spot = closes[-1]
