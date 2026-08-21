@@ -41,6 +41,7 @@ No account, no API key, no orders, no money. Standard library only.
 import argparse
 import json
 import math
+import os
 import ssl
 import sys
 import urllib.parse
@@ -90,6 +91,156 @@ CAL_Y = [0.001, 0.050, 0.080, 0.141, 0.198, 0.266, 0.299, 0.344, 0.441,
          0.957, 0.987, 0.998]
 
 W = 64
+
+
+# ---------------------------------------------------------------------------
+# Memory
+# ---------------------------------------------------------------------------
+# Every answer is written down. The next time you run this, it looks up how
+# the earlier contracts actually settled and adjusts. Kalshi publishes the
+# result, so it checks its own homework -- you do not have to tell it.
+#
+# What it adjusts is CALIBRATION: the mapping from "the formula says 78%" to
+# "78% really means 84%". That is a real thing to learn and it is what the
+# 63-day study showed was off.
+#
+# It does NOT learn to see the future. If Kalshi's price is the better
+# forecast, no amount of self-correction changes that. Learning straightens a
+# bent ruler; it does not make the ruler longer.
+#
+# The 63-day table below counts as PRIOR_STRENGTH observations per bin, so a
+# handful of live results nudges it rather than throwing it out. Three lucky
+# wins should not convince it that a bin is a certainty.
+MEMORY = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                      "forward_test", "check_memory.json")
+N_BINS = 20
+PRIOR_STRENGTH = 30.0
+
+
+def bin_of(p):
+    return min(int(p * N_BINS), N_BINS - 1)
+
+
+def prior_for(b):
+    """The 63-day calibration, read at the centre of bin b."""
+    centre = (b + 0.5) / N_BINS
+    lo = CAL_Y[0]
+    for i in range(1, len(CAL_X)):
+        if centre <= CAL_X[i]:
+            x0, x1, y0, y1 = CAL_X[i - 1], CAL_X[i], CAL_Y[i - 1], CAL_Y[i]
+            lo = y0 + (y1 - y0) * (centre - x0) / (x1 - x0)
+            break
+    else:
+        lo = CAL_Y[-1]
+    return lo
+
+
+def load_memory():
+    blank = {"predictions": [], "bins_n": [0.0] * N_BINS,
+             "bins_wins": [0.0] * N_BINS}
+    try:
+        with open(MEMORY) as f:
+            m = json.load(f)
+        for k, v in blank.items():
+            m.setdefault(k, v)
+        return m
+    except Exception:                                         # noqa: BLE001
+        return blank
+
+
+def save_memory(m):
+    os.makedirs(os.path.dirname(MEMORY), exist_ok=True)
+    tmp = MEMORY + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(m, f, indent=1)
+    os.replace(tmp, MEMORY)      # atomic; a crash cannot corrupt the memory
+
+
+def learned(mem, raw):
+    """Prior blended with whatever this tool has since observed."""
+    b = bin_of(raw)
+    n, w = mem["bins_n"][b], mem["bins_wins"][b]
+    p = (prior_for(b) * PRIOR_STRENGTH + w) / (PRIOR_STRENGTH + n)
+    return min(max(p, 0.001), 0.999)
+
+
+def settle_pending(mem, quiet=False):
+    """Look up how earlier calls turned out, and learn from them."""
+    now = datetime.now(timezone.utc)
+    checked = right = wrong = 0
+    for rec in mem["predictions"]:
+        if rec.get("outcome") is not None:
+            continue
+        try:
+            ct = datetime.fromisoformat(str(rec["close_time"]).replace("Z", "+00:00"))
+        except Exception:                                     # noqa: BLE001
+            continue
+        if now < ct + timedelta(minutes=2):
+            continue
+        d, _ = get(KALSHI + "/markets/" + rec["ticker"])
+        res = ((d or {}).get("market") or {}).get("result")
+        if res not in ("yes", "no"):
+            continue
+        y = 1 if res == "yes" else 0
+        rec["outcome"] = y
+        b = bin_of(rec["raw"])
+        mem["bins_n"][b] += 1.0
+        mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
+        checked += 1
+        if rec.get("answered"):
+            ok = (rec["side"] == "YES" and y == 1) or (rec["side"] == "NO" and y == 0)
+            rec["correct"] = bool(ok)
+            right += ok
+            wrong += not ok
+    if checked and not quiet:
+        bits = ["learned from %d settled contract%s" % (checked, "" if checked == 1 else "s")]
+        if right or wrong:
+            bits.append("%d of my calls right, %d wrong" % (right, wrong))
+        print("  (%s)" % "; ".join(bits))
+    return checked
+
+
+def show_record(mem):
+    answered = [r for r in mem["predictions"]
+                if r.get("answered") and r.get("correct") is not None]
+    print()
+    line("=")
+    print("  TRACK RECORD")
+    line("=")
+    if not answered:
+        pend = sum(1 for r in mem["predictions"]
+                   if r.get("answered") and r.get("outcome") is None)
+        print("  No answered calls have settled yet.%s"
+              % ("  %d waiting." % pend if pend else ""))
+        print()
+        return
+    n = len(answered)
+    w = sum(1 for r in answered if r["correct"])
+    stake = sum(r["price"] for r in answered)
+    pnl = sum((1.0 - r["price"]) if r["correct"] else -r["price"] for r in answered)
+    print("  calls answered   %d" % n)
+    print("  right / wrong    %d / %d   (%.0f%%)" % (w, n - w, 100 * w / n))
+    print("  break-even was   %.0f%%" % (100 * stake / n))
+    print("  paper P&L        %+.2f per $1 staked  (%+.1f%%)"
+          % (pnl / n, 100 * pnl / stake if stake else 0))
+    print()
+    print("  last 10:")
+    for r in answered[-10:]:
+        print("    %s  %-3s @ %.2f  ->  %s"
+              % (str(r["close_time"])[:16].replace("T", " "), r["side"],
+                 r["price"], "RIGHT" if r["correct"] else "wrong"))
+    moved = [b for b in range(N_BINS) if mem["bins_n"][b] > 0]
+    if moved:
+        print()
+        print("  what it has adjusted:")
+        for b in moved:
+            cur = (prior_for(b) * PRIOR_STRENGTH + mem["bins_wins"][b]) / \
+                  (PRIOR_STRENGTH + mem["bins_n"][b])
+            flag = "  <- moved" if abs(cur - prior_for(b)) > 0.02 else ""
+            print("    formula %.2f-%.2f : %.3f -> %.3f  (%d live)%s"
+                  % (b / N_BINS, (b + 1) / N_BINS, prior_for(b), cur,
+                     int(mem["bins_n"][b]), flag))
+    print()
 
 
 def get(url, params=None, timeout=20):
@@ -229,10 +380,45 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--why", action="store_true",
                     help="show every number behind the answer")
+    ap.add_argument("--record", action="store_true",
+                    help="show the track record and what it has learned")
+    ap.add_argument("--confirm", metavar="YES|NO",
+                    help="manually tell it how the last contract settled")
     a = ap.parse_args()
+
+    mem = load_memory()
+
+    if a.record:
+        settle_pending(mem, quiet=True)
+        save_memory(mem)
+        show_record(mem)
+        return
+
+    if a.confirm:
+        v = a.confirm.strip().upper()
+        if v not in ("YES", "NO"):
+            sys.exit("  --confirm takes YES or NO")
+        pend = [r for r in mem["predictions"] if r.get("outcome") is None]
+        if not pend:
+            sys.exit("  Nothing waiting to be confirmed.")
+        rec = pend[-1]
+        y = 1 if v == "YES" else 0
+        rec["outcome"] = y
+        b = bin_of(rec["raw"])
+        mem["bins_n"][b] += 1.0
+        mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
+        if rec.get("answered"):
+            rec["correct"] = bool((rec["side"] == "YES") == (y == 1))
+            print("  Recorded: %s settled %s -- my call was %s."
+                  % (rec["ticker"], v, "RIGHT" if rec["correct"] else "WRONG"))
+        else:
+            print("  Recorded: %s settled %s." % (rec["ticker"], v))
+        save_memory(mem)
+        return
 
     print()
     print("  Checking the BTC 15-minute contract...")
+    settle_pending(mem)
 
     got, err = live()
     if err:
@@ -252,7 +438,7 @@ def main():
     spot = closes[-1]
     v = max(vol_per_min(closes) or MIN_VOL, MIN_VOL)
     raw = norm_cdf(math.log(spot / strike) / (v * math.sqrt(max(mins, 0.05))))
-    p = calibrate(raw)
+    p = learned(mem, raw)
 
     no_ask = 1.0 - yb
     ey, en = p - ya, (1.0 - p) - no_ask
@@ -286,34 +472,51 @@ def main():
             print("  EMA 9 v 21   %s" % ("above" if e9 > e21 else "below"))
         print("  spread       %.0fc" % (100 * spread))
 
+    def remember(answered):
+        if any(r["ticker"] == m.get("ticker") for r in mem["predictions"]):
+            return
+        mem["predictions"].append({
+            "asked": datetime.now(timezone.utc).isoformat(),
+            "ticker": m.get("ticker"), "close_time": m.get("close_time"),
+            "raw": raw, "p": p, "side": side, "price": price,
+            "edge": edge, "answered": bool(answered), "outcome": None})
+        mem["predictions"] = mem["predictions"][-2000:]
+        save_memory(mem)
+
     # ---- the gates ---------------------------------------------------
     if mins < MIN_MINUTES_LEFT:
+        remember(False)
         cant("Too late in the contract -- only %.1f minutes left." % mins,
              "Entries under 10 minutes lost 8%% across 63 days. Wait for the "
              "next one.")
 
     if spread > MAX_SPREAD:
+        remember(False)
         cant("The spread is %.0f cents." % (100 * spread),
              "Too wide -- the cost of getting in eats the edge.")
 
     if edge < MIN_EDGE:
+        remember(False)
         cant("Kalshi's price already matches my estimate.",
              "I say %.0f%%, the market says %.0f%%. Difference of %.0f points "
              "is not enough to trade." % (100 * conf, 100 * price, 100 * edge))
 
     if price < MIN_PRICE:
+        remember(False)
         cant("The entry price would be %.0f cents." % (100 * price),
              "Only 70-90c held up across all three test periods. Below that, "
              "including the coin-flip zone near 50c, the edge vanished -- the "
              "market has already priced it.")
 
     if price > MAX_PRICE:
+        remember(False)
         cant("The price is already %.0f cents." % (100 * price),
              "You would risk %.0fc to win %.0fc -- one loss undoes %d wins. "
              "Not worth the shape." % (100 * price, 100 * (1 - price),
                                        int(price / max(1 - price, 0.01))))
 
     # ---- an actual answer --------------------------------------------
+    remember(True)
     answer(side)
     print()
     print("  Buy %s at %.0f cents" % (side, 100 * price))
@@ -341,6 +544,12 @@ def main():
     print("  Never tested with live money. Treat it as a leaning, not a")
     print("  certainty, and size small.")
     print()
+    n_live = sum(mem["bins_n"])
+    if n_live:
+        print("  It has now learned from %d settled contract%s of its own."
+              % (int(n_live), "" if n_live == 1 else "s"))
+        print("  Run  python3 check.py --record  to see its track record.")
+        print()
 
 
 if __name__ == "__main__":
