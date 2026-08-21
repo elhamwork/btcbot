@@ -437,6 +437,85 @@ def cant(reason, detail="", normal=True):
     sys.exit(0)
 
 
+# ---------------------------------------------------------------------------
+# Grading
+# ---------------------------------------------------------------------------
+# Two numbers that must never be confused:
+#
+#   CHANCE IT HITS -- how often this call comes true. An 80c contract hits
+#                     about 80% of the time. That is arithmetic, not skill,
+#                     and it says nothing about whether the trade is good.
+#
+#   TRADE GRADE    -- whether setups like this actually made money. Measured
+#                     over 63 days and 59,860 decision points, per dollar
+#                     staked, on train / validation / test separately.
+#
+# The 'above 90c' row is the clearest illustration of why both are needed: a
+# 95.5% hit rate, and not a trade worth making.
+#
+#     grade                     n     hits    train    valid     test
+#     GOOD 70-90c, 10+ min   2,344   82.3%   +3.46%   +2.00%   +4.27%
+#     WEAK 50-70c            3,458   62.3%   -0.22%   +1.75%   +2.85%
+#     WEAK 5-10 min left     3,577   77.7%   +0.35%   +2.73%   +1.36%
+#     WEAK above 90c            89   95.5%   too few to judge
+#     NONE no disagreement  14,665   75.4%   -2.41%   -2.40%   +0.85%
+#     BAD  cheap side       11,787   27.5%   -9.84%   -9.11%  -11.20%
+#     BAD  last 5 minutes   23,940   39.9%   -3.03%   -1.59%   -3.23%
+
+def grade_of(price, edge, mins, spread):
+    """Grade this setup against what setups like it actually returned."""
+    if mins < 5:
+        return {"label": "BAD -- do not trade", "short": "BAD (last 5 min)",
+                "trade": False,
+                "why": ["Only %.1f minutes left. Late entries lose." % mins],
+                "stats": (23940, 39.9, "-3.0% / -1.6% / -3.2%")}
+    if price < 0.50:
+        return {"label": "BAD -- do not trade", "short": "BAD (cheap side)",
+                "trade": False,
+                "why": ["This is the cheap side at %.0fc. Cheap contracts lose"
+                        % (100 * price),
+                        "badly and consistently -- the worst category measured."],
+                "stats": (11787, 27.5, "-9.8% / -9.1% / -11.2%")}
+    if spread > MAX_SPREAD:
+        return {"label": "BAD -- spread too wide", "short": "BAD (wide spread)",
+                "trade": False,
+                "why": ["The spread is %.0f cents. Getting in costs more than"
+                        % (100 * spread),
+                        "the edge is worth."],
+                "stats": None}
+    if edge < MIN_EDGE:
+        return {"label": "NO EDGE -- skip", "short": "NONE (no disagreement)",
+                "trade": False,
+                "why": ["Kalshi's price already matches my estimate, so there",
+                        "is nothing to take. This is the usual outcome."],
+                "stats": (14665, 75.4, "-2.4% / -2.4% / +0.9%")}
+    if mins < MIN_MINUTES_LEFT:
+        return {"label": "WEAK -- small size only", "short": "WEAK (5-10 min)",
+                "trade": False,
+                "why": ["%.1f minutes left. Positive on average but shaky --"
+                        % mins,
+                        "barely above break-even in training."],
+                "stats": (3577, 77.7, "+0.4% / +2.7% / +1.4%")}
+    if price > MAX_PRICE:
+        return {"label": "WEAK -- poor payoff", "short": "WEAK (above 90c)",
+                "trade": False,
+                "why": ["At %.0fc there is almost nothing to win." % (100 * price),
+                        "Only 89 of these in 63 days -- too few to trust."],
+                "stats": None}
+    if price < MIN_PRICE:
+        return {"label": "WEAK -- small size only", "short": "WEAK (50-70c)",
+                "trade": False,
+                "why": ["At %.0fc this is closer to a coin flip." % (100 * price),
+                        "It was NEGATIVE in training, positive after. Unproven."],
+                "stats": (3458, 62.3, "-0.2% / +1.8% / +2.9%")}
+    return {"label": "GOOD -- the zone that held up",
+            "short": "GOOD", "trade": True,
+            "why": ["%.0fc entry, %.0f minutes left, %.0f-point edge."
+                    % (100 * price, mins, 100 * edge),
+                    "This is the only combination positive in all three periods."],
+            "stats": (2344, 82.3, "+3.5% / +2.0% / +4.3%")}
+
+
 def evaluate(mem, a):
     print()
     print("  Checking the BTC 15-minute contract...")
@@ -504,12 +583,19 @@ def evaluate(mem, a):
     p = learned(mem, raw)
 
     no_ask = 1.0 - yb
-    ey, en = p - ya, (1.0 - p) - no_ask
-    side = "YES" if ey >= en else "NO"
-    edge = max(ey, en)
-    price = ya if side == "YES" else no_ask
-    conf = p if side == "YES" else 1.0 - p
     spread = ya - yb
+
+    # The ANSWER is simply which way the model leans, so the confidence shown
+    # is always the probability of the thing being asserted. Reporting "NO,
+    # 46% chance" -- which the earlier version could do when the two sides had
+    # similar edge -- reads as a contradiction and is no use to anybody.
+    #
+    # The TRADE is then judged on buying that same side: whether the price of
+    # the direction we favour is worth paying.
+    side = "YES" if p >= 0.5 else "NO"
+    conf = p if side == "YES" else 1.0 - p
+    price = ya if side == "YES" else no_ask
+    edge = conf - price
 
     # ---- the readout -------------------------------------------------
     print()
@@ -546,79 +632,52 @@ def evaluate(mem, a):
         mem["predictions"] = mem["predictions"][-2000:]
         save_memory(mem)
 
-    # ---- the gates ---------------------------------------------------
-    if mins < MIN_MINUTES_LEFT:
-        remember(False)
-        cant("Too late in the contract -- only %.1f minutes left." % mins,
-             "Entries under 10 minutes lost 8%% across 63 days. Wait for the "
-             "next one.")
+    # ---- grade it ------------------------------------------------------
+    g = grade_of(price, edge, mins, spread)
+    remember(g["trade"])
+    if WAITING and not g["trade"]:
+        # --wait holds out for a GOOD grade. Everything else is reported as a
+        # reason and the loop carries on.
+        raise NoSetup("%s  (%s at %.0fc, %.0f min)"
+                      % (g["short"], side, 100 * price, mins))
 
-    if spread > MAX_SPREAD:
-        remember(False)
-        cant("The spread is %.0f cents." % (100 * spread),
-             "Too wide -- the cost of getting in eats the edge.")
-
-    if edge < MIN_EDGE:
-        remember(False)
-        gap = 100 * edge
-        if gap <= 0.5:
-            how = "We agree almost exactly"
-        elif gap < 1:
-            how = "Less than a point apart"
-        else:
-            how = "%.1f points apart" % gap
-        cant("Kalshi's price already matches my estimate.",
-             "I say %.0f%%, the market says %.0f%%. %s -- not enough to trade."
-             % (100 * conf, 100 * price, how))
-
-    if price < MIN_PRICE:
-        remember(False)
-        cant("The entry price would be %.0f cents." % (100 * price),
-             "Only 70-90c held up across all three test periods. Below that, "
-             "including the coin-flip zone near 50c, the edge vanished -- the "
-             "market has already priced it.")
-
-    if price > MAX_PRICE:
-        remember(False)
-        cant("The price is already %.0f cents." % (100 * price),
-             "You would risk %.0fc to win %.0fc -- one loss undoes %d wins. "
-             "Not worth the shape." % (100 * price, 100 * (1 - price),
-                                       int(price / max(1 - price, 0.01))))
-
-    # ---- an actual answer --------------------------------------------
-    remember(True)
     answer(side)
     print()
     print("  Buy %s at %.0f cents" % (side, 100 * price))
-    shown = min(conf, 0.99)
-    print("  I think it is %s%.0f%% -- Kalshi says %.0f%%  (edge +%.0f points)"
-          % (">" if conf > 0.99 else "", 100 * shown, 100 * price, 100 * edge))
     print()
-    if spot >= strike:
-        print("  BTC is $%s ABOVE target with %.0f minutes to go."
-              % (format(abs(round(spot - strike, 2)), ",.2f"), mins))
+    print("  CHANCE IT HITS      %.0f%%" % (100 * min(conf, 0.99)))
+    print("  TRADE GRADE         %s" % g["label"])
+    print()
+    for ln in g["why"]:
+        print("  %s" % ln)
+    print()
+    line()
+    if g["stats"]:
+        n, wr, rets = g["stats"]
+        print("  Setups graded %s over 63 days: %d of them." % (g["short"], n))
+        print("  They hit %.1f%% of the time and returned %s per dollar" % (wr, rets))
+        print("  across the three test periods.")
     else:
-        print("  BTC is $%s BELOW target with %.0f minutes to go."
-              % (format(abs(round(spot - strike, 2)), ",.2f"), mins))
+        print("  Too few of these in 63 days to say anything reliable.")
     print()
-    line()
-    print("  HOW MUCH TO TRUST THIS")
-    line()
-    print("  Over 63 days, setups passing every filter above won 84.9% of")
-    print("  the time against an 80.4% break-even -- 1,250 contracts,")
-    print("  p < 0.0001, positive in all three test periods.")
+    if g["trade"]:
+        print("  Read the hit rate carefully: an 80c contract hits ~80% of the")
+        print("  time by definition. What makes this one worth taking is the")
+        print("  %.0f-point gap between my estimate and the price -- not the %.0f%%."
+              % (100 * edge, 100 * min(conf, 0.99)))
+    else:
+        print("  A high chance of hitting is NOT the same as a good trade. At")
+        print("  %.0fc you risk %.0fc to win %.0fc, so one miss undoes %d hits."
+              % (100 * price, 100 * price, 100 * (1 - price),
+                 int(price / max(1 - price, 0.01))))
     print()
-    print("  Read that win rate carefully: an 80c contract wins ~80% of the")
-    print("  time by definition. The edge is the 4.5 point gap, not the 85%.")
-    print()
-    print("  Never tested with live money. Treat it as a leaning, not a")
-    print("  certainty, and size small.")
+    print("  Never tested with live money. Size small or not at all.")
     print()
     n_live = sum(mem["bins_n"])
     if n_live:
-        print("  It has now learned from %d settled contract%s of its own."
+        print("  It has learned from %d settled contract%s of its own so far."
               % (int(n_live), "" if n_live == 1 else "s"))
-        print("  Run  python3 check.py --record  to see its track record.")
+        print("  Run  python3 check.py --record  for its track record.")
         print()
 
 
