@@ -531,9 +531,16 @@ def main():
 
     if edge < MIN_EDGE:
         remember(False)
+        gap = 100 * edge
+        if gap <= 0.5:
+            how = "We agree almost exactly"
+        elif gap < 1:
+            how = "Less than a point apart"
+        else:
+            how = "%.1f points apart" % gap
         cant("Kalshi's price already matches my estimate.",
-             "I say %.0f%%, the market says %.0f%%. Difference of %.0f points "
-             "is not enough to trade." % (100 * conf, 100 * price, 100 * edge))
+             "I say %.0f%%, the market says %.0f%%. %s -- not enough to trade."
+             % (100 * conf, 100 * price, how))
 
     if price < MIN_PRICE:
         remember(False)
