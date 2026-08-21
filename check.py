@@ -40,6 +40,7 @@ No account, no API key, no orders, no money. Standard library only.
 
 import argparse
 import json
+import time
 import math
 import os
 import ssl
@@ -115,6 +116,10 @@ CAL_Y = [0.001, 0.050, 0.080, 0.141, 0.198, 0.266, 0.299, 0.344, 0.441,
          0.957, 0.987, 0.998]
 
 W = 64
+
+
+class NoSetup(Exception):
+    """Raised instead of printing, when running in --wait mode."""
 
 
 # ---------------------------------------------------------------------------
@@ -400,8 +405,13 @@ def answer(verdict, colour_note=""):
     print("  " + "=" * W)
 
 
+WAITING = False
+
+
 def cant(reason, detail="", normal=True):
     """normal=True means 'no edge here'. False means 'no data / market shut'."""
+    if WAITING:
+        raise NoSetup(reason)
     answer("CAN'T SAY")
     print()
     print("  %s" % reason)
@@ -427,47 +437,7 @@ def cant(reason, detail="", normal=True):
     sys.exit(0)
 
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__,
-                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--why", action="store_true",
-                    help="show every number behind the answer")
-    ap.add_argument("--record", action="store_true",
-                    help="show the track record and what it has learned")
-    ap.add_argument("--confirm", metavar="YES|NO",
-                    help="manually tell it how the last contract settled")
-    a = ap.parse_args()
-
-    mem = load_memory()
-
-    if a.record:
-        settle_pending(mem, quiet=True)
-        save_memory(mem)
-        show_record(mem)
-        return
-
-    if a.confirm:
-        v = a.confirm.strip().upper()
-        if v not in ("YES", "NO"):
-            sys.exit("  --confirm takes YES or NO")
-        pend = [r for r in mem["predictions"] if r.get("outcome") is None]
-        if not pend:
-            sys.exit("  Nothing waiting to be confirmed.")
-        rec = pend[-1]
-        y = 1 if v == "YES" else 0
-        rec["outcome"] = y
-        b = bin_of(rec["raw"])
-        mem["bins_n"][b] += 1.0
-        mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
-        if rec.get("answered"):
-            rec["correct"] = bool((rec["side"] == "YES") == (y == 1))
-            print("  Recorded: %s settled %s -- my call was %s."
-                  % (rec["ticker"], v, "RIGHT" if rec["correct"] else "WRONG"))
-        else:
-            print("  Recorded: %s settled %s." % (rec["ticker"], v))
-        save_memory(mem)
-        return
-
+def evaluate(mem, a):
     print()
     print("  Checking the BTC 15-minute contract...")
     settle_pending(mem)
@@ -650,6 +620,101 @@ def main():
               % (int(n_live), "" if n_live == 1 else "s"))
         print("  Run  python3 check.py --record  to see its track record.")
         print()
+
+
+def wait_loop(mem, a):
+    """
+    Poll until a setup appears, then print it once and stop.
+
+    Only about 4% of random moments qualify -- 10+ minutes left rules out two
+    thirds of them before anything else is even checked -- so checking by hand
+    means a lot of CAN'T SAY for nothing. This waits for you instead, and
+    exits the moment it finds something.
+    """
+    global WAITING
+    WAITING = True
+    print()
+    print("  Waiting for a setup. About 1 run in 25 qualifies, so this may")
+    print("  take a while. Ctrl-C to stop.")
+    print()
+    settle_pending(mem)
+    checks = 0
+    last_reason = None
+    started = datetime.now(timezone.utc)
+    while True:
+        checks += 1
+        try:
+            # WAITING stays True throughout: cant() raises instead of exiting,
+            # so a decline sends us round the loop. If evaluate() returns
+            # normally it has already printed a real answer, and we are done.
+            evaluate(mem, a)
+            return
+        except NoSetup as e:
+            reason = str(e)
+            if reason != last_reason:
+                print("  %s  %s" % (datetime.now().strftime("%H:%M:%S"), reason))
+                last_reason = reason
+            elif checks % 10 == 0:
+                mins = (datetime.now(timezone.utc) - started).total_seconds() / 60
+                print("  %s  still waiting (%d checks, %.0f min)"
+                      % (datetime.now().strftime("%H:%M:%S"), checks, mins))
+        except KeyboardInterrupt:
+            print("\n  Stopped after %d checks." % checks)
+            return
+        try:
+            time.sleep(30)
+        except KeyboardInterrupt:
+            print("\n  Stopped after %d checks." % checks)
+            return
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--why", action="store_true",
+                    help="show every number behind the answer")
+    ap.add_argument("--wait", action="store_true",
+                    help="keep checking until a setup appears, then stop")
+    ap.add_argument("--record", action="store_true",
+                    help="show the track record and what it has learned")
+    ap.add_argument("--confirm", metavar="YES|NO",
+                    help="manually tell it how the last contract settled")
+    a = ap.parse_args()
+
+    mem = load_memory()
+
+    if a.record:
+        settle_pending(mem, quiet=True)
+        save_memory(mem)
+        show_record(mem)
+        return
+
+    if a.confirm:
+        v = a.confirm.strip().upper()
+        if v not in ("YES", "NO"):
+            sys.exit("  --confirm takes YES or NO")
+        pend = [r for r in mem["predictions"] if r.get("outcome") is None]
+        if not pend:
+            sys.exit("  Nothing waiting to be confirmed.")
+        rec = pend[-1]
+        y = 1 if v == "YES" else 0
+        rec["outcome"] = y
+        b = bin_of(rec["raw"])
+        mem["bins_n"][b] += 1.0
+        mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
+        if rec.get("answered"):
+            rec["correct"] = bool((rec["side"] == "YES") == (y == 1))
+            print("  Recorded: %s settled %s -- my call was %s."
+                  % (rec["ticker"], v, "RIGHT" if rec["correct"] else "WRONG"))
+        else:
+            print("  Recorded: %s settled %s." % (rec["ticker"], v))
+        save_memory(mem)
+        return
+
+    if a.wait:
+        return wait_loop(mem, a)
+
+    evaluate(mem, a)
 
 
 if __name__ == "__main__":
