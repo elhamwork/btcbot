@@ -51,6 +51,7 @@ from datetime import datetime, timedelta, timezone
 SERIES = "KXBTC15M"
 KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
 COINBASE = "https://api.exchange.coinbase.com/products/BTC-USD/candles"
+COINBASE_TICKER = "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
 
 MIN_EDGE = 0.05
 # Price window, chosen on the data rather than intuition.
@@ -286,6 +287,28 @@ def bars():
     return [float(r[4]) for r in rows], [float(r[5]) for r in rows], None
 
 
+def live_spot():
+    """
+    BTC right now, from the live ticker rather than the last closed candle.
+
+    Candles are 1-minute buckets and the forming one has to be dropped, so a
+    candle-derived price can be nearly two minutes old. Measured live during a
+    fast move, that was $26 off -- material when the whole edge is 4.5 points,
+    and it grows exactly when BTC is moving, which is when it matters most.
+
+    Volatility still comes from the candles; only spot comes from here.
+    Returns None on failure and the caller falls back to the candle.
+    """
+    d, err = get(COINBASE_TICKER, timeout=10)
+    if err or not isinstance(d, dict):
+        return None
+    try:
+        px = float(d.get("price"))
+    except (TypeError, ValueError):
+        return None
+    return px if 1000.0 < px < 10_000_000.0 else None
+
+
 def vol_per_min(closes, look=15):
     seg = closes[-(look + 1):]
     rets = [math.log(b / a) for a, b in zip(seg, seg[1:]) if a > 0]
@@ -470,6 +493,17 @@ def main():
         cant("Every price on this contract is showing 0.", why, normal=False)
 
     spot = closes[-1]
+    tick = live_spot()
+    spot_src = "last closed minute"
+    if tick is not None:
+        # Sanity-gate the ticker against the candle. A wild disagreement means
+        # one of them is broken, and the candle is the more trustworthy of the
+        # two, so keep it rather than trade on a number we cannot corroborate.
+        if abs(tick - spot) / spot < 0.01:
+            spot, spot_src = tick, "live ticker"
+        else:
+            spot_src = "last closed minute (ticker disagreed by %.0f%%, ignored)" \
+                       % (100 * abs(tick - spot) / spot)
     v = max(vol_per_min(closes) or MIN_VOL, MIN_VOL)
     raw = norm_cdf(math.log(spot / strike) / (v * math.sqrt(max(mins, 0.05))))
     p = learned(mem, raw)
@@ -487,7 +521,7 @@ def main():
     line("=")
     print("  %s" % m.get("ticker"))
     line("=")
-    print("  BTC now      $%s" % format(round(spot, 2), ",.2f"))
+    print("  BTC now      $%s   (%s)" % (format(round(spot, 2), ",.2f"), spot_src))
     print("  Target       $%s" % format(round(strike, 2), ",.2f"))
     print("  Difference   %s$%s" % ("+" if spot >= strike else "-",
                                     format(abs(round(spot - strike, 2)), ",.2f")))
