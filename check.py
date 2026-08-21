@@ -83,6 +83,29 @@ MIN_MINUTES_LEFT = 10.0
 MAX_SPREAD = 0.05
 MIN_VOL = 0.0001
 
+# ---------------------------------------------------------------------------
+# Coinbase -> Kalshi index correction
+# ---------------------------------------------------------------------------
+# Kalshi does not settle on Coinbase. It settles on CF Benchmarks' BRTI, which
+# blends several venues, averaged over the final 60 seconds. Every settled
+# contract carries the real BRTI value in `expiration_value`, so the gap is
+# measurable rather than guessable.
+#
+# Across 5,998 settled contracts, Coinbase sits BELOW BRTI:
+#
+#     mean       -6.56        std dev        14.42
+#     median     -5.97        |gap| median    8.29
+#                             |gap| 90th     24.36
+#
+# and it is below in all ten weeks measured, ranging -4.56 to -10.54. A
+# persistent one-sided bias like that is worth removing; the remaining +/-$14
+# of scatter is not removable without the real BRTI feed.
+#
+# This matters more than its size suggests. These contracts are decided by
+# tens of dollars, so a systematic $6 error is a systematic error in every
+# probability the tool produces.
+COINBASE_TO_BRTI = 5.97
+
 # Calibration measured over 63 days: what the formula says, versus what really
 # happened. The formula is systematically under-confident; this corrects it.
 CAL_X = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50,
@@ -504,6 +527,8 @@ def main():
         else:
             spot_src = "last closed minute (ticker disagreed by %.0f%%, ignored)" \
                        % (100 * abs(tick - spot) / spot)
+    spot += COINBASE_TO_BRTI          # shift onto Kalshi's index
+    spot_src += " +$%.2f to Kalshi index" % COINBASE_TO_BRTI
     v = max(vol_per_min(closes) or MIN_VOL, MIN_VOL)
     raw = norm_cdf(math.log(spot / strike) / (v * math.sqrt(max(mins, 0.05))))
     p = learned(mem, raw)
