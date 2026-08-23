@@ -1,18 +1,21 @@
 # What the bot has learned
 
-Written 2026-08-23 17:56 UTC by `check.py --report`.
+Written 2026-08-23 18:59 UTC by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,000.00** (started $1,000, +0.0%) |
-| best / worst it has been | $1,000.00 / $1,000.00 |
-| fees paid | $0.00 |
-| contracts looked at | 1 |
-| of those, settled and learned from | 0 |
-| actual calls (graded GOOD) | 0 |
-| calls that have settled | 0 |
+| **paper account** | **$1,038.77** (started $1,000, +3.9%) |
+| best / worst it has been | $1,038.77 / $1,000.00 |
+| fees paid | $2.03 |
+| contracts looked at | 5 |
+| of those, settled and learned from | 4 |
+| actual calls (graded GOOD) | 1 |
+| calls that have settled | 1 |
+| calls right | 1 of 1 (100%) |
+| break-even needed | 71% |
+| paper P&L | +40.8% per dollar staked |
 
 ## What it is actually learning
 
@@ -23,7 +26,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 0 live
+The 63-day study is worth 30 observations per row below. So 4 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -31,6 +34,9 @@ three lucky wins should not rewrite the table.
 
 | formula says | started at | now says | live results | moved |
 |---|---|---|---|---|
+| 40-45% | 0.473 | 0.490 | 1 (1 hit) | +0.017 |
+| 45-50% | 0.541 | 0.524 | 1 (0 hit) | -0.017 |
+| 50-55% | 0.605 | 0.599 | 2 (1 hit) | -0.007 |
 
 Nothing has moved more than 0.02 yet. That is the expected state
 early on and is not a fault.
@@ -39,10 +45,19 @@ early on and is not a fault.
 
 | grade | times |
 |---|---|
+| BAD (cheap side) | 2 |
 | WEAK (5-10 min) | 1 |
+| NONE (no disagreement) | 1 |
+| WEAK (50-70c) | 1 |
 
-Leaned YES 1 times, NO 0 times. Over 63 days of history the
+Leaned YES 3 times, NO 2 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Every call it has made
+
+| closed | side | price | result | paid | account after |
+|---|---|---|---|---|---|
+| 2026-08-23 18:45 | NO | 0.71 | RIGHT | +38.77 | $1,038.77 |
 
 ## What would change the conclusion
 
