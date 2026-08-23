@@ -1,0 +1,71 @@
+# Run the watcher on GitHub's machines instead of your laptop.
+#
+# Free, no card, nothing to install. It starts itself every 6 hours, watches
+# for 5 hours 45 minutes, sends alerts to your phone, and commits what it
+# learned back into cloud_state/ so the next run picks up where it left off.
+#
+# What it does NOT do: trade. There is no account, no key, no order. It reads
+# public prices and sends notifications.
+#
+# HONEST LIMITS -- read these before relying on it:
+#   * GitHub's scheduler is best-effort. Runs are often 10-30 minutes late and
+#     under heavy load a scheduled run can be skipped entirely. Expect gaps.
+#   * A job is capped at 6 hours, which is why this stops at 5h45 and restarts.
+#   * Free minutes are unlimited only while this repo is PUBLIC. If you make it
+#     private you get 2,000 minutes a month, which is about an hour a day.
+#   * Your laptop, left awake, is more reliable than this. This is the
+#     no-laptop option, not the better option.
+
+name: watch
+
+on:
+  schedule:
+    - cron: "7 */6 * * *"      # 4x a day. Minute 7 to dodge the on-the-hour rush.
+  workflow_dispatch:            # and a "Run workflow" button
+
+# Never two at once -- they would fight over the memory file.
+concurrency:
+  group: watch
+  cancel-in-progress: false
+
+permissions:
+  contents: write               # to commit what it learned
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355        # 5h55, a safety net above the 5h45 below
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Watch
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+        run: python3 check.py --loop --hours 5.75
+
+      - name: Write the report
+        if: always()
+        env:
+          CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+        run: python3 check.py --report
+
+      # always() so a timeout or a crash still saves the learning.
+      - name: Save what it learned
+        if: always()
+        run: |
+          git config user.name  "btcbot"
+          git config user.email "btcbot@users.noreply.github.com"
+          git add cloud_state
+          git diff --staged --quiet && echo "nothing new" && exit 0
+          git commit -m "watch: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" \
+              && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((2 ** i))
+          done
+          exit 1

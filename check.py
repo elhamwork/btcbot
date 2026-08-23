@@ -203,10 +203,13 @@ class NoSetup(Exception):
 # The 63-day table below counts as PRIOR_STRENGTH observations per bin, so a
 # handful of live results nudges it rather than throwing it out. Three lucky
 # wins should not convince it that a bin is a certainty.
-MEMORY = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                      "forward_test", "check_memory.json")
-CONFIG = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                      "forward_test", "check_config.json")
+# Where the memory lives. Overridable so a cloud runner can point it at a
+# folder that gets committed back to the repo -- otherwise every run would
+# start from nothing and learn the same first lesson forever.
+STATE_DIR = os.environ.get("CHECK_STATE_DIR") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "forward_test")
+MEMORY = os.path.join(STATE_DIR, "check_memory.json")
+CONFIG = os.path.join(STATE_DIR, "check_config.json")
 N_BINS = 20
 PRIOR_STRENGTH = 30.0
 
@@ -895,8 +898,24 @@ def grade_of(price, edge, mins, spread, confirmed):
 
 
 def evaluate(mem, a):
-    print()
-    print("  Checking the BTC 15-minute contract...")
+    # In --wait and --loop this runs every 30 seconds for hours. Printing the
+    # full readout each time buries the one line that matters and, on a cloud
+    # runner, produces a log nobody will scroll. So the readout is buffered
+    # and only actually printed when there is something to say.
+    out = []
+    say = out.append
+
+    def sayline(ch="-"):
+        out.append("  " + ch * W)
+
+    def flush():
+        for t in out:
+            print(t)
+        del out[:]
+
+    if not WAITING:
+        print()
+        print("  Checking the BTC 15-minute contract...")
     settle_pending(mem)
 
     got, err = live()
@@ -984,16 +1003,16 @@ def evaluate(mem, a):
     confirmed, earlier = note_poll(mem, m.get("ticker"), mins, side, qualifies)
 
     # ---- the readout -------------------------------------------------
-    print()
-    line("=")
-    print("  %s" % m.get("ticker"))
-    line("=")
-    print("  BTC now      $%s   (%s)" % (format(round(spot, 2), ",.2f"), spot_src))
-    print("  Target       $%s" % format(round(strike, 2), ",.2f"))
-    print("  Difference   %s$%s" % ("+" if spot >= strike else "-",
+    say("")
+    sayline("=")
+    say("  %s" % m.get("ticker"))
+    sayline("=")
+    say("  BTC now      $%s   (%s)" % (format(round(spot, 2), ",.2f"), spot_src))
+    say("  Target       $%s" % format(round(strike, 2), ",.2f"))
+    say("  Difference   %s$%s" % ("+" if spot >= strike else "-",
                                     format(abs(round(spot - strike, 2)), ",.2f")))
-    print("  Time left    %.1f minutes" % mins)
-    print("  Kalshi       YES %.0fc  /  NO %.0fc" % (100 * ya, 100 * no_ask))
+    say("  Time left    %.1f minutes" % mins)
+    say("  Kalshi       YES %.0fc  /  NO %.0fc" % (100 * ya, 100 * no_ask))
 
     # If we have looked at this contract before, say what we said, because a
     # lean that flips between looks is the single most confusing thing this
@@ -1013,28 +1032,28 @@ def evaluate(mem, a):
         seq = "".join("Y" if q["side"] == "YES" else "N" for q in earlier[-8:])
         seq += "Y" if side == "YES" else "N"
         flips = sum(1 for x, y in zip(seq, seq[1:]) if x != y)
-        print("  Looks so far %s   (%d look%s, %d change%s of mind)"
+        say("  Looks so far %s   (%d look%s, %d change%s of mind)"
               % (seq, len(seq), "" if len(seq) == 1 else "s",
                  flips, "" if flips == 1 else "s"))
         if flips:
-            print("               A changing answer means it is close to the")
-            print("               line and does not know. Flip rate at %.0f%%"
+            say("               A changing answer means it is close to the")
+            say("               line and does not know. Flip rate at %.0f%%"
                   % (100 * min(conf, 0.99)))
-            print("               confidence is about %s."
+            say("               confidence is about %s."
                   % ("44%" if conf < 0.55 else "29%" if conf < 0.65 else
                      "18%" if conf < 0.75 else "9%" if conf < 0.85 else "3%"))
 
     if a.why:
         r = rsi(closes)
         e9, e21 = ema(closes, 9), ema(closes, 21)
-        print()
-        print("  volatility   %.4f%% per minute" % (100 * v))
-        print("  raw model    %.1f%%   ->  calibrated %.1f%%" % (100 * raw, 100 * p))
+        say("")
+        say("  volatility   %.4f%% per minute" % (100 * v))
+        say("  raw model    %.1f%%   ->  calibrated %.1f%%" % (100 * raw, 100 * p))
         if r is not None:
-            print("  RSI(14)      %.1f" % r)
+            say("  RSI(14)      %.1f" % r)
         if e9 and e21:
-            print("  EMA 9 v 21   %s" % ("above" if e9 > e21 else "below"))
-        print("  spread       %.0fc" % (100 * spread))
+            say("  EMA 9 v 21   %s" % ("above" if e9 > e21 else "below"))
+        say("  spread       %.0fc" % (100 * spread))
 
     def remember(answered):
         prev = next((r for r in mem["predictions"]
@@ -1081,6 +1100,7 @@ def evaluate(mem, a):
         raise NoSetup("%s  (%s at %.0fc, %.0f min)"
                       % (g["short"], side, 100 * price, mins))
 
+    flush()
     answer(side)
     if g["trade"] and not already:
         send_ntfy("%s at %.0fc -- %.0f min left" % (side, 100 * price, mins),
@@ -1214,7 +1234,14 @@ def run_forever(mem, a):
     checks = hits = 0
     last_reason = None
     started = datetime.now(timezone.utc)
+    stop_at = (started + timedelta(hours=a.hours)) if a.hours else None
+    if stop_at:
+        print("  Will stop by itself in %.1f hours." % a.hours)
+        print()
     while True:
+        if stop_at and datetime.now(timezone.utc) >= stop_at:
+            print("  %s  time is up." % datetime.now().strftime("%H:%M:%S"))
+            break
         checks += 1
         try:
             evaluate(mem, a)          # prints the whole readout and alerts
@@ -1291,6 +1318,8 @@ def main():
                     help="set up phone alerts (ntfy) and send a test")
     ap.add_argument("--report", action="store_true",
                     help="write a full report of what it has learned")
+    ap.add_argument("--hours", type=float, default=0,
+                    help="with --loop, stop cleanly after this many hours")
     a = ap.parse_args()
 
     if a.alerts:
