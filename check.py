@@ -261,8 +261,20 @@ def note_poll(mem, ticker, mins, side, qualified):
     """
     polls = mem.setdefault("polls", {})
     seen = polls.setdefault(ticker, [])
-    confirmed = any(q["qual"] and q["side"] == side
-                    and q["mins"] >= mins + CONFIRM_GAP_MIN for q in seen)
+    confirmed = False
+    for i, q in enumerate(seen):
+        if not (q["qual"] and q["side"] == side
+                and q["mins"] >= mins + CONFIRM_GAP_MIN):
+            continue
+        # ... and it has not changed its mind in between. The 12-then-10
+        # backtest could not see intermediate looks, so this extra guard is
+        # NOT separately measured. It is kept because it can only ever refuse
+        # trades, never add them, and a lean that flipped and flipped back is
+        # the definition of the noise confirmation exists to filter.
+        if all(later["side"] == side for later in seen[i + 1:]):
+            confirmed = True
+            break
+    before = list(seen)
     seen.append({"mins": round(mins, 2), "side": side, "qual": bool(qualified)})
     polls[ticker] = seen[-40:]
     # Contracts live 15 minutes; anything not touched in this run and already
@@ -271,7 +283,7 @@ def note_poll(mem, ticker, mins, side, qualified):
         for k in list(polls)[:-100]:
             if k != ticker:
                 del polls[k]
-    return confirmed
+    return confirmed, before
 
 
 def settle_pending(mem, quiet=False):
@@ -310,6 +322,39 @@ def settle_pending(mem, quiet=False):
     return checked
 
 
+def side_breakdown(mem):
+    """
+    Every look it has taken, split YES vs NO and by grade.
+
+    This exists because "it always says NO" is easy to believe and hard to
+    check by memory. Over 63 days of history the split is 49.5% YES, and
+    among setups that actually qualify it is 62% YES -- so if your own runs
+    look one-sided, this is where to see whether they really are.
+    """
+    recs = mem.get("predictions") or []
+    if not recs:
+        return
+    y = sum(1 for r in recs if r.get("side") == "YES")
+    n = len(recs)
+    print("  which way it leaned")
+    print("    YES  %3d   (%.0f%%)" % (y, 100 * y / n))
+    print("    NO   %3d   (%.0f%%)" % (n - y, 100 * (n - y) / n))
+    print("    63-day expectation: about half and half")
+    grades = {}
+    for r in recs:
+        grades[r.get("grade") or "(not recorded)"] = \
+            grades.get(r.get("grade") or "(not recorded)", 0) + 1
+    print()
+    print("  what it graded them")
+    for k, v in sorted(grades.items(), key=lambda kv: -kv[1]):
+        print("    %-28s %3d" % (k, v))
+    print()
+    print("  Note: \"NONE (no disagreement)\" is not the answer NO. It means")
+    print("  there is no trade. The YES/NO above is the lean; the grade is")
+    print("  whether the lean is worth money.")
+    print()
+
+
 def show_record(mem):
     answered = [r for r in mem["predictions"]
                 if r.get("answered") and r.get("correct") is not None]
@@ -317,6 +362,7 @@ def show_record(mem):
     line("=")
     print("  TRACK RECORD")
     line("=")
+    side_breakdown(mem)
     if not answered:
         seen = sum(mem["bins_n"])
         calls = sum(1 for r in mem["predictions"] if r.get("answered"))
@@ -707,6 +753,14 @@ def evaluate(mem, a):
     price = ya if side == "YES" else no_ask
     edge = conf - price
 
+    # ---- write this look down ------------------------------------------
+    # "Qualifying" here is everything grade_of asks for EXCEPT confirmation,
+    # so a look that qualifies on its own merits is what a later look gets to
+    # confirm against. Confirmation confirming itself would be worthless.
+    qualifies = (mins >= MIN_MINUTES_LEFT and MIN_PRICE <= price <= MAX_PRICE
+                 and edge >= MIN_EDGE and spread <= MAX_SPREAD)
+    confirmed, earlier = note_poll(mem, m.get("ticker"), mins, side, qualifies)
+
     # ---- the readout -------------------------------------------------
     print()
     line("=")
@@ -718,6 +772,35 @@ def evaluate(mem, a):
                                     format(abs(round(spot - strike, 2)), ",.2f")))
     print("  Time left    %.1f minutes" % mins)
     print("  Kalshi       YES %.0fc  /  NO %.0fc" % (100 * ya, 100 * no_ask))
+
+    # If we have looked at this contract before, say what we said, because a
+    # lean that flips between looks is the single most confusing thing this
+    # tool does -- and it is not a bug. Near the strike the answer genuinely
+    # is a coin flip, and a coin flip flips. Measured over 63 days, same
+    # contract at 12 minutes then 10 minutes:
+    #
+    #     confidence 50-55%   flipped 44% of the time
+    #                55-65%           29%
+    #                65-75%           18%
+    #                75-85%            9%
+    #                  85%+            3%
+    #
+    # So a flipping answer is the tool telling you it does not know. That is
+    # exactly the case confirmation now refuses to trade.
+    if earlier:
+        seq = "".join("Y" if q["side"] == "YES" else "N" for q in earlier[-8:])
+        seq += "Y" if side == "YES" else "N"
+        flips = sum(1 for x, y in zip(seq, seq[1:]) if x != y)
+        print("  Looks so far %s   (%d look%s, %d change%s of mind)"
+              % (seq, len(seq), "" if len(seq) == 1 else "s",
+                 flips, "" if flips == 1 else "s"))
+        if flips:
+            print("               A changing answer means it is close to the")
+            print("               line and does not know. Flip rate at %.0f%%"
+                  % (100 * min(conf, 0.99)))
+            print("               confidence is about %s."
+                  % ("44%" if conf < 0.55 else "29%" if conf < 0.65 else
+                     "18%" if conf < 0.75 else "9%" if conf < 0.85 else "3%"))
 
     if a.why:
         r = rsi(closes)
@@ -748,18 +831,14 @@ def evaluate(mem, a):
             "asked": datetime.now(timezone.utc).isoformat(),
             "ticker": m.get("ticker"), "close_time": m.get("close_time"),
             "raw": raw, "p": p, "side": side, "price": price,
-            "edge": edge, "answered": bool(answered), "outcome": None})
+            "edge": edge, "grade": grade_short, "mins": round(mins, 1),
+            "answered": bool(answered), "outcome": None})
         mem["predictions"] = mem["predictions"][-2000:]
         save_memory(mem)
 
     # ---- grade it ------------------------------------------------------
-    # "Qualifying" here is everything grade_of asks for EXCEPT confirmation,
-    # so a look that qualifies on its own merits is what a later look gets to
-    # confirm against. Confirmation confirming itself would be worthless.
-    qualifies = (mins >= MIN_MINUTES_LEFT and MIN_PRICE <= price <= MAX_PRICE
-                 and edge >= MIN_EDGE and spread <= MAX_SPREAD)
-    confirmed = note_poll(mem, m.get("ticker"), mins, side, qualifies)
     g = grade_of(price, edge, mins, spread, confirmed)
+    grade_short = g["short"]
     remember(g["trade"])
     save_memory(mem)          # note_poll changed the memory either way
     if WAITING and not g["trade"]:
