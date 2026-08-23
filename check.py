@@ -124,6 +124,40 @@ MIN_VOL = 0.0001
 CONFIRM_GAP_MIN = 1.5
 
 # ---------------------------------------------------------------------------
+# The paper account
+# ---------------------------------------------------------------------------
+# $1,000 of imaginary money, 10% of whatever the account is worth on each
+# call. Nothing is ever sent to Kalshi; this is a scoreboard.
+#
+# 10% compounding is aggressive. Run over the 414 confirmed trades in the
+# 63-day study, in the order they actually happened:
+#
+#     stake    ends at    worst dip
+#      2%       $1,766       $941
+#      5%       $3,918       $856
+#     10%      $12,613       $727      <- this setting
+#     20%      $67,859       $508
+#     50%       $7,211        $92      past the peak: volatility eats it
+#    100%        WIPED       -$13      one loss ends it
+#
+# Two things that number is not. It is not a forecast: the price window and
+# the confirmation rule were both chosen by looking at all three periods, so
+# some of that 12x is the choosing. And it is not reachable in practice --
+# a 15-minute market trades on the order of ten thousand contracts in its
+# whole life, so a few hundred contracts fills fine and a few thousand moves
+# the price against you. The paper account ignores that entirely. Past about
+# $10,000 the arithmetic here stops describing anything real.
+#
+# Over a first week (about 40 calls) the same simulation ends between $814
+# and $1,908, and finishes below $1,000 seventeen times in a hundred. That
+# spread, not the 12x, is what a week actually looks like.
+PAPER_START = 1000.0
+PAPER_STAKE = 0.10
+
+# Kalshi's fee: 0.07 x contracts x price x (1 - price), charged on entry.
+FEE_RATE = 0.07
+
+# ---------------------------------------------------------------------------
 # Coinbase -> Kalshi index correction
 # ---------------------------------------------------------------------------
 # Kalshi does not settle on Coinbase. It settles on CF Benchmarks' BRTI, which
@@ -322,7 +356,10 @@ def prior_for(b):
 
 def load_memory():
     blank = {"predictions": [], "bins_n": [0.0] * N_BINS,
-             "bins_wins": [0.0] * N_BINS, "polls": {}}
+             "bins_wins": [0.0] * N_BINS, "polls": {},
+             "bank": {"cash": PAPER_START, "start": PAPER_START,
+                      "peak": PAPER_START, "low": PAPER_START,
+                      "settled": 0, "fees": 0.0}}
     try:
         with open(MEMORY) as f:
             m = json.load(f)
@@ -347,6 +384,44 @@ def learned(mem, raw):
     n, w = mem["bins_n"][b], mem["bins_wins"][b]
     p = (prior_for(b) * PRIOR_STRENGTH + w) / (PRIOR_STRENGTH + n)
     return min(max(p, 0.001), 0.999)
+
+
+def bank_of(mem):
+    b = mem.setdefault("bank", {})
+    for k, v in (("cash", PAPER_START), ("start", PAPER_START),
+                 ("peak", PAPER_START), ("low", PAPER_START),
+                 ("settled", 0), ("fees", 0.0)):
+        b.setdefault(k, v)
+    return b
+
+
+def plan_stake(mem, price):
+    """What this call would risk, and what it would win. Nothing is sent."""
+    b = bank_of(mem)
+    stake = round(b["cash"] * PAPER_STAKE, 2)
+    contracts = stake / max(price, 0.01)
+    fee = round(FEE_RATE * contracts * price * (1 - price), 2)
+    return {"stake": stake, "contracts": round(contracts, 1), "fee": fee,
+            "to_win": round(contracts * (1 - price) - fee, 2),
+            "bank_before": round(b["cash"], 2)}
+
+
+def apply_settle(mem, rec, won):
+    """Move the paper money once a call has settled. Idempotent."""
+    if rec.get("paid") is not None or not rec.get("bet"):
+        return None
+    b = bank_of(mem)
+    bet = rec["bet"]
+    paid = (bet["contracts"] - bet["stake"] - bet["fee"]) if won \
+        else (-bet["stake"] - bet["fee"])
+    b["cash"] = round(b["cash"] + paid, 2)
+    b["peak"] = round(max(b["peak"], b["cash"]), 2)
+    b["low"] = round(min(b["low"], b["cash"]), 2)
+    b["settled"] += 1
+    b["fees"] = round(b["fees"] + bet["fee"], 2)
+    rec["paid"] = round(paid, 2)
+    rec["bank_after"] = b["cash"]
+    return paid
 
 
 def note_poll(mem, ticker, mins, side, qualified):
@@ -415,12 +490,17 @@ def settle_pending(mem, quiet=False):
             wrong += not ok
             # This is the alert that matters: not "here is an idea" but "the
             # idea you were given settled, and here is what happened".
-            paid = (1.0 - rec["price"]) if ok else -rec["price"]
+            paid = apply_settle(mem, rec, ok)
+            b = bank_of(mem)
+            money = ("\n%s$%s. Paper account now $%s."
+                     % ("Won " if paid and paid > 0 else "Lost ",
+                        format(abs(round(paid or 0, 2)), ",.2f"),
+                        format(round(b["cash"], 2), ",.2f"))) if paid is not None else ""
             send_ntfy(
                 "WE HIT -- %s" % rec["side"] if ok else "Missed -- %s" % rec["side"],
-                "%s settled %s.\n%s bought at %.0fc -> %+.0fc per $1 staked."
+                "%s settled %s.\n%s bought at %.0fc.%s"
                 % (rec["ticker"], res.upper(), rec["side"],
-                   100 * rec["price"], 100 * paid / max(rec["price"], 0.01)),
+                   100 * rec["price"], money),
                 tags="tada" if ok else "x",
                 priority="high" if ok else "default")
     if checked and not quiet:
@@ -488,6 +568,15 @@ def write_report(mem):
     A("")
     A("| | |")
     A("|---|---|")
+    b = bank_of(mem)
+    A("| **paper account** | **$%s** (started $%s, %+.1f%%) |"
+      % (format(round(b["cash"], 2), ",.2f"),
+         format(round(b["start"]), ",d"),
+         100 * (b["cash"] / b["start"] - 1) if b["start"] else 0))
+    A("| best / worst it has been | $%s / $%s |"
+      % (format(round(b["peak"], 2), ",.2f"),
+         format(round(b["low"], 2), ",.2f")))
+    A("| fees paid | $%s |" % format(round(b["fees"], 2), ",.2f"))
     A("| contracts looked at | %d |" % len(recs))
     A("| of those, settled and learned from | %d |" % len(settled))
     A("| actual calls (graded GOOD) | %d |" % len(calls))
@@ -560,12 +649,16 @@ def write_report(mem):
     if done:
         A("## Every call it has made")
         A("")
-        A("| closed | side | price | result |")
-        A("|---|---|---|---|")
+        A("| closed | side | price | result | paid | account after |")
+        A("|---|---|---|---|---|---|")
         for r in done:
-            A("| %s | %s | %.2f | %s |"
+            bet = r.get("bet") or {}
+            A("| %s | %s | %.2f | %s | %s | %s |"
               % (str(r["close_time"])[:16].replace("T", " "), r["side"],
-                 r["price"], "RIGHT" if r["correct"] else "wrong"))
+                 r["price"], "RIGHT" if r["correct"] else "wrong",
+                 ("%+.2f" % r["paid"]) if r.get("paid") is not None else "-",
+                 ("$%s" % format(round(r["bank_after"], 2), ",.2f"))
+                 if r.get("bank_after") is not None else "-"))
         A("")
     A("## What would change the conclusion")
     A("")
@@ -574,6 +667,26 @@ def write_report(mem):
     A("this needs roughly 100 settled calls. At about 6 a day that is two to")
     A("three weeks of leaving `--loop` running. Below that number, a good")
     A("run and a bad run look identical.")
+    A("")
+    A("## About the paper account")
+    A("")
+    A("$1,000 to start, 10% of whatever it is worth on each call. Imaginary.")
+    A("Nothing is sent to Kalshi and there is no account behind it.")
+    A("")
+    A("Run over the 414 confirmed trades from the 63-day study, in the order")
+    A("they happened, $1,000 at 10% a call ends at **$12,613**, dipping to")
+    A("$727 on the way. Two reasons not to plan around that:")
+    A("")
+    A("1. The price window and the confirmation rule were both chosen after")
+    A("   looking at all three periods. Some of that 12x is the choosing.")
+    A("2. It is not fillable. A 15-minute market trades on the order of ten")
+    A("   thousand contracts in its entire life. A few hundred contracts is")
+    A("   fine; a few thousand moves the price against you. Past roughly")
+    A("   $10,000 the arithmetic stops describing anything that could happen.")
+    A("")
+    A("A first week -- about 40 calls -- lands between $814 and $1,908 in the")
+    A("same simulation, and finishes below $1,000 about 17 times in 100.")
+    A("That spread is what a week actually looks like.")
     A("")
     A("Nothing here has been traded with real money.")
     with open(path, "w") as f:
@@ -588,6 +701,21 @@ def show_record(mem):
     line("=")
     print("  TRACK RECORD")
     line("=")
+    b = bank_of(mem)
+    grow = 100 * (b["cash"] / b["start"] - 1) if b["start"] else 0
+    print("  PAPER ACCOUNT   $%s   (%+.1f%% from $%s)"
+          % (format(round(b["cash"], 2), ",.2f"), grow,
+             format(round(b["start"]), ",d")))
+    if b["settled"]:
+        print("    %d settled call%s, best $%s, worst $%s, fees $%s"
+              % (b["settled"], "" if b["settled"] == 1 else "s",
+                 format(round(b["peak"], 2), ",.2f"),
+                 format(round(b["low"], 2), ",.2f"),
+                 format(round(b["fees"], 2), ",.2f")))
+    else:
+        print("    Nothing settled yet, so it has not moved.")
+    print("    Imaginary money. 10% of the account per call.")
+    print()
     side_breakdown(mem)
     if not answered:
         seen = sum(mem["bins_n"])
@@ -1066,7 +1194,7 @@ def evaluate(mem, a):
             # otherwise confirmed trades never show up in the track record.
             if answered and not prev.get("answered"):
                 prev.update({"answered": True, "side": side, "price": price,
-                             "edge": edge})
+                             "edge": edge, "bet": plan_stake(mem, price)})
                 save_memory(mem)
             return
         mem["predictions"].append({
@@ -1074,7 +1202,8 @@ def evaluate(mem, a):
             "ticker": m.get("ticker"), "close_time": m.get("close_time"),
             "raw": raw, "p": p, "side": side, "price": price,
             "edge": edge, "grade": grade_short, "mins": round(mins, 1),
-            "answered": bool(answered), "outcome": None})
+            "answered": bool(answered), "outcome": None,
+            "bet": plan_stake(mem, price) if answered else None})
         mem["predictions"] = mem["predictions"][-2000:]
         save_memory(mem)
 
@@ -1113,6 +1242,17 @@ def evaluate(mem, a):
                   tags="rotating_light", priority="high")
     print()
     print("  Buy %s at %.0f cents" % (side, 100 * price))
+    if g["trade"]:
+        bet = next((r["bet"] for r in mem["predictions"]
+                    if r["ticker"] == m.get("ticker") and r.get("bet")), None)
+        if bet:
+            print()
+            print("  PAPER ACCOUNT  $%s"
+                  % format(round(bet["bank_before"], 2), ",.2f"))
+            print("    risks       $%s  (10%%, %.0f contracts, $%.2f fee)"
+                  % (format(bet["stake"], ",.2f"), bet["contracts"], bet["fee"]))
+            print("    to win      $%s" % format(bet["to_win"], ",.2f"))
+            print("    No money is sent anywhere. This is a scoreboard.")
     print()
     print("  CHANCE IT HITS      %.0f%%" % (100 * min(conf, 0.99)))
     print("  TRADE GRADE         %s" % g["label"])
@@ -1325,6 +1465,8 @@ def main():
                     help="set up phone alerts (ntfy) and send a test")
     ap.add_argument("--report", action="store_true",
                     help="write a full report of what it has learned")
+    ap.add_argument("--reset-bank", action="store_true",
+                    help="set the paper account back to $1,000")
     ap.add_argument("--hours", type=float, default=0,
                     help="with --loop, stop cleanly after this many hours")
     a = ap.parse_args()
@@ -1338,6 +1480,17 @@ def main():
         settle_pending(mem, quiet=True)
         save_memory(mem)
         show_record(mem)
+        return
+
+    if getattr(a, "reset_bank", False):
+        mem["bank"] = {"cash": PAPER_START, "start": PAPER_START,
+                       "peak": PAPER_START, "low": PAPER_START,
+                       "settled": 0, "fees": 0.0}
+        for r in mem["predictions"]:
+            r.pop("paid", None)
+            r.pop("bank_after", None)
+        save_memory(mem)
+        print("  Paper account reset to $%s." % format(round(PAPER_START), ",d"))
         return
 
     if a.report:
