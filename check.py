@@ -281,6 +281,7 @@ def ntfy_setup():
     print("  PHONE ALERTS")
     line("=")
     print("  Your topic%s:" % ("" if fresh else " (already set)"))
+    print("  Saved in %s" % CONFIG)
     print()
     print("      %s" % topic)
     print()
@@ -1215,7 +1216,13 @@ def run_forever(mem, a):
     print("  WATCHING -- Ctrl-C to stop")
     line("=")
     if ntfy_topic():
-        print("  Alerts go to your phone (ntfy topic %s...)." % ntfy_topic()[:14])
+        # Printed in full, not truncated. Two copies of the project in two
+        # folders means two config files and two topics, and a half-printed
+        # topic makes that impossible to notice -- you subscribe the phone to
+        # one and the bot posts to the other, and nothing ever arrives.
+        print("  Alerts go to ntfy topic:  %s" % ntfy_topic())
+        print("  (from %s)" % (("environment variable NTFY_TOPIC")
+                               if os.environ.get("NTFY_TOPIC") else CONFIG))
     else:
         print("  No phone alerts set up. Run  python3 check.py --alerts")
         print("  to switch them on. Everything still prints here.")
