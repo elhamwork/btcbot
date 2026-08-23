@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """
-check.py -- ask once, get one answer.
+check.py -- ask once, or leave it watching.
 
-    python3 check.py
+    python3 check.py            asks which you want
+    python3 check.py --once     one answer, then stop
+    python3 check.py --loop     watch all day, alert your phone
+    python3 check.py --alerts   set up phone alerts (30 seconds, once)
 
 Looks at the BTC 15-minute contract open right now and answers YES, NO, or
-CAN'T SAY. Then it exits. Nothing runs in the background.
+CAN'T SAY. In --loop it keeps doing that every 30 seconds, pings your phone
+when there is a call, and pings again when that call settles so you find out
+whether it was right without opening Kalshi.
 
 WHY "CAN'T SAY" IS THE DEFAULT
 ==============================
@@ -32,7 +37,8 @@ against an 82.0% break-even, across 414 independent contracts (p=0.0012).
 A ~5.7 point edge, positive in all three test periods: 87.6 / 87.7 / 87.9.
 
 The last filter -- confirmation -- is what lifted it from 81.9% to 87.7%. It
-costs volume: about 6 setups a day instead of 20. `--wait` does the waiting.
+costs volume: about 6 setups a day instead of 20, which is why --loop
+exists: leave it running rather than checking by hand.
 
 That is the strongest result in this project, and it still is not proof. It
 has never been tested on live money, and the high win rate is mostly just the
@@ -199,8 +205,97 @@ class NoSetup(Exception):
 # wins should not convince it that a bin is a certainty.
 MEMORY = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                       "forward_test", "check_memory.json")
+CONFIG = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                      "forward_test", "check_config.json")
 N_BINS = 20
 PRIOR_STRENGTH = 30.0
+
+
+# ---------------------------------------------------------------------------
+# Phone alerts
+# ---------------------------------------------------------------------------
+# ntfy.sh: install the app, subscribe to a topic name, and anything posted to
+# that name arrives on your phone. No account, no key, no signup.
+#
+# SECURITY: topics on ntfy.sh are PUBLIC. Anyone who guesses the name sees
+# your alerts. That is why the setup generates a long random one rather than
+# letting you pick "btc". Nothing secret is ever sent -- the alerts contain a
+# contract ticker and a price, both public information -- but a guessable
+# topic still lets a stranger read when you trade.
+NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
+
+
+def load_config():
+    try:
+        with open(CONFIG) as f:
+            return json.load(f)
+    except Exception:                                         # noqa: BLE001
+        return {}
+
+
+def save_config(c):
+    os.makedirs(os.path.dirname(CONFIG), exist_ok=True)
+    tmp = CONFIG + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(c, f, indent=1)
+    os.replace(tmp, CONFIG)
+
+
+def ntfy_topic():
+    return os.environ.get("NTFY_TOPIC") or load_config().get("ntfy_topic") or ""
+
+
+def send_ntfy(title, body, tags="chart_with_upwards_trend", priority="default"):
+    """POST to ntfy.sh. Returns (ok, detail). Never raises."""
+    topic = ntfy_topic()
+    if not topic:
+        return False, "no topic set"
+    req = urllib.request.Request(
+        "%s/%s" % (NTFY_SERVER.rstrip("/"), topic),
+        data=body.encode("utf-8"), method="POST",
+        headers={"Title": title.encode("ascii", "replace").decode("ascii"),
+                 "Tags": tags, "Priority": priority, "Markdown": "no"})
+    try:
+        with urllib.request.urlopen(
+                req, timeout=10, context=ssl.create_default_context()) as r:
+            return r.status < 300, "HTTP %s" % r.status
+    except Exception as e:                                    # noqa: BLE001
+        return False, "%s: %s" % (type(e).__name__, e)
+
+
+def ntfy_setup():
+    """Make a random topic, save it, and print the two steps to hook it up."""
+    import secrets
+    cfg = load_config()
+    topic = cfg.get("ntfy_topic")
+    fresh = not topic
+    if fresh:
+        topic = "btcbot-" + secrets.token_urlsafe(12).replace("-", "").replace("_", "")
+        cfg["ntfy_topic"] = topic
+        save_config(cfg)
+    print()
+    line("=")
+    print("  PHONE ALERTS")
+    line("=")
+    print("  Your topic%s:" % ("" if fresh else " (already set)"))
+    print()
+    print("      %s" % topic)
+    print()
+    print("  1. Install the free app 'ntfy' from the App Store or Play Store.")
+    print("  2. Open it, tap +, and paste that topic in.")
+    print()
+    print("  That is it. Saved to forward_test/check_config.json, so you only")
+    print("  do this once.")
+    print()
+    ok, detail = send_ntfy("btcbot connected",
+                           "If you can read this, alerts are working.",
+                           tags="white_check_mark")
+    print("  Test alert: %s (%s)" % ("sent -- check your phone" if ok
+                                     else "FAILED", detail))
+    print()
+    print("  Note: ntfy topics are public. Anyone who knows that name can")
+    print("  read your alerts, so do not post it anywhere.")
+    print()
 
 
 def bin_of(p):
@@ -314,6 +409,16 @@ def settle_pending(mem, quiet=False):
             rec["correct"] = bool(ok)
             right += ok
             wrong += not ok
+            # This is the alert that matters: not "here is an idea" but "the
+            # idea you were given settled, and here is what happened".
+            paid = (1.0 - rec["price"]) if ok else -rec["price"]
+            send_ntfy(
+                "WE HIT -- %s" % rec["side"] if ok else "Missed -- %s" % rec["side"],
+                "%s settled %s.\n%s bought at %.0fc -> %+.0fc per $1 staked."
+                % (rec["ticker"], res.upper(), rec["side"],
+                   100 * rec["price"], 100 * paid / max(rec["price"], 0.01)),
+                tags="tada" if ok else "x",
+                priority="high" if ok else "default")
     if checked and not quiet:
         bits = ["learned from %d settled contract%s" % (checked, "" if checked == 1 else "s")]
         if right or wrong:
@@ -840,7 +945,19 @@ def evaluate(mem, a):
     g = grade_of(price, edge, mins, spread, confirmed)
     grade_short = g["short"]
     remember(g["trade"])
+
+    # A confirmed setup stays confirmed for the rest of the contract, so a
+    # 30-second loop would re-announce the same call twenty times. One call
+    # per contract: that is also how it was counted in the backtest.
+    called = mem.setdefault("alerted", [])
+    already = m.get("ticker") in called
+    if g["trade"] and not already:
+        called.append(m.get("ticker"))
+        mem["alerted"] = called[-200:]
     save_memory(mem)          # note_poll changed the memory either way
+    if WAITING and g["trade"] and already:
+        raise NoSetup("already called %s at %.0fc on this contract"
+                      % (side, 100 * price))
     if WAITING and not g["trade"]:
         # --wait holds out for a GOOD grade. Everything else is reported as a
         # reason and the loop carries on.
@@ -848,6 +965,14 @@ def evaluate(mem, a):
                       % (g["short"], side, 100 * price, mins))
 
     answer(side)
+    if g["trade"] and not already:
+        send_ntfy("%s at %.0fc -- %.0f min left" % (side, 100 * price, mins),
+                  "%s\nBuy %s at %.0fc. Chance %.0f%%, edge %.0f points.\n"
+                  "Confirmed: the same call was standing 2 minutes ago.\n"
+                  "Setups like this hit 87.7%% over 63 days. Never traded live."
+                  % (m.get("ticker"), side, 100 * price,
+                     100 * min(conf, 0.99), 100 * edge),
+                  tags="rotating_light", priority="high")
     print()
     print("  Buy %s at %.0f cents" % (side, 100 * price))
     print()
@@ -936,6 +1061,92 @@ def wait_loop(mem, a):
             return
 
 
+def run_forever(mem, a):
+    """
+    Watch continuously. Alert on every confirmed setup, and again when it
+    settles. Never exits on its own.
+
+    Unlike --wait, this does not stop after a hit: a setup is roughly 6 a day,
+    so stopping after one means restarting it a dozen times. The settle alert
+    is the point of leaving it up -- it tells you whether the call was right
+    without you checking Kalshi.
+    """
+    global WAITING
+    WAITING = True
+    print()
+    line("=")
+    print("  WATCHING -- Ctrl-C to stop")
+    line("=")
+    if ntfy_topic():
+        print("  Alerts go to your phone (ntfy topic %s...)." % ntfy_topic()[:14])
+    else:
+        print("  No phone alerts set up. Run  python3 check.py --alerts")
+        print("  to switch them on. Everything still prints here.")
+    print()
+    print("  A setup has to appear twice, two minutes apart. About 6 a day,")
+    print("  so most of the time nothing will happen. That is normal.")
+    print()
+    checks = hits = 0
+    last_reason = None
+    started = datetime.now(timezone.utc)
+    while True:
+        checks += 1
+        try:
+            evaluate(mem, a)          # prints the whole readout and alerts
+            hits += 1
+            print("  %s  that is call %d. Still watching."
+                  % (datetime.now().strftime("%H:%M:%S"), hits))
+            last_reason = None
+        except NoSetup as e:
+            reason = str(e)
+            if reason != last_reason:
+                print("  %s  %s" % (datetime.now().strftime("%H:%M:%S"), reason))
+                last_reason = reason
+            elif checks % 20 == 0:
+                up = (datetime.now(timezone.utc) - started).total_seconds() / 60
+                print("  %s  still watching (%d checks, %.0f min, %d call%s)"
+                      % (datetime.now().strftime("%H:%M:%S"), checks, up,
+                         hits, "" if hits == 1 else "s"))
+        except KeyboardInterrupt:
+            break
+        except Exception as e:                                # noqa: BLE001
+            # A dropped connection must not end an overnight run.
+            print("  %s  hiccup (%s) -- retrying"
+                  % (datetime.now().strftime("%H:%M:%S"),
+                     ("%s: %s" % (type(e).__name__, e))[:60]))
+        try:
+            time.sleep(30)
+        except KeyboardInterrupt:
+            break
+    up = (datetime.now(timezone.utc) - started).total_seconds() / 60
+    print("\n  Stopped after %d check%s over %.0f minutes, %d call%s."
+          % (checks, "" if checks == 1 else "s", up,
+             hits, "" if hits == 1 else "s"))
+
+
+def choose_mode():
+    """Ask once, up front, instead of making the user remember a flag."""
+    print()
+    line("=")
+    print("  HOW DO YOU WANT TO RUN IT?")
+    line("=")
+    print("    1   Once  --  check right now, print the answer, stop.")
+    print()
+    print("    2   Keep running  --  watch all day, alert my phone every")
+    print("        time there is a call and again when it settles.")
+    print("        Ctrl-C to stop.")
+    print()
+    while True:
+        try:
+            pick = input("  1 or 2 ? ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            sys.exit(0)
+        if pick in ("1", "2"):
+            return pick
+        print("  Type 1 or 2.")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -947,7 +1158,16 @@ def main():
                     help="show the track record and what it has learned")
     ap.add_argument("--confirm", metavar="YES|NO",
                     help="manually tell it how the last contract settled")
+    ap.add_argument("--loop", action="store_true",
+                    help="keep watching and alerting until you stop it")
+    ap.add_argument("--once", action="store_true",
+                    help="check now and stop, without asking")
+    ap.add_argument("--alerts", action="store_true",
+                    help="set up phone alerts (ntfy) and send a test")
     a = ap.parse_args()
+
+    if a.alerts:
+        return ntfy_setup()
 
     mem = load_memory()
 
@@ -981,7 +1201,15 @@ def main():
 
     if a.wait:
         return wait_loop(mem, a)
+    if a.loop:
+        return run_forever(mem, a)
+    if a.once:
+        return evaluate(mem, a)
 
+    # No mode asked for: ask. Only when there is somebody there to answer --
+    # piped into a script or run from cron, fall back to a single check.
+    if sys.stdin.isatty() and choose_mode() == "2":
+        return run_forever(mem, a)
     evaluate(mem, a)
 
 
