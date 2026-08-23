@@ -563,6 +563,9 @@ def side_breakdown(mem):
     print("  what it graded them")
     for k, v in sorted(grades.items(), key=lambda kv: -kv[1]):
         print("    %-28s %3d" % (k, v))
+    if "(not recorded)" in grades:
+        print("    ((not recorded) = looked at before this tool started")
+        print("     writing the grade down. They fade as you keep running.)")
     print()
     print("  Note: \"NONE (no disagreement)\" is not the answer NO. It means")
     print("  there is no trade. The YES/NO above is the lean; the grade is")
@@ -761,8 +764,9 @@ def show_record(mem):
             print()
             print("  A call means it graded a setup GOOD and said YES or NO.")
             print("  A setup now has to appear twice, two minutes apart, so")
-            print("  roughly 1 run in 75 gets there on its own. Use:")
-            print("      python3 check.py --wait")
+            print("  roughly 1 run in 75 gets there on its own. Leave it")
+            print("  watching instead:")
+            print("      python3 check.py --loop")
         else:
             print("  %d call%s made, none settled yet. Each takes ~15 minutes."
                   % (calls, "" if calls == 1 else "s"))
