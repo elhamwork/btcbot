@@ -1,0 +1,116 @@
+{
+ "predictions": [
+  {
+   "asked": "2026-08-23T17:52:53.412016+00:00",
+   "ticker": "KXBTC15M-26AUG231400-00",
+   "close_time": "2026-08-23T18:00:00Z",
+   "raw": 0.5084339859089649,
+   "p": 0.6054999999999999,
+   "side": "YES",
+   "price": 0.55,
+   "edge": 0.05549999999999988,
+   "grade": "WEAK (5-10 min)",
+   "mins": 7.1,
+   "answered": false,
+   "outcome": null,
+   "bet": null
+  }
+ ],
+ "bins_n": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "bins_wins": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "polls": {
+  "KXBTC15M-26AUG231400-00": [
+   {
+    "mins": 7.11,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 6.61,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 6.1,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.6,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 4.59,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.08,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 3.58,
+    "side": "NO",
+    "qual": false
+   }
+  ]
+ },
+ "bank": {
+  "cash": 1000.0,
+  "start": 1000.0,
+  "peak": 1000.0,
+  "low": 1000.0,
+  "settled": 0,
+  "fees": 0.0
+ },
+ "alerted": []
+}
