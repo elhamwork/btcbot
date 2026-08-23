@@ -32,13 +32,14 @@ the honest answer far more often than YES or NO.
 
 HOW ACCURATE IS IT WHEN IT DOES ANSWER
 ======================================
-On 63 days of history, setups passing all these filters won 87.7% of the time
-against an 82.0% break-even, across 414 independent contracts (p=0.0012).
-A ~5.7 point edge, positive in all three test periods: 87.6 / 87.7 / 87.9.
+On 63 days of history, setups passing all these filters won 89.3% of the time
+against an 81.7% break-even, across 272 independent contracts (p=0.0002).
+A ~7.6 point edge, positive in all three test periods: 89.8 / 89.2 / 88.5.
 
-The last filter -- confirmation -- is what lifted it from 81.9% to 87.7%. It
-costs volume: about 6 setups a day instead of 20, which is why --loop
-exists: leave it running rather than checking by hand.
+The last filter -- confirmation -- is what lifted it from 80.5% to 89.3%. It
+costs volume, and so does the 7-point minimum: about 4 setups a day out of
+96 contracts, which is why --loop exists -- leave it running rather than
+checking by hand.
 
 That is the strongest result in this project, and it still is not proof. It
 has never been tested on live money, and the high win rate is mostly just the
@@ -64,7 +65,32 @@ KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
 COINBASE = "https://api.exchange.coinbase.com/products/BTC-USD/candles"
 COINBASE_TICKER = "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
 
-MIN_EDGE = 0.05
+# How far we have to disagree with Kalshi before it is worth acting on.
+#
+# Raised from 5 points to 7 after measuring it. Inside the GOOD band, with
+# the threshold applied to the confirming look as well as the entry:
+#
+#     threshold    train    valid     test   pooled   per day
+#      5 points    87.6%    87.7%    87.9%    87.7%      6.6
+#      6 points    88.7%    86.5%    87.6%    88.1%      5.3
+#      7 points    89.8%    89.2%    88.5%    89.3%      4.3   <- chosen
+#      8 points    91.4%    86.7%    87.1%    89.4%      3.3
+#     10 points    88.3%    81.2%    86.0%    86.6%      1.9
+#
+# Return per dollar goes +7.05% -> +10.35%, and p drops from 0.0012 to
+# 0.0002. The 5-to-7 point trades that get dropped were the weak ones:
+# 86.0% against an 84% break-even, +1.8% -- inside the noise.
+#
+# 7 over 8 because 8 is only better on train (91.4%) and worse on both
+# periods it had not seen, which is what curve-fitting looks like. 7 is the
+# steadiest reading: 89.8 / 89.2 / 88.5.
+#
+# Honest caveat: six thresholds were tried and the best-looking one picked.
+# Some of the gain is that choosing. The three periods agreeing this closely
+# is the reason to believe most of it is real, not proof that all of it is.
+#
+# Cost: about 4 calls a day instead of 6.6.
+MIN_EDGE = 0.07
 # Price window, chosen on the data rather than intuition.
 #
 # The obvious guess -- trade the coin-flips near 50c -- is wrong. Buying YES
@@ -106,15 +132,15 @@ MIN_VOL = 0.0001
 # side also qualified at 12 minutes left:
 #
 #                       train              valid               test      pooled
-#   confirmed      242  87.6% +6.5%    65  87.7% +7.0%   107  87.9% +8.4%   87.7%
-#   NOT confirmed  414  82.1% +3.8%   139  82.0% +3.2%   156  81.4% +3.6%   81.9%
+#   confirmed      157  89.8% +10.3%   37  89.2% +9.7%    78  88.5% +10.7%  89.3%
+#   NOT confirmed  298  80.2%  +1.8%   97  81.4% +3.1%   127  80.3%  +2.8%  80.5%
 #
-# 414 confirmed trades, 363 right, against a break-even of 82.0%: one-sided
-# p = 0.0012. The win rate is 87.6 / 87.7 / 87.9 across three chronological
+# 272 confirmed trades, 243 right, against a break-even of 81.7%: one-sided
+# p = 0.0002. The win rate is 89.8 / 89.2 / 88.5 across three chronological
 # periods -- about as stable as anything measured here.
 #
-# It is not free. Confirmation throws away roughly a third of the setups, so
-# there are about 6 or 7 a day instead of 20.
+# It is not free. Confirmation throws away roughly half the setups, so there
+# are about 4 a day instead of 20.
 #
 # Checked at other entry times too (12/14, 8/10, 6/8): confirmation raised the
 # win rate in 11 of the 12 period-cells. Entry at 10 confirmed at 12 is the
@@ -721,7 +747,7 @@ def write_report(mem):
         A("")
     A("## What would change the conclusion")
     A("")
-    A("The backtest says setups like these hit 87.7% against an 82.0%")
+    A("The backtest says setups like these hit 89.3% against an 81.7%")
     A("break-even. To tell whether that is real rather than 63 lucky days,")
     A("this needs roughly 100 settled calls. At about 6 a day that is two to")
     A("three weeks of leaving `--loop` running. Below that number, a good")
@@ -1043,6 +1069,15 @@ def grade_of(price, edge, mins, spread, confirmed):
                         "the edge is worth."],
                 "stats": None}
     if edge < MIN_EDGE:
+        if edge >= 0.05:
+            return {"label": "WEAK -- disagreement too small",
+                    "short": "WEAK (small disagreement)", "trade": False,
+                    "why": ["I disagree with Kalshi by %.0f points. That used to"
+                            % (100 * edge),
+                            "be enough; measuring it showed it is not. Setups",
+                            "in the 5-to-7 point range won 86.0%% against an 84%%",
+                            "break-even -- inside the noise. 7 points is the line."],
+                    "stats": (107, 86.0, "+0.2% / +3.3% / +5.6%")}
         return {"label": "NO EDGE -- skip", "short": "NONE (no disagreement)",
                 "trade": False,
                 "why": ["Kalshi's price already matches my estimate, so there",
@@ -1073,17 +1108,17 @@ def grade_of(price, edge, mins, spread, confirmed):
                 "why": ["%.0fc, %.0f min left, %.0f-point edge -- the right shape."
                         % (100 * price, mins, 100 * edge),
                         "But I have only seen it once. Setups that were still",
-                        "there two minutes later hit 87.7%; ones that were not",
-                        "hit 81.9%. Re-run in 2 minutes -- if it still says",
+                        "there two minutes later hit 89.3%; ones that were not",
+                        "hit 80.5%. Re-run in 2 minutes -- if it still says",
                         "the same thing, it upgrades to GOOD."],
-                "stats": (708, 81.9, "+3.8% / +3.3% / +3.6%")}
+                "stats": (522, 80.5, "+1.8% / +3.1% / +2.8%")}
     return {"label": "GOOD -- confirmed, the zone that held up",
             "short": "GOOD", "trade": True,
             "why": ["%.0fc entry, %.0f minutes left, %.0f-point edge, and the"
                     % (100 * price, mins, 100 * edge),
                     "same call was already standing two minutes ago.",
                     "The only combination positive in all three periods."],
-            "stats": (414, 87.7, "+6.5% / +7.0% / +8.4%")}
+            "stats": (272, 89.3, "+10.3% / +9.7% / +10.7%")}
 
 
 def evaluate(mem, a):
@@ -1302,7 +1337,7 @@ def evaluate(mem, a):
         send_ntfy("%s at %.0fc -- %.0f min left" % (side, 100 * price, mins),
                   "%s\nBuy %s at %.0fc. Chance %.0f%%, edge %.0f points.\n"
                   "Confirmed: the same call was standing 2 minutes ago.\n"
-                  "Setups like this hit 87.7%% over 63 days. Never traded live."
+                  "Setups like this hit 89.3%% over 63 days. Never traded live."
                   % (m.get("ticker"), side, 100 * price,
                      100 * min(conf, 0.99), 100 * edge),
                   tags="rotating_light", priority="high")
@@ -1435,7 +1470,7 @@ def run_forever(mem, a):
         print("  No phone alerts set up. Run  python3 check.py --alerts")
         print("  to switch them on. Everything still prints here.")
     print()
-    print("  A setup has to appear twice, two minutes apart. About 6 a day,")
+    print("  A setup has to appear twice, two minutes apart. About 4 a day,")
     print("  so most of the time nothing will happen. That is normal.")
     print()
     print("  Left up for a day it sees about 96 contracts and learns from all")
