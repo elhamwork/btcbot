@@ -304,6 +304,32 @@ def ntfy_setup():
     """Make a random topic, save it, and print the two steps to hook it up."""
     import secrets
     cfg = load_config()
+    # An NTFY_TOPIC in the environment overrides the saved file everywhere
+    # else, so it has to win here too. Otherwise this prints one topic, you
+    # subscribe the phone to it, and every run posts to a different one.
+    env = os.environ.get("NTFY_TOPIC")
+    if env:
+        print()
+        line("=")
+        print("  PHONE ALERTS")
+        line("=")
+        print("  The environment variable NTFY_TOPIC is set, and it beats the")
+        print("  saved file. Everything posts to:")
+        print()
+        print("      %s" % env)
+        print()
+        print("  Subscribe your phone to THAT one. The saved file says %s,"
+              % (cfg.get("ntfy_topic") or "nothing"))
+        print("  which is being ignored. To use the saved one instead, run:")
+        print("      unset NTFY_TOPIC")
+        print()
+        ok, detail = send_ntfy("btcbot connected",
+                               "If you can read this, alerts are working.",
+                               tags="white_check_mark")
+        print("  Test alert: %s (%s)" % ("sent -- check your phone" if ok
+                                         else "FAILED", detail))
+        print()
+        return
     topic = cfg.get("ntfy_topic")
     fresh = not topic
     if fresh:
