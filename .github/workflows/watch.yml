@@ -1,16 +1,16 @@
 # Run the watcher on GitHub's machines instead of your laptop.
 #
-# Free, no card, nothing to install. It starts itself every 6 hours, watches
-# for 5 hours 45 minutes, sends alerts to your phone, and commits what it
-# learned back into cloud_state/ so the next run picks up where it left off.
+# Free, no card, nothing to install. It starts every 6 hours, watches, sends
+# alerts to your phone, and commits what it learned back into cloud_state/ so
+# the next run picks up where it left off.
 #
 # What it does NOT do: trade. There is no account, no key, no order. It reads
 # public prices and sends notifications.
 #
 # HONEST LIMITS -- read these before relying on it:
-#   * GitHub's scheduler is best-effort. Runs are often 10-30 minutes late and
+#   * GitHub's scheduler is best-effort. Runs are often 10-40 minutes late and
 #     under heavy load a scheduled run can be skipped entirely. Expect gaps.
-#   * A job is capped at 6 hours, which is why this stops at 5h45 and restarts.
+#   * A job is capped at 6 hours, which is why this stops at 5h30 and restarts.
 #   * Free minutes are unlimited only while this repo is PUBLIC. If you make it
 #     private you get 2,000 minutes a month, which is about an hour a day.
 #   * Your laptop, left awake, is more reliable than this. This is the
@@ -23,10 +23,13 @@ on:
     - cron: "7 */6 * * *"      # 4x a day. Minute 7 to dodge the on-the-hour rush.
   workflow_dispatch:            # and a "Run workflow" button
 
-# Never two at once -- they would fight over the memory file.
+# A late-firing schedule used to queue behind the run it was meant to replace,
+# so the next watcher sat idle for hours. It now takes over instead. The old
+# run still saves on its way out (see always() below), and the new one merges
+# with whatever it finds, so the handover loses nothing.
 concurrency:
   group: watch
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: write               # to commit what it learned
@@ -34,7 +37,7 @@ permissions:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 355        # 5h55, a safety net above the 5h45 below
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
 
@@ -47,26 +50,35 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
           CHECK_LABEL: cloud
-        run: python3 check.py --loop --hours 5.75
+        run: python3 check.py --loop --hours 5.5
 
-      - name: Write the report
+      # always() so a timeout, a crash, or being cancelled by the next
+      # scheduled run all still save the learning.
+      - name: Save what it learned
         if: always()
         env:
           CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
-        run: python3 check.py --report
-
-      # always() so a timeout or a crash still saves the learning.
-      - name: Save what it learned
-        if: always()
         run: |
+          set -u
           git config user.name  "btcbot"
           git config user.email "btcbot@users.noreply.github.com"
-          git add cloud_state
-          git diff --staged --quiet && echo "nothing new" && exit 0
-          git commit -m "watch: $(date -u +%Y-%m-%dT%H:%MZ)"
-          for i in 1 2 3 4; do
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" \
-              && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+          cp cloud_state/check_memory.json /tmp/mine.json 2>/dev/null || echo '{}' > /tmp/mine.json
+          for i in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME" || { sleep $((2 ** i)); continue; }
+            # Start from whatever is on the branch NOW, then fold our own
+            # copy into it. Two watchers can hold the memory at once -- a
+            # handover, a re-run, the laptop -- and a plain overwrite would
+            # silently drop one side's settled calls.
+            git reset --hard "origin/$GITHUB_REF_NAME"
+            git show "origin/$GITHUB_REF_NAME:cloud_state/check_memory.json" \
+              > /tmp/theirs.json 2>/dev/null || echo '{}' > /tmp/theirs.json
+            python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
+              cloud_state/check_memory.json
+            python3 check.py --report || true
+            git add cloud_state
+            if git diff --staged --quiet; then echo "nothing new"; exit 0; fi
+            git commit -m "watch: $(date -u +%Y-%m-%dT%H:%MZ)"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
             sleep $((2 ** i))
           done
           exit 1
