@@ -460,6 +460,123 @@ def side_breakdown(mem):
     print()
 
 
+def write_report(mem):
+    """
+    Write down, in a file, everything it has learned so far.
+
+    --record prints a summary. This is the long version, kept on disk so you
+    can watch it change week to week instead of trusting a number that
+    scrolls past.
+    """
+    path = os.path.join(os.path.dirname(MEMORY), "learning_report.md")
+    recs = mem.get("predictions") or []
+    settled = [r for r in recs if r.get("outcome") is not None]
+    calls = [r for r in recs if r.get("answered")]
+    done = [r for r in calls if r.get("correct") is not None]
+    L = []
+    A = L.append
+    A("# What the bot has learned")
+    A("")
+    A("Written %s UTC by `check.py --report`."
+      % datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"))
+    A("")
+    A("## The short version")
+    A("")
+    A("| | |")
+    A("|---|---|")
+    A("| contracts looked at | %d |" % len(recs))
+    A("| of those, settled and learned from | %d |" % len(settled))
+    A("| actual calls (graded GOOD) | %d |" % len(calls))
+    A("| calls that have settled | %d |" % len(done))
+    if done:
+        w = sum(1 for r in done if r["correct"])
+        stake = sum(r["price"] for r in done)
+        pnl = sum((1.0 - r["price"]) if r["correct"] else -r["price"] for r in done)
+        A("| calls right | %d of %d (%.0f%%) |" % (w, len(done), 100 * w / len(done)))
+        A("| break-even needed | %.0f%% |" % (100 * stake / len(done)))
+        A("| paper P&L | %+.1f%% per dollar staked |"
+          % (100 * pnl / stake if stake else 0))
+    A("")
+
+    A("## What it is actually learning")
+    A("")
+    A("Only one thing: **calibration**. When the formula says 78%, how often")
+    A("does that really happen? It is a bent ruler being straightened. It is")
+    A("not learning to see further ahead, and no amount of it will make the")
+    A("bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's")
+    A("own price is the better forecast. The bot's only claim is a narrow")
+    A("band where its disagreement with Kalshi has been worth something.")
+    A("")
+    A("The 63-day study is worth %g observations per row below. So %d live"
+      % (PRIOR_STRENGTH, len(settled)))
+    A("results spread over 20 rows moves things very little, on purpose --")
+    A("three lucky wins should not rewrite the table.")
+    A("")
+    A("## The table it is straightening")
+    A("")
+    A("| formula says | started at | now says | live results | moved |")
+    A("|---|---|---|---|---|")
+    moved_any = False
+    for b in range(N_BINS):
+        n = mem["bins_n"][b]
+        if not n:
+            continue
+        cur = (prior_for(b) * PRIOR_STRENGTH + mem["bins_wins"][b]) / \
+              (PRIOR_STRENGTH + n)
+        d = cur - prior_for(b)
+        if abs(d) > 0.02:
+            moved_any = True
+        A("| %.0f-%.0f%% | %.3f | %.3f | %d (%d hit) | %+.3f%s |"
+          % (100 * b / N_BINS, 100 * (b + 1) / N_BINS, prior_for(b), cur,
+             int(n), int(mem["bins_wins"][b]), d, " **" if abs(d) > 0.02 else ""))
+    if not moved_any:
+        A("")
+        A("Nothing has moved more than 0.02 yet. That is the expected state")
+        A("early on and is not a fault.")
+    A("")
+
+    grades = {}
+    for r in recs:
+        k = r.get("grade") or "(not recorded)"
+        grades[k] = grades.get(k, 0) + 1
+    if grades:
+        A("## How it graded what it saw")
+        A("")
+        A("| grade | times |")
+        A("|---|---|")
+        for k, v in sorted(grades.items(), key=lambda kv: -kv[1]):
+            A("| %s | %d |" % (k, v))
+        A("")
+        y = sum(1 for r in recs if r.get("side") == "YES")
+        A("Leaned YES %d times, NO %d times. Over 63 days of history the"
+          % (y, len(recs) - y))
+        A("split is 49.5% YES, so anything near half and half is normal.")
+        A("")
+
+    if done:
+        A("## Every call it has made")
+        A("")
+        A("| closed | side | price | result |")
+        A("|---|---|---|---|")
+        for r in done:
+            A("| %s | %s | %.2f | %s |"
+              % (str(r["close_time"])[:16].replace("T", " "), r["side"],
+                 r["price"], "RIGHT" if r["correct"] else "wrong"))
+        A("")
+    A("## What would change the conclusion")
+    A("")
+    A("The backtest says setups like these hit 87.7% against an 82.0%")
+    A("break-even. To tell whether that is real rather than 63 lucky days,")
+    A("this needs roughly 100 settled calls. At about 6 a day that is two to")
+    A("three weeks of leaving `--loop` running. Below that number, a good")
+    A("run and a bad run look identical.")
+    A("")
+    A("Nothing here has been traded with real money.")
+    with open(path, "w") as f:
+        f.write("\n".join(L) + "\n")
+    return path, len(recs), len(settled), len(done)
+
+
 def show_record(mem):
     answered = [r for r in mem["predictions"]
                 if r.get("answered") and r.get("correct") is not None]
@@ -1164,6 +1281,8 @@ def main():
                     help="check now and stop, without asking")
     ap.add_argument("--alerts", action="store_true",
                     help="set up phone alerts (ntfy) and send a test")
+    ap.add_argument("--report", action="store_true",
+                    help="write a full report of what it has learned")
     a = ap.parse_args()
 
     if a.alerts:
@@ -1175,6 +1294,23 @@ def main():
         settle_pending(mem, quiet=True)
         save_memory(mem)
         show_record(mem)
+        return
+
+    if a.report:
+        settle_pending(mem, quiet=True)
+        save_memory(mem)
+        path, seen, settled, done = write_report(mem)
+        print()
+        print("  Wrote %s" % path)
+        print("    %d contracts looked at, %d settled and learned from,"
+              % (seen, settled))
+        print("    %d calls settled." % done)
+        if done < 100:
+            print()
+            print("    %d of the ~100 settled calls needed before the win rate"
+                  % done)
+            print("    means anything. Leave --loop running.")
+        print()
         return
 
     if a.confirm:
