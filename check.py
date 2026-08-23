@@ -262,6 +262,26 @@ PRIOR_STRENGTH = 30.0
 NTFY_SERVER = os.environ.get("NTFY_SERVER", "https://ntfy.sh")
 
 
+def where_am_i():
+    """
+    A short name for this copy, stamped on every alert.
+
+    The laptop and the cloud runner post to the same topic, so without this
+    an alert says a call hit but not whose paper account just moved.
+    """
+    name = os.environ.get("CHECK_LABEL")
+    if name:
+        return name[:20]
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        return "cloud"
+    try:
+        import socket
+        host = socket.gethostname().split(".")[0]
+        return (host.replace("-", " ").split()[0] or "here")[:20]
+    except Exception:                                         # noqa: BLE001
+        return "here"
+
+
 def load_config():
     try:
         with open(CONFIG) as f:
@@ -287,6 +307,7 @@ def send_ntfy(title, body, tags="chart_with_upwards_trend", priority="default"):
     topic = ntfy_topic()
     if not topic:
         return False, "no topic set"
+    title = "[%s] %s" % (where_am_i(), title)
     req = urllib.request.Request(
         "%s/%s" % (NTFY_SERVER.rstrip("/"), topic),
         data=body.encode("utf-8"), method="POST",
@@ -1391,6 +1412,8 @@ def run_forever(mem, a):
         # topic makes that impossible to notice -- you subscribe the phone to
         # one and the bot posts to the other, and nothing ever arrives.
         print("  Alerts go to ntfy topic:  %s" % ntfy_topic())
+        print("  Tagged [%s] so you can tell it from the other copy."
+              % where_am_i())
         print("  (from %s)" % (("environment variable NTFY_TOPIC")
                                if os.environ.get("NTFY_TOPIC") else CONFIG))
     else:

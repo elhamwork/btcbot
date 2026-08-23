@@ -46,6 +46,7 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+          CHECK_LABEL: cloud
         run: python3 check.py --loop --hours 5.75
 
       - name: Write the report
