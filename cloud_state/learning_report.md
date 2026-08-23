@@ -1,21 +1,21 @@
 # What the bot has learned
 
-Written 2026-08-23 18:59 UTC by `check.py --report`.
+Written 2026-08-23 20:00 UTC by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,038.77** (started $1,000, +3.9%) |
-| best / worst it has been | $1,038.77 / $1,000.00 |
-| fees paid | $2.03 |
-| contracts looked at | 5 |
-| of those, settled and learned from | 4 |
-| actual calls (graded GOOD) | 1 |
-| calls that have settled | 1 |
-| calls right | 1 of 1 (100%) |
-| break-even needed | 71% |
-| paper P&L | +40.8% per dollar staked |
+| **paper account** | **$1,069.87** (started $1,000, +7.0%) |
+| best / worst it has been | $1,069.87 / $1,000.00 |
+| fees paid | $3.78 |
+| contracts looked at | 6 |
+| of those, settled and learned from | 5 |
+| actual calls (graded GOOD) | 2 |
+| calls that have settled | 2 |
+| calls right | 2 of 2 (100%) |
+| break-even needed | 74% |
+| paper P&L | +36.1% per dollar staked |
 
 ## What it is actually learning
 
@@ -26,7 +26,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 4 live
+The 63-day study is worth 30 observations per row below. So 5 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -49,15 +49,17 @@ early on and is not a fault.
 | WEAK (5-10 min) | 1 |
 | NONE (no disagreement) | 1 |
 | WEAK (50-70c) | 1 |
+| GOOD | 1 |
 
-Leaned YES 3 times, NO 2 times. Over 63 days of history the
+Leaned YES 4 times, NO 2 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
 
 | closed | side | price | result | paid | account after |
 |---|---|---|---|---|---|
-| 2026-08-23 18:45 | NO | 0.71 | RIGHT | +38.77 | $1,038.77 |
+| 2026-08-23 18:45 | NO | 0.71 | RIGHT | +38.82 | $1,038.82 |
+| 2026-08-23 19:30 | YES | 0.76 | RIGHT | +31.05 | $1,069.87 |
 
 ## What would change the conclusion
 

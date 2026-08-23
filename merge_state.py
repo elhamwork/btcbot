@@ -67,9 +67,16 @@ def rebuild(preds):
             rec.pop("paid", None)
             rec.pop("bank_after", None)
             continue
-        b = min(int(float(rec.get("raw", 0.0)) * N_BINS), N_BINS - 1)
-        bins_n[b] += 1.0
-        bins_wins[b] += 1.0 if y == 1 else 0.0
+        # A recovered record is one reconstructed by hand from an alert after
+        # its memory was lost. The settled side, price and outcome are all
+        # verifiable, so it counts for the paper account and the call log --
+        # but the raw pre-calibration number is NOT recoverable from an alert,
+        # and guessing it would quietly corrupt the calibration table with a
+        # made-up value. Recovered records therefore teach nothing.
+        if not rec.get("recovered"):
+            b = min(int(float(rec.get("raw", 0.0)) * N_BINS), N_BINS - 1)
+            bins_n[b] += 1.0
+            bins_wins[b] += 1.0 if y == 1 else 0.0
         if not rec.get("answered"):
             continue
         price = float(rec.get("price") or 0.0)

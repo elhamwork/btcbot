@@ -66,8 +66,8 @@
     "bank_before": 1000.0
    },
    "correct": true,
-   "paid": 38.77,
-   "bank_after": 1038.77
+   "paid": 38.82,
+   "bank_after": 1038.82
   },
   {
    "asked": "2026-08-23T18:45:33.832284+00:00",
@@ -83,6 +83,31 @@
    "answered": false,
    "outcome": null,
    "bet": null
+  },
+  {
+   "asked": "2026-08-23T19:19:00+00:00",
+   "ticker": "KXBTC15M-26AUG231530-30",
+   "close_time": "2026-08-23T19:30:00Z",
+   "raw": null,
+   "p": 0.92,
+   "side": "YES",
+   "price": 0.76,
+   "edge": 0.16,
+   "grade": "GOOD",
+   "mins": 11.0,
+   "answered": true,
+   "outcome": 1,
+   "correct": true,
+   "recovered": "rebuilt from the ntfy alerts of 2026-08-23 12:19 and 12:32 PT after the run holding it failed to save (merge conflict). Side, price and outcome are from the alert text; the raw pre-calibration number was not in the alert, so this record is excluded from the calibration table.",
+   "bet": {
+    "stake": 103.88,
+    "contracts": 136.7,
+    "fee": 1.75,
+    "to_win": 31.05,
+    "bank_before": 1038.82
+   },
+   "paid": 31.05,
+   "bank_after": 1069.87
   }
  ],
  "bins_n": [
@@ -782,12 +807,12 @@
   ]
  },
  "bank": {
-  "cash": 1038.77,
+  "cash": 1069.87,
   "start": 1000.0,
-  "peak": 1038.77,
+  "peak": 1069.87,
   "low": 1000.0,
-  "settled": 1,
-  "fees": 2.03
+  "settled": 2,
+  "fees": 3.78
  },
  "alerted": [
   "KXBTC15M-26AUG231445-45"
