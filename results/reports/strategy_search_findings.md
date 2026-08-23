@@ -132,3 +132,57 @@ honestly. Everything else tested is indistinguishable from chance.
 No positive-expectancy strategy was found. The market prices these contracts
 efficiently enough that the spread and fee absorb the one genuine mispricing
 present.
+
+## Confirmation filter (added after the baseline report)
+
+Three further ideas were tested against the same 63-day panel, on the same
+chronological 60/20/20 split, with all fitting done on train only.
+
+**1. Blending the model probability with Kalshi's price — rejected as the
+answer, but it settles a question.** Brier score, model weight vs market
+weight:
+
+| model / market | train | valid | test |
+|---|---|---|---|
+| 0% / 100% | 0.12727 | 0.12585 | 0.13874 |
+| 10% / 90% | 0.12711 | **0.12583** | **0.13863** |
+| 50% / 50% | 0.12717 | 0.12669 | 0.14055 |
+| 100% / 0% | 0.12885 | 0.12985 | 0.14822 |
+
+Kalshi's own price is a better forecast than our model in every period. The
+best blend puts only 10-20% weight on the model and improves on the market by
+about 0.1% — nothing. This is worth stating plainly: **the model is not a
+better predictor of BTC than the market.** What it has is a narrow band
+(70-90c, 10+ minutes) where its disagreement with the market is informative;
+that is a different and much smaller claim, and blending destroys it (at 20%
+model weight, one qualifying trade survives in 63 days).
+
+**2. Horizon-aware volatility scaling — rejected.** Fitting a separate
+z-divisor per minutes-remaining on train (0.56 at 1 minute rising to ~0.95 at
+10+) improved Brier slightly on train and validation and made it worse on
+test, and cut the trade rule's test return from +4.13% to +2.76%. The gain is
+already captured by the global calibration curve.
+
+**3. Requiring the setup to persist — accepted.** Entries at 10 minutes left
+in the 70-90c window with edge >= 5%, split by whether the same side also
+qualified at 12 minutes left:
+
+| | train | valid | test | pooled |
+|---|---|---|---|---|
+| confirmed | 242, 87.6%, +6.5% | 65, 87.7%, +7.0% | 107, 87.9%, +8.4% | 414, 87.7%, +7.05% |
+| not confirmed | 414, 82.1%, +3.8% | 139, 82.0%, +3.2% | 156, 81.4%, +3.6% | 708, 81.9%, +3.57% |
+
+414 confirmed trades, 363 correct, break-even 82.0%, one-sided binomial
+p = 0.0012. Checked at three other entry/confirm pairs (12/14, 8/10, 6/8):
+confirmation raised the win rate in 11 of the 12 period-cells. Entry at 10
+confirmed at 12 is both the strongest and the only pair positive in all three
+periods, so that is the one wired into `check.py`.
+
+Cost: roughly a third of the setups are discarded, about 6 a day rather than
+20. Triple confirmation (12 and 14) was also tested and is too thin to judge
+(n = 9 in validation).
+
+Strategies tested to date: 105 in the model search, plus 11 direct
+price-prediction variants, plus these 3. Nothing here changes the headline
+conclusion — the edge is small, unproven on live money, and rests on the
+market being the better forecaster in general.

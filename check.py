@@ -20,15 +20,19 @@ actually profitable across 63 days and 6,000 real contracts:
     the last 5 minutes              lost 8%
     a wide spread                   costs more than the edge is worth
     no disagreement with Kalshi     nothing to trade
+    seen only once                  has to still be there 2 minutes later
 
 Any of those and it says CAN'T SAY. Expect that most of the time. Silence is
 the honest answer far more often than YES or NO.
 
 HOW ACCURATE IS IT WHEN IT DOES ANSWER
 ======================================
-On 63 days of history, setups passing all these filters won 84.9% of the time
-against an 80.4% break-even, across 1,250 independent contracts (p<0.0001).
-A ~4.5 point edge, positive in all three test periods.
+On 63 days of history, setups passing all these filters won 87.7% of the time
+against an 82.0% break-even, across 414 independent contracts (p=0.0012).
+A ~5.7 point edge, positive in all three test periods: 87.6 / 87.7 / 87.9.
+
+The last filter -- confirmation -- is what lifted it from 81.9% to 87.7%. It
+costs volume: about 6 setups a day instead of 20. `--wait` does the waiting.
 
 That is the strongest result in this project, and it still is not proof. It
 has never been tested on live money, and the high win rate is mostly just the
@@ -83,6 +87,35 @@ MAX_PRICE = 0.90
 MIN_MINUTES_LEFT = 10.0
 MAX_SPREAD = 0.05
 MIN_VOL = 0.0001
+
+# ---------------------------------------------------------------------------
+# Confirmation: the setup has to still be there two minutes later
+# ---------------------------------------------------------------------------
+# A single reading can qualify on noise -- one jumpy minute of BTC, or a
+# momentarily stale quote on one side of the book. Requiring the SAME side to
+# have already qualified on an earlier look filters those out, and it is the
+# only filter tested so far that improves every period at once.
+#
+# Entries at 10 minutes left, 70-90c, edge >= 5%, split by whether the same
+# side also qualified at 12 minutes left:
+#
+#                       train              valid               test      pooled
+#   confirmed      242  87.6% +6.5%    65  87.7% +7.0%   107  87.9% +8.4%   87.7%
+#   NOT confirmed  414  82.1% +3.8%   139  82.0% +3.2%   156  81.4% +3.6%   81.9%
+#
+# 414 confirmed trades, 363 right, against a break-even of 82.0%: one-sided
+# p = 0.0012. The win rate is 87.6 / 87.7 / 87.9 across three chronological
+# periods -- about as stable as anything measured here.
+#
+# It is not free. Confirmation throws away roughly a third of the setups, so
+# there are about 6 or 7 a day instead of 20.
+#
+# Checked at other entry times too (12/14, 8/10, 6/8): confirmation raised the
+# win rate in 11 of the 12 period-cells. Entry at 10 confirmed at 12 is the
+# strongest and the only one positive in all three periods, so that is the one
+# wired in. The gap is measured at 2 minutes; 1.5 is allowed here because
+# --wait polls every 30 seconds and will not land exactly on the minute.
+CONFIRM_GAP_MIN = 1.5
 
 # ---------------------------------------------------------------------------
 # Coinbase -> Kalshi index correction
@@ -190,7 +223,7 @@ def prior_for(b):
 
 def load_memory():
     blank = {"predictions": [], "bins_n": [0.0] * N_BINS,
-             "bins_wins": [0.0] * N_BINS}
+             "bins_wins": [0.0] * N_BINS, "polls": {}}
     try:
         with open(MEMORY) as f:
             m = json.load(f)
@@ -215,6 +248,30 @@ def learned(mem, raw):
     n, w = mem["bins_n"][b], mem["bins_wins"][b]
     p = (prior_for(b) * PRIOR_STRENGTH + w) / (PRIOR_STRENGTH + n)
     return min(max(p, 0.001), 0.999)
+
+
+def note_poll(mem, ticker, mins, side, qualified):
+    """
+    Write down what this look at the contract saw, and say whether an earlier
+    look already saw the same thing.
+
+    Only qualifying looks count as confirmation -- a contract that was a
+    coin-flip three minutes ago and is a signal now has not been confirmed,
+    it has just moved.
+    """
+    polls = mem.setdefault("polls", {})
+    seen = polls.setdefault(ticker, [])
+    confirmed = any(q["qual"] and q["side"] == side
+                    and q["mins"] >= mins + CONFIRM_GAP_MIN for q in seen)
+    seen.append({"mins": round(mins, 2), "side": side, "qual": bool(qualified)})
+    polls[ticker] = seen[-40:]
+    # Contracts live 15 minutes; anything not touched in this run and already
+    # holding a full history is finished. Keep the file from growing forever.
+    if len(polls) > 200:
+        for k in list(polls)[:-100]:
+            if k != ticker:
+                del polls[k]
+    return confirmed
 
 
 def settle_pending(mem, quiet=False):
@@ -277,7 +334,8 @@ def show_record(mem):
             print("  so there is no win/loss record yet.")
             print()
             print("  A call means it graded a setup GOOD and said YES or NO.")
-            print("  Roughly 1 run in 25 gets there. Try:")
+            print("  A setup now has to appear twice, two minutes apart, so")
+            print("  roughly 1 run in 75 gets there on its own. Use:")
             print("      python3 check.py --wait")
         else:
             print("  %d call%s made, none settled yet. Each takes ~15 minutes."
@@ -503,7 +561,7 @@ def cant(reason, detail="", normal=True):
 #     BAD  cheap side       11,787   27.5%   -9.84%   -9.11%  -11.20%
 #     BAD  last 5 minutes   23,940   39.9%   -3.03%   -1.59%   -3.23%
 
-def grade_of(price, edge, mins, spread):
+def grade_of(price, edge, mins, spread, confirmed):
     """Grade this setup against what setups like it actually returned."""
     if mins < 5:
         return {"label": "BAD -- do not trade", "short": "BAD (last 5 min)",
@@ -549,12 +607,23 @@ def grade_of(price, edge, mins, spread):
                 "why": ["At %.0fc this is closer to a coin flip." % (100 * price),
                         "It was NEGATIVE in training, positive after. Unproven."],
                 "stats": (3458, 62.3, "-0.2% / +1.8% / +2.9%")}
-    return {"label": "GOOD -- the zone that held up",
+    if not confirmed:
+        return {"label": "ALMOST -- look again in 2 minutes",
+                "short": "ALMOST (not confirmed yet)", "trade": False,
+                "why": ["%.0fc, %.0f min left, %.0f-point edge -- the right shape."
+                        % (100 * price, mins, 100 * edge),
+                        "But I have only seen it once. Setups that were still",
+                        "there two minutes later hit 87.7%; ones that were not",
+                        "hit 81.9%. Re-run in 2 minutes -- if it still says",
+                        "the same thing, it upgrades to GOOD."],
+                "stats": (708, 81.9, "+3.8% / +3.3% / +3.6%")}
+    return {"label": "GOOD -- confirmed, the zone that held up",
             "short": "GOOD", "trade": True,
-            "why": ["%.0fc entry, %.0f minutes left, %.0f-point edge."
+            "why": ["%.0fc entry, %.0f minutes left, %.0f-point edge, and the"
                     % (100 * price, mins, 100 * edge),
-                    "This is the only combination positive in all three periods."],
-            "stats": (2344, 82.3, "+3.5% / +2.0% / +4.3%")}
+                    "same call was already standing two minutes ago.",
+                    "The only combination positive in all three periods."],
+            "stats": (414, 87.7, "+6.5% / +7.0% / +8.4%")}
 
 
 def evaluate(mem, a):
@@ -663,7 +732,17 @@ def evaluate(mem, a):
         print("  spread       %.0fc" % (100 * spread))
 
     def remember(answered):
-        if any(r["ticker"] == m.get("ticker") for r in mem["predictions"]):
+        prev = next((r for r in mem["predictions"]
+                     if r["ticker"] == m.get("ticker")), None)
+        if prev is not None:
+            # --wait looks at the same contract many times. The first look is
+            # what teaches calibration, so leave it -- but if a later look is
+            # the one that became an actual call, the record has to say so,
+            # otherwise confirmed trades never show up in the track record.
+            if answered and not prev.get("answered"):
+                prev.update({"answered": True, "side": side, "price": price,
+                             "edge": edge})
+                save_memory(mem)
             return
         mem["predictions"].append({
             "asked": datetime.now(timezone.utc).isoformat(),
@@ -674,8 +753,15 @@ def evaluate(mem, a):
         save_memory(mem)
 
     # ---- grade it ------------------------------------------------------
-    g = grade_of(price, edge, mins, spread)
+    # "Qualifying" here is everything grade_of asks for EXCEPT confirmation,
+    # so a look that qualifies on its own merits is what a later look gets to
+    # confirm against. Confirmation confirming itself would be worthless.
+    qualifies = (mins >= MIN_MINUTES_LEFT and MIN_PRICE <= price <= MAX_PRICE
+                 and edge >= MIN_EDGE and spread <= MAX_SPREAD)
+    confirmed = note_poll(mem, m.get("ticker"), mins, side, qualifies)
+    g = grade_of(price, edge, mins, spread, confirmed)
     remember(g["trade"])
+    save_memory(mem)          # note_poll changed the memory either way
     if WAITING and not g["trade"]:
         # --wait holds out for a GOOD grade. Everything else is reported as a
         # reason and the loop carries on.
@@ -708,9 +794,11 @@ def evaluate(mem, a):
               % (100 * edge, 100 * min(conf, 0.99)))
     else:
         print("  A high chance of hitting is NOT the same as a good trade. At")
-        print("  %.0fc you risk %.0fc to win %.0fc, so one miss undoes %d hits."
-              % (100 * price, 100 * price, 100 * (1 - price),
-                 int(price / max(1 - price, 0.01))))
+        ratio = price / max(1 - price, 0.01)
+        many = "%.1f" % ratio if ratio < 10 else "%d" % round(ratio)
+        print("  %.0fc you risk %.0fc to win %.0fc, so one miss undoes %s %s."
+              % (100 * price, 100 * price, 100 * (1 - price), many,
+                 "win" if many == "1.0" else "wins"))
     print()
     print("  Never tested with live money. Size small or not at all.")
     print()
@@ -726,16 +814,17 @@ def wait_loop(mem, a):
     """
     Poll until a setup appears, then print it once and stop.
 
-    Only about 4% of random moments qualify -- 10+ minutes left rules out two
-    thirds of them before anything else is even checked -- so checking by hand
-    means a lot of CAN'T SAY for nothing. This waits for you instead, and
-    exits the moment it finds something.
+    Only about 4% of random moments look right, and a setup now has to look
+    right twice, two minutes apart, before it counts -- so roughly 1 run in 75
+    lands a call by hand. This waits for you instead. Because it polls every
+    30 seconds it sees the same contract repeatedly, which is exactly what
+    confirmation needs, and it exits the moment one is confirmed.
     """
     global WAITING
     WAITING = True
     print()
-    print("  Waiting for a setup. About 1 run in 25 qualifies, so this may")
-    print("  take a while. Ctrl-C to stop.")
+    print("  Waiting for a setup that shows up twice, two minutes apart.")
+    print("  Roughly 6 a day, so this may take a while. Ctrl-C to stop.")
     print()
     settle_pending(mem)
     checks = 0
