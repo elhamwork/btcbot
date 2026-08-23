@@ -1203,6 +1203,14 @@ def run_forever(mem, a):
     print("  A setup has to appear twice, two minutes apart. About 6 a day,")
     print("  so most of the time nothing will happen. That is normal.")
     print()
+    print("  Left up for a day it sees about 96 contracts and learns from all")
+    print("  of them, not just the ones it trades.")
+    if sys.platform == "darwin":
+        print()
+        print("  A sleeping Mac stops this dead. To keep it awake, quit and")
+        print("  restart it as:")
+        print("      caffeinate -i python3 check.py --loop")
+    print()
     checks = hits = 0
     last_reason = None
     started = datetime.now(timezone.utc)
