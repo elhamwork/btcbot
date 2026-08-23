@@ -261,10 +261,27 @@ def show_record(mem):
     print("  TRACK RECORD")
     line("=")
     if not answered:
+        seen = sum(mem["bins_n"])
+        calls = sum(1 for r in mem["predictions"] if r.get("answered"))
         pend = sum(1 for r in mem["predictions"]
                    if r.get("answered") and r.get("outcome") is None)
-        print("  No answered calls have settled yet.%s"
-              % ("  %d waiting." % pend if pend else ""))
+        print("  contracts watched   %d" % len(mem["predictions"]))
+        print("  learned from        %d settled" % int(seen))
+        print("  actual calls made   %d%s"
+              % (calls, "  (%d still open)" % pend if pend else ""))
+        print()
+        if not calls:
+            print("  It has been learning from contracts it DECLINED. Those")
+            print("  still teach it how often the formula is right, which is")
+            print("  most of what there is to learn -- but they are not calls,")
+            print("  so there is no win/loss record yet.")
+            print()
+            print("  A call means it graded a setup GOOD and said YES or NO.")
+            print("  Roughly 1 run in 25 gets there. Try:")
+            print("      python3 check.py --wait")
+        else:
+            print("  %d call%s made, none settled yet. Each takes ~15 minutes."
+                  % (calls, "" if calls == 1 else "s"))
         print()
         return
     n = len(answered)
