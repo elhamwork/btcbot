@@ -699,16 +699,25 @@ def write_report(mem):
     if done:
         A("## Every call it has made")
         A("")
-        A("| closed | side | price | result | paid | account after |")
-        A("|---|---|---|---|---|---|")
+        A("| closed | side | price | BTC vs target | min left | result | paid | account after |")
+        A("|---|---|---|---|---|---|---|---|")
         for r in done:
-            bet = r.get("bet") or {}
-            A("| %s | %s | %.2f | %s | %s | %s |"
+            dist = r.get("dist")
+            A("| %s | %s | %.2f | %s | %s | %s | %s | %s |"
               % (str(r["close_time"])[:16].replace("T", " "), r["side"],
-                 r["price"], "RIGHT" if r["correct"] else "wrong",
+                 r["price"],
+                 ("%+.0f" % dist) if dist is not None else "-",
+                 ("%.0f" % r["mins"]) if r.get("mins") is not None else "-",
+                 "RIGHT" if r["correct"] else "**wrong**",
                  ("%+.2f" % r["paid"]) if r.get("paid") is not None else "-",
                  ("$%s" % format(round(r["bank_after"], 2), ",.2f"))
                  if r.get("bank_after") is not None else "-"))
+        A("")
+        A("\"BTC vs target\" is how many dollars above (+) or below (-) the")
+        A("target BTC was when the call was made. That number, the minutes")
+        A("left, and how fast BTC had been moving are the whole basis of every")
+        A("call -- so a losing row with a small gap and a lot of time left is")
+        A("the bot being unlucky, and one with a big gap is it being wrong.")
         A("")
     A("## What would change the conclusion")
     A("")
@@ -1253,6 +1262,12 @@ def evaluate(mem, a):
             "ticker": m.get("ticker"), "close_time": m.get("close_time"),
             "raw": raw, "p": p, "side": side, "price": price,
             "edge": edge, "grade": grade_short, "mins": round(mins, 1),
+            # What the call was actually looking at. Without these a past
+            # call cannot be checked -- "why did it say YES?" has no answer
+            # once the moment has gone, and an unauditable record is not
+            # much of a record.
+            "spot": round(spot, 2), "strike": round(strike, 2),
+            "dist": round(spot - strike, 2), "vol": round(v, 6),
             "answered": bool(answered), "outcome": None,
             "bet": plan_stake(mem, price) if answered else None})
         mem["predictions"] = mem["predictions"][-2000:]
