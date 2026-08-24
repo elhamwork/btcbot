@@ -637,6 +637,56 @@ def side_breakdown(mem):
     print()
 
 
+def digest(mem):
+    """
+    One message a day: where the paper account stands and how far off proof
+    it still is.
+
+    Worth its own mode because the interesting number moves slowly. The
+    per-call alerts say what just happened; this says whether any of it adds
+    up yet, which is the only question that matters and the easiest one to
+    lose track of between individual wins.
+    """
+    settle_pending(mem, quiet=True)
+    save_memory(mem)
+    b = bank_of(mem)
+    recs = mem.get("predictions") or []
+    done = [r for r in recs if r.get("answered") and not r.get("retired")
+            and r.get("correct") is not None]
+    w = sum(1 for r in done if r["correct"])
+    grow = 100 * (b["cash"] / b["start"] - 1) if b["start"] else 0
+    lines = ["Paper account $%s (%+.1f%%)"
+             % (format(round(b["cash"], 2), ",.2f"), grow)]
+    if done:
+        stake = sum(r["bet"]["stake"] for r in done if r.get("bet"))
+        be = 100 * sum(r["price"] for r in done) / len(done)
+        lines.append("%d calls, %d right (%.0f%%). Break-even was %.0f%%."
+                     % (len(done), w, 100 * w / len(done), be))
+        lines.append("Peak $%s, low $%s, fees $%s."
+                     % (format(round(b["peak"], 2), ",.2f"),
+                        format(round(b["low"], 2), ",.2f"),
+                        format(round(b["fees"], 2), ",.2f")))
+        left = max(0, 100 - len(done))
+        lines.append("%d of ~100 settled calls. %s"
+                     % (len(done),
+                        "About %d days to go -- the number means nothing yet."
+                        % round(left / 4.0) if left else
+                        "Enough to judge it now."))
+    else:
+        lines.append("No calls settled yet. Watched %d contracts." % len(recs))
+    lines.append("Nothing traded with real money.")
+    body = "\n".join(lines)
+    print()
+    for ln in lines:
+        print("  " + ln)
+    print()
+    ok, detail = send_ntfy("Daily: $%s (%+.1f%%)"
+                           % (format(round(b["cash"], 2), ",.2f"), grow),
+                           body, tags="bar_chart")
+    print("  phone: %s (%s)" % ("sent" if ok else "not sent", detail))
+    print()
+
+
 def write_report(mem):
     """
     Write down, in a file, everything it has learned so far.
@@ -1677,6 +1727,8 @@ def main():
                     help="check now and stop, without asking")
     ap.add_argument("--alerts", action="store_true",
                     help="set up phone alerts (ntfy) and send a test")
+    ap.add_argument("--digest", action="store_true",
+                    help="send one summary of the whole record to your phone")
     ap.add_argument("--report", action="store_true",
                     help="write a full report of what it has learned")
     ap.add_argument("--reset-bank", action="store_true",
@@ -1706,6 +1758,9 @@ def main():
         save_memory(mem)
         print("  Paper account reset to $%s." % format(round(PAPER_START), ",d"))
         return
+
+    if a.digest:
+        return digest(mem)
 
     if a.report:
         settle_pending(mem, quiet=True)

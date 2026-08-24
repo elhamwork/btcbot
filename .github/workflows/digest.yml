@@ -1,0 +1,35 @@
+# One message a day, to your phone, saying where the paper account stands.
+#
+# Separate from watch.yml because it answers a different question. The
+# per-call alerts say what just happened; this says whether any of it adds
+# up yet -- which moves slowly, is the only question that matters, and is
+# the easiest one to lose track of between individual wins.
+#
+# It reads the state that watch.yml has already committed. It does not watch,
+# does not trade, and does not write anything back.
+
+name: digest
+
+on:
+  schedule:
+    - cron: "0 16 * * *"      # 16:00 UTC = 9am Pacific
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send the daily summary
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+          CHECK_LABEL: cloud
+        run: python3 check.py --digest
