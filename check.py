@@ -1752,11 +1752,27 @@ def main():
         mem["bank"] = {"cash": PAPER_START, "start": PAPER_START,
                        "peak": PAPER_START, "low": PAPER_START,
                        "settled": 0, "fees": 0.0}
+        # Retire the old calls, do not merely unhook their money. Zeroing the
+        # bank alone left a record reading "8 calls, 7 right" beside "$1,000,
+        # fees $0.00" -- a win rate with no money behind it, which is worse
+        # than either number alone. A call whose result no longer counts is
+        # not a call. They stay for calibration: the raw formula is unchanged
+        # and the outcomes are real observations.
+        gone = 0
         for r in mem["predictions"]:
             r.pop("paid", None)
             r.pop("bank_after", None)
+            r.pop("bet", None)
+            if r.get("answered") and not r.get("retired"):
+                r["retired"] = ("reset by hand on %s"
+                                % datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+                gone += 1
         save_memory(mem)
         print("  Paper account reset to $%s." % format(round(PAPER_START), ",d"))
+        if gone:
+            print("  %d earlier call%s retired -- still teaching calibration,"
+                  % (gone, "" if gone == 1 else "s"))
+            print("  no longer counted in the win/loss record.")
         return
 
     if a.digest:
