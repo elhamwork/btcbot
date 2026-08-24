@@ -190,6 +190,36 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: learning from the losses to avoid future ones.
+#
+# The natural request -- study the trades that lost, find what they had in
+# common, refuse those in future. Built it: a gradient-boosted classifier
+# over price, edge, minutes left, z-score, three volatility windows, four
+# return horizons, RSI, ATR, VWAP, two EMAs, relative volume, spread and
+# distance, trained on the training period to predict which confirmed
+# trades lose, then used to veto trades on data it had never seen.
+#
+#                            win rate   return
+#     no veto      train       89.8%   +10.33%
+#                  unseen      88.7%   +10.38%
+#     with veto    train      100.0%   +23.01%   <- perfect
+#                  unseen      88.0%    +9.48%   <- worse than nothing
+#
+# It removed every loss it had already been shown, and on new trades it was
+# worse than not having it. It did not learn why trades lose; it memorised
+# sixteen particular losses and then vetoed innocent trades that resembled
+# them. Logistic regression, being too simple to memorise, dropped almost
+# nothing and changed nothing -- which is its own kind of answer.
+#
+# There is a reason this cannot work. If a losing trade were identifiable in
+# advance, the market would have priced it. A contract trades at 80c because
+# nobody knows which fifth of them fail. The edge here is a property of the
+# aggregate, not of any single trade, and no amount of studying individual
+# losses will make it otherwise.
+#
+# This is also the standard way a backtest is fooled: a rule fitted to avoid
+# past losses always looks flawless on the past.
+
 # TESTED AND REJECTED: cutting a losing trade early.
 #
 # Kalshi lets you sell before settlement, so the obvious way to lose less is
