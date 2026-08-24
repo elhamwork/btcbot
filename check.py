@@ -648,8 +648,13 @@ def write_report(mem):
     path = os.path.join(os.path.dirname(MEMORY), "learning_report.md")
     recs = mem.get("predictions") or []
     settled = [r for r in recs if r.get("outcome") is not None]
-    calls = [r for r in recs if r.get("answered")]
+    # A retired call was made under a rule that no longer exists. It still
+    # teaches calibration -- the raw formula did not change and the outcome
+    # is real -- but counting it as a call would average two different bots
+    # into one track record.
+    calls = [r for r in recs if r.get("answered") and not r.get("retired")]
     done = [r for r in calls if r.get("correct") is not None]
+    retired = [r for r in recs if r.get("retired")]
     L = []
     A = L.append
     A("# What the bot has learned")
@@ -671,6 +676,8 @@ def write_report(mem):
          format(round(b["low"], 2), ",.2f")))
     A("| fees paid | $%s |" % format(round(b["fees"], 2), ",.2f"))
     A("| contracts looked at | %d |" % len(recs))
+    if retired:
+        A("| retired (old rule, not counted) | %d |" % len(retired))
     A("| of those, settled and learned from | %d |" % len(settled))
     A("| actual calls (graded GOOD) | %d |" % len(calls))
     A("| calls that have settled | %d |" % len(done))
@@ -798,7 +805,8 @@ def write_report(mem):
 
 def show_record(mem):
     answered = [r for r in mem["predictions"]
-                if r.get("answered") and r.get("correct") is not None]
+                if r.get("answered") and r.get("correct") is not None
+                and not r.get("retired")]
     print()
     line("=")
     print("  TRACK RECORD")
@@ -821,13 +829,19 @@ def show_record(mem):
     side_breakdown(mem)
     if not answered:
         seen = sum(mem["bins_n"])
-        calls = sum(1 for r in mem["predictions"] if r.get("answered"))
+        calls = sum(1 for r in mem["predictions"]
+                    if r.get("answered") and not r.get("retired"))
+        gone = sum(1 for r in mem["predictions"] if r.get("retired"))
         pend = sum(1 for r in mem["predictions"]
                    if r.get("answered") and r.get("outcome") is None)
         print("  contracts watched   %d" % len(mem["predictions"]))
         print("  learned from        %d settled" % int(seen))
         print("  actual calls made   %d%s"
               % (calls, "  (%d still open)" % pend if pend else ""))
+        if gone:
+            print("  retired             %d  (made under the old calibration,"
+                  % gone)
+            print("                         still teaching, no longer counted)")
         print()
         if not calls:
             print("  It has been learning from contracts it DECLINED. Those")

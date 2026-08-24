@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 2026-08-24 02:22 UTC by `check.py --report`.
+Written 2026-08-24 02:23 UTC by `check.py --report`.
 
 ## The short version
 
@@ -10,12 +10,10 @@ Written 2026-08-24 02:22 UTC by `check.py --report`.
 | best / worst it has been | $1,000.00 / $1,000.00 |
 | fees paid | $0.00 |
 | contracts looked at | 29 |
+| retired (old rule, not counted) | 10 |
 | of those, settled and learned from | 28 |
-| actual calls (graded GOOD) | 10 |
-| calls that have settled | 10 |
-| calls right | 9 of 10 (90%) |
-| break-even needed | 78% |
-| paper P&L | +14.9% per dollar staked |
+| actual calls (graded GOOD) | 0 |
+| calls that have settled | 0 |
 
 ## What it is actually learning
 
@@ -59,27 +57,6 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 18 times, NO 11 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Every call it has made
-
-| closed | side | price | BTC vs target | min left | result | paid | account after |
-|---|---|---|---|---|---|---|---|
-| 2026-08-23 18:45 | NO | 0.71 | - | 14 | RIGHT | - | - |
-| 2026-08-23 19:30 | YES | 0.76 | - | 11 | RIGHT | - | - |
-| 2026-08-23 20:15 | NO | 0.72 | - | 14 | RIGHT | - | - |
-| 2026-08-23 21:15 | YES | 0.89 | - | 14 | RIGHT | - | - |
-| 2026-08-23 21:30 | YES | 0.88 | - | 15 | RIGHT | - | - |
-| 2026-08-23 22:00 | YES | 0.74 | - | 14 | RIGHT | - | - |
-| 2026-08-23 23:15 | NO | 0.86 | - | 14 | RIGHT | - | - |
-| 2026-08-23 23:30 | YES | 0.73 | - | 14 | RIGHT | - | - |
-| 2026-08-23 23:45 | YES | 0.78 | - | 14 | **wrong** | - | - |
-| 2026-08-24 00:00 | YES | 0.76 | - | 15 | RIGHT | - | - |
-
-"BTC vs target" is how many dollars above (+) or below (-) the
-target BTC was when the call was made. That number, the minutes
-left, and how fast BTC had been moving are the whole basis of every
-call -- so a losing row with a small gap and a lot of time left is
-the bot being unlucky, and one with a big gap is it being wrong.
 
 ## What would change the conclusion
 
