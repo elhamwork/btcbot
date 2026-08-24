@@ -121,3 +121,68 @@ The band alone is not the strategy; the filter is doing the work.
 - *Intraday return predictability in the cryptocurrency markets: Momentum, reversal, or both*
 - *Forecasting Bitcoin realized volatility by exploiting measurement error under model uncertainty*
 - *Stylized Facts of High-Frequency Bitcoin Time Series*
+
+
+---
+
+# Addendum: the second exchange, tested
+
+Bitstamp 1-minute bars for the same 63 days, 129,472 of 129,601 possible
+(99.9%), fetched by `fetch_bitstamp.py`.
+
+## The timestamp convention, verified not assumed
+
+Both feeds label a bar by its start. Checked against two independent anchors
+-- Kalshi's real settlement value and the strike, which is the index at open:
+
+| shift | Coinbase median error | Bitstamp median error |
+|---|---|---|
+| +0 | 16.63 | 14.46 |
+| **+1** | **8.29** | **7.09** |
+| +2 | 8.23 | 8.40 |
+
++1 minute for both, agreeing across both anchors. Same convention, confirmed.
+
+## Bitstamp really is closer to Kalshi's index
+
+Offset fitted on the training period only, judged on unseen:
+
+| feed | unseen RMS | unseen median error |
+|---|---|---|
+| Coinbase alone (current) | 12.05 | 5.83 |
+| Bitstamp alone | 10.44 | 4.47 |
+| blend 30/70 | **10.43** | **4.31** |
+
+Median error falls 5.83 -> 4.31, a 26% reduction. The largest measured error
+in the project, cut by a quarter.
+
+## And it does not make better trades — REJECTED
+
+|  | unseen | all 63 days |
+|---|---|---|
+| price CB, vol CB (current) | 87.7%, +8.67% | **88.6%, +9.36%** |
+| price BS, vol CB | 87.1%, +9.50% | 86.9%, +8.25% |
+| price CB, vol BS | 85.3%, +6.05% | 86.4%, +7.06% |
+| price BS, vol BS | 86.3%, +8.08% | 85.7%, +7.11% |
+| price MIX, vol CB | 87.8%, +10.21% | 87.1%, +8.34% |
+
+Two things fall out. Bitstamp's **volatility** is worse everywhere it is used --
+it is a thinner venue, so its per-minute prices are jumpier and the realised
+volatility read from them is noisier. And the improved **price** produces no
+reliable gain: the mixed feed leads on unseen data and trails over all 63
+days, on 98 trades against 114. That is noise, and adopting it because the
+unseen column looks better would be choosing after seeing the answer -- the
+exact error that killed the other ideas in this file.
+
+Not adopted. Coinbase alone stays.
+
+## What it actually taught us
+
+A 26% more accurate price bought no improvement at all. So the +/-$14 index
+gap was never the binding constraint, and the edge -- whatever it is -- does
+not come from reading BTC more precisely than the market does. That is worth
+more than the improvement would have been, because it closes the last
+direction anyone was likely to look in.
+
+The Bitstamp data is kept in `real_data/btc_1min_bitstamp.csv` so this can be
+re-checked rather than re-argued.
