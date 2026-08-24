@@ -190,6 +190,33 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: cutting a losing trade early.
+#
+# Kalshi lets you sell before settlement, so the obvious way to lose less is
+# to bail out when a position turns. Measured over the same 272 confirmed
+# trades, using the real per-minute book for each contract -- selling YES at
+# the bid, NO at one minus the ask:
+#
+#                        train    unseen   overall
+#     hold to the end   +10.33%   +10.38%  +10.35%   <- what we do
+#     stop at  -5%       +3.71%    +3.70%   +3.70%
+#     stop at -10%       +4.75%    +4.31%   +4.57%
+#     stop at -20%       +6.73%    +1.87%   +4.67%
+#     stop at -30%       +6.72%    +5.04%   +6.01%
+#     take profit 92c    +8.18%    +7.73%   +7.99%
+#     take profit 95c    +9.97%   +10.41%  +10.16%
+#
+# Every stop-loss roughly halves the return, and the tighter the worse. A
+# 15-minute contract thrashes -- one real example went 0.80, 0.71, 0.78,
+# 0.81, 0.80, 0.87, 0.91, 0.87, 0.97 and settled a winner. Any stop is hit
+# by that noise and converts winners into realised losses.
+#
+# Taking profit early is also worse: the last few cents on the winners are
+# what pay for the losers.
+#
+# So the answer to "can we lose less on the bad ones" is: not this way. The
+# losses are the price of the wins, in the most literal sense.
+
 PAPER_START = 1000.0
 PAPER_STAKE = 0.10
 
