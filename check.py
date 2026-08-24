@@ -914,6 +914,20 @@ def write_report(mem):
                  ("$%s" % format(round(r["bank_after"], 2), ",.2f"))
                  if r.get("bank_after") is not None else "-"))
         A("")
+        stale = [r for r in done
+                 if str(r.get("close_time", "")) < "2026-08-24T19"
+                 and r.get("dist") is not None]
+        if stale:
+            A("**The %d row%s above dated before 24 Aug 19:00 UTC may show a stale"
+              % (len(stale), "" if len(stale) == 1 else "s"))
+            A("\"BTC vs target\".** Until then a contract first seen as a decline")
+            A("kept the distance from that first look, not from the moment it was")
+            A("called -- so a call made once BTC had crossed the line can appear")
+            A("to have been made well short of it. The side, price, result and")
+            A("money on those rows are correct; only the distance and the minutes")
+            A("may be from a few minutes earlier. Rows after that are recorded at")
+            A("the moment of the call.")
+            A("")
         A("\"BTC vs target\" is how many dollars above (+) or below (-) the")
         A("target BTC was when the call was made. That number, the minutes")
         A("left, and how fast BTC had been moving are the whole basis of every")

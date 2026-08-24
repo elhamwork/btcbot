@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 2026-08-24 18:32 UTC by `check.py --report`.
+Written 2026-08-24 18:50 UTC by `check.py --report`.
 
 ## The short version
 
@@ -84,6 +84,15 @@ split is 49.5% YES, so anything near half and half is normal.
 | 14:00 | 2026-08-24 14:15 | YES | 0.80 | +68 | 14 | RIGHT | +24.85 | $1,077.60 |
 | 17:02 | 2026-08-24 17:15 | NO | 0.88 | -421 | 12 | **wrong** | -108.67 | $968.93 |
 | 18:03 | 2026-08-24 18:15 | YES | 0.76 | +139 | 11 | RIGHT | +28.97 | $997.90 |
+
+**The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
+"BTC vs target".** Until then a contract first seen as a decline
+kept the distance from that first look, not from the moment it was
+called -- so a call made once BTC had crossed the line can appear
+to have been made well short of it. The side, price, result and
+money on those rows are correct; only the distance and the minutes
+may be from a few minutes earlier. Rows after that are recorded at
+the moment of the call.
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
