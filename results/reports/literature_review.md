@@ -62,6 +62,29 @@ Worse on unseen data both ways. The fitted HAR gave rv_15m a *negative*
 coefficient, a collinearity signature; and "half and half" scoring best on
 train and worst on unseen is the textbook overfit pattern. Not adopted.
 
+## 3b. Signed semi-variance — TESTED, REJECTED
+
+The same volatility literature reports that separating upward from downward
+realized variance beats a single symmetric number for crypto at short
+horizons. It is principled here too: a YES bet only fears downward moves, a
+NO bet only fears upward ones, and we currently price both with one
+symmetric volatility.
+
+Built from the 1-minute bars (bar-end aligned, same look-ahead fix as
+everywhere else), using downside semi-deviation to price YES and upside to
+price NO:
+
+| volatility | train | unseen | overall |
+|---|---|---|---|
+| symmetric (current) | 89.8%, +10.33% | **88.7%, +10.38%** | 89.3%, +10.35% |
+| directional, 15 min | 85.8%, +3.61% | 88.7%, +7.84% | 86.9%, +5.31% |
+| directional, 30 min | 88.0%, +6.82% | 84.6%, +2.97% | 86.6%, +5.20% |
+| half symmetric, half signed | 87.8%, +6.62% | 86.2%, +5.56% | 87.2%, +6.20% |
+
+Worse in every variant. It also more than doubles the trade count (597 vs
+272), which is the tell: the asymmetric estimate is smaller on one side, so
+it manufactures confidence and lets marginal setups through. Not adopted.
+
 ## 4. Intraday momentum and reversal — consistent with what we already found
 
 Papers report intraday momentum and reversal in crypto at intraday
