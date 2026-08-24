@@ -230,13 +230,30 @@ COINBASE_TO_BRTI = 5.97
 # Blending the two helps by 0.05 of RMS at w=0.10, which is nothing, and
 # costs real complexity. Not taken.
 
-# Calibration measured over 63 days: what the formula says, versus what really
-# happened. The formula is systematically under-confident; this corrects it.
+# Calibration: what the formula says, versus what really happened.
+#
+# FITTED ON THE TRAINING PERIOD ONLY (17 Jun - 25 Jul). The table shipped
+# before this was fitted on all 63 days, validation and test included, which
+# is a leak: the live tool was tuned on data used to judge it. Refitting
+# honestly moved it a long way, and in the direction that matters --
+#
+#     formula says      old table      honest table
+#         0.40            0.441            0.354
+#         0.65            0.763            0.678
+#         0.70            0.835            0.780
+#
+# -- every row too confident, by as much as 8.7 points. Over-confidence
+# inflates the edge, and the edge is what decides whether to trade, so the
+# tool was calling setups that do not qualify. The backtest figures quoted
+# elsewhere in this file were always computed with a train-only fit, so they
+# are unaffected; it was only the live tool that was wrong.
+#
+# Expect fewer calls than before, and expect them to be the right ones.
 CAL_X = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50,
          0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00]
-CAL_Y = [0.001, 0.050, 0.080, 0.141, 0.198, 0.266, 0.299, 0.344, 0.441,
-         0.506, 0.576, 0.635, 0.682, 0.763, 0.835, 0.856, 0.898, 0.934,
-         0.957, 0.987, 0.998]
+CAL_Y = [0.000, 0.044, 0.071, 0.102, 0.178, 0.226, 0.286, 0.326, 0.354,
+         0.450, 0.510, 0.594, 0.640, 0.678, 0.780, 0.824, 0.885, 0.920,
+         0.953, 0.978, 1.000]
 
 W = 64
 
