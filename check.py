@@ -155,16 +155,23 @@ CONFIRM_GAP_MIN = 1.5
 # $1,000 of imaginary money, 10% of whatever the account is worth on each
 # call. Nothing is ever sent to Kalshi; this is a scoreboard.
 #
-# 10% compounding is aggressive. Run over the 414 confirmed trades in the
+# 10% compounding is aggressive. Run over the 268 confirmed trades in the
 # 63-day study, in the order they actually happened:
 #
-#     stake    ends at    worst dip
-#      2%       $1,766       $941
-#      5%       $3,918       $856
-#     10%      $12,613       $727      <- this setting
-#     20%      $67,859       $508
-#     50%       $7,211        $92      past the peak: volatility eats it
-#    100%        WIPED       -$13      one loss ends it
+#     stake    ends at    worst dip   max drawdown
+#      2%       $1,539       $960          6%
+#      5%       $2,831       $901         14%
+#     10%       $7,062       $808         28%      <- this setting
+#     20%      $28,893       $637         53%
+#     50%      $19,292       $245         97%   past the peak: volatility eats it
+#    100%        WIPED         $0        101%   one loss ends it
+#
+# These figures are lower than the ones this file carried before, and the
+# earlier ones were wrong to keep quoting: they came from the 5-point
+# threshold and a different calibration fit. Re-derived after the honest
+# recalibration. Same 63 days at 5 points now gives $7,066 with a 39%
+# drawdown -- the same money as 7 points for a third more pain, which is a
+# better argument for the 7-point rule than the one originally written here.
 #
 # Two things that number is not. It is not a forecast: the price window and
 # the confirmation rule were both chosen by looking at all three periods, so
@@ -832,9 +839,9 @@ def write_report(mem):
     A("$1,000 to start, 10% of whatever it is worth on each call. Imaginary.")
     A("Nothing is sent to Kalshi and there is no account behind it.")
     A("")
-    A("Run over the 414 confirmed trades from the 63-day study, in the order")
-    A("they happened, $1,000 at 10% a call ends at **$12,613**, dipping to")
-    A("$727 on the way. Two reasons not to plan around that:")
+    A("Run over the 268 confirmed trades from the 63-day study, in the order")
+    A("they happened, $1,000 at 10% a call ends at **$7,062**, dipping to $808")
+    A("on the way -- a 28% drawdown. Two reasons not to plan around that:")
     A("")
     A("1. The price window and the confirmation rule were both chosen after")
     A("   looking at all three periods. Some of that 12x is the choosing.")
