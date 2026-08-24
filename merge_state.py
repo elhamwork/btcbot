@@ -43,6 +43,12 @@ def better(a, b):
         return b
     if b is None:
         return a
+    # A deliberate retirement beats everything. When the rule changes, old
+    # calls are struck from the money record on purpose -- and a watcher
+    # still running the previous code must not quietly reinstate them by
+    # merging its own copy back in.
+    if a.get("retired") != b.get("retired"):
+        return a if a.get("retired") else b
     # A settled record beats an unsettled one; a call beats a decline.
     for key in ("outcome", "answered"):
         av, bv = a.get(key), b.get(key)
@@ -77,7 +83,7 @@ def rebuild(preds):
             b = min(int(float(rec.get("raw", 0.0)) * N_BINS), N_BINS - 1)
             bins_n[b] += 1.0
             bins_wins[b] += 1.0 if y == 1 else 0.0
-        if not rec.get("answered"):
+        if not rec.get("answered") or rec.get("retired"):
             continue
         price = float(rec.get("price") or 0.0)
         if not 0.0 < price < 1.0:
