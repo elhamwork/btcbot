@@ -736,8 +736,9 @@ def digest(mem):
     if done:
         stake = sum(r["bet"]["stake"] for r in done if r.get("bet"))
         be = 100 * sum(r["price"] for r in done) / len(done)
-        lines.append("%d calls, %d right (%.0f%%). Break-even was %.0f%%."
-                     % (len(done), w, 100 * w / len(done), be))
+        lines.append("%d call%s, %d right (%.0f%%). Break-even was %.0f%%."
+                     % (len(done), "" if len(done) == 1 else "s",
+                        w, 100 * w / len(done), be))
         lines.append("Peak $%s, low $%s, fees $%s."
                      % (format(round(b["peak"], 2), ",.2f"),
                         format(round(b["low"], 2), ",.2f"),
@@ -750,6 +751,11 @@ def digest(mem):
                         "Enough to judge it now."))
     else:
         lines.append("No calls settled yet. Watched %d contracts." % len(recs))
+    live_now = sum(1 for r in recs if r.get("answered") and not r.get("retired")
+                   and r.get("correct") is None)
+    if live_now:
+        lines.append("%d call%s open right now."
+                     % (live_now, "" if live_now == 1 else "s"))
     lines.append("Nothing traded with real money.")
     body = "\n".join(lines)
     print()
@@ -872,15 +878,34 @@ def write_report(mem):
         A("split is 49.5% YES, so anything near half and half is normal.")
         A("")
 
+    open_now = [r for r in calls if r.get("correct") is None]
+    if open_now:
+        A("## Open right now")
+        A("")
+        A("| placed | contract | side | price | risking | to win |")
+        A("|---|---|---|---|---|---|")
+        for r in open_now:
+            bet = r.get("bet") or {}
+            A("| %s | %s | %s | %.2f | $%s | $%s |"
+              % (str(r.get("asked"))[11:16], r["ticker"], r["side"], r["price"],
+                 format(bet.get("stake", 0), ",.2f"),
+                 format(bet.get("to_win", 0), ",.2f")))
+        A("")
+        A("These have been called but have not settled yet. A 15-minute")
+        A("contract takes about that long, plus a minute or two for Kalshi to")
+        A("publish the result, so this list is usually empty.")
+        A("")
+
     if done:
         A("## Every call it has made")
         A("")
-        A("| closed | side | price | BTC vs target | min left | result | paid | account after |")
-        A("|---|---|---|---|---|---|---|---|")
+        A("| placed | closed | side | price | BTC vs target | min left | result | paid | account after |")
+        A("|---|---|---|---|---|---|---|---|---|")
         for r in done:
             dist = r.get("dist")
-            A("| %s | %s | %.2f | %s | %s | %s | %s | %s |"
-              % (str(r["close_time"])[:16].replace("T", " "), r["side"],
+            A("| %s | %s | %s | %.2f | %s | %s | %s | %s | %s |"
+              % (str(r.get("asked"))[11:16] if r.get("asked") else "-",
+                 str(r["close_time"])[:16].replace("T", " "), r["side"],
                  r["price"],
                  ("%+.0f" % dist) if dist is not None else "-",
                  ("%.0f" % r["mins"]) if r.get("mins") is not None else "-",
@@ -985,6 +1010,20 @@ def show_record(mem):
                   % (calls, "" if calls == 1 else "s"))
         print()
         return
+    live_now = [r for r in mem["predictions"]
+                if r.get("answered") and not r.get("retired")
+                and r.get("correct") is None]
+    if live_now:
+        print("  OPEN RIGHT NOW")
+        for r in live_now:
+            bet = r.get("bet") or {}
+            print("    %s  %-3s @ %.2f   risking $%s to win $%s"
+                  % (str(r.get("asked"))[11:16], r["side"], r["price"],
+                     format(bet.get("stake", 0), ",.2f"),
+                     format(bet.get("to_win", 0), ",.2f")))
+        print("    (called, not settled yet -- about 15 minutes each)")
+        print()
+
     n = len(answered)
     w = sum(1 for r in answered if r["correct"])
     stake = sum(r["price"] for r in answered)
