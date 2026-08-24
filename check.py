@@ -32,11 +32,16 @@ the honest answer far more often than YES or NO.
 
 HOW ACCURATE IS IT WHEN IT DOES ANSWER
 ======================================
-On 63 days of history, setups passing all these filters won 89.3% of the time
-against an 81.7% break-even, across 272 independent contracts (p=0.0002).
-A ~7.6 point edge, positive in all three test periods: 89.8 / 89.2 / 88.5.
+On 63 days of history, setups passing all these filters won 88.1% of the time
+against an 81.7% break-even, across 268 independent contracts (p=0.003).
+A ~6.4 point edge, positive in all three test periods: 88.1 / 89.5 / 87.3.
 
-The last filter -- confirmation -- is what lifted it from 80.5% to 89.3%. It
+Every figure in this file is measured with the CAL_Y table below, the one
+this tool actually uses -- not with the finer model it was fitted from. The
+table is a 21-point simplification and it costs about a point of win rate.
+Quoting the model's number for a tool that ships the table would flatter it.
+
+The last filter -- confirmation -- is what lifted it from 81.8% to 88.1%. It
 costs volume, and so does the 7-point minimum: about 4 setups a day out of
 96 contracts, which is why --loop exists -- leave it running rather than
 checking by hand.
@@ -73,7 +78,7 @@ COINBASE_TICKER = "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
 #     threshold    train    valid     test   pooled   per day
 #      5 points    87.6%    87.7%    87.9%    87.7%      6.6
 #      6 points    88.7%    86.5%    87.6%    88.1%      5.3
-#      7 points    89.8%    89.2%    88.5%    89.3%      4.3   <- chosen
+#      7 points    88.1%    89.5%    87.3%    88.1%      4.3   <- chosen
 #      8 points    91.4%    86.7%    87.1%    89.4%      3.3
 #     10 points    88.3%    81.2%    86.0%    86.6%      1.9
 #
@@ -83,7 +88,9 @@ COINBASE_TICKER = "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
 #
 # 7 over 8 because 8 is only better on train (91.4%) and worse on both
 # periods it had not seen, which is what curve-fitting looks like. 7 is the
-# steadiest reading: 89.8 / 89.2 / 88.5.
+# steadiest reading. Note these threshold rows were measured with the finer
+# isotonic model; the shipped table gives 88.1% at 7 points. The ranking
+# between thresholds holds, the levels are about a point lower.
 #
 # Honest caveat: six thresholds were tried and the best-looking one picked.
 # Some of the gain is that choosing. The three periods agreeing this closely
@@ -132,11 +139,11 @@ MIN_VOL = 0.0001
 # side also qualified at 12 minutes left:
 #
 #                       train              valid               test      pooled
-#   confirmed      157  89.8% +10.3%   37  89.2% +9.7%    78  88.5% +10.7%  89.3%
-#   NOT confirmed  298  80.2%  +1.8%   97  81.4% +3.1%   127  80.3%  +2.8%  80.5%
+#   confirmed      159  88.1%  +7.8%   38  89.5% +8.7%    71  87.3%  +8.8%  88.1%
+#   NOT confirmed  285  81.1%  +2.5%   99  82.8% +4.3%   138  82.6%  +5.2%  81.8%
 #
-# 272 confirmed trades, 243 right, against a break-even of 81.7%: one-sided
-# p = 0.0002. The win rate is 89.8 / 89.2 / 88.5 across three chronological
+# 268 confirmed trades, 236 right, against a break-even of 81.7%: one-sided
+# p = 0.003. The win rate is 88.1 / 89.5 / 87.3 across three chronological
 # periods -- about as stable as anything measured here.
 #
 # It is not free. Confirmation throws away roughly half the setups, so there
@@ -828,7 +835,7 @@ def write_report(mem):
         A("")
     A("## What would change the conclusion")
     A("")
-    A("The backtest says setups like these hit 89.3% against an 81.7%")
+    A("The backtest says setups like these hit 88.1% against an 81.7%")
     A("break-even. To tell whether that is real rather than 63 lucky days,")
     A("this needs roughly 100 settled calls. At about 6 a day that is two to")
     A("three weeks of leaving `--loop` running. Below that number, a good")
@@ -1215,17 +1222,17 @@ def grade_of(price, edge, mins, spread, confirmed):
                 "why": ["%.0fc, %.0f min left, %.0f-point edge -- the right shape."
                         % (100 * price, mins, 100 * edge),
                         "But I have only seen it once. Setups that were still",
-                        "there two minutes later hit 89.3%; ones that were not",
-                        "hit 80.5%. Re-run in 2 minutes -- if it still says",
+                        "there two minutes later hit 88.1%; ones that were not",
+                        "hit 81.8%. Re-run in 2 minutes -- if it still says",
                         "the same thing, it upgrades to GOOD."],
-                "stats": (522, 80.5, "+1.8% / +3.1% / +2.8%")}
+                "stats": (522, 81.8, "+2.5% / +4.3% / +5.2%")}
     return {"label": "GOOD -- confirmed, the zone that held up",
             "short": "GOOD", "trade": True,
             "why": ["%.0fc entry, %.0f minutes left, %.0f-point edge, and the"
                     % (100 * price, mins, 100 * edge),
                     "same call was already standing two minutes ago.",
                     "The only combination positive in all three periods."],
-            "stats": (272, 89.3, "+10.3% / +9.7% / +10.7%")}
+            "stats": (268, 88.1, "+7.8% / +8.7% / +8.8%")}
 
 
 def evaluate(mem, a):
@@ -1501,7 +1508,7 @@ def evaluate(mem, a):
         send_ntfy("%s at %.0fc -- %.0f min left" % (side, 100 * price, mins),
                   "%s\nBuy %s at %.0fc. Chance %.0f%%, edge %.0f points.\n"
                   "Confirmed: the same call was standing 2 minutes ago.\n"
-                  "Setups like this hit 89.3%% over 63 days. Never traded live."
+                  "Setups like this hit 88.1%% over 63 days. Never traded live."
                   % (m.get("ticker"), side, 100 * price,
                      100 * min(conf, 0.99), 100 * edge),
                   tags="rotating_light", priority="high")
