@@ -1498,13 +1498,34 @@ def evaluate(mem, a):
         prev = next((r for r in mem["predictions"]
                      if r["ticker"] == m.get("ticker")), None)
         if prev is not None:
-            # --wait looks at the same contract many times. The first look is
-            # what teaches calibration, so leave it -- but if a later look is
-            # the one that became an actual call, the record has to say so,
-            # otherwise confirmed trades never show up in the track record.
+            # --loop looks at the same contract many times. Which look counts
+            # depends on what the field is for.
+            #
+            # raw and p stay from the FIRST look: they feed the calibration
+            # bins, and that wants one observation per contract, taken before
+            # anything was decided.
+            #
+            # Everything describing the CALL is refreshed to the moment the
+            # call was made. It used to keep the first look's spot, strike,
+            # distance, minutes and timestamp, which made the record lie: a
+            # contract declined at 14 minutes with BTC $17 the wrong side,
+            # then called four minutes later once BTC had crossed, was
+            # recorded as a call made $17 the wrong side. Reading the record
+            # back, the bot looked like it bet on reversals. It does not: the
+            # calibration curve crosses 0.5 at raw 0.4973, which at a typical
+            # volatility over twelve minutes is BTC about sixty cents below
+            # the target -- so a YES call needs BTC essentially at or past the
+            # line, and $17 short of it is not reachable. The number was
+            # stale, not the behaviour. All 272 backtest trades are on the
+            # side they bet.
             if answered and not prev.get("answered"):
                 prev.update({"answered": True, "side": side, "price": price,
-                             "edge": edge, "bet": plan_stake(mem, price)})
+                             "edge": edge, "bet": plan_stake(mem, price),
+                             "asked": datetime.now(timezone.utc).isoformat(),
+                             "grade": grade_short, "mins": round(mins, 1),
+                             "spot": round(spot, 2), "strike": round(strike, 2),
+                             "dist": round(spot - strike, 2),
+                             "vol": round(v, 6)})
                 save_memory(mem)
             return
         mem["predictions"].append({
