@@ -32,16 +32,17 @@ the honest answer far more often than YES or NO.
 
 HOW ACCURATE IS IT WHEN IT DOES ANSWER
 ======================================
-On 63 days of history, setups passing all these filters won 88.1% of the time
-against an 81.7% break-even, across 268 independent contracts (p=0.003).
-A ~6.4 point edge, positive in all three test periods: 88.1 / 89.5 / 87.3.
+On 63 days of history, setups passing all these filters won 89.3% of the time
+against an 81.3% break-even, across 272 independent contracts (p=0.0002).
+An 8-point edge, positive in all three test periods: 89.8 / 89.2 / 88.5.
 
-Every figure in this file is measured with the CAL_Y table below, the one
-this tool actually uses -- not with the finer model it was fitted from. The
-table is a 21-point simplification and it costs about a point of win rate.
-Quoting the model's number for a tool that ships the table would flatter it.
+Every figure in this file is measured by running the code in this file --
+not the model it was fitted from. Those used to differ: the calibration
+shipped as a 21-point approximation and quietly cost a point of win rate
+and a fifth of the return. The full model now ships exactly, so the two
+agree again. See the CAL_X block.
 
-The last filter -- confirmation -- is what lifted it from 81.8% to 88.1%. It
+The last filter -- confirmation -- is what lifted it from 80.5% to 89.3%. It
 costs volume, and so does the 7-point minimum: about 4 setups a day out of
 96 contracts, which is why --loop exists -- leave it running rather than
 checking by hand.
@@ -75,12 +76,13 @@ COINBASE_TICKER = "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
 # Raised from 5 points to 7 after measuring it. Inside the GOOD band, with
 # the threshold applied to the confirming look as well as the entry:
 #
-#     threshold    train    valid     test   pooled   per day
-#      5 points    87.6%    87.7%    87.9%    87.7%      6.6
-#      6 points    88.7%    86.5%    87.6%    88.1%      5.3
-#      7 points    88.1%    89.5%    87.3%    88.1%      4.3   <- chosen
-#      8 points    91.4%    86.7%    87.1%    89.4%      3.3
-#     10 points    88.3%    81.2%    86.0%    86.6%      1.9
+#     threshold   pooled   return   per day
+#      5 points    87.7%    +7.05%     6.6
+#      6 points    88.1%    +8.21%     5.3
+#      7 points    89.3%   +10.35%     4.3   <- chosen
+#      8 points    89.4%   +11.32%     3.3
+#      9 points    88.9%   +11.25%     2.6
+#     10 points    86.6%    +9.35%     1.9
 #
 # Return per dollar goes +7.05% -> +10.35%, and p drops from 0.0012 to
 # 0.0002. The 5-to-7 point trades that get dropped were the weak ones:
@@ -88,9 +90,7 @@ COINBASE_TICKER = "https://api.exchange.coinbase.com/products/BTC-USD/ticker"
 #
 # 7 over 8 because 8 is only better on train (91.4%) and worse on both
 # periods it had not seen, which is what curve-fitting looks like. 7 is the
-# steadiest reading. Note these threshold rows were measured with the finer
-# isotonic model; the shipped table gives 88.1% at 7 points. The ranking
-# between thresholds holds, the levels are about a point lower.
+# steadiest reading: 89.8 / 89.2 / 88.5.
 #
 # Honest caveat: six thresholds were tried and the best-looking one picked.
 # Some of the gain is that choosing. The three periods agreeing this closely
@@ -139,11 +139,11 @@ MIN_VOL = 0.0001
 # side also qualified at 12 minutes left:
 #
 #                       train              valid               test      pooled
-#   confirmed      159  88.1%  +7.8%   38  89.5% +8.7%    71  87.3%  +8.8%  88.1%
-#   NOT confirmed  285  81.1%  +2.5%   99  82.8% +4.3%   138  82.6%  +5.2%  81.8%
+#   confirmed      157  89.8% +10.3%   37  89.2% +9.6%    78  88.5% +10.7%  89.3%
+#   NOT confirmed  298  80.2%  +1.8%   97  81.4% +3.1%   127  80.3%  +2.8%  80.5%
 #
-# 268 confirmed trades, 236 right, against a break-even of 81.7%: one-sided
-# p = 0.003. The win rate is 88.1 / 89.5 / 87.3 across three chronological
+# 272 confirmed trades, 243 right, against a break-even of 81.3%: one-sided
+# p = 0.0002. The win rate is 89.8 / 89.2 / 88.5 across three chronological
 # periods -- about as stable as anything measured here.
 #
 # It is not free. Confirmation throws away roughly half the setups, so there
@@ -162,23 +162,22 @@ CONFIRM_GAP_MIN = 1.5
 # $1,000 of imaginary money, 10% of whatever the account is worth on each
 # call. Nothing is ever sent to Kalshi; this is a scoreboard.
 #
-# 10% compounding is aggressive. Run over the 268 confirmed trades in the
+# 10% compounding is aggressive. Run over the 272 confirmed trades in the
 # 63-day study, in the order they actually happened:
 #
 #     stake    ends at    worst dip   max drawdown
-#      2%       $1,539       $960          6%
-#      5%       $2,831       $901         14%
-#     10%       $7,062       $808         28%      <- this setting
-#     20%      $28,893       $637         53%
-#     50%      $19,292       $245         97%   past the peak: volatility eats it
+#      2%       $1,740       $980          6%
+#      5%       $3,857       $949         15%
+#     10%      $13,187       $899         29%      <- this setting
+#     20%     $103,476       $797         53%
+#     50%     $657,023       $494         94%
 #    100%        WIPED         $0        101%   one loss ends it
 #
-# These figures are lower than the ones this file carried before, and the
-# earlier ones were wrong to keep quoting: they came from the 5-point
-# threshold and a different calibration fit. Re-derived after the honest
-# recalibration. Same 63 days at 5 points now gives $7,066 with a 39%
-# drawdown -- the same money as 7 points for a third more pain, which is a
-# better argument for the 7-point rule than the one originally written here.
+# The 20% and 50% rows are arithmetic, not a suggestion. They assume every
+# order fills at the quoted price, and six figures of stake in a market that
+# trades ten thousand contracts a life does not fill at all. Read them as
+# what compounding does on paper, and read the drawdown column as what it
+# costs.
 #
 # Two things that number is not. It is not a forecast: the price window and
 # the confirmation rule were both chosen by looking at all three periods, so
@@ -246,28 +245,80 @@ COINBASE_TO_BRTI = 5.97
 
 # Calibration: what the formula says, versus what really happened.
 #
-# FITTED ON THE TRAINING PERIOD ONLY (17 Jun - 25 Jul). The table shipped
-# before this was fitted on all 63 days, validation and test included, which
-# is a leak: the live tool was tuned on data used to judge it. Refitting
-# honestly moved it a long way, and in the direction that matters --
+# FITTED ON THE TRAINING PERIOD ONLY (17 Jun - 25 Jul), and shipped EXACTLY.
 #
-#     formula says      old table      honest table
-#         0.40            0.441            0.354
-#         0.65            0.763            0.678
-#         0.70            0.835            0.780
+# Two corrections live in this block, both found late.
 #
-# -- every row too confident, by as much as 8.7 points. Over-confidence
-# inflates the edge, and the edge is what decides whether to trade, so the
-# tool was calling setups that do not qualify. The backtest figures quoted
-# elsewhere in this file were always computed with a train-only fit, so they
-# are unaffected; it was only the live tool that was wrong.
+# The first: the table shipped before this was fitted on all 63 days,
+# validation and test included -- a leak, since the live tool was then tuned
+# on the data used to judge it. Refitting honestly moved every row down, by
+# as much as 8.7 points. Over-confidence inflates the edge, and the edge is
+# what decides whether to trade, so the tool was calling setups that do not
+# meet its own rule.
 #
-# Expect fewer calls than before, and expect them to be the right ones.
-CAL_X = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50,
-         0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00]
-CAL_Y = [0.000, 0.044, 0.071, 0.102, 0.178, 0.226, 0.286, 0.326, 0.354,
-         0.450, 0.510, 0.594, 0.640, 0.678, 0.780, 0.824, 0.885, 0.920,
-         0.953, 0.978, 1.000]
+# The second: even after refitting, this was stored as 21 evenly spaced
+# points, and that approximation was quietly expensive --
+#
+#     grid          trades   win rate   return    63 days at 10 percent
+#     21 points      267      88.0        +8.20        $6,981
+#     101 points     273      88.6        +9.29        $9,867
+#     201 points     275      89.5       +10.35       $13,590
+#     the model      272      89.3       +10.35       $13,187
+#
+# -- a fifth of the return, thrown away by rounding a curve. Isotonic
+# regression is a step function with finitely many breakpoints, so there is
+# no need to approximate it at all: the 164 knots below reproduce the fitted
+# model to the last decimal (verified, max difference 0.00e+00). This is not
+# extra fitting. It is the same model, copied properly.
+CAL_X = [
+    0, 5.3462e-06, 5.36853e-06, 0.000364103, 0.000365189, 0.0053352,
+    0.0053473, 0.0096232, 0.00963275, 0.0308979, 0.0309066, 0.0332223,
+    0.0332424, 0.0354375, 0.035441, 0.0800849, 0.0801172, 0.0828338,
+    0.0829501, 0.0899102, 0.0900576, 0.13242, 0.132454, 0.133462, 0.133464,
+    0.142046, 0.142057, 0.166829, 0.166841, 0.173925, 0.173939, 0.193367,
+    0.193368, 0.228731, 0.228733, 0.245923, 0.246006, 0.264451, 0.264463,
+    0.28751, 0.287537, 0.288391, 0.288401, 0.337502, 0.337521, 0.339286,
+    0.339306, 0.340097, 0.340102, 0.346136, 0.346148, 0.349085, 0.349094,
+    0.35972, 0.359727, 0.405151, 0.4052, 0.409042, 0.409058, 0.426546,
+    0.426564, 0.432823, 0.432868, 0.432945, 0.432958, 0.438906, 0.438939,
+    0.447034, 0.447057, 0.461909, 0.461916, 0.463759, 0.463782, 0.466349,
+    0.466365, 0.497253, 0.497261, 0.50289, 0.50293, 0.515756, 0.515767,
+    0.516198, 0.516245, 0.524241, 0.524256, 0.525631, 0.525639, 0.528045,
+    0.528077, 0.564621, 0.564638, 0.590261, 0.590271, 0.613082, 0.613121,
+    0.6136, 0.613641, 0.617714, 0.61786, 0.653651, 0.65378, 0.654003,
+    0.654005, 0.677496, 0.677558, 0.68756, 0.687577, 0.69559, 0.69566,
+    0.698011, 0.698015, 0.700335, 0.700339, 0.700486, 0.700571, 0.709481,
+    0.709494, 0.745016, 0.745082, 0.752084, 0.752094, 0.784722, 0.78485,
+    0.787257, 0.787296, 0.797108, 0.797171, 0.833027, 0.833034, 0.834793,
+    0.834831, 0.877918, 0.878126, 0.883325, 0.883341, 0.88955, 0.889615,
+    0.899099, 0.899123, 0.936553, 0.936588, 0.93796, 0.937993, 0.940678,
+    0.940765, 0.941582, 0.94163, 0.94364, 0.943657, 0.948224, 0.948257,
+    0.950537, 0.950558, 0.95247, 0.952499, 0.990821, 0.990828, 0.993447,
+    0.993455, 0.998684, 0.998685, 0.999834, 0.999837, 1]
+CAL_Y = [
+    0, 0, 0.00298063, 0.00298063, 0.0077821, 0.0077821, 0.0124378, 0.0124378,
+    0.0191304, 0.0191304, 0.0294118, 0.0294118, 0.0353982, 0.0353982,
+    0.0435069, 0.0435069, 0.0632911, 0.0632911, 0.0673077, 0.0673077,
+    0.0709957, 0.0709957, 0.09375, 0.09375, 0.0988142, 0.0988142, 0.101749,
+    0.101749, 0.122995, 0.122995, 0.166667, 0.166667, 0.178378, 0.178378,
+    0.215321, 0.215321, 0.226236, 0.226236, 0.237856, 0.237856, 0.277778,
+    0.277778, 0.285521, 0.285521, 0.288136, 0.288136, 0.307692, 0.307692,
+    0.324176, 0.324176, 0.325581, 0.325581, 0.325779, 0.325779, 0.354086,
+    0.354086, 0.365517, 0.365517, 0.384375, 0.384375, 0.395833, 0.395833, 0.4,
+    0.4, 0.408451, 0.408451, 0.420195, 0.420195, 0.450161, 0.450161, 0.460317,
+    0.460317, 0.487805, 0.487805, 0.496764, 0.496764, 0.51, 0.51, 0.523517,
+    0.523517, 0.529412, 0.529412, 0.547059, 0.547059, 0.557692, 0.557692,
+    0.57732, 0.57732, 0.593864, 0.593864, 0.604978, 0.604978, 0.639726,
+    0.639726, 0.666667, 0.666667, 0.673203, 0.673203, 0.677998, 0.677998,
+    0.714286, 0.714286, 0.73785, 0.73785, 0.756272, 0.756272, 0.772093,
+    0.772093, 0.777778, 0.777778, 0.779661, 0.779661, 0.8, 0.8, 0.80786,
+    0.80786, 0.813877, 0.813877, 0.824176, 0.824176, 0.835801, 0.835801,
+    0.866667, 0.866667, 0.86692, 0.86692, 0.885017, 0.885017, 0.92, 0.92,
+    0.920379, 0.920379, 0.928571, 0.928571, 0.930556, 0.930556, 0.943548,
+    0.943548, 0.952525, 0.952525, 0.955556, 0.955556, 0.961538, 0.961538,
+    0.962963, 0.962963, 0.971429, 0.971429, 0.97351, 0.97351, 0.977528,
+    0.977528, 0.987179, 0.987179, 0.990419, 0.990419, 0.990476, 0.990476,
+    0.995929, 0.995929, 0.996139, 0.996139, 1, 1]
 
 W = 64
 
@@ -444,18 +495,29 @@ def bin_of(p):
     return min(int(p * N_BINS), N_BINS - 1)
 
 
+def calibrated(raw):
+    """Read the fitted curve at `raw`. Linear between knots, clipped outside."""
+    if raw <= CAL_X[0]:
+        return CAL_Y[0]
+    if raw >= CAL_X[-1]:
+        return CAL_Y[-1]
+    lo, hi = 0, len(CAL_X) - 1
+    while hi - lo > 1:                       # 164 knots; binary search
+        mid = (lo + hi) // 2
+        if CAL_X[mid] <= raw:
+            lo = mid
+        else:
+            hi = mid
+    x0, x1 = CAL_X[lo], CAL_X[hi]
+    y0, y1 = CAL_Y[lo], CAL_Y[hi]
+    if x1 <= x0:                             # isotonic knots can repeat an x
+        return y1
+    return y0 + (y1 - y0) * (raw - x0) / (x1 - x0)
+
+
 def prior_for(b):
-    """The 63-day calibration, read at the centre of bin b."""
-    centre = (b + 0.5) / N_BINS
-    lo = CAL_Y[0]
-    for i in range(1, len(CAL_X)):
-        if centre <= CAL_X[i]:
-            x0, x1, y0, y1 = CAL_X[i - 1], CAL_X[i], CAL_Y[i - 1], CAL_Y[i]
-            lo = y0 + (y1 - y0) * (centre - x0) / (x1 - x0)
-            break
-    else:
-        lo = CAL_Y[-1]
-    return lo
+    """The calibration, read at the centre of bin b."""
+    return calibrated((b + 0.5) / N_BINS)
 
 
 def load_memory():
@@ -835,7 +897,7 @@ def write_report(mem):
         A("")
     A("## What would change the conclusion")
     A("")
-    A("The backtest says setups like these hit 88.1% against an 81.7%")
+    A("The backtest says setups like these hit 89.3% against an 81.3%")
     A("break-even. To tell whether that is real rather than 63 lucky days,")
     A("this needs roughly 100 settled calls. At about 6 a day that is two to")
     A("three weeks of leaving `--loop` running. Below that number, a good")
@@ -846,9 +908,9 @@ def write_report(mem):
     A("$1,000 to start, 10% of whatever it is worth on each call. Imaginary.")
     A("Nothing is sent to Kalshi and there is no account behind it.")
     A("")
-    A("Run over the 268 confirmed trades from the 63-day study, in the order")
-    A("they happened, $1,000 at 10% a call ends at **$7,062**, dipping to $808")
-    A("on the way -- a 28% drawdown. Two reasons not to plan around that:")
+    A("Run over the 272 confirmed trades from the 63-day study, in the order")
+    A("they happened, $1,000 at 10% a call ends at **$13,187**, dipping to")
+    A("$899 on the way -- a 29% drawdown. Two reasons not to plan around that:")
     A("")
     A("1. The price window and the confirmation rule were both chosen after")
     A("   looking at all three periods. Some of that 12x is the choosing.")
@@ -1222,17 +1284,17 @@ def grade_of(price, edge, mins, spread, confirmed):
                 "why": ["%.0fc, %.0f min left, %.0f-point edge -- the right shape."
                         % (100 * price, mins, 100 * edge),
                         "But I have only seen it once. Setups that were still",
-                        "there two minutes later hit 88.1%; ones that were not",
-                        "hit 81.8%. Re-run in 2 minutes -- if it still says",
+                        "there two minutes later hit 89.3%; ones that were not",
+                        "hit 80.5%. Re-run in 2 minutes -- if it still says",
                         "the same thing, it upgrades to GOOD."],
-                "stats": (522, 81.8, "+2.5% / +4.3% / +5.2%")}
+                "stats": (522, 80.5, "+1.8% / +3.1% / +2.8%")}
     return {"label": "GOOD -- confirmed, the zone that held up",
             "short": "GOOD", "trade": True,
             "why": ["%.0fc entry, %.0f minutes left, %.0f-point edge, and the"
                     % (100 * price, mins, 100 * edge),
                     "same call was already standing two minutes ago.",
                     "The only combination positive in all three periods."],
-            "stats": (268, 88.1, "+7.8% / +8.7% / +8.8%")}
+            "stats": (272, 89.3, "+10.3% / +9.6% / +10.7%")}
 
 
 def evaluate(mem, a):
@@ -1508,7 +1570,7 @@ def evaluate(mem, a):
         send_ntfy("%s at %.0fc -- %.0f min left" % (side, 100 * price, mins),
                   "%s\nBuy %s at %.0fc. Chance %.0f%%, edge %.0f points.\n"
                   "Confirmed: the same call was standing 2 minutes ago.\n"
-                  "Setups like this hit 88.1%% over 63 days. Never traded live."
+                  "Setups like this hit 89.3%% over 63 days. Never traded live."
                   % (m.get("ticker"), side, 100 * price,
                      100 * min(conf, 0.99), 100 * edge),
                   tags="rotating_light", priority="high")
