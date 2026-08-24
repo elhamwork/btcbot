@@ -1,22 +1,22 @@
 # What the bot has learned
 
-Written 2026-08-24 13:45 UTC by `check.py --report`.
+Written 2026-08-24 14:36 UTC by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,020.52** (started $1,000, +2.1%) |
+| **paper account** | **$1,076.86** (started $1,000, +7.7%) |
 | best / worst it has been | $1,099.47 / $987.44 |
-| fees paid | $9.98 |
-| contracts looked at | 78 |
+| fees paid | $13.20 |
+| contracts looked at | 82 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 77 |
-| actual calls (graded GOOD) | 8 |
-| calls that have settled | 7 |
-| calls right | 6 of 7 (86%) |
+| of those, settled and learned from | 81 |
+| actual calls (graded GOOD) | 9 |
+| calls that have settled | 9 |
+| calls right | 8 of 9 (89%) |
 | break-even needed | 80% |
-| paper P&L | +6.6% per dollar staked |
+| paper P&L | +11.4% per dollar staked |
 
 ## What it is actually learning
 
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 77 live
+The 63-day study is worth 30 observations per row below. So 81 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -39,12 +39,12 @@ three lucky wins should not rewrite the table.
 | 15-20% | 0.167 | 0.194 | 1 (1 hit) | +0.027 ** |
 | 20-25% | 0.178 | 0.173 | 1 (0 hit) | -0.006 |
 | 25-30% | 0.238 | 0.230 | 1 (0 hit) | -0.008 |
-| 30-35% | 0.286 | 0.276 | 1 (0 hit) | -0.009 |
+| 30-35% | 0.286 | 0.299 | 2 (1 hit) | +0.013 |
 | 35-40% | 0.354 | 0.332 | 8 (2 hit) | -0.022 ** |
-| 40-45% | 0.384 | 0.376 | 6 (2 hit) | -0.009 |
+| 40-45% | 0.384 | 0.366 | 7 (2 hit) | -0.019 |
 | 45-50% | 0.497 | 0.476 | 16 (7 hit) | -0.021 ** |
-| 50-55% | 0.558 | 0.539 | 14 (7 hit) | -0.018 |
-| 55-60% | 0.605 | 0.633 | 5 (4 hit) | +0.028 ** |
+| 50-55% | 0.558 | 0.550 | 15 (8 hit) | -0.008 |
+| 55-60% | 0.605 | 0.643 | 6 (5 hit) | +0.038 ** |
 | 60-65% | 0.678 | 0.676 | 6 (4 hit) | -0.002 |
 | 65-70% | 0.738 | 0.714 | 8 (5 hit) | -0.024 ** |
 | 70-75% | 0.814 | 0.820 | 1 (1 hit) | +0.006 |
@@ -56,16 +56,16 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 26 |
-| WEAK (50-70c) | 24 |
+| NONE (no disagreement) | 28 |
+| WEAK (50-70c) | 25 |
 | BAD (cheap side) | 11 |
 | BAD (last 5 min) | 6 |
-| WEAK (small disagreement) | 5 |
+| WEAK (small disagreement) | 6 |
 | WEAK (5-10 min) | 3 |
 | ALMOST (not confirmed yet) | 2 |
 | GOOD | 1 |
 
-Leaned YES 45 times, NO 33 times. Over 63 days of history the
+Leaned YES 47 times, NO 35 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -79,6 +79,8 @@ split is 49.5% YES, so anything near half and half is normal.
 | 2026-08-24 08:00 | YES | 0.73 | -17 | 15 | **wrong** | -112.03 | $987.44 |
 | 2026-08-24 09:15 | YES | 0.86 | -2 | 14 | RIGHT | +15.10 | $1,002.54 |
 | 2026-08-24 13:00 | YES | 0.84 | +47 | 15 | RIGHT | +17.98 | $1,020.52 |
+| 2026-08-24 13:45 | NO | 0.75 | -39 | 15 | RIGHT | +32.26 | $1,076.86 |
+| 2026-08-24 14:15 | YES | 0.80 | +68 | 14 | RIGHT | +24.08 | $1,044.60 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
