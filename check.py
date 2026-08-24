@@ -959,6 +959,25 @@ def rsi(c, period=14):
     return 100.0 - 100.0 / (1.0 + ag / al)
 
 
+def refetch(ticker):
+    """Read one contract's book again, right now. None if it is unusable."""
+    d, err = get(KALSHI + "/markets/" + str(ticker))
+    mk = (d or {}).get("market") or {}
+    ya, yb, ct = (mk.get("yes_ask_dollars"), mk.get("yes_bid_dollars"),
+                  mk.get("close_time"))
+    if err or ya is None or yb is None or not ct:
+        return None
+    try:
+        mins = (datetime.fromisoformat(str(ct).replace("Z", "+00:00"))
+                - datetime.now(timezone.utc)).total_seconds() / 60.0
+    except Exception:                                         # noqa: BLE001
+        return None
+    ya, yb = float(ya), float(yb)
+    if not (0.0 < ya < 1.0) or not (0.0 <= yb < ya):
+        return None
+    return ya, yb, mins
+
+
 def live():
     d, err = get(KALSHI + "/markets",
                  {"series_ticker": SERIES, "status": "open", "limit": 50})
@@ -1310,6 +1329,63 @@ def evaluate(mem, a):
 
     # ---- grade it ------------------------------------------------------
     g = grade_of(price, edge, mins, spread, confirmed)
+
+    # A quote goes stale between reading it and acting on it. The check takes
+    # a second or two, the alert takes a moment to arrive, and you take longer
+    # than that to open Kalshi -- and a 15-minute contract can move 9 cents in
+    # a minute (measured: two copies of this bot, one minute apart, quoted the
+    # same contract at 72c and 81c).
+    #
+    # So before committing to a call, read the price one more time and redo
+    # the arithmetic on it. If it still qualifies, the number you are given is
+    # the fresh one. If it has moved out of the rules, say so instead of
+    # sending you after a price that no longer exists.
+    if g["trade"]:
+        fresh = refetch(m.get("ticker"))
+        if fresh is None:
+            g = {"label": "GONE -- lost the quote while checking",
+                 "short": "GONE (no quote)", "trade": False,
+                 "why": ["It qualified, then Kalshi stopped quoting it before",
+                         "I could confirm the price. Not acting on a stale one."],
+                 "stats": None}
+        else:
+            fya, fyb, fmins = fresh
+            ftick = live_spot()
+            base = spot - COINBASE_TO_BRTI
+            fspot = (ftick + COINBASE_TO_BRTI) if (
+                ftick and abs(ftick - base) / max(base, 1) < 0.01) else spot
+            fraw = norm_cdf(math.log(fspot / strike)
+                            / (v * math.sqrt(max(fmins, 0.05))))
+            fp = learned(mem, fraw)
+            fside = "YES" if fp >= 0.5 else "NO"
+            fconf = fp if fside == "YES" else 1.0 - fp
+            fprice = fya if fside == "YES" else 1.0 - fyb
+            fedge = fconf - fprice
+            fspread = fya - fyb
+            moved = abs(fprice - price)
+            g2 = grade_of(fprice, fedge, fmins, fspread, confirmed) \
+                if fside == side else None
+            if g2 is None or not g2["trade"]:
+                was = "%.0fc" % (100 * price)
+                now = ("%s at %.0fc" % (fside, 100 * fprice)) if fside != side \
+                    else "%.0fc" % (100 * fprice)
+                g = {"label": "GONE -- it moved while I was checking",
+                     "short": "GONE (moved)", "trade": False,
+                     "why": ["It qualified at %s, and by the time I re-read the"
+                             % was,
+                             "book it was %s. That is no longer a trade." % now,
+                             "Chasing a price that has already gone is how a",
+                             "measured edge turns into a real loss."],
+                     "stats": None}
+            else:
+                # Fresh numbers win: everything reported from here is what the
+                # book says now, not what it said when the check started.
+                side, conf, price, edge = fside, fconf, fprice, fedge
+                mins, spread, spot, raw, p, g = fmins, fspread, fspot, fraw, fp, g2
+                if moved >= 0.01:
+                    g["why"] = list(g["why"]) + [
+                        "(re-checked just now: price moved %.0f cent%s, still good.)"
+                        % (100 * moved, "" if round(100 * moved) == 1 else "s")]
     grade_short = g["short"]
     remember(g["trade"])
 
@@ -1504,7 +1580,7 @@ def run_forever(mem, a):
             if reason != last_reason:
                 print("  %s  %s" % (datetime.now().strftime("%H:%M:%S"), reason))
                 last_reason = reason
-            elif checks % 20 == 0:
+            elif checks % 40 == 0:
                 up = (datetime.now(timezone.utc) - started).total_seconds() / 60
                 print("  %s  still watching (%d checks, %.0f min, %d call%s)"
                       % (datetime.now().strftime("%H:%M:%S"), checks, up,
@@ -1517,7 +1593,11 @@ def run_forever(mem, a):
                   % (datetime.now().strftime("%H:%M:%S"),
                      ("%s: %s" % (type(e).__name__, e))[:60]))
         try:
-            time.sleep(30)
+            # 15 seconds, not 30. A contract lives 15 minutes and can move
+            # several cents in one of them; half the wait means half the
+            # staleness, and the confirmation gap is measured in minutes so
+            # it is unaffected.
+            time.sleep(15)
         except KeyboardInterrupt:
             break
     up = (datetime.now(timezone.utc) - started).total_seconds() / 60

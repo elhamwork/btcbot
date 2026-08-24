@@ -1,6 +1,6 @@
 # Run the watcher on GitHub's machines instead of your laptop.
 #
-# Free, no card, nothing to install. It starts every 6 hours, watches, sends
+# Free, no card, nothing to install. It starts every hour, watches, sends
 # alerts to your phone, and commits what it learned back into cloud_state/ so
 # the next run picks up where it left off.
 #
@@ -18,9 +18,19 @@
 
 name: watch
 
+# Hourly, not every 6 hours. A 5h30 job followed by a 6-hourly cron leaves a
+# gap whenever the cron and the job drift apart -- on 2026-08-24 a run that
+# started off-schedule finished at 01:29 and nothing ran again until 06:07,
+# so the bot was dark for four and a half hours and nobody could tell the
+# difference between "no setups" and "not running".
+#
+# Each run now lasts 2 hours and a new one starts every hour and takes over,
+# so the cover always overlaps. If GitHub skips or delays an hour -- it does
+# both -- the running job carries on regardless. The handover is lossless
+# because the outgoing run saves and the incoming one merges.
 on:
   schedule:
-    - cron: "7 */6 * * *"      # 4x a day. Minute 7 to dodge the on-the-hour rush.
+    - cron: "0 * * * *"
   workflow_dispatch:            # and a "Run workflow" button
 
 # A late-firing schedule used to queue behind the run it was meant to replace,
@@ -37,7 +47,7 @@ permissions:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 140
     steps:
       - uses: actions/checkout@v4
 
@@ -50,7 +60,7 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
           CHECK_LABEL: cloud
-        run: python3 check.py --loop --hours 5.5
+        run: python3 check.py --loop --hours 2
 
       # always() so a timeout, a crash, or being cancelled by the next
       # scheduled run all still save the learning.
