@@ -190,6 +190,60 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: trading differently after a drawdown.
+#
+# Asked for: once the account is $200 down, trade less, and take bets that
+# pay more when they win. Both halves were measured on the 63-day sequence,
+# switching modes at the same moments in time rather than gluing two
+# separate backtests together.
+#
+# First half -- a defensive mode triggered $200 below the running peak:
+#
+#     defensive mode              63-day end   worst    trades   win rate
+#     do nothing (current)           $13,187    $899       272     89.3%
+#     stricter edge 10%               $3,373    $899       172     86.6%
+#     stricter edge 12%               $2,842    $899       127     87.4%
+#     price band 60-75c               $2,269    $899       117     85.5%
+#     half stake                      $7,074    $899       272     89.3%
+#     edge 10% + half stake           $3,001    $899       170     87.1%
+#
+# Every variant is worse, and the worst point is $899 in all of them --
+# identical to doing nothing. That column is the whole finding. The account
+# has to fall $200 before the brake engages, so the fall that hurt has
+# already happened; afterwards the brake only sits on the recovery. It costs
+# return and protects nothing. Repeated on the unseen fifth alone: same
+# ordering, doing nothing wins.
+#
+# There is a reason this cannot work, beyond the measurement. The model's
+# inputs are BTC's distance from the target, the minutes left and how fast
+# it has been moving. The account balance is not among them and must not be:
+# a drawdown says nothing whatever about the next contract. Trading smaller
+# after losses is the gambler's fallacy with a spreadsheet.
+#
+# Second half -- "bigger wins", which means buying cheaper, as the main rule:
+#
+#     price band    trades   win rate   break-even   per $     63-day end
+#     55-70c           154     72.1%       64.2%    +12.3%        $3,035
+#     60-75c           197     74.6%       68.6%     +8.8%        $2,324
+#     65-80c           216     83.8%       73.1%    +14.7%       $11,642
+#     70-90c (ours)    272     89.3%       80.2%    +11.3%       $13,187
+#     75-90c           134     91.0%       83.0%     +9.6%        $2,874
+#     80-95c            60     93.3%       85.6%     +9.0%        $1,572
+#
+# Bigger wins cost exactly what they are worth. Every cent of extra payoff
+# is paid for in win rate, in both directions -- 80-95c wins 93.3% of the
+# time and returns less; 55-70c pays double and wins 72.1%. The market
+# prices this correctly, which is what a market is.
+#
+# 55-70c does look strong on the unseen fifth alone (+25.1%). Over all 63
+# days it is +12.3% with a worst point of $657 against our $899. Taking it
+# on the strength of the flattering window is the mistake refused over
+# Bitstamp, and it is refused here.
+#
+# What is true: the losses are large because the stake is 10% of a grown
+# account, not because the calls are bad. The only honest lever on the size
+# of a loss is the size of the bet, and that lowers the wins by the same
+# factor. See the staking table above.
 # TESTED AND REJECTED: learning from the losses to avoid future ones.
 #
 # The natural request -- study the trades that lost, find what they had in
