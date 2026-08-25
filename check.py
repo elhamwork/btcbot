@@ -190,6 +190,50 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# WATCHED, NOT ACTED ON: the 80-85c band is the weak one, not the cheap end.
+#
+# Asked after four live losses whether the low end of the band -- around 70c
+# -- is where it goes wrong. Live it certainly looks that way: 2 of 4 in
+# 70-75c, against 10 of 10 in 80-85c.
+#
+# The 63 days say the reverse. Splitting the 329 full-window trades by the
+# price paid:
+#
+#     band     trades   win rate   break-even   margin    per $
+#     70-75c       81     86.4%       72.0%      +14.4   +20.01%
+#     75-80c       66     95.5%       77.0%      +18.5   +24.04%
+#     80-85c       96     81.2%       82.3%       -1.0    -1.27%
+#     85-91c       86     93.0%       87.0%       +6.1    +6.97%
+#
+# The cheap end is the second best band in the book. What is priced at 72c
+# has to win 72% of the time, and it wins 86%. 80-85c is the only band that
+# does not clear its own break-even, and it is consistent about it across all
+# three periods -- 84.2%, 76.5%, 83.3% against an 82.3% requirement. The
+# chance of a band that good going 78-of-96 is 0.3%.
+#
+# Live's 2 of 4 is 4 calls. If the true rate there is 86.4%, two or fewer
+# wins in four happens 9% of the time.
+#
+# SO WHY IS IT NOT CUT? Because dropping 80-85c is a slice chosen after
+# seeing the answer, and the out-of-sample column says so:
+#
+#                            all 63 days              unseen fifth
+#     keep everything     +10.68%   $18,331        +12.22%   $2,516
+#     drop 80-85c         +15.82%   $26,220        +14.96%   $2,477
+#
+# In-sample the return per dollar jumps by half. On unseen data it gains 2.7
+# points per dollar and the account ends slightly LOWER, because the trades
+# it removes were paying for themselves in volume. Large in the window it was
+# found in, marginal outside it: the exact signature that got Bitstamp and
+# the 55-70c band rejected, and it gets the same answer here.
+#
+# Four bands were sliced, so roughly one in four chance of one looking bad
+# by luck alone. The period consistency is what makes this worth recording
+# rather than dismissing -- but recording is all it gets until the live count
+# is large enough to split without inventing patterns.
+#
+# The thing to watch: 80-85c below break-even in live trading too. It is
+# currently 10 of 10 there, which is luck in the other direction.
 # MEASURED AND CORRECTED: the study looked at one minute, the bot uses six.
 #
 # The 89.3% quoted throughout this file came from a study that evaluated a
