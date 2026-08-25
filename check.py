@@ -720,10 +720,14 @@ def settle_pending(mem, quiet=False):
                         format(abs(round(paid or 0, 2)), ",.2f"),
                         format(round(b["cash"], 2), ",.2f"))) if paid is not None else ""
             send_ntfy(
-                "WE HIT -- %s" % rec["side"] if ok else "Missed -- %s" % rec["side"],
-                "%s settled %s.\n%s bought at %.0fc.%s"
-                % (rec["ticker"], res.upper(), rec["side"],
-                   100 * rec["price"], money),
+                ("WON %+.0f  -  $%s" % (paid, format(round(b["cash"]), ",d")))
+                if paid is not None and ok else
+                ("LOST %.0f  -  $%s" % (abs(paid or 0),
+                                        format(round(b["cash"]), ",d")))
+                if paid is not None else
+                ("%s settled %s" % (rec["side"], res.upper())),
+                "%s %.0fc  -  settled %s"
+                % (rec["side"], 100 * rec["price"], res.upper()),
                 tags="tada" if ok else "x",
                 priority="high" if ok else "default")
     if checked and not quiet:
@@ -788,39 +792,34 @@ def digest(mem):
             and r.get("correct") is not None]
     w = sum(1 for r in done if r["correct"])
     grow = 100 * (b["cash"] / b["start"] - 1) if b["start"] else 0
-    lines = ["Paper account $%s (%+.1f%%)"
-             % (format(round(b["cash"], 2), ",.2f"), grow)]
+    lines = []
     if done:
-        stake = sum(r["bet"]["stake"] for r in done if r.get("bet"))
         be = 100 * sum(r["price"] for r in done) / len(done)
-        lines.append("%d call%s, %d right (%.0f%%). Break-even was %.0f%%."
-                     % (len(done), "" if len(done) == 1 else "s",
-                        w, 100 * w / len(done), be))
-        lines.append("Peak $%s, low $%s, fees $%s."
-                     % (format(round(b["peak"], 2), ",.2f"),
-                        format(round(b["low"], 2), ",.2f"),
-                        format(round(b["fees"], 2), ",.2f")))
+        lines.append("%d of %d right (%.0f%%), break-even %.0f%%."
+                     % (w, len(done), 100 * w / len(done), be))
+        lines.append("peak $%s  low $%s"
+                     % (format(round(b["peak"]), ",d"),
+                        format(round(b["low"]), ",d")))
         left = max(0, 100 - len(done))
-        lines.append("%d of ~100 settled calls. %s"
+        lines.append("%d of ~100 calls%s"
                      % (len(done),
-                        "About %d days to go -- the number means nothing yet."
-                        % round(left / 4.0) if left else
-                        "Enough to judge it now."))
+                        " - about %d days to go" % round(left / 4.0)
+                        if left else " - enough to judge now"))
     else:
-        lines.append("No calls settled yet. Watched %d contracts." % len(recs))
+        lines.append("no calls yet, %d contracts watched" % len(recs))
     live_now = sum(1 for r in recs if r.get("answered") and not r.get("retired")
                    and r.get("correct") is None)
     if live_now:
         lines.append("%d call%s open right now."
                      % (live_now, "" if live_now == 1 else "s"))
-    lines.append("Nothing traded with real money.")
+    lines.append("paper only")
     body = "\n".join(lines)
     print()
     for ln in lines:
         print("  " + ln)
     print()
-    ok, detail = send_ntfy("Daily: $%s (%+.1f%%)"
-                           % (format(round(b["cash"], 2), ",.2f"), grow),
+    ok, detail = send_ntfy("$%s  %+.1f%%"
+                           % (format(round(b["cash"]), ",d"), grow),
                            body, tags="bar_chart")
     print("  phone: %s (%s)" % ("sent" if ok else "not sent", detail))
     print()
@@ -1698,12 +1697,15 @@ def evaluate(mem, a):
     flush()
     answer(side)
     if g["trade"] and not already:
-        send_ntfy("%s at %.0fc -- %.0f min left" % (side, 100 * price, mins),
-                  "%s\nBuy %s at %.0fc. Chance %.0f%%, edge %.0f points.\n"
-                  "Confirmed: the same call was standing 2 minutes ago.\n"
-                  "Setups like this hit 89.3%% over 63 days. Never traded live."
-                  % (m.get("ticker"), side, 100 * price,
-                     100 * min(conf, 0.99), 100 * edge),
+        # Short on purpose. The detail lives in --report; a phone alert has
+        # one job, which is to say what to buy and for how much.
+        bet = next((r["bet"] for r in mem["predictions"]
+                    if r["ticker"] == m.get("ticker") and r.get("bet")), None)
+        send_ntfy("%s %.0fc  -  %.0f min" % (side, 100 * price, mins),
+                  "$%s at %.0fc.  edge %.0f  -  paper $%s"
+                  % (format(bet["stake"], ",.0f") if bet else "?",
+                     100 * price, 100 * edge,
+                     format(round(bet["bank_before"]), ",d") if bet else "?"),
                   tags="rotating_light", priority="high")
     print()
     print("  Buy %s at %.0f cents" % (side, 100 * price))

@@ -55,6 +55,30 @@ jobs:
         with:
           python-version: "3.12"
 
+      # The outgoing run saves as it is cancelled, but this one has already
+      # checked the files out by then -- so it would start on an account up to
+      # an hour stale, forget any wins in that window, and size its next bet
+      # off the wrong number. Seen live on 2026-08-25: a balance of $1,031.34
+      # came back as $1,014.46 after a handover, and the next alert reported
+      # $911.52 instead of $928.40.
+      #
+      # Wait for the outgoing run to finish saving, then take its work.
+      - name: Let the outgoing run save first
+        run: |
+          sleep 90
+          git fetch origin "$GITHUB_REF_NAME" --quiet || true
+          git checkout "origin/$GITHUB_REF_NAME" -- cloud_state || true
+          python3 - <<'PY'
+          import json
+          try:
+              m = json.load(open("cloud_state/check_memory.json"))
+              b = m.get("bank", {})
+              print("  starting from $%.2f, %d settled calls"
+                    % (b.get("cash", 0), b.get("settled", 0)))
+          except Exception as e:
+              print("  no state to start from (%s)" % e)
+          PY
+
       - name: Watch
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
