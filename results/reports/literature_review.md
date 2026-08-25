@@ -186,3 +186,92 @@ direction anyone was likely to look in.
 
 The Bitstamp data is kept in `real_data/btc_1min_bitstamp.csv` so this can be
 re-checked rather than re-argued.
+
+---
+
+# Addendum 2: time-of-day volatility, tested
+
+Searched again August 2026. The one direction the first review did not cover.
+
+## The claim
+
+Bitcoin volatility follows a daily cycle. Trading volume and volatility are
+"noticeably higher during hours that coincide with the daytime trading hours
+of US and European stock exchanges", the intraday pattern differs between a
+US venue and a European one and tracks local hours in each, and both volume
+and realized volatility are substantially higher on weekdays than weekends.
+
+This is a real gap in our model on the face of it. Our volatility input is
+`rv_15m`, realized volatility over the trailing fifteen minutes. A trailing
+estimator cannot know what is about to happen — at 13:25 UTC it is still
+reporting the quiet hour that just ended, five minutes before the US equity
+open.
+
+## The cycle is there. It is large.
+
+Median `rv_15m` by UTC hour, train split only, normalised to its own median:
+
+    00h  1.21     08h  1.00     16h  1.36
+    02h  1.11     10h  0.79     18h  1.10
+    04h  0.91     12h  1.08     20h  0.86
+    06h  0.89     14h  2.04     22h  1.00
+
+The 14h bucket is twice the median. That is 09:30 New York — the equity open,
+exactly where the literature puts it. Range across the day is 0.79 to 2.04.
+Confirmed on our own data, and larger than expected.
+
+## And there is nothing left to exploit — REJECTED
+
+The question is not whether the cycle exists but whether a trailing estimator
+misses it. Measured directly: the size of the move that actually followed,
+against what `rv_15m` predicted, by hour, fitted on train only.
+
+    hour   ratio        hour   ratio        hour   ratio
+    00     1.08         08     0.82         16     0.81
+    01     1.17         09     1.06         17     0.94
+    04     1.19         12     1.18         19     0.84
+    05     0.89         13     1.18         20     1.12
+
+Range 0.81 to 1.19, and no shape — 12h and 13h run hot, 14h does not, 16h is
+the coldest hour of the day sitting between two warm ones. Adjacent hours
+disagree, which a real daily cycle does not do.
+
+The reason is straightforward once seen. The periodicity is in the *level* of
+volatility, and a trailing fifteen-minute estimator tracks the level by
+construction. By 13:35 the 14h regime is already inside `rv_15m`. The cycle
+is not missed; it is absorbed.
+
+Applying the hour multiplier anyway, refitting the calibration on train only:
+
+    version                      trades   win rate    per $    63-day end
+    current, no time term           272     89.3%    +11.35%      $13,187
+    with hour multiplier            287     86.4%     +7.44%       $4,527
+
+    unseen fifth only
+    current, no time term            78     88.5%    +11.81%       $2,143
+    with hour multiplier             77     84.4%     +6.63%       $1,350
+
+Worse on both windows. And note the trade count going *up* over 63 days, 287
+against 272 — the same signature as the signed semi-variance failure. A
+noisier volatility input produces more confident-looking disagreements with
+the market, not better ones.
+
+Weekday effects were checked in the same pass and are smaller still: Thursday
+0.91, Friday 1.08, everything else within 0.03 of flat.
+
+## What this adds
+
+A confirmed effect that our model already handles. Worth recording precisely
+because it looked like an obvious gap and was not one — the trailing estimator
+was doing more work than it was given credit for.
+
+That is roughly the hundred-and-thirtieth idea tested and the hundred-and-
+twenty-seventh rejected. Nothing further is available from the literature
+without new data, which is what the order-book collection is for.
+
+## Sources
+
+- Time-of-day periodicities of trading volume and volatility in Bitcoin
+  exchange: does the stock market matter? — https://www.sciencedirect.com/science/article/abs/pii/S1544612319301904
+- Periodicity in Cryptocurrency Volatility and Liquidity — https://arxiv.org/pdf/2109.12142
+- What Explains Bitcoin Volatility? Evidence from an Extended HAR Framework — https://www.mdpi.com/2227-7072/14/4/81

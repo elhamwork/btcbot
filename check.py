@@ -190,6 +190,42 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: a time-of-day volatility term.
+#
+# The literature is firm that BTC volatility runs on a daily cycle tracking
+# US and European market hours, and our volatility input is trailing, which
+# cannot see a cycle coming. It looked like a real gap.
+#
+# The cycle is there and it is big. Median rv_15m by UTC hour, train only,
+# against its own median: 0.79 at 10h, 2.04 at 14h -- twice normal at the
+# New York equity open, exactly where the research puts it.
+#
+# But the question is whether a trailing estimator MISSES it, and it does
+# not. Measured on train only, the size of the move that actually followed
+# against what rv_15m predicted, by hour, ranges 0.81 to 1.19 with no shape:
+# 12h and 13h run hot, 14h does not, and 16h is the coldest hour of the day
+# sitting between two warm ones. Adjacent hours disagree, which a real cycle
+# does not. The periodicity is in the LEVEL of volatility, and a trailing
+# fifteen-minute estimate tracks the level by construction -- by 13:35 the
+# 14h regime is already inside it. The cycle is absorbed, not missed.
+#
+# Fitted anyway, calibration refit on train only:
+#
+#                            trades   win rate    per $    63-day end
+#     no time term (current)    272     89.3%    +11.35%      $13,187
+#     with hour multiplier      287     86.4%     +7.44%       $4,527
+#     -- unseen fifth --
+#     no time term (current)     78     88.5%    +11.81%       $2,143
+#     with hour multiplier       77     84.4%     +6.63%       $1,350
+#
+# Worse on both windows, and the trade count rises over 63 days -- the same
+# signature as signed semi-variance. A noisier volatility input manufactures
+# confident disagreements with the market rather than better ones.
+#
+# Weekday effects are smaller still: Thursday 0.91, Friday 1.08, the rest
+# flat within 0.03.
+#
+# Detail in results/reports/literature_review.md, addendum 2.
 # TESTED AND REJECTED: trading differently after a drawdown.
 #
 # Asked for: once the account is $200 down, trade less, and take bets that
