@@ -1,22 +1,22 @@
 # What the bot has learned
 
-Written 2026-08-25 01:51 UTC by `check.py --report`.
+Written 2026-08-25 02:17 UTC by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,031.29** (started $1,000, +3.1%) |
-| best / worst it has been | $1,099.47 / $968.93 |
-| fees paid | $17.90 |
-| contracts looked at | 123 |
+| **paper account** | **$926.64** (started $1,000, -7.3%) |
+| best / worst it has been | $1,099.47 / $926.64 |
+| fees paid | $19.42 |
+| contracts looked at | 129 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 122 |
-| actual calls (graded GOOD) | 13 |
-| calls that have settled | 13 |
-| calls right | 11 of 13 (85%) |
+| of those, settled and learned from | 128 |
+| actual calls (graded GOOD) | 14 |
+| calls that have settled | 14 |
+| calls right | 11 of 14 (79%) |
 | break-even needed | 81% |
-| paper P&L | +4.6% per dollar staked |
+| paper P&L | -2.7% per dollar staked |
 
 ## What it is actually learning
 
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 122 live
+The 63-day study is worth 30 observations per row below. So 128 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -43,31 +43,31 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.299 | 2 (1 hit) | +0.013 |
 | 35-40% | 0.354 | 0.332 | 11 (3 hit) | -0.022 ** |
 | 40-45% | 0.384 | 0.379 | 11 (4 hit) | -0.006 |
-| 45-50% | 0.497 | 0.498 | 22 (11 hit) | +0.001 |
-| 50-55% | 0.558 | 0.523 | 23 (11 hit) | -0.034 ** |
-| 55-60% | 0.605 | 0.629 | 10 (7 hit) | +0.024 ** |
+| 45-50% | 0.497 | 0.498 | 24 (12 hit) | +0.001 |
+| 50-55% | 0.558 | 0.522 | 25 (12 hit) | -0.035 ** |
+| 55-60% | 0.605 | 0.638 | 11 (8 hit) | +0.033 ** |
 | 60-65% | 0.678 | 0.683 | 10 (7 hit) | +0.006 |
 | 65-70% | 0.738 | 0.694 | 12 (7 hit) | -0.044 ** |
 | 70-75% | 0.814 | 0.836 | 4 (4 hit) | +0.022 ** |
 | 75-80% | 0.836 | 0.796 | 4 (2 hit) | -0.040 ** |
 | 80-85% | 0.885 | 0.892 | 2 (2 hit) | +0.007 |
 | 85-90% | 0.920 | 0.894 | 2 (1 hit) | -0.026 ** |
-| 95-100% | 0.990 | 0.991 | 1 (1 hit) | +0.000 |
+| 95-100% | 0.990 | 0.991 | 2 (2 hit) | +0.001 |
 
 ## How it graded what it saw
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 50 |
+| NONE (no disagreement) | 52 |
 | WEAK (50-70c) | 33 |
-| BAD (cheap side) | 15 |
-| BAD (last 5 min) | 7 |
+| BAD (cheap side) | 17 |
+| BAD (last 5 min) | 8 |
 | WEAK (small disagreement) | 7 |
-| GOOD | 5 |
+| GOOD | 6 |
 | WEAK (5-10 min) | 3 |
 | ALMOST (not confirmed yet) | 3 |
 
-Leaned YES 72 times, NO 51 times. Over 63 days of history the
+Leaned YES 77 times, NO 52 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -87,6 +87,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 18:03 | 2026-08-24 18:15 | YES | 0.76 | +139 | 11 | RIGHT | +28.97 | $997.90 |
 | 19:19 | 2026-08-24 19:30 | NO | 0.85 | -339 | 11 | RIGHT | +16.56 | $1,014.46 |
 | 00:19 | 2026-08-25 00:30 | NO | 0.85 | -183 | 10 | RIGHT | +16.83 | $1,031.29 |
+| 01:04 | 2026-08-25 01:15 | YES | 0.79 | +194 | 10 | **wrong** | -104.65 | $926.64 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -109,11 +110,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 |---|---|---|---|---|---|
 | 08-24 08:00 | YES | 0.73 | 9% | -16 | 15 |
 | 08-24 17:15 | NO | 0.88 | 8% | -420 | 12 |
+| 08-25 01:15 | YES | 0.79 | 10% | +193 | 10 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 11 | 0.81 | 11% | 13 |
-| lost | 2 | 0.80 | 8% | 13 |
+| lost | 3 | 0.80 | 9% | 12 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
