@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,103.08** &nbsp; +10.3% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 2:21pm California time
+**$1,103.08** &nbsp; +10.3% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 3:16pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -66,9 +66,16 @@ calls a day out of ninety-six contracts.
 The numbers above are the only honest answer, and there are not enough of them
 yet. Roughly 100 settled calls are needed before a win rate means anything.
 
-The 63-day study it was built on: **272 trades, 89.3% right against an 81.3%
-break-even, +10.35% per dollar staked after fees.** Whether that survives
-contact with the live market is exactly what the account above is testing.
+The 63-day study it was built on: **329 trades, 88.4% right against a 79.9%
+break-even.** Whether that survives contact with the live market is exactly
+what the account above is testing.
+
+One caveat that belongs next to that number. The historical data holds only
+three moments per contract, while the bot polls every fifteen seconds and
+sees about twenty-four. So it makes roughly three times as many calls as the
+study could evaluate, at instants the data does not contain. Those calls are
+not wrong, they are unmeasured, and the live record above is the only
+evidence covering them.
 
 Two or three losses in the first dozen calls is ordinary. Four or more in
 twenty would say the model is wrong, and I would take it apart rather than
@@ -102,6 +109,7 @@ A few worth knowing about, because they are the obvious things to suggest:
 | Buy cheaper for bigger wins | Costs exactly what it is worth in win rate |
 | A second price feed (Bitstamp) | 26% more accurate. Made no better trades |
 | Time-of-day volatility | The cycle is real and already absorbed by the model |
+| One all-in bet on a sure thing | There is no sure thing, and 15% every time beats it |
 
 ## Where things are
 

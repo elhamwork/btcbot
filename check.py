@@ -190,6 +190,52 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# MEASURED AND CORRECTED: the study looked at one minute, the bot uses six.
+#
+# The 89.3% quoted throughout this file came from a study that evaluated a
+# single instant -- 10 minutes left, confirmed against 12. The shipped rule
+# allows a call any time from 15 minutes down to 10, and live, three quarters
+# of calls happen at other times. So the headline number described a narrower
+# rule than the one running.
+#
+# Re-run across the real window, taking the first confirmed setup per
+# contract exactly as the bot does (study_window.py):
+#
+#     rule                     trades   win%   break-even   63d at 10%
+#     10-min snapshot (old)       272   89.3%     80.2%       $13,187
+#     full 10-15 min window       329   88.4%     79.9%       $18,331
+#       unseen fifth only          89   88.8%     79.1%        $2,516
+#
+# The rule holds. 88.4% against 89.3% is the same number, on 21% more trades,
+# and the unseen fifth agrees at 88.8%. Nothing here needs changing.
+#
+# WHAT THE RE-RUN EXPOSED IS WORSE THAN WHAT IT WAS LOOKING FOR. The trade
+# rate still does not reconcile: live takes 17.5 calls a day, this study 5.2.
+# Calibration drift was checked first and is not it -- the largest bin has
+# moved 0.034 and most have moved DOWN, which would mean fewer trades. The
+# cause is in the data:
+#
+#     minutes present in decision_panel.parquet, per contract
+#         14 min   100% of contracts
+#         12 min   100%
+#         10 min   100%
+#         every other minute   absent
+#
+# The panel holds three moments per contract. The live bot polls every 15
+# seconds and sees about 24. It therefore acts on setups that appear at
+# minute 13, or 11, or 15 -- which no version of this study can evaluate,
+# because those rows do not exist.
+#
+# So roughly two thirds of what the bot does is unmeasured. Not wrong:
+# unmeasured. The live record is the only evidence covering those calls, and
+# it is 28 calls long.
+#
+# The fix is available. real_data/kalshi_15m_candlesticks.csv holds every
+# minute, about 15 rows per contract; the panel was downsampled when it was
+# built. Rebuilding it at full resolution and re-running would put the study
+# and the bot on the same footing for the first time. Until then, every
+# figure in this file describes a sample of the bot's behaviour rather than
+# all of it, and this comment is here so that is not forgotten.
 # TESTED AND REJECTED: one all-in bet on a sure thing, then back to 10%.
 #
 # The idea: wait for a call it is certain about, stake the whole account once

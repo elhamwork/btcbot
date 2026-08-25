@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 25 Aug 2026 2:21pm California time by `check.py --report`.
+Written 25 Aug 2026 3:16pm California time by `check.py --report`.
 
 ## The short version
 
@@ -130,7 +130,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 24 | 0.81 | 11% | 12 |
-| lost | 4 | 0.79 | 9% | 12 |
+| lost | 4 | 0.78 | 9% | 12 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
