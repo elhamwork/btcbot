@@ -79,12 +79,28 @@ jobs:
               print("  no state to start from (%s)" % e)
           PY
 
+      # Two processes, one job. check.py decides and alerts; bookwatch.py
+      # only records the order book, which no history exists for anywhere --
+      # Kalshi's historical endpoints serve prices and volume, never depth.
+      # It cannot answer anything for about three weeks, and it changes
+      # nothing in the meantime: it is a tape recorder, not a signal.
+      #
+      # It runs in the background so a failure to collect can never stop the
+      # watcher. It flushes every snapshot, so being killed mid-poll costs at
+      # most the one in flight.
       - name: Watch
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+          BOOK_OUT_DIR: ${{ github.workspace }}/cloud_state
           CHECK_LABEL: cloud
-        run: python3 check.py --loop --hours 2
+        run: |
+          python3 bookwatch.py --hours 2 > bookwatch.log 2>&1 &
+          book=$!
+          python3 check.py --loop --hours 2
+          kill "$book" 2>/dev/null || true
+          wait "$book" 2>/dev/null || true
+          tail -n 3 bookwatch.log || true
 
       # always() so a timeout, a crash, or being cancelled by the next
       # scheduled run all still save the learning.
@@ -97,6 +113,10 @@ jobs:
           git config user.name  "btcbot"
           git config user.email "btcbot@users.noreply.github.com"
           cp cloud_state/check_memory.json /tmp/mine.json 2>/dev/null || echo '{}' > /tmp/mine.json
+          # The order book is append-only, but the reset below throws this
+          # run's copy away, and two collectors overlap on every handover.
+          rm -rf /tmp/minebook && mkdir -p /tmp/minebook
+          cp -r cloud_state/orderbook /tmp/minebook/ 2>/dev/null || true
           for i in 1 2 3 4 5; do
             git fetch origin "$GITHUB_REF_NAME" || { sleep $((2 ** i)); continue; }
             # Start from whatever is on the branch NOW, then fold our own
@@ -108,6 +128,8 @@ jobs:
               > /tmp/theirs.json 2>/dev/null || echo '{}' > /tmp/theirs.json
             python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
               cloud_state/check_memory.json
+            # cloud_state now holds the branch's copy, so it is 'theirs'.
+            python3 merge_books.py /tmp/minebook cloud_state cloud_state || true
             python3 check.py --report || true
             # Both views are views of the state, so they are rebuilt from
             # the merged copy, after the merge, never from this run's own.

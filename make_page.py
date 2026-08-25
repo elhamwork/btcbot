@@ -340,6 +340,33 @@ BEGIN = "<!-- LIVE:BEGIN -->"
 END = "<!-- LIVE:END -->"
 
 
+def book_progress():
+    """
+    How much order-book depth has been recorded, in one line.
+
+    Not part of the model and not used by it -- Kalshi publishes no history
+    for depth, so it has to be gathered forward for about three weeks before
+    it can be tested. This exists only so you can see it filling up rather
+    than take it on trust.
+    """
+    d = os.path.join(os.path.dirname(check.MEMORY), "orderbook")
+    try:
+        files = sorted(f for f in os.listdir(d) if f.endswith(".csv"))
+    except OSError:
+        return None
+    n = 0
+    for f in files:
+        try:
+            with open(os.path.join(d, f)) as fh:
+                n += max(sum(1 for _ in fh) - 1, 0)   # minus the header
+        except OSError:
+            pass
+    if not n:
+        return None
+    return "%s order-book snapshots over %d day%s (needs about three weeks)" \
+        % (format(n, ",d"), len(files), "" if len(files) == 1 else "s")
+
+
 def readme_block(mem, updated):
     """
     The same numbers as a markdown block, for the repo front page.
@@ -393,6 +420,10 @@ def readme_block(mem, updated):
             A("")
     else:
         A("No settled calls yet.")
+        A("")
+    bp = book_progress()
+    if bp:
+        A("Collecting in the background: %s." % bp)
         A("")
     A("Paper only: no broker, no account, no orders. Full history in")
     A("[`cloud_state/learning_report.md`](cloud_state/learning_report.md).")

@@ -58,9 +58,34 @@ POLL_SECONDS = 20
 DEPTH = 30                      # levels per side to request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT_DIR = os.path.join(HERE, "forward_test")
-BOOK_CSV = os.path.join(OUT_DIR, "orderbook.csv")
+# Overridable so the cloud runner can point it at a folder that gets committed
+# back to the repo. Without that every run would collect for an hour and throw
+# it away, and this signal needs weeks.
+OUT_DIR = os.environ.get("BOOK_OUT_DIR") or os.path.join(HERE, "forward_test")
+BOOK_DIR = os.path.join(OUT_DIR, "orderbook")
 RAW_SAMPLE = os.path.join(OUT_DIR, "orderbook_raw_sample.json")
+
+
+def book_csv(day=None):
+    """
+    One file per UTC day.
+
+    A single growing file would be re-stored by git on every hourly commit.
+    At 20-second polls that is about 900KB a day, so three weeks of hourly
+    commits would put hundreds of megabytes of near-duplicate snapshots in
+    the repository. Sharding by day means each commit only rewrites today.
+    """
+    d = day or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return os.path.join(BOOK_DIR, "%s.csv" % d)
+
+
+def book_files():
+    """Every day file, oldest first."""
+    try:
+        return sorted(os.path.join(BOOK_DIR, f)
+                      for f in os.listdir(BOOK_DIR) if f.endswith(".csv"))
+    except OSError:
+        return []
 
 FIELDS = [
     "observed_at", "ticker", "close_time", "minutes_remaining", "strike",
@@ -199,13 +224,23 @@ def fetch_book(ticker, save_raw=False):
 
 # ---------------------------------------------------------------------------
 
-def collect():
-    os.makedirs(OUT_DIR, exist_ok=True)
-    new = not os.path.exists(BOOK_CSV)
-    fh = open(BOOK_CSV, "a", newline="", encoding="utf-8")
+def _open_day(day):
+    """Append to that day's file, writing the header if it is new."""
+    os.makedirs(BOOK_DIR, exist_ok=True)
+    path = book_csv(day)
+    fresh = not os.path.exists(path)
+    fh = open(path, "a", newline="", encoding="utf-8")
     w = csv.DictWriter(fh, fieldnames=FIELDS, extrasaction="ignore")
-    if new:
+    if fresh:
         w.writeheader()
+    return fh, w, path
+
+
+def collect(hours=None):
+    os.makedirs(OUT_DIR, exist_ok=True)
+    stop_at = (time.time() + hours * 3600.0) if hours else None
+    day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    fh, w, BOOK_CSV = _open_day(day)
 
     print("=" * 70)
     print("  Kalshi order-book collector -- %s" % SERIES)
@@ -218,6 +253,15 @@ def collect():
     rows = 0
     first = True
     while True:
+        if stop_at and time.time() >= stop_at:
+            print("  %d snapshots this run. Stopping as asked." % rows)
+            break
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        if today != day:                       # roll over at UTC midnight
+            fh.close()
+            day = today
+            fh, w, BOOK_CSV = _open_day(day)
+            print("  new day, now writing %s" % BOOK_CSV)
         try:
             got, err = live_contract()
             if err or not got:
@@ -275,10 +319,14 @@ def _i(x):
 
 
 def read_rows():
-    if not os.path.exists(BOOK_CSV):
-        return []
-    with open(BOOK_CSV, newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+    """Every snapshot ever collected, across all day files."""
+    out = []
+    for path in book_files():
+        with open(path, newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                r["_file"] = path
+                out.append(r)
+    return out
 
 
 def settle():
@@ -309,12 +357,16 @@ def settle():
         if not r.get("outcome") and r["ticker"] in done:
             r["outcome"] = done[r["ticker"]]
 
-    tmp = BOOK_CSV + ".tmp"
-    with open(tmp, "w", newline="", encoding="utf-8") as f:
-        wr = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
-        wr.writeheader()
-        wr.writerows(rows)
-    os.replace(tmp, BOOK_CSV)
+    by_file = {}
+    for r in rows:
+        by_file.setdefault(r["_file"], []).append(r)
+    for path, group in by_file.items():
+        tmp = path + ".tmp"
+        with open(tmp, "w", newline="", encoding="utf-8") as f:
+            wr = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
+            wr.writeheader()
+            wr.writerows(group)
+        os.replace(tmp, path)
     print("Attached outcomes to %d contracts." % len(done))
     status()
 
@@ -363,13 +415,15 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--settle", action="store_true")
+    ap.add_argument("--hours", type=float, default=None,
+                    help="stop after this long (the cloud runner uses it)")
     a = ap.parse_args()
     if a.status:
         status()
     elif a.settle:
         settle()
     else:
-        collect()
+        collect(a.hours)
 
 
 if __name__ == "__main__":
