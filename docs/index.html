@@ -61,25 +61,26 @@ a{color:var(--go)}
 <div class="wrap">
 <span class="flag">paper only</span>
 <h1 style="margin-top:14px">paper account</h1>
-<div class="big">$1,130.09</div>
-<div class="chg up">+13.0% since $1,000</div>
+<div class="big">$1,141.86</div>
+<div class="chg up">+14.2% since $1,000</div>
 <div class="sub">No money moves. Nothing is ordered. This is what $1,000 would have become if every call had been taken at 10% of the account.</div>
 <div class="grid">
-<div class="cell"><div class="k">calls settled</div><div class="v">22</div></div>
-<div class="cell"><div class="k">won / lost</div><div class="v"><span class="win">19</span> / <span class="loss">3</span></div></div>
-<div class="cell"><div class="k">win rate</div><div class="v">86.4%</div></div>
-<div class="cell"><div class="k">break-even</div><div class="v">80.2%</div></div>
+<div class="cell"><div class="k">calls settled</div><div class="v">23</div></div>
+<div class="cell"><div class="k">won / lost</div><div class="v"><span class="win">20</span> / <span class="loss">3</span></div></div>
+<div class="cell"><div class="k">win rate</div><div class="v">87.0%</div></div>
+<div class="cell"><div class="k">break-even</div><div class="v">80.6%</div></div>
 </div>
-<p class="note">Break-even is the win rate these prices require just to stand still. Winning 86.4% of the time against a 80.2% requirement is +6.2 points ahead &mdash; that gap is the whole business.</p>
+<p class="note">Break-even is the win rate these prices require just to stand still. Winning 87.0% of the time against a 80.6% requirement is +6.3 points ahead &mdash; that gap is the whole business.</p>
 <h2>the account, call by call</h2>
 <div class="card">
-<svg class="spark" viewBox="0 0 680 180" preserveAspectRatio="none" role="img" aria-label="paper account over time"><line x1="0" y1="109.3" x2="680" y2="109.3" class="base"/><polyline points="0.0,109.3 30.9,92.2 61.8,75.8 92.7,52.0 123.6,41.6 154.5,117.9 185.5,107.6 216.4,95.3 247.3,73.4 278.2,56.5 309.1,130.4 340.0,110.7 370.9,99.5 401.8,88.0 432.7,159.2 463.6,144.4 494.5,129.1 525.5,107.1 556.4,85.6 587.3,67.9 618.2,54.9 649.1,40.7 680.0,20.8" fill="none" stroke="var(--go)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
-<p class="note">best $1,130.09 &nbsp;&middot;&nbsp; worst $926.64 &nbsp;&middot;&nbsp; fees paid $31.28</p>
+<svg class="spark" viewBox="0 0 680 180" preserveAspectRatio="none" role="img" aria-label="paper account over time"><line x1="0" y1="112.0" x2="680" y2="112.0" class="base"/><polyline points="0.0,112.0 29.6,95.9 59.1,80.3 88.7,57.8 118.3,48.0 147.8,120.1 177.4,110.4 207.0,98.8 236.5,78.1 266.1,62.1 295.7,132.0 325.2,113.4 354.8,102.7 384.3,91.9 413.9,159.2 443.5,145.2 473.0,130.8 502.6,110.0 532.2,89.6 561.7,72.9 591.3,60.6 620.9,47.2 650.4,28.3 680.0,20.8" fill="none" stroke="var(--go)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+<p class="note">best $1,141.86 &nbsp;&middot;&nbsp; worst $926.64 &nbsp;&middot;&nbsp; fees paid $32.07</p>
 </div>
 <h2>open right now</h2>
 <p class="none">Nothing open. Normal &mdash; calls last about fifteen minutes and the bot passes on most contracts.</p>
 <h2>every call, newest first</h2>
 <div class="scroll"><table><tr><th>closed</th><th>result</th><th class="num">paid</th><th class="num">account</th><th>side</th><th class="num">price</th><th class="num">btc vs target</th><th class="num">min left</th></tr>
+<tr><td>25 Aug 4:00am</td><td class="win">won</td><td class="num win">+11.77</td><td class="num">$1,141.86</td><td>YES</td><td class="num">0.90</td><td class="num">+191</td><td class="num">12</td></tr>
 <tr><td>25 Aug 3:00am</td><td class="win">won</td><td class="num win">+29.35</td><td class="num">$1,130.09</td><td>NO</td><td class="num">0.78</td><td class="num">-152</td><td class="num">12</td></tr>
 <tr><td>25 Aug 2:15am</td><td class="win">won</td><td class="num win">+20.83</td><td class="num">$1,100.74</td><td>NO</td><td class="num">0.83</td><td class="num">-128</td><td class="num">12</td></tr>
 <tr><td>25 Aug 2:00am</td><td class="win">won</td><td class="num win">+19.02</td><td class="num">$1,079.91</td><td>NO</td><td class="num">0.84</td><td class="num">-181</td><td class="num">11</td></tr>
@@ -107,11 +108,11 @@ a{color:var(--go)}
 <h2>what this is measured against</h2>
 <div class="card">
 <p class="note" style="margin-top:0">Over 63 days of Kalshi history the shipped rule made 272 trades, won 89.3% of them against an 81.3% break-even, and returned +10.35% per dollar staked after fees. Its worst drawdown was 29%.</p>
-<p class="note">22 of the roughly 100 settled calls needed before the live win rate means much. Two or three losses in the first dozen is ordinary; four or more in twenty would say the model is wrong.</p>
-<p class="note">Contracts looked at: 161 &nbsp;&middot;&nbsp; settled and learned from: 160 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
+<p class="note">23 of the roughly 100 settled calls needed before the live win rate means much. Two or three losses in the first dozen is ordinary; four or more in twenty would say the model is wrong.</p>
+<p class="note">Contracts looked at: 165 &nbsp;&middot;&nbsp; settled and learned from: 164 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
 </div>
 <footer>
-Updated 25 Aug 3:25am California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
+Updated 25 Aug 4:21am California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
 </footer>
 </div>
 </html>
