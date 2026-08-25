@@ -46,10 +46,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # enablement: true turns Pages on the first time this runs, so there is
-      # no switch to find in Settings. If your token cannot do that the step
-      # fails saying so -- then Settings > Pages > Source: GitHub Actions,
-      # once, by hand.
+      # enablement: true asks GitHub to turn Pages on. On this repo it is
+      # refused -- "Create Pages site failed: Resource not accessible by
+      # integration" -- because the workflow token is not allowed to create
+      # the site, only to deploy to one. So it has to be switched on by hand,
+      # once:
+      #
+      #     Settings > Pages > Build and deployment > Source: GitHub Actions
+      #
+      # It stays true because once the site exists this step simply reads it
+      # and never tries to create anything, and if the repo is ever recreated
+      # it will enable itself where the token does allow it.
       - uses: actions/configure-pages@v5
         with:
           enablement: true
