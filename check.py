@@ -190,6 +190,66 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: one all-in bet on a sure thing, then back to 10%.
+#
+# The idea: wait for a call it is certain about, stake the whole account once
+# to clear the ground it keeps losing, then resume at 10%. Three separate
+# reasons it fails, in order of how badly.
+#
+# FIRST, there is no call it is certain about. Sorting the 272 trades by the
+# model's own confidence:
+#
+#     model's confidence   trades   actually won   avg price
+#     under 85%               52        80.8%        0.73
+#     85-90%                  34        97.1%        0.76
+#     90-95%                  81        92.6%        0.80
+#     95-99%                  83        86.7%        0.85
+#     99% and over            22        95.5%        0.86
+#
+# The highest confidence it ever produced was 99.0%, and the 99%+ bucket lost
+# one of twenty-two. The top decile by confidence lost 3 of 30. Note also
+# that the ordering is not monotone -- 95-99% did worse than 85-90%. The
+# calibration is good on average and cannot single out a certainty, because
+# there isn't one to single out.
+#
+# SECOND, staking everything is past the point where growth stops. Kelly at
+# 89.3% and an 80c price is 46% of the account; growth per bet goes NEGATIVE
+# above 92%. A 100% bet is not aggressive, it is beyond the maximum, and it
+# carries an 11% chance of ending at zero, which no later win rate repairs.
+#
+# THIRD -- the one that settles it -- the plan is beaten by simply staking a
+# bit more every time. Over 40 calls, 40,000 runs:
+#
+#     first bet                     median   5th pct   ends at zero
+#     10% always (what we do)       $1,484      $920       0.0%
+#     100% once, then 10%           $1,740        $0      10.7%
+#     15% always                    $1,772      $853       0.0%
+#     20% always                    $2,055      $766       0.0%
+#
+# Staking 15% every time beats the all-in plan on the median AND cannot wipe
+# out. The heroic bet buys nothing that patience does not buy more safely.
+# Leverage lives in the ongoing fraction, never in one bet.
+#
+# ON THE $1,140 CEILING that prompted this. It is not a ceiling, it is the
+# shape of 10% staking at 80c: a win adds 2.4% of the account and a loss
+# costs 10.1%, so it takes 4.3 wins to undo one loss and losses arrive about
+# every 9 calls. The account climbs in small steps and falls in big ones
+# while still going up. That is a sawtooth, not a wall.
+#
+# WHAT WOULD ACTUALLY BE WORTH DOING, and why it is not done yet. Kelly is
+# violently sensitive to the true win rate at these prices:
+#
+#     if the true win rate is   Kelly says stake
+#     89.3% (the 63-day study)        46.5%
+#     85.0%                           25.0%
+#     83.0%                           15.0%
+#     81.2% (live, 16 calls)           6.0%
+#     80.0%                        nothing at all
+#
+# Break-even after fees is 80.7%. The whole strategy sits a couple of points
+# above the line, and the optimal stake swings from half the account to zero
+# across that gap. 10% is the honest hedge between the backtest and the live
+# record while they disagree. It moves when the win rate is known, not before.
 # TESTED AND REJECTED: a time-of-day volatility term.
 #
 # The literature is firm that BTC volatility runs on a daily cycle tracking

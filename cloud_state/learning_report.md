@@ -1,6 +1,10 @@
 # What the bot has learned
 
+<<<<<<< Updated upstream
 Written 2026-08-25 14:39 UTC by `check.py --report`.
+=======
+Written 2026-08-25 14:42 UTC by `check.py --report`.
+>>>>>>> Stashed changes
 
 ## The short version
 
