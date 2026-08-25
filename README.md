@@ -15,18 +15,19 @@ added until a strategy clears the gate described below.
 
 ## Live paper account
 
-**$926.64** &nbsp; -7.3% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 04:43 UTC
+**$948.50** &nbsp; -5.1% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 04:44 UTC
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
-| 14 | 11 / 3 | 78.6% | 80.8% |
+| 15 | 12 / 3 | 80.0% | 80.7% |
 
-Best $1,099.47, worst $926.64, fees paid $19.42.
+Best $1,099.47, worst $926.64, fees paid $20.72.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
+| 25 Aug 03:45 | won | +21.86 | $948.50 | YES | 0.80 |
 | 25 Aug 01:15 | **LOST** | -104.65 | $926.64 | YES | 0.79 |
 | 25 Aug 00:30 | won | +16.83 | $1,031.29 | NO | 0.85 |
 | 24 Aug 19:30 | won | +16.56 | $1,014.46 | NO | 0.85 |
@@ -34,11 +35,8 @@ Best $1,099.47, worst $926.64, fees paid $19.42.
 | 24 Aug 17:15 | **LOST** | -108.67 | $968.93 | NO | 0.88 |
 | 24 Aug 14:15 | won | +24.85 | $1,077.60 | YES | 0.80 |
 | 24 Aug 13:45 | won | +32.23 | $1,052.75 | NO | 0.75 |
-| 24 Aug 13:00 | won | +17.98 | $1,020.52 | YES | 0.84 |
 
-1 call open right now.
-
-14 of the roughly 100 settled calls needed before this win rate
+15 of the roughly 100 settled calls needed before this win rate
 means much. Two or three losses in the first dozen is ordinary;
 four or more in twenty would say the model is wrong.
 

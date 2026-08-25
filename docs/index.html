@@ -61,28 +61,26 @@ a{color:var(--go)}
 <div class="wrap">
 <span class="flag">paper only</span>
 <h1 style="margin-top:14px">paper account</h1>
-<div class="big">$926.64</div>
-<div class="chg down">-7.3% since $1,000</div>
+<div class="big">$948.50</div>
+<div class="chg down">-5.1% since $1,000</div>
 <div class="sub">No money moves. Nothing is ordered. This is what $1,000 would have become if every call had been taken at 10% of the account.</div>
 <div class="grid">
-<div class="cell"><div class="k">calls settled</div><div class="v">14</div></div>
-<div class="cell"><div class="k">won / lost</div><div class="v"><span class="win">11</span> / <span class="loss">3</span></div></div>
-<div class="cell"><div class="k">win rate</div><div class="v">78.6%</div></div>
-<div class="cell"><div class="k">break-even</div><div class="v">80.8%</div></div>
+<div class="cell"><div class="k">calls settled</div><div class="v">15</div></div>
+<div class="cell"><div class="k">won / lost</div><div class="v"><span class="win">12</span> / <span class="loss">3</span></div></div>
+<div class="cell"><div class="k">win rate</div><div class="v">80.0%</div></div>
+<div class="cell"><div class="k">break-even</div><div class="v">80.7%</div></div>
 </div>
-<p class="note">Break-even is the win rate these prices require just to stand still. Winning 78.6% of the time against a 80.8% requirement is -2.2 points behind &mdash; that gap is the whole business.</p>
+<p class="note">Break-even is the win rate these prices require just to stand still. Winning 80.0% of the time against a 80.7% requirement is -0.7 points behind &mdash; that gap is the whole business.</p>
 <h2>the account, call by call</h2>
 <div class="card">
-<svg class="spark" viewBox="0 0 680 180" preserveAspectRatio="none" role="img" aria-label="paper account over time"><line x1="0" y1="100.5" x2="680" y2="100.5" class="base"/><polyline points="0.0,100.5 48.6,80.3 97.1,61.0 145.7,33.0 194.3,20.8 242.9,110.5 291.4,98.4 340.0,84.0 388.6,58.2 437.1,38.3 485.7,125.4 534.3,102.1 582.9,88.9 631.4,75.4 680.0,159.2" fill="none" stroke="var(--stop)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
-<p class="note">best $1,099.47 &nbsp;&middot;&nbsp; worst $926.64 &nbsp;&middot;&nbsp; fees paid $19.42</p>
+<svg class="spark" viewBox="0 0 680 180" preserveAspectRatio="none" role="img" aria-label="paper account over time"><line x1="0" y1="100.5" x2="680" y2="100.5" class="base"/><polyline points="0.0,100.5 45.3,80.3 90.7,61.0 136.0,33.0 181.3,20.8 226.7,110.5 272.0,98.4 317.3,84.0 362.7,58.2 408.0,38.3 453.3,125.4 498.7,102.1 544.0,88.9 589.3,75.4 634.7,159.2 680.0,141.7" fill="none" stroke="var(--stop)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+<p class="note">best $1,099.47 &nbsp;&middot;&nbsp; worst $926.64 &nbsp;&middot;&nbsp; fees paid $20.72</p>
 </div>
 <h2>open right now</h2>
-<div class="scroll"><table><tr><th>placed</th><th>contract</th><th>side</th><th class="num">price</th><th class="num">risking</th><th class="num">to win</th></tr>
-<tr><td>25 Aug 03:33</td><td>KXBTC15M-26AUG242345-45</td><td>YES</td><td class="num">0.80</td><td class="num">$92.66</td><td class="num">$21.86</td></tr>
-</table></div>
-<p class="note">Called but not settled. A 15-minute contract takes about that long plus a minute for Kalshi to publish, so this list is usually empty.</p>
+<p class="none">Nothing open. Normal &mdash; calls last about fifteen minutes and the bot passes on most contracts.</p>
 <h2>every call, newest first</h2>
 <div class="scroll"><table><tr><th>closed</th><th>result</th><th class="num">paid</th><th class="num">account</th><th>side</th><th class="num">price</th><th class="num">btc vs target</th><th class="num">min left</th></tr>
+<tr><td>25 Aug 03:45</td><td class="win">won</td><td class="num win">+21.86</td><td class="num">$948.50</td><td>YES</td><td class="num">0.80</td><td class="num">+172</td><td class="num">11</td></tr>
 <tr><td>25 Aug 01:15</td><td class="loss">LOST</td><td class="num loss">-104.65</td><td class="num">$926.64</td><td>YES</td><td class="num">0.79</td><td class="num">+194</td><td class="num">10</td></tr>
 <tr><td>25 Aug 00:30</td><td class="win">won</td><td class="num win">+16.83</td><td class="num">$1,031.29</td><td>NO</td><td class="num">0.85</td><td class="num">-183</td><td class="num">10</td></tr>
 <tr><td>24 Aug 19:30</td><td class="win">won</td><td class="num win">+16.56</td><td class="num">$1,014.46</td><td>NO</td><td class="num">0.85</td><td class="num">-339</td><td class="num">11</td></tr>
@@ -102,11 +100,11 @@ a{color:var(--go)}
 <h2>what this is measured against</h2>
 <div class="card">
 <p class="note" style="margin-top:0">Over 63 days of Kalshi history the shipped rule made 272 trades, won 89.3% of them against an 81.3% break-even, and returned +10.35% per dollar staked after fees. Its worst drawdown was 29%.</p>
-<p class="note">14 of the roughly 100 settled calls needed before the live win rate means much. Two or three losses in the first dozen is ordinary; four or more in twenty would say the model is wrong.</p>
-<p class="note">Contracts looked at: 134 &nbsp;&middot;&nbsp; settled and learned from: 133 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
+<p class="note">15 of the roughly 100 settled calls needed before the live win rate means much. Two or three losses in the first dozen is ordinary; four or more in twenty would say the model is wrong.</p>
+<p class="note">Contracts looked at: 138 &nbsp;&middot;&nbsp; settled and learned from: 137 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
 </div>
 <footer>
-Updated 25 Aug 2026 04:43 UTC, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
+Updated 25 Aug 2026 04:44 UTC, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
 </footer>
 </div>
 </html>
