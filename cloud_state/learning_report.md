@@ -1,10 +1,6 @@
 # What the bot has learned
 
-<<<<<<< Updated upstream
-Written 2026-08-25 14:39 UTC by `check.py --report`.
-=======
-Written 2026-08-25 14:42 UTC by `check.py --report`.
->>>>>>> Stashed changes
+Written 25 Aug 2026 7:43am California time by `check.py --report`.
 
 ## The short version
 
@@ -132,7 +128,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 22 | 0.81 | 11% | 12 |
-| lost | 4 | 0.79 | 9% | 12 |
+| lost | 4 | 0.78 | 9% | 12 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a

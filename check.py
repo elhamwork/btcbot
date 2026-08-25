@@ -975,6 +975,25 @@ def digest(mem):
     print()
 
 
+def local_stamp(when=None):
+    """
+    Now, in California time. Storage stays UTC; reading does not.
+
+    Falls back to UTC and says so rather than shifting by nothing, because a
+    timestamp that is silently wrong by seven hours is worse than one that
+    admits which clock it is on.
+    """
+    d = when or datetime.now(timezone.utc)
+    try:
+        from zoneinfo import ZoneInfo
+        d = d.astimezone(ZoneInfo("America/Los_Angeles"))
+        name = "California time"
+    except Exception:                                         # noqa: BLE001
+        name = "UTC"
+    return "%s %d:%02d%s %s" % (d.strftime("%d %b %Y"), (d.hour % 12) or 12,
+                                d.minute, "am" if d.hour < 12 else "pm", name)
+
+
 def write_report(mem):
     """
     Write down, in a file, everything it has learned so far.
@@ -997,8 +1016,7 @@ def write_report(mem):
     A = L.append
     A("# What the bot has learned")
     A("")
-    A("Written %s UTC by `check.py --report`."
-      % datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"))
+    A("Written %s by `check.py --report`." % local_stamp())
     A("")
     A("## The short version")
     A("")
