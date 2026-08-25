@@ -209,17 +209,38 @@ def summarise(yes, no):
     }
 
 
+def book_sides(d):
+    """
+    Pull the two ladders out, whatever Kalshi is calling them today.
+
+    The live response is {"orderbook_fp": {"yes_dollars": [["0.24","525.62"],
+    ...], "no_dollars": [...]}} -- prices already in dollars, as strings. The
+    documented {"orderbook": {"yes": [[24, 525], ...]}} shape is still
+    accepted because a collection that has been running for weeks must not
+    stop over a rename, and the first version of this file read only that one
+    and quietly recorded 151 snapshots of nothing.
+    """
+    d = d or {}
+    for parent in ("orderbook_fp", "orderbook"):
+        ob = d.get(parent)
+        if not isinstance(ob, dict):
+            continue
+        for yk, nk in (("yes_dollars", "no_dollars"), ("yes", "no")):
+            if ob.get(yk) is not None or ob.get(nk) is not None:
+                return ob.get(yk), ob.get(nk)
+    return None, None
+
+
 def fetch_book(ticker, save_raw=False):
     d, err = get(KALSHI + "/markets/%s/orderbook" % ticker, {"depth": DEPTH})
     if err:
         return None, err
-    ob = (d or {}).get("orderbook") or {}
     if save_raw and not os.path.exists(RAW_SAMPLE):
         os.makedirs(OUT_DIR, exist_ok=True)
         with open(RAW_SAMPLE, "w") as f:
             json.dump(d, f, indent=1)
-    return summarise(parse_levels(ob.get("yes")),
-                     parse_levels(ob.get("no"))), None
+    yes, no = book_sides(d)
+    return summarise(parse_levels(yes), parse_levels(no)), None
 
 
 # ---------------------------------------------------------------------------
@@ -275,6 +296,19 @@ def collect(hours=None):
             first = False
             if err or not book:
                 print("  book unavailable (%s)" % (err or "empty")[:50], flush=True)
+                time.sleep(POLL_SECONDS)
+                continue
+
+            if not book.get("n_yes_levels") and not book.get("n_no_levels"):
+                # A row with no ladder in it is not a snapshot of anything.
+                # The first version of this file recorded 151 of them before
+                # anyone looked, because the response had been renamed and
+                # every book column came out blank while the run reported
+                # itself healthy. Refuse to write them and say so.
+                print("  %s  EMPTY BOOK -- not recording. Response shape may "
+                      "have changed; see %s"
+                      % (datetime.now().strftime("%H:%M:%S"), RAW_SAMPLE),
+                      flush=True)
                 time.sleep(POLL_SECONDS)
                 continue
 
@@ -390,7 +424,20 @@ def status():
                 - datetime.fromisoformat(times[0])).total_seconds() / 86400
     except Exception:                                         # noqa: BLE001
         pass
+    def has_book(r):
+        try:
+            return int(float(r.get("n_yes_levels") or 0)) > 0 \
+                or int(float(r.get("n_no_levels") or 0)) > 0
+        except ValueError:
+            return False
+
+    usable = [r for r in rows if has_book(r)]
     print("  snapshots        %d" % len(rows))
+    if len(usable) != len(rows):
+        print("  with a book      %d   <-- the rest recorded no ladder and"
+              % len(usable))
+        print("                        are not usable; filter on"
+              " n_yes_levels > 0")
     print("  contracts        %d  (%d settled)" % (len(tickers), len(settled)))
     print("  collecting for   %.1f days" % span)
     print()
