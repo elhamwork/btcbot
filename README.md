@@ -1,21 +1,17 @@
-# BTC 15-Minute Kalshi Strategy Backtester
+# btcbot
 
-A research backtester for Kalshi's `KXBTC15M` series (BTC 15-minute binary
-contracts). Its only purpose is to answer one question honestly:
+A bot that watches Kalshi's 15-minute Bitcoin contracts, and when it thinks
+the price is wrong, tells my phone. It bets paper money so we can find out
+whether it is right.
 
-> Does a BTC 15-minute Kalshi strategy have a statistically meaningful edge
-> after real prices, spreads, fees, and execution assumptions?
-
-**Current answer: no.** See [`results/final_report.md`](results/final_report.md).
-
-This is not a trading bot. There is no order execution code and none should be
-added until a strategy clears the gate described below.
+**It does not trade.** There is no account, no key, no order. It reads public
+prices and sends notifications.
 
 <!-- LIVE:BEGIN -->
 
 ## Live paper account
 
-**$970.88** &nbsp; -2.9% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 05:26 UTC
+**$970.88** &nbsp; -2.9% since $1,000 &nbsp;&middot;&nbsp; updated 24 Aug 10:50pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -27,14 +23,14 @@ Best $1,099.47, worst $926.64, fees paid $22.05.
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 25 Aug 05:15 | won | +22.38 | $970.88 | YES | 0.80 |
-| 25 Aug 03:45 | won | +21.86 | $948.50 | YES | 0.80 |
-| 25 Aug 01:15 | **LOST** | -104.65 | $926.64 | YES | 0.79 |
-| 25 Aug 00:30 | won | +16.83 | $1,031.29 | NO | 0.85 |
-| 24 Aug 19:30 | won | +16.56 | $1,014.46 | NO | 0.85 |
-| 24 Aug 18:15 | won | +28.97 | $997.90 | YES | 0.76 |
-| 24 Aug 17:15 | **LOST** | -108.67 | $968.93 | NO | 0.88 |
-| 24 Aug 14:15 | won | +24.85 | $1,077.60 | YES | 0.80 |
+| 24 Aug 10:15pm | won | +22.38 | $970.88 | YES | 0.80 |
+| 24 Aug 8:45pm | won | +21.86 | $948.50 | YES | 0.80 |
+| 24 Aug 6:15pm | **LOST** | -104.65 | $926.64 | YES | 0.79 |
+| 24 Aug 5:30pm | won | +16.83 | $1,031.29 | NO | 0.85 |
+| 24 Aug 12:30pm | won | +16.56 | $1,014.46 | NO | 0.85 |
+| 24 Aug 11:15am | won | +28.97 | $997.90 | YES | 0.76 |
+| 24 Aug 10:15am | **LOST** | -108.67 | $968.93 | NO | 0.88 |
+| 24 Aug 7:15am | won | +24.85 | $1,077.60 | YES | 0.80 |
 
 16 of the roughly 100 settled calls needed before this win rate
 means much. Two or three losses in the first dozen is ordinary;
@@ -50,198 +46,83 @@ Rebuilt each time the cloud watcher saves, about once an hour.
 
 ---
 
-## The headline result
+## What it actually does
 
-| Test split, probability quality | Brier | Log loss | ROC-AUC |
-|---|---|---|---|
-| **Market mid-price** | **0.1353** | **0.4155** | 0.8901 |
-| Analytic GBM baseline | 0.1418 | 0.4594 | 0.8820 |
-| Logistic baseline (Strategy A) | 0.1483 | 0.5730 | 0.8657 |
+Every 15 minutes Kalshi opens a contract: *will Bitcoin be higher in fifteen
+minutes than it is right now?* You can buy YES or NO at whatever the market is
+charging, and it pays $1 if you are right and nothing if you are wrong.
 
-The market's own price is a better probability estimate than either model, on
-every split, by every scoring rule. When your estimate is worse than the price
-you are betting against, every "edge" you compute is your own error.
+The bot works out its own answer from three things: how far Bitcoin is from
+the target, how many minutes are left, and how fast it has been moving. If its
+answer disagrees with the price by at least 7 cents, and the price is between
+70c and 90c, and the disagreement is still there two minutes later, it calls
+it and your phone buzzes.
 
-Trading follows directly: 263 trades, 60.08% win rate, **−7.79% ROI**, profit
-factor 0.92. The break-even win rate implied by the prices actually paid was
-60.65%. The strategy won 60.08% of the time. It lost by almost exactly the
-spread.
+It passes on almost everything. Over 63 days of history it found about four
+calls a day out of ninety-six contracts.
 
-**The gate:** a model must beat a Brier of 0.1353 before any trading rule
-built on it is worth testing.
+## Is it working?
 
----
+The numbers above are the only honest answer, and there are not enough of them
+yet. Roughly 100 settled calls are needed before a win rate means anything.
 
-## A look-ahead bug was found and fixed
+The 63-day study it was built on: **272 trades, 89.3% right against an 81.3%
+break-even, +10.35% per dollar staked after fees.** Whether that survives
+contact with the live market is exactly what the account above is testing.
 
-The first run reported a 63.9% win rate and **+28.7% ROI**. That was false.
+Two or three losses in the first dozen calls is ordinary. Four or more in
+twenty would say the model is wrong, and I would take it apart rather than
+defend it.
 
-Coinbase timestamps each 1-minute bar at the **start** of its bucket, so the
-`close` of the bar labelled `T` is the price at `T+1`. Joining a decision at
-time `T` to that bar fed the model a price one minute into the future — nearly
-the answer itself at the 1-minute decision point.
+## Why it might not work
 
-Two independent anchors caught it, neither visible to the model:
+- **63 days is 63 days.** The edge may not persist.
+- **We take the offer.** Someone chose to leave it there. That cost cannot be
+  measured from historical prices.
+- **Size.** These contracts trade a few hundred dollars over their whole life.
+  Past about $10,000 the paper account stops describing anything real.
+- **The market is a better forecaster than we are.** Measured, over the same
+  63 days. The bot's only claim is one narrow band where its disagreement has
+  been worth something.
 
-- **Settlement** agreement peaked at a one-minute shift (92.3%) rather than at
-  zero (86.9%).
-- **The strike**, which Kalshi fixes at spot on open, matched the bar's *open*
-  rather than its close.
+## What has been tried and thrown away
 
-Bars are now re-labelled to bar-end (`config.BTC_BAR_SHIFT_MINUTES`), and
-`data/cleaner.py::_check_alignment` re-runs both tests on every
-`--prepare-data`, reporting the best shift by each anchor. Both currently read
-`+0`.
+About 130 ideas. Three survived: the 70-90c band, the 7-cent threshold, and
+the two-minute confirmation. The rejections are written down with their
+numbers rather than forgotten -- in the header of `check.py` and in
+[the literature review](results/reports/literature_review.md).
 
-The whole apparent edge was the bug. This is worth stating plainly because it
-is the normal failure mode of backtests, and it produced a result that looked
-excellent rather than obviously broken.
+A few worth knowing about, because they are the obvious things to suggest:
 
----
+| idea | verdict |
+|---|---|
+| Learn from past losses and avoid them | 100% on the losses it studied, worse than nothing on new trades |
+| Cut a losing trade early | Worse |
+| Trade smaller after a drawdown | Worse, and the worst point did not move |
+| Buy cheaper for bigger wins | Costs exactly what it is worth in win rate |
+| A second price feed (Bitstamp) | 26% more accurate. Made no better trades |
+| Time-of-day volatility | The cycle is real and already absorbed by the model |
 
-## Data
-
-Everything is real. Nothing is simulated, interpolated, or back-filled.
+## Where things are
 
 | | |
 |---|---|
-| Kalshi | `KXBTC15M`, public REST API, **no account required** |
-| | 1,320 settled contracts, 19,845 per-minute bid/ask candles |
-| BTC price | Coinbase `BTC-USD`, 1-minute OHLCV, 20,161 bars, 100% coverage |
-| Period | 2026-08-06 → 2026-08-20 (14 days) |
-| Outcome balance | 50.4% YES — a genuine coin flip |
+| [`cloud_state/learning_report.md`](cloud_state/learning_report.md) | full history: every call, the calibration table, why the losses happened |
+| `check.py` | the whole bot, and the reasoning, in the file header |
+| `bookwatch.py` | records the order book -- the one untested idea, three weeks from an answer |
+| [`docs/RESEARCH.md`](docs/RESEARCH.md) | the original 14-day study, the look-ahead bug, and how look-ahead is prevented |
+| [`results/reports/literature_review.md`](results/reports/literature_review.md) | what the published research says, re-tested on our own data |
+| `real_data/` | the raw Kalshi and Bitcoin data, so any of this can be re-checked |
 
-`KXBTC15M` runs one contract every 15 minutes with **one strike per event**,
-set at spot when the contract opens. That makes every contract a near
-coin-flip and avoids the deep in/out-of-the-money strike ladder of Kalshi's
-hourly `KXBTCD` series.
+## Running it
 
-### Collecting it
-
-Collection is separate from analysis, because the machine that can reach
-Kalshi is often not the machine running the analysis. Each script is
-standard-library only — no `pip install`, no API key, read-only:
-
-```bash
-python3 discover_series.py     # which BTC series exist, and their real cadence
-python3 fetch_15m.py           # Kalshi contracts + per-minute bid/ask
-python3 fetch_btc_prices.py    # BTC 1-minute OHLCV from Coinbase
-```
-
-They write to `real_data/`. See [`HOW_TO_GET_DATA.md`](HOW_TO_GET_DATA.md) for
-step-by-step instructions.
-
----
-
-## Usage
-
-```bash
-pip install -r requirements.txt
-
-python main.py --download          # status of the collected data files
-python main.py --prepare-data      # clean, audit, verify causality, build panel
-python main.py --backtest baseline # Strategy A (logistic)
-python main.py --backtest analytic # no-fit GBM null
-python main.py --backtest market   # market mid reference (scores only)
-python main.py --report            # charts, statistics, final_report.md
-```
-
-`--backtest technical` and `--backtest ml` intentionally refuse to run. See
-"Not done yet" below.
-
----
-
-## How look-ahead bias is prevented
-
-The rule: at a decision made at time `T`, only information available at `T`.
-
-1. **Causal indicators.** Every function in `features/indicators.py` uses
-   trailing windows and recursive EMAs. Nothing is shifted backwards.
-2. **Tested, not asserted.** `verify_no_lookahead()` rebuilds features from a
-   truncated history at 150 random timestamps and compares against the
-   full-series computation. Any peeking shows up as a mismatch. It currently
-   reports a worst relative difference of exactly `0.00e+00`, and
-   `--prepare-data` aborts if that changes.
-3. **Clock alignment.** `_check_alignment()` independently verifies the BTC
-   clock against settlement and strike-at-open — the check that caught the bug
-   above.
-4. **Quotes are as-of.** A decision at `T` uses the candle whose period *ends*
-   at `T`. Nothing later in the contract's life is visible.
-5. **Bankroll causality.** `portfolio.verify_causality()` asserts every trade's
-   stake was sized from the bankroll as it stood before that trade. The
-   backtest aborts on violation.
-6. **Labels are for scoring only.** The settled result never enters a feature.
-
----
-
-## Execution assumptions
-
-Pessimistic where there is doubt. All configurable in `config.py`.
-
-- YES buys pay `yes_ask`; NO buys pay `1 − yes_bid`. **Never the mid.**
-- Kalshi fee `ceil(0.07 × contracts × P × (1−P))` charged on entry.
-  ⚠️ `FEE_SCHEDULE_VERIFIED_LIVE = False` — `docs.kalshi.com` was unreachable
-  from the build environment, so this is the published formula, unconfirmed.
-- Skip if spread > 5¢, or price outside 5¢–95¢.
-- One trade per contract, so a single contract cannot spawn ten correlated
-  trades.
-- Fixed-fractional sizing, 1% of bankroll, from $1,000.
-
----
-
-## Overfitting controls
-
-- Chronological splits only: train 60% / validation 20% / test 20%, by contract
-  close time. Never random.
-- 3 models × 28 parameter combinations swept **on validation only**.
-- The test split was scored once, after the model was locked.
-- Calibration is fit on validation with the underlying model frozen.
-- Volatility-regime buckets are cut at **train** quantiles.
-- The best validation configuration was deliberately *not* carried into test.
-
----
-
-## Project layout
+It runs itself, on GitHub's machines, every hour. Nothing to install and
+nothing to keep awake. To run it yourself:
 
 ```
-config.py                  all assumptions and thresholds
-main.py                    CLI
-fetch_15m.py               standalone Kalshi collector
-fetch_btc_prices.py        standalone Coinbase collector
-discover_series.py         standalone series discovery
-data/       loader, cleaner (audit), downloader (docs)
-features/   indicators (causal), feature_engine (panel + verification)
-models/     baseline (analytic / logistic / market), logistic + ml (stubs)
-backtest/   engine, execution, portfolio, metrics
-analysis/   breakdowns, statistics, charts, report_builder
-results/    final_report.md, reports/, charts/, trades/
+python3 check.py            # look once, or keep watching
+python3 check.py --report   # write the full history
+python3 check.py --alerts   # hook up phone notifications
 ```
 
----
-
-## Known limitations
-
-1. **14 days, 1,320 contracts.** Short. A small real edge could hide here —
-   though the observed failure is not marginal.
-2. **Feed mismatch.** Coinbase reproduces Kalshi's settlement 92.3% of the
-   time; disagreements cluster on near-ties, where the two indices differ by a
-   few dollars. This adds feature noise, making the model's job *harder* — it
-   cannot manufacture an edge, only hide one.
-3. **No order-book depth.** Best bid/ask per minute only; fills assumed at the
-   quoted ask for the full position.
-4. **Minute resolution.** The 30-second entry point in the original spec is not
-   observable and is not faked.
-5. **Fee schedule unverified.** See above.
-
----
-
-## Not done yet
-
-Strategy B (technical features) and Strategy C (ML) are stubs. Per the
-specification, work stopped after the baseline so results could be reviewed
-first. Both stubs document the gate they must clear: **beat a Brier of
-0.1353**, the market's own score, before any trading rule is worth testing.
-
-Before adding model complexity, consider the simpler explanation: a coin flip
-priced with a 1-cent spread plus fees may simply be efficiently priced. "No
-edge" is a legitimate finding, not a failure of method.
+Standard library only. No account, no API key, read-only.

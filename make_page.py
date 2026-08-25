@@ -28,6 +28,14 @@ import os
 import sys
 from datetime import datetime, timezone
 
+try:                                    # every timestamp shown is local time
+    from zoneinfo import ZoneInfo       # -- UTC is not a time anyone lives in
+    LOCAL = ZoneInfo("America/Los_Angeles")
+    LOCAL_NAME = "California time"
+except Exception:                                             # noqa: BLE001
+    LOCAL = timezone.utc                # no tzdata: say UTC rather than lie
+    LOCAL_NAME = "UTC"
+
 import check
 
 
@@ -114,15 +122,33 @@ def money(v, dp=2):
 
 
 def clock(ts):
-    """'2026-08-25T02:41:00Z' -> '25 Aug 02:41'. Blank stays blank."""
+    """
+    A UTC timestamp as California local time: '24 Aug 7:41pm'.
+
+    Everything the bot stores is UTC, which is right for storage and wrong
+    for reading. Kalshi's own clock is New York; ours is here.
+    """
     s = str(ts or "")
     if len(s) < 16:
         return "-"
     try:
         d = datetime.fromisoformat(s.replace("Z", "+00:00"))
-        return d.strftime("%d %b %H:%M")
+        if d.tzinfo is None:
+            d = d.replace(tzinfo=timezone.utc)
+        d = d.astimezone(LOCAL)
+        return "%s %d:%02d%s" % (d.strftime("%d %b"),
+                                 (d.hour % 12) or 12, d.minute,
+                                 "am" if d.hour < 12 else "pm")
     except Exception:                                         # noqa: BLE001
         return s[:16].replace("T", " ")
+
+
+def stamp(d):
+    """'24 Aug 10:49pm California time' -- for the one line that says when."""
+    d = d.astimezone(LOCAL)
+    return "%s %d:%02d%s %s" % (d.strftime("%d %b"), (d.hour % 12) or 12,
+                                d.minute, "am" if d.hour < 12 else "pm",
+                                LOCAL_NAME)
 
 
 CSS = """
@@ -323,12 +349,12 @@ def build(mem, updated):
     A('</div>')
 
     A('<footer>')
-    A('Updated %s UTC, rebuilt each time the cloud watcher saves &mdash; '
+    A('Updated %s, rebuilt each time the cloud watcher saves &mdash; '
       'about once an hour.<br>'
       'Paper trading only: no broker, no account, no orders. '
       'Source and raw state in '
       '<a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.'
-      % esc(updated.strftime("%d %b %Y %H:%M")))
+      % esc(stamp(updated)))
     A('</footer>')
     A('</div>')
     return "<!doctype html>\n<html lang=\"en\">\n" + "\n".join(L) + "\n</html>\n"
@@ -382,9 +408,9 @@ def readme_block(mem, updated):
     A = L.append
     A("## Live paper account")
     A("")
-    A("**%s** &nbsp; %+.1f%% since %s &nbsp;&middot;&nbsp; updated %s UTC"
+    A("**%s** &nbsp; %+.1f%% since %s &nbsp;&middot;&nbsp; updated %s"
       % (money(b["cash"]), g["growth"], money(b["start"], 0),
-         updated.strftime("%d %b %H:%M")))
+         stamp(updated)))
     A("")
     if done:
         A("| calls settled | won / lost | win rate | break-even it must beat |")
