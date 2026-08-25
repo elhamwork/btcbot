@@ -15,7 +15,7 @@ added until a strategy clears the gate described below.
 
 ## Live paper account
 
-**$926.64** &nbsp; -7.3% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 03:57 UTC
+**$926.64** &nbsp; -7.3% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 04:00 UTC
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
