@@ -109,10 +109,13 @@ jobs:
             python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
               cloud_state/check_memory.json
             python3 check.py --report || true
-            # The page is a view of the state, so it is rebuilt from the
-            # merged copy, after the merge, never from this run's own.
+            # Both views are views of the state, so they are rebuilt from
+            # the merged copy, after the merge, never from this run's own.
+            # make_page.py writes docs/index.html and the LIVE block in
+            # README.md -- the README is what you get with no login and no
+            # settings, so it must be committed too.
             python3 make_page.py || true
-            git add cloud_state docs
+            git add cloud_state docs README.md
             if git diff --staged --quiet; then echo "nothing new"; exit 0; fi
             git commit -m "watch: $(date -u +%Y-%m-%dT%H:%MZ)"
             if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Build docs/index.html -- the page you can open on your phone.
+Build the two live views of the paper account: the repo front page and
+docs/index.html.
 
 Why a page and not just the markdown report: the report lives at a URL
 nobody can type, renders badly on a phone, and needs a GitHub login to be
@@ -10,8 +11,13 @@ It is a *view*. It computes nothing and decides nothing -- everything on it
 comes from cloud_state/check_memory.json, which check.py writes. If a number
 here disagrees with `check.py --record`, this file is wrong, not the bot.
 
-Self-contained on purpose: no fonts, scripts or images fetched from anywhere,
-so it renders the same on a phone with a bad connection as on a laptop.
+The HTML page is self-contained on purpose: no fonts, scripts or images
+fetched from anywhere, so it renders the same on a phone with a bad
+connection as on a laptop.
+
+The README block exists because the HTML page needs GitHub Pages switched on
+by hand, and until that happens the shortest address that works with no
+login and no setup is the repo front page itself.
 
     CHECK_STATE_DIR=cloud_state python3 make_page.py [out.html]
 """
@@ -328,15 +334,107 @@ def build(mem, updated):
     return "<!doctype html>\n<html lang=\"en\">\n" + "\n".join(L) + "\n</html>\n"
 
 
+# ------------------------------------------------------------------- readme
+
+BEGIN = "<!-- LIVE:BEGIN -->"
+END = "<!-- LIVE:END -->"
+
+
+def readme_block(mem, updated):
+    """
+    The same numbers as a markdown block, for the repo front page.
+
+    github.com/elhamwork/btcbot is the shortest address that needs no login
+    and no settings, and GitHub renders the README there on a phone. So the
+    front page carries the headline and the last few calls; the full history
+    stays on the HTML page and in learning_report.md.
+    """
+    g = gather(mem)
+    b, done = g["bank"], g["done"]
+    L = [BEGIN, ""]
+    A = L.append
+    A("## Live paper account")
+    A("")
+    A("**%s** &nbsp; %+.1f%% since %s &nbsp;&middot;&nbsp; updated %s UTC"
+      % (money(b["cash"]), g["growth"], money(b["start"], 0),
+         updated.strftime("%d %b %H:%M")))
+    A("")
+    if done:
+        A("| calls settled | won / lost | win rate | break-even it must beat |")
+        A("|---|---|---|---|")
+        A("| %d | %d / %d | %.1f%% | %.1f%% |"
+          % (len(done), g["wins"], g["losses"], g["win_rate"], g["breakeven"]))
+        A("")
+        A("Best %s, worst %s, fees paid %s."
+          % (money(b["peak"]), money(b["low"]), money(b["fees"])))
+        A("")
+        A("### Last %d calls" % min(8, len(done)))
+        A("")
+        A("| closed | result | paid | account after | side | price |")
+        A("|---|---|---|---|---|---|")
+        for r in list(reversed(done))[:8]:
+            A("| %s | %s | %s | %s | %s | %.2f |"
+              % (clock(r.get("close_time")),
+                 "won" if r["correct"] else "**LOST**",
+                 ("%+.2f" % r["paid"]) if r.get("paid") is not None else "-",
+                 money(r["bank_after"])
+                 if r.get("bank_after") is not None else "-",
+                 r.get("side", "-"), r.get("price", 0)))
+        A("")
+        if g["open"]:
+            A("%d call%s open right now."
+              % (len(g["open"]), "" if len(g["open"]) == 1 else "s"))
+            A("")
+        if len(done) < 100:
+            A("%d of the roughly 100 settled calls needed before this win rate"
+              % len(done))
+            A("means much. Two or three losses in the first dozen is ordinary;")
+            A("four or more in twenty would say the model is wrong.")
+            A("")
+    else:
+        A("No settled calls yet.")
+        A("")
+    A("Paper only: no broker, no account, no orders. Full history in")
+    A("[`cloud_state/learning_report.md`](cloud_state/learning_report.md).")
+    A("Rebuilt each time the cloud watcher saves, about once an hour.")
+    A("")
+    A(END)
+    return "\n".join(L)
+
+
+def patch_readme(path, mem, updated):
+    """Replace the marked block in README.md. Leaves the rest alone."""
+    try:
+        with open(path) as f:
+            s = f.read()
+    except OSError as e:
+        print("  README not updated (%s)" % e)
+        return False
+    i, j = s.find(BEGIN), s.find(END)
+    if i < 0 or j < 0 or j < i:
+        print("  README has no %s ... %s block; left alone" % (BEGIN, END))
+        return False
+    new = s[:i] + readme_block(mem, updated) + s[j + len(END):]
+    if new == s:
+        return False
+    with open(path, "w") as f:
+        f.write(new)
+    print("  Updated %s" % path)
+    return True
+
+
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "docs", "index.html")
+    here = os.path.dirname(os.path.abspath(__file__))
     mem = check.load_memory()
-    page = build(mem, datetime.now(timezone.utc))
+    now = datetime.now(timezone.utc)
+    page = build(mem, now)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w") as f:
         f.write(page)
     print("  Wrote %s (%.1f KB)" % (out, len(page) / 1024.0))
+    patch_readme(os.path.join(here, "README.md"), mem, now)
 
 
 if __name__ == "__main__":

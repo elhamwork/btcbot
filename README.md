@@ -11,9 +11,42 @@ contracts). Its only purpose is to answer one question honestly:
 This is not a trading bot. There is no order execution code and none should be
 added until a strategy clears the gate described below.
 
-**Live paper results: <https://elhamwork.github.io/btcbot/>** -- one page, no
-login, rebuilt each time the cloud watcher saves (about hourly). Paper only:
-no broker, no account, no orders.
+<!-- LIVE:BEGIN -->
+
+## Live paper account
+
+**$926.64** &nbsp; -7.3% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 03:57 UTC
+
+| calls settled | won / lost | win rate | break-even it must beat |
+|---|---|---|---|
+| 14 | 11 / 3 | 78.6% | 80.8% |
+
+Best $1,099.47, worst $926.64, fees paid $19.42.
+
+### Last 8 calls
+
+| closed | result | paid | account after | side | price |
+|---|---|---|---|---|---|
+| 25 Aug 01:15 | **LOST** | -104.65 | $926.64 | YES | 0.79 |
+| 25 Aug 00:30 | won | +16.83 | $1,031.29 | NO | 0.85 |
+| 24 Aug 19:30 | won | +16.56 | $1,014.46 | NO | 0.85 |
+| 24 Aug 18:15 | won | +28.97 | $997.90 | YES | 0.76 |
+| 24 Aug 17:15 | **LOST** | -108.67 | $968.93 | NO | 0.88 |
+| 24 Aug 14:15 | won | +24.85 | $1,077.60 | YES | 0.80 |
+| 24 Aug 13:45 | won | +32.23 | $1,052.75 | NO | 0.75 |
+| 24 Aug 13:00 | won | +17.98 | $1,020.52 | YES | 0.84 |
+
+1 call open right now.
+
+14 of the roughly 100 settled calls needed before this win rate
+means much. Two or three losses in the first dozen is ordinary;
+four or more in twenty would say the model is wrong.
+
+Paper only: no broker, no account, no orders. Full history in
+[`cloud_state/learning_report.md`](cloud_state/learning_report.md).
+Rebuilt each time the cloud watcher saves, about once an hour.
+
+<!-- LIVE:END -->
 
 ---
 
