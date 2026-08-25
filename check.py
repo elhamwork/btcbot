@@ -990,6 +990,53 @@ def write_report(mem):
         A("call -- so a losing row with a small gap and a lot of time left is")
         A("the bot being unlucky, and one with a big gap is it being wrong.")
         A("")
+    if done and any(not r["correct"] for r in done):
+        # NB: the report's line buffer is already called L in this function,
+        # so these must not be.
+        lost = [r for r in done if not r["correct"]]
+        wonr = [r for r in done if r["correct"]]
+        A("## Why the losses happened")
+        A("")
+        A("| closed | side | price | edge | BTC vs target | min left |")
+        A("|---|---|---|---|---|---|")
+        for r in lost:
+            A("| %s | %s | %.2f | %.0f%% | %s | %s |"
+              % (str(r["close_time"])[5:16].replace("T", " "), r["side"],
+                 r["price"], 100 * r.get("edge", 0),
+                 ("%+d" % r["dist"]) if r.get("dist") is not None else "-",
+                 ("%.0f" % r["mins"]) if r.get("mins") is not None else "-"))
+        A("")
+
+        def avg(rows, k):
+            v = [rw[k] for rw in rows if rw.get(k) is not None]
+            return sum(v) / len(v) if v else None
+
+        A("| | n | avg price | avg edge | avg min left |")
+        A("|---|---|---|---|---|")
+        for lab, rows in (("won", wonr), ("lost", lost)):
+            ap, ae, am = avg(rows, "price"), avg(rows, "edge"), avg(rows, "mins")
+            A("| %s | %d | %s | %s | %s |"
+              % (lab, len(rows),
+                 "%.2f" % ap if ap else "-",
+                 "%.0f%%" % (100 * ae) if ae else "-",
+                 "%.0f" % am if am else "-"))
+        A("")
+        A("**Read this as a thermometer, not a filter.** A rule fitted to")
+        A("avoid these particular losses was built and measured: it reached a")
+        A("100% win rate on the losses it had studied and did *worse than")
+        A("nothing* on new trades. It memorised them; it did not learn from")
+        A("them. Losing trades in the 63-day study had, if anything, slightly")
+        A("*more* edge than winners -- 11.6 points against 11.4 -- and the")
+        A("biggest signals ever taken include two losses. They are not")
+        A("distinguishable in advance, and that is not a gap in the bot: a")
+        A("contract trades at 80c precisely because nobody knows which fifth")
+        A("of them fail.")
+        A("")
+        A("What this table is for is spotting a pattern that is *large and")
+        A("persistent* -- losses clustered at one price, one time of day, one")
+        A("side -- over dozens of trades, not three. If one appears here and")
+        A("holds up, it is worth acting on. Until then it is a thermometer.")
+        A("")
     A("## What would change the conclusion")
     A("")
     A("The backtest says setups like these hit 89.3% against an 81.3%")

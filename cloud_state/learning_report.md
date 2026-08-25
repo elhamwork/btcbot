@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 2026-08-25 00:56 UTC by `check.py --report`.
+Written 2026-08-25 01:51 UTC by `check.py --report`.
 
 ## The short version
 
@@ -102,6 +102,34 @@ target BTC was when the call was made. That number, the minutes
 left, and how fast BTC had been moving are the whole basis of every
 call -- so a losing row with a small gap and a lot of time left is
 the bot being unlucky, and one with a big gap is it being wrong.
+
+## Why the losses happened
+
+| closed | side | price | edge | BTC vs target | min left |
+|---|---|---|---|---|---|
+| 08-24 08:00 | YES | 0.73 | 9% | -16 | 15 |
+| 08-24 17:15 | NO | 0.88 | 8% | -420 | 12 |
+
+| | n | avg price | avg edge | avg min left |
+|---|---|---|---|---|
+| won | 11 | 0.81 | 11% | 13 |
+| lost | 2 | 0.80 | 8% | 13 |
+
+**Read this as a thermometer, not a filter.** A rule fitted to
+avoid these particular losses was built and measured: it reached a
+100% win rate on the losses it had studied and did *worse than
+nothing* on new trades. It memorised them; it did not learn from
+them. Losing trades in the 63-day study had, if anything, slightly
+*more* edge than winners -- 11.6 points against 11.4 -- and the
+biggest signals ever taken include two losses. They are not
+distinguishable in advance, and that is not a gap in the bot: a
+contract trades at 80c precisely because nobody knows which fifth
+of them fail.
+
+What this table is for is spotting a pattern that is *large and
+persistent* -- losses clustered at one price, one time of day, one
+side -- over dozens of trades, not three. If one appears here and
+holds up, it is worth acting on. Until then it is a thermometer.
 
 ## What would change the conclusion
 
