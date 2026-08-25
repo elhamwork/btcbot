@@ -1,0 +1,62 @@
+# Publish docs/index.html at a short address.
+#
+# The state has always been in the repo, but reading it meant a GitHub login,
+# a branch name with a slash in it, and a JSON file. This puts the same
+# numbers at one address you can type from memory on a phone:
+#
+#     https://elhamwork.github.io/btcbot/
+#
+# Free, and free without limit only because this repo is PUBLIC. Making it
+# private turns Pages off unless you pay. Nothing secret is published: the
+# page holds paper-trading results and public market data. The ntfy topic
+# stays a repository secret and never appears in the page.
+#
+# It runs whenever watch.yml commits a rebuilt page -- about once an hour --
+# and takes well under a minute.
+
+name: pages
+
+on:
+  push:
+    branches: ["claude/btc-kalshi-backtester-w74k71"]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a deploy in progress. Unlike the watcher, a half-finished
+# deploy is not something the next run can pick up -- it would leave the
+# page as it was and give no sign of why.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # enablement: true turns Pages on the first time this runs, so there is
+      # no switch to find in Settings. If your token cannot do that the step
+      # fails saying so -- then Settings > Pages > Source: GitHub Actions,
+      # once, by hand.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

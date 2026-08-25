@@ -109,7 +109,10 @@ jobs:
             python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
               cloud_state/check_memory.json
             python3 check.py --report || true
-            git add cloud_state
+            # The page is a view of the state, so it is rebuilt from the
+            # merged copy, after the merge, never from this run's own.
+            python3 make_page.py || true
+            git add cloud_state docs
             if git diff --staged --quiet; then echo "nothing new"; exit 0; fi
             git commit -m "watch: $(date -u +%Y-%m-%dT%H:%MZ)"
             if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi

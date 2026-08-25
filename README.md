@@ -11,6 +11,10 @@ contracts). Its only purpose is to answer one question honestly:
 This is not a trading bot. There is no order execution code and none should be
 added until a strategy clears the gate described below.
 
+**Live paper results: <https://elhamwork.github.io/btcbot/>** -- one page, no
+login, rebuilt each time the cloud watcher saves (about hourly). Paper only:
+no broker, no account, no orders.
+
 ---
 
 ## The headline result
