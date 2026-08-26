@@ -1,0 +1,72 @@
+# Download deep KXBTC15M history. Manual, resumable, one chunk per run.
+#
+# The 63-day study exists because fetch_15m.py stopped at 6,000 contracts --
+# a cap chosen for a 14-day window and never raised. This has no cap. A year
+# is roughly 35,000 contracts and one request each, so it does not fit in a
+# single job; each run works for five hours, commits what it got, and the
+# next run resumes from progress.json.
+#
+# Run it from the Actions tab. Repeat until --status stops growing.
+#
+# It does not touch cloud_state, so it cannot disturb the live watcher, and
+# it commits only under real_data/kalshi15m/.
+
+name: fetch
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "How far back to ask Kalshi for"
+        default: "400"
+      minutes:
+        description: "Stop cleanly after this many minutes"
+        default: "300"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch                  # never two fetchers appending at once
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download
+        run: |
+          python3 fetch_15m_deep.py \
+            --days "${{ inputs.days }}" \
+            --minutes "${{ inputs.minutes }}"
+
+      # always() so a timeout still keeps the hours of downloading that
+      # already happened -- the whole point of the resume file.
+      - name: Save
+        if: always()
+        run: |
+          set -u
+          git config user.name  "btcbot"
+          git config user.email "btcbot@users.noreply.github.com"
+          for i in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME" || { sleep $((2 ** i)); continue; }
+            git stash push -- real_data/kalshi15m || true
+            git reset --hard "origin/$GITHUB_REF_NAME"
+            git stash pop || true
+            git add real_data/kalshi15m
+            if git diff --staged --quiet; then echo "nothing new"; exit 0; fi
+            git commit -m "fetch: $(date -u +%Y-%m-%dT%H:%MZ)"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep $((2 ** i))
+          done
+          exit 1
+
+      - name: What we have now
+        if: always()
+        run: python3 fetch_15m_deep.py --status
