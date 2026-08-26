@@ -1,17 +1,17 @@
 # What the bot has learned
 
-Written 25 Aug 2026 6:57pm California time by `check.py --report`.
+Written 25 Aug 2026 7:25pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,104.47** (started $1,000, +10.4%) |
-| best / worst it has been | $1,214.04 / $926.64 |
-| fees paid | $48.07 |
-| contracts looked at | 223 |
+| **paper account** | **$1,104.43** (started $1,000, +10.4%) |
+| best / worst it has been | $1,214.01 / $926.62 |
+| fees paid | $48.13 |
+| contracts looked at | 225 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 222 |
+| of those, settled and learned from | 224 |
 | actual calls (graded GOOD) | 33 |
 | calls that have settled | 33 |
 | calls right | 28 of 33 (85%) |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 222 live
+The 63-day study is worth 30 observations per row below. So 224 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -43,11 +43,11 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.281 | 4 (1 hit) | -0.004 |
 | 35-40% | 0.354 | 0.339 | 22 (7 hit) | -0.015 |
 | 40-45% | 0.384 | 0.380 | 24 (9 hit) | -0.004 |
-| 45-50% | 0.497 | 0.483 | 34 (16 hit) | -0.014 |
+| 45-50% | 0.497 | 0.475 | 35 (16 hit) | -0.021 ** |
 | 50-55% | 0.558 | 0.529 | 47 (24 hit) | -0.029 ** |
 | 55-60% | 0.605 | 0.560 | 31 (16 hit) | -0.045 ** |
 | 60-65% | 0.678 | 0.701 | 19 (14 hit) | +0.023 ** |
-| 65-70% | 0.738 | 0.714 | 15 (10 hit) | -0.024 ** |
+| 65-70% | 0.738 | 0.699 | 16 (10 hit) | -0.039 ** |
 | 70-75% | 0.814 | 0.836 | 4 (4 hit) | +0.022 ** |
 | 75-80% | 0.836 | 0.802 | 5 (3 hit) | -0.034 ** |
 | 80-85% | 0.885 | 0.892 | 2 (2 hit) | +0.007 |
@@ -58,8 +58,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 86 |
-| WEAK (50-70c) | 65 |
+| NONE (no disagreement) | 87 |
+| WEAK (50-70c) | 66 |
 | GOOD | 25 |
 | BAD (cheap side) | 22 |
 | WEAK (small disagreement) | 11 |
@@ -67,7 +67,7 @@ three lucky wins should not rewrite the table.
 | WEAK (5-10 min) | 3 |
 | ALMOST (not confirmed yet) | 3 |
 
-Leaned YES 136 times, NO 87 times. Over 63 days of history the
+Leaned YES 137 times, NO 88 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -80,33 +80,33 @@ split is 49.5% YES, so anything near half and half is normal.
 | 06:45 | 2026-08-24 07:00 | YES | 0.87 | +54 | 14 | RIGHT | +15.21 | $1,099.47 |
 | 07:45 | 2026-08-24 08:00 | YES | 0.73 | -17 | 15 | **wrong** | -112.03 | $987.44 |
 | 09:00 | 2026-08-24 09:15 | YES | 0.86 | -2 | 14 | RIGHT | +15.10 | $1,002.54 |
-| 12:45 | 2026-08-24 13:00 | YES | 0.84 | +47 | 15 | RIGHT | +17.98 | $1,020.52 |
-| 13:30 | 2026-08-24 13:45 | NO | 0.75 | -39 | 15 | RIGHT | +32.23 | $1,052.75 |
-| 14:00 | 2026-08-24 14:15 | YES | 0.80 | +68 | 14 | RIGHT | +24.85 | $1,077.60 |
-| 17:02 | 2026-08-24 17:15 | NO | 0.88 | -421 | 12 | **wrong** | -108.67 | $968.93 |
-| 18:03 | 2026-08-24 18:15 | YES | 0.76 | +139 | 11 | RIGHT | +28.97 | $997.90 |
-| 19:19 | 2026-08-24 19:30 | NO | 0.85 | -339 | 11 | RIGHT | +16.56 | $1,014.46 |
-| 00:19 | 2026-08-25 00:30 | NO | 0.85 | -183 | 10 | RIGHT | +16.83 | $1,031.29 |
-| 01:04 | 2026-08-25 01:15 | YES | 0.79 | +194 | 10 | **wrong** | -104.65 | $926.64 |
-| 03:33 | 2026-08-25 03:45 | YES | 0.80 | +172 | 11 | RIGHT | +21.86 | $948.50 |
-| 05:04 | 2026-08-25 05:15 | YES | 0.80 | +147 | 10 | RIGHT | +22.38 | $970.88 |
-| 05:34 | 2026-08-25 05:45 | YES | 0.74 | +115 | 10 | RIGHT | +32.34 | $1,003.22 |
-| 07:03 | 2026-08-25 07:15 | YES | 0.75 | +134 | 12 | RIGHT | +31.68 | $1,034.90 |
-| 08:18 | 2026-08-25 08:30 | YES | 0.79 | +118 | 12 | RIGHT | +25.99 | $1,060.89 |
-| 08:49 | 2026-08-25 09:00 | NO | 0.84 | -181 | 11 | RIGHT | +19.02 | $1,079.91 |
-| 09:03 | 2026-08-25 09:15 | NO | 0.83 | -128 | 12 | RIGHT | +20.83 | $1,100.74 |
-| 09:47 | 2026-08-25 10:00 | NO | 0.78 | -152 | 12 | RIGHT | +29.35 | $1,130.09 |
-| 10:47 | 2026-08-25 11:00 | YES | 0.90 | +191 | 12 | RIGHT | +11.77 | $1,141.86 |
-| 11:34 | 2026-08-25 11:45 | YES | 0.74 | +99 | 11 | **wrong** | -116.27 | $1,025.59 |
-| 12:04 | 2026-08-25 12:15 | NO | 0.84 | -179 | 10 | RIGHT | +18.39 | $1,043.98 |
-| 12:49 | 2026-08-25 13:00 | YES | 0.82 | +136 | 10 | RIGHT | +21.60 | $1,065.58 |
-| 16:34 | 2026-08-25 16:45 | YES | 0.88 | +190 | 10 | RIGHT | +13.63 | $1,079.21 |
-| 18:34 | 2026-08-25 18:45 | NO | 0.81 | -99 | 10 | RIGHT | +23.87 | $1,103.08 |
-| 23:03 | 2026-08-25 23:15 | YES | 0.70 | +83 | 12 | RIGHT | +44.96 | $1,148.04 |
-| 23:49 | 2026-08-26 00:00 | NO | 0.75 | -83 | 10 | RIGHT | +36.26 | $1,184.30 |
-| 01:04 | 2026-08-26 01:15 | YES | 0.79 | +155 | 10 | RIGHT | +29.74 | $1,214.04 |
-| 01:19 | 2026-08-26 01:30 | YES | 0.75 | +112 | 10 | **wrong** | -123.52 | $1,090.52 |
-| 01:33 | 2026-08-26 01:45 | YES | 0.88 | +183 | 12 | RIGHT | +13.95 | $1,104.47 |
+| 12:45 | 2026-08-24 13:00 | YES | 0.84 | +47 | 15 | RIGHT | +17.97 | $1,020.51 |
+| 13:30 | 2026-08-24 13:45 | NO | 0.75 | -39 | 15 | RIGHT | +32.23 | $1,052.74 |
+| 14:00 | 2026-08-24 14:15 | YES | 0.80 | +68 | 14 | RIGHT | +24.84 | $1,077.58 |
+| 17:02 | 2026-08-24 17:15 | NO | 0.88 | -421 | 12 | **wrong** | -108.67 | $968.91 |
+| 18:03 | 2026-08-24 18:15 | YES | 0.76 | +139 | 11 | RIGHT | +28.97 | $997.88 |
+| 19:19 | 2026-08-24 19:30 | NO | 0.85 | -339 | 11 | RIGHT | +16.56 | $1,014.44 |
+| 00:19 | 2026-08-25 00:30 | NO | 0.85 | -183 | 10 | RIGHT | +16.83 | $1,031.27 |
+| 01:04 | 2026-08-25 01:15 | YES | 0.79 | +194 | 10 | **wrong** | -104.65 | $926.62 |
+| 03:33 | 2026-08-25 03:45 | YES | 0.80 | +172 | 11 | RIGHT | +21.86 | $948.49 |
+| 05:04 | 2026-08-25 05:15 | YES | 0.80 | +147 | 10 | RIGHT | +22.38 | $970.87 |
+| 05:34 | 2026-08-25 05:45 | YES | 0.74 | +115 | 10 | RIGHT | +32.34 | $1,003.21 |
+| 07:03 | 2026-08-25 07:15 | YES | 0.75 | +134 | 12 | RIGHT | +31.68 | $1,034.89 |
+| 08:18 | 2026-08-25 08:30 | YES | 0.79 | +118 | 12 | RIGHT | +25.98 | $1,060.87 |
+| 08:49 | 2026-08-25 09:00 | NO | 0.84 | -181 | 11 | RIGHT | +19.02 | $1,079.89 |
+| 09:03 | 2026-08-25 09:15 | NO | 0.83 | -128 | 12 | RIGHT | +20.83 | $1,100.72 |
+| 09:47 | 2026-08-25 10:00 | NO | 0.78 | -152 | 12 | RIGHT | +29.35 | $1,130.07 |
+| 10:47 | 2026-08-25 11:00 | YES | 0.90 | +191 | 12 | RIGHT | +11.76 | $1,141.83 |
+| 11:34 | 2026-08-25 11:45 | YES | 0.74 | +99 | 11 | **wrong** | -116.26 | $1,025.57 |
+| 12:04 | 2026-08-25 12:15 | NO | 0.84 | -179 | 10 | RIGHT | +18.39 | $1,043.96 |
+| 12:49 | 2026-08-25 13:00 | YES | 0.82 | +136 | 10 | RIGHT | +21.60 | $1,065.56 |
+| 16:34 | 2026-08-25 16:45 | YES | 0.88 | +190 | 10 | RIGHT | +13.63 | $1,079.19 |
+| 18:34 | 2026-08-25 18:45 | NO | 0.81 | -99 | 10 | RIGHT | +23.87 | $1,103.06 |
+| 23:03 | 2026-08-25 23:15 | YES | 0.70 | +83 | 12 | RIGHT | +44.96 | $1,148.02 |
+| 23:49 | 2026-08-26 00:00 | NO | 0.75 | -83 | 10 | RIGHT | +36.26 | $1,184.28 |
+| 01:04 | 2026-08-26 01:15 | YES | 0.79 | +155 | 10 | RIGHT | +29.73 | $1,214.01 |
+| 01:19 | 2026-08-26 01:30 | YES | 0.75 | +112 | 10 | **wrong** | -123.53 | $1,090.48 |
+| 01:33 | 2026-08-26 01:45 | YES | 0.88 | +183 | 12 | RIGHT | +13.95 | $1,104.43 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -173,10 +173,13 @@ $899 on the way -- a 29% drawdown. Two reasons not to plan around that:
 
 1. The price window and the confirmation rule were both chosen after
    looking at all three periods. Some of that 12x is the choosing.
-2. It is not fillable. A 15-minute market trades on the order of ten
-   thousand contracts in its entire life. A few hundred contracts is
-   fine; a few thousand moves the price against you. Past roughly
-   $10,000 the arithmetic stops describing anything that could happen.
+2. Size eventually bites, though later than once claimed. Measured
+   from 3,130 live order-book snapshots, the median size at the best
+   price is $3,062 and the median spread is 1c. A $1,000 order fills
+   at the quoted price 73% of the time and within 5c always; a $2,500
+   order fills at the quote 56% of the time. So the arithmetic holds
+   to roughly a $25,000 account, not the $10,000 asserted before the
+   book was actually recorded.
 
 A first week -- about 40 calls -- lands between $814 and $1,908 in the
 same simulation, and finishes below $1,000 about 17 times in 100.
