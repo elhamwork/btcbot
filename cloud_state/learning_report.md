@@ -1,22 +1,22 @@
 # What the bot has learned
 
-Written 26 Aug 2026 1:56pm California time by `check.py --report`.
+Written 26 Aug 2026 4:35pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,198.21** (started $1,000, +19.8%) |
-| best / worst it has been | $1,214.01 / $926.62 |
-| fees paid | $62.19 |
-| contracts looked at | 292 |
+| **paper account** | **$1,279.61** (started $1,000, +28.0%) |
+| best / worst it has been | $1,279.61 / $926.62 |
+| fees paid | $66.63 |
+| contracts looked at | 301 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 291 |
-| actual calls (graded GOOD) | 42 |
-| calls that have settled | 42 |
-| calls right | 36 of 42 (86%) |
+| of those, settled and learned from | 300 |
+| actual calls (graded GOOD) | 44 |
+| calls that have settled | 44 |
+| calls right | 38 of 44 (86%) |
 | break-even needed | 80% |
-| paper P&L | +6.7% per dollar staked |
+| paper P&L | +7.9% per dollar staked |
 
 ## What it is actually learning
 
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 291 live
+The 63-day study is worth 30 observations per row below. So 300 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,13 +40,13 @@ three lucky wins should not rewrite the table.
 | 15-20% | 0.167 | 0.194 | 1 (1 hit) | +0.027 ** |
 | 20-25% | 0.178 | 0.173 | 1 (0 hit) | -0.006 |
 | 25-30% | 0.238 | 0.210 | 4 (0 hit) | -0.028 ** |
-| 30-35% | 0.286 | 0.286 | 7 (2 hit) | +0.000 |
+| 30-35% | 0.286 | 0.278 | 8 (2 hit) | -0.007 |
 | 35-40% | 0.354 | 0.339 | 25 (8 hit) | -0.015 |
-| 40-45% | 0.384 | 0.369 | 31 (11 hit) | -0.015 |
-| 45-50% | 0.497 | 0.468 | 51 (23 hit) | -0.029 ** |
-| 50-55% | 0.558 | 0.497 | 66 (31 hit) | -0.060 ** |
-| 55-60% | 0.605 | 0.564 | 43 (23 hit) | -0.041 ** |
-| 60-65% | 0.678 | 0.673 | 21 (14 hit) | -0.005 |
+| 40-45% | 0.384 | 0.383 | 34 (13 hit) | -0.001 |
+| 45-50% | 0.497 | 0.474 | 52 (24 hit) | -0.022 ** |
+| 50-55% | 0.558 | 0.507 | 68 (33 hit) | -0.050 ** |
+| 55-60% | 0.605 | 0.556 | 44 (23 hit) | -0.049 ** |
+| 60-65% | 0.678 | 0.680 | 22 (15 hit) | +0.002 |
 | 65-70% | 0.738 | 0.699 | 16 (10 hit) | -0.039 ** |
 | 70-75% | 0.814 | 0.840 | 5 (5 hit) | +0.027 ** |
 | 75-80% | 0.836 | 0.813 | 7 (5 hit) | -0.023 ** |
@@ -58,16 +58,16 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 123 |
-| WEAK (50-70c) | 74 |
-| BAD (cheap side) | 34 |
-| GOOD | 34 |
-| WEAK (small disagreement) | 11 |
+| NONE (no disagreement) | 126 |
+| WEAK (50-70c) | 76 |
+| GOOD | 36 |
+| BAD (cheap side) | 35 |
+| WEAK (small disagreement) | 12 |
 | BAD (last 5 min) | 9 |
 | ALMOST (not confirmed yet) | 4 |
 | WEAK (5-10 min) | 3 |
 
-Leaned YES 173 times, NO 119 times. Over 63 days of history the
+Leaned YES 178 times, NO 123 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -116,6 +116,8 @@ split is 49.5% YES, so anything near half and half is normal.
 | 16:48 | 2026-08-26 17:00 | YES | 0.81 | +179 | 12 | RIGHT | +24.79 | $1,145.46 |
 | 17:18 | 2026-08-26 17:30 | YES | 0.87 | +164 | 11 | RIGHT | +16.07 | $1,161.53 |
 | 19:49 | 2026-08-26 20:00 | YES | 0.75 | +62 | 10 | RIGHT | +36.68 | $1,198.21 |
+| 22:04 | 2026-08-26 22:15 | YES | 0.72 | +85 | 10 | RIGHT | +44.25 | $1,242.46 |
+| 22:19 | 2026-08-26 22:30 | YES | 0.76 | +155 | 11 | RIGHT | +37.15 | $1,279.61 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -145,7 +147,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 36 | 0.81 | 11% | 12 |
+| won | 38 | 0.80 | 11% | 12 |
 | lost | 6 | 0.79 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
