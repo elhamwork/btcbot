@@ -181,11 +181,22 @@ CONFIRM_GAP_MIN = 1.5
 #
 # Two things that number is not. It is not a forecast: the price window and
 # the confirmation rule were both chosen by looking at all three periods, so
-# some of that 12x is the choosing. And it is not reachable in practice --
-# a 15-minute market trades on the order of ten thousand contracts in its
-# whole life, so a few hundred contracts fills fine and a few thousand moves
-# the price against you. The paper account ignores that entirely. Past about
-# $10,000 the arithmetic here stops describing anything real.
+# some of that 12x is the choosing. And the size ceiling is real, though
+# further out than this file used to claim. MEASURED from 3,130 live
+# order-book snapshots across 78 contracts: the median size resting at the
+# best price is $3,062 and the median spread is one cent.
+#
+#     order size   fills at the best price   fills within 5c of it
+#     $250                     86%                    100%
+#     $1,000                   73%                    100%
+#     $2,500                   56%                     99%
+#     $5,000                   31%                     97%
+#
+# At 10% of the account that is: $1,100 account fills 90% of the time,
+# $10,000 account fills 73%, $25,000 account fills 56% and always within a
+# couple of cents. So friction starts around $2,500 a bet -- an account near
+# $25,000 -- not the $10,000 previously asserted here, which was a guess from
+# total contract volume rather than a measurement of the book.
 #
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
@@ -1358,10 +1369,13 @@ def write_report(mem):
     A("")
     A("1. The price window and the confirmation rule were both chosen after")
     A("   looking at all three periods. Some of that 12x is the choosing.")
-    A("2. It is not fillable. A 15-minute market trades on the order of ten")
-    A("   thousand contracts in its entire life. A few hundred contracts is")
-    A("   fine; a few thousand moves the price against you. Past roughly")
-    A("   $10,000 the arithmetic stops describing anything that could happen.")
+    A("2. Size eventually bites, though later than once claimed. Measured")
+    A("   from 3,130 live order-book snapshots, the median size at the best")
+    A("   price is $3,062 and the median spread is 1c. A $1,000 order fills")
+    A("   at the quoted price 73% of the time and within 5c always; a $2,500")
+    A("   order fills at the quote 56% of the time. So the arithmetic holds")
+    A("   to roughly a $25,000 account, not the $10,000 asserted before the")
+    A("   book was actually recorded.")
     A("")
     A("A first week -- about 40 calls -- lands between $814 and $1,908 in the")
     A("same simulation, and finishes below $1,000 about 17 times in 100.")
