@@ -16,12 +16,11 @@
 
 name: pages
 
+# Manual only. The state now publishes every five minutes, and a push
+# trigger would mean twelve deploys an hour -- each of which currently fails,
+# because Pages has never been switched on by hand (see the enablement note
+# below). Turn Pages on, then add the push trigger back.
 on:
-  push:
-    branches: ["claude/btc-kalshi-backtester-w74k71"]
-    paths:
-      - "docs/**"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:

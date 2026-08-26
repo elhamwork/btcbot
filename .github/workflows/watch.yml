@@ -97,10 +97,18 @@ jobs:
         run: |
           python3 bookwatch.py --hours 2 > bookwatch.log 2>&1 &
           book=$!
+          # Publish every five minutes from a separate clone, so the report
+          # and the front page track the phone alerts instead of trailing the
+          # hourly handover by up to an hour. It never touches this workspace,
+          # so the watch below is uninterrupted.
+          STATE="$CHECK_STATE_DIR" BRANCH="$GITHUB_REF_NAME" \
+            ./publish.sh loop 300 > publish.log 2>&1 &
+          pub=$!
           python3 check.py --loop --hours 2
-          kill "$book" 2>/dev/null || true
-          wait "$book" 2>/dev/null || true
+          kill "$book" "$pub" 2>/dev/null || true
+          wait "$book" "$pub" 2>/dev/null || true
           tail -n 3 bookwatch.log || true
+          tail -n 3 publish.log || true
 
       # always() so a timeout, a crash, or being cancelled by the next
       # scheduled run all still save the learning.
