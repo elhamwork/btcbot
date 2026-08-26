@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,153.99** &nbsp; +15.4% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 9:34pm California time
+**$1,153.99** &nbsp; +15.4% since $1,000 &nbsp;&middot;&nbsp; updated 25 Aug 10:10pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -109,6 +109,9 @@ A few worth knowing about, because they are the obvious things to suggest:
 | Buy cheaper for bigger wins | Costs exactly what it is worth in win rate |
 | A second price feed (Bitstamp) | 26% more accurate. Made no better trades |
 | Time-of-day volatility | The cycle is real and already absorbed by the model |
+| Chart indicators (RSI, EMA, MACD...) | 0 of 15 significant across 329 trades |
+| Kalshi lagging spot by 3-7 seconds | Dies inside one minute; unreachable |
+| Adding at the dip when it falls to 10c | 3 of 41 recovered. The market prices it right |
 | One all-in bet on a sure thing | There is no sure thing, and 15% every time beats it |
 
 ## Where things are
@@ -120,6 +123,7 @@ A few worth knowing about, because they are the obvious things to suggest:
 | `bookwatch.py` | records the order book -- the one untested idea, three weeks from an answer |
 | [`docs/RESEARCH.md`](docs/RESEARCH.md) | the original 14-day study, the look-ahead bug, and how look-ahead is prevented |
 | [`results/reports/literature_review.md`](results/reports/literature_review.md) | what the published research says, re-tested on our own data |
+| [`results/reports/what_others_are_doing.md`](results/reports/what_others_are_doing.md) | the other bots on this market, and which of their claims survive |
 | `real_data/` | the raw Kalshi and Bitcoin data, so any of this can be re-checked |
 
 ## Running it

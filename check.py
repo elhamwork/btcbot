@@ -201,6 +201,28 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: that Kalshi lags spot by long enough to matter.
+#
+# Widely claimed in the wild that Kalshi reprices 3-7 seconds behind spot,
+# and in places that the stale window runs 30-90 seconds. If true at the
+# longer end it would be the easiest money in this project.
+#
+# Measured over 69,122 minute-triples across 5,994 contracts:
+#
+#     BTC this minute    vs  Kalshi this minute     +0.7007
+#     BTC this minute    vs  Kalshi NEXT minute     -0.0071
+#     Kalshi this minute vs  BTC NEXT minute        +0.0026
+#
+# Kalshi tracks BTC at +0.70 inside the same minute and says nothing at all
+# about the next one. R-squared of the lag effect is 0.0001.
+#
+# So the 30-90 second version is false. The 3-7 second version may be true
+# and is unreachable: it dies inside one minute, and this bot polls every
+# fifteen seconds and then waits for a human to open an app. That is a race
+# against colocated infrastructure and not one to enter.
+#
+# Settles a question asked repeatedly: a faster price feed would not help.
+# study_lag.py re-runs it.
 # TESTED AND REJECTED: gap-to-volatility as a tell for which calls lose.
 #
 # Two contracts, both $99 from the target, one lost and one won. The losing
