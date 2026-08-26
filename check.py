@@ -190,6 +190,50 @@ CONFIRM_GAP_MIN = 1.5
 # Over a first week (about 40 calls) the same simulation ends between $814
 # and $1,908, and finishes below $1,000 seventeen times in a hundred. That
 # spread, not the 12x, is what a week actually looks like.
+# TESTED AND REJECTED: gap-to-volatility as a tell for which calls lose.
+#
+# Two contracts, both $99 from the target, one lost and one won. The losing
+# one sat in a market moving $118 per ten minutes and the winning one in a
+# market moving $58 -- so the cushion was under one ordinary swing in the
+# first case and nearly two in the second. A clean story, and it was told as
+# the mechanism before it was checked. It is wrong.
+#
+# Over 329 trades the ratio does not distinguish them at all:
+#
+#                            losses      wins
+#     gap / typical swing      1.20      1.17
+#     gap to target             $67       $65
+#     typical swing             $62       $58
+#     price paid               0.79      0.80
+#     edge                    12.0%     11.3%
+#     minutes left             10.5      10.4
+#
+# Losses carried MORE edge than wins, again. Win rate by ratio, five equal
+# buckets: 87.9, 87.9, 92.3, 86.4, 87.9. Flat.
+#
+# What the ratio governs is the PRICE, not the outcome:
+#
+#     gap / swing    trades   win rate   break-even   margin
+#     0.50 - 0.80        66     87.9%       72.8%      +15.0
+#     0.80 - 1.04        66     87.9%       77.6%      +10.3
+#     1.04 - 1.24        65     92.3%       79.7%      +12.6
+#     1.24 - 1.54        66     86.4%       83.8%       +2.6
+#     1.54 - 2.26        66     87.9%       85.7%       +2.2
+#
+# The market reads the ratio correctly -- break-even climbs from 73% to 86%
+# in step with it -- while our win rate stays near 88% throughout. So the
+# margin is LARGEST where the cushion is thinnest, the opposite of the
+# intuition. The trades that look frightening are the ones worth taking, and
+# the comfortable ones are priced so there is nothing left in them.
+#
+# Fifth angle tried on separating losses in advance, after the loss
+# classifier, early exits, drawdown throttling and the price bands. All five
+# agree. An 88% model loses 12% of the time and there is no tell in the data
+# available before the call.
+#
+# Recorded here mainly as a caution about method: the ratio story was built
+# from two contracts and sounded mechanistic. Two contracts will support any
+# story. Nothing goes in this file on fewer than a few hundred.
 # WATCHED, NOT ACTED ON: the 80-85c band is the weak one, not the cheap end.
 #
 # Asked after four live losses whether the low end of the band -- around 70c
