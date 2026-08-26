@@ -21,6 +21,7 @@ Standard library only.
 """
 
 import json
+import math
 import sys
 
 N_BINS = 20
@@ -91,7 +92,8 @@ def rebuild(preds):
         won = bool(rec.get("correct"))
         stake = round(bank["cash"] * PAPER_STAKE, 2)
         contracts = stake / price
-        fee = round(FEE_RATE * contracts * price * (1 - price), 2)
+        # Kalshi rounds the fee UP to the nearest cent, not to nearest.
+        fee = math.ceil(FEE_RATE * contracts * price * (1 - price) * 100) / 100
         rec["bet"] = {"stake": stake, "contracts": round(contracts, 1),
                       "fee": fee, "to_win": round(contracts * (1 - price) - fee, 2),
                       "bank_before": round(bank["cash"], 2)}

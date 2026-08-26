@@ -82,9 +82,20 @@ ONE_TRADE_PER_CONTRACT = True
 
 # Kalshi trading fee: ceil(0.07 * contracts * P * (1-P)) in cents, charged on
 # entry. UNVERIFIED-LIVE: docs.kalshi.com was unreachable from the build
-# environment, so this comes from Kalshi's published general fee formula and
-# has not been confirmed against the live fee schedule. Settlement is assumed
-# free. Raise FEE_RATE to stress-test.
+# environment, so this comes from Kalshi's published general fee formula:
+#
+#     fee = ceil(0.07 x contracts x price x (1 - price))     rounded UP to 1c
+#
+# Re-checked August 2026 against several independent write-ups of the
+# published schedule, which agree on the formula, on the rate, and on the
+# rounding being upward -- the code had been rounding to nearest, which made
+# every paper trade slightly cheaper than a real one. That is now fixed.
+# Settlement is assumed free, and maker orders are reported as free on most
+# markets, which we do not rely on because we always take.
+#
+# The flag below stays False on purpose. The formula is confirmed against the
+# published schedule; it has never been confirmed against a real fill, and
+# only a real fill can do that. Raise FEE_RATE to stress-test.
 FEE_RATE = 0.07
 FEE_SCHEDULE_VERIFIED_LIVE = False
 APPLY_FEES = True

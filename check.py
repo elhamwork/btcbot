@@ -918,7 +918,10 @@ def plan_stake(mem, price):
     b = bank_of(mem)
     stake = round(b["cash"] * PAPER_STAKE, 2)
     contracts = stake / max(price, 0.01)
-    fee = round(FEE_RATE * contracts * price * (1 - price), 2)
+    # Kalshi rounds the fee UP to the nearest cent, not to nearest -- verified
+    # against the published schedule. Rounding to nearest made every paper
+    # trade very slightly cheaper than a real one.
+    fee = math.ceil(FEE_RATE * contracts * price * (1 - price) * 100) / 100
     return {"stake": stake, "contracts": round(contracts, 1), "fee": fee,
             "to_win": round(contracts * (1 - price) - fee, 2),
             "bank_before": round(b["cash"], 2)}
