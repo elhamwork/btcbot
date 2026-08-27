@@ -1039,7 +1039,7 @@ def settle_pending(mem, quiet=False):
                      % ("Won " if paid and paid > 0 else "Lost ",
                         format(abs(round(paid or 0, 2)), ",.2f"),
                         format(round(b["cash"], 2), ",.2f"))) if paid is not None else ""
-            send_ntfy(
+            sent, detail = send_ntfy(
                 ("WON %+.0f  -  $%s" % (paid, format(round(b["cash"]), ",d")))
                 if paid is not None and ok else
                 ("LOST %.0f  -  $%s" % (abs(paid or 0),
@@ -1050,6 +1050,12 @@ def settle_pending(mem, quiet=False):
                 % (rec["side"], 100 * rec["price"], res.upper()),
                 tags="tada" if ok else "x",
                 priority="high" if ok else "default")
+            # Whether the phone actually heard about it. Discarding this is
+            # how three alerts went missing on 2026-08-27 with no trace.
+            rec["settle_alert"] = bool(sent)
+            rec["settle_alert_detail"] = detail
+            if not sent:
+                print("  ALERT NOT DELIVERED (settle): %s" % detail)
     if checked and not quiet:
         bits = ["learned from %d settled contract%s" % (checked, "" if checked == 1 else "s")]
         if right or wrong:
@@ -1207,6 +1213,17 @@ def write_report(mem):
     A("| of those, settled and learned from | %d |" % len(settled))
     A("| actual calls (graded GOOD) | %d |" % len(calls))
     A("| calls that have settled | %d |" % len(done))
+    # Delivery is not the same as calling. An alert that never arrived is a
+    # call you could not have taken, and until 2026-08-27 nothing recorded it.
+    known = [r for r in calls if r.get("call_alert") is not None]
+    if known:
+        missed = [r for r in known if not r["call_alert"]]
+        A("| alerts that reached the phone | %d of %d%s |"
+          % (len(known) - len(missed), len(known),
+             "  **%d FAILED**" % len(missed) if missed else ""))
+    if len(known) < len(calls):
+        A("| calls made before delivery was recorded | %d |"
+          % (len(calls) - len(known)))
     if done:
         w = sum(1 for r in done if r["correct"])
         stake = sum(r["price"] for r in done)
@@ -2089,12 +2106,21 @@ def evaluate(mem, a):
         # one job, which is to say what to buy and for how much.
         bet = next((r["bet"] for r in mem["predictions"]
                     if r["ticker"] == m.get("ticker") and r.get("bet")), None)
-        send_ntfy("%s %.0fc  -  %.0f min" % (side, 100 * price, mins),
-                  "$%s at %.0fc.  edge %.0f  -  paper $%s"
-                  % (format(bet["stake"], ",.0f") if bet else "?",
-                     100 * price, 100 * edge,
-                     format(round(bet["bank_before"]), ",d") if bet else "?"),
-                  tags="rotating_light", priority="high")
+        sent, detail = send_ntfy(
+            "%s %.0fc  -  %.0f min" % (side, 100 * price, mins),
+            "$%s at %.0fc.  edge %.0f  -  paper $%s"
+            % (format(bet["stake"], ",.0f") if bet else "?",
+               100 * price, 100 * edge,
+               format(round(bet["bank_before"]), ",d") if bet else "?"),
+            tags="rotating_light", priority="high")
+        for r in mem["predictions"]:
+            if r["ticker"] == m.get("ticker"):
+                r["call_alert"] = bool(sent)
+                r["call_alert_detail"] = detail
+        save_memory(mem)
+        print("  phone: %s (%s)" % ("sent" if sent else "NOT SENT", detail))
+        if not sent:
+            print("  >> THE ALERT DID NOT REACH YOUR PHONE. %s" % detail)
     print()
     print("  Buy %s at %.0f cents" % (side, 100 * price))
     if g["trade"]:
