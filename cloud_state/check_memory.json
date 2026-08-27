@@ -6359,6 +6359,25 @@
    "answered": false,
    "outcome": 1,
    "bet": null
+  },
+  {
+   "asked": "2026-08-27T09:00:58.087289+00:00",
+   "ticker": "KXBTC15M-26AUG270515-15",
+   "close_time": "2026-08-27T09:15:00Z",
+   "raw": 0.5290381252372536,
+   "p": 0.5071643137254902,
+   "side": "YES",
+   "price": 0.46,
+   "edge": 0.04716431372549018,
+   "grade": "BAD (cheap side)",
+   "mins": 14.0,
+   "spot": 79758.42,
+   "strike": 79742.28,
+   "dist": 16.14,
+   "vol": 0.000742,
+   "answered": false,
+   "outcome": null,
+   "bet": null
   }
  ],
  "bins_n": [
@@ -41480,6 +41499,43 @@
    {
     "mins": 1.06,
     "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26AUG270515-15": [
+   {
+    "mins": 14.03,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.78,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.53,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.27,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.76,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.51,
+    "side": "NO",
     "qual": false
    }
   ]
