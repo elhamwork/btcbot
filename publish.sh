@@ -7,8 +7,14 @@
 #
 # Saving from the running workspace is not an option: the save resets the tree
 # to the branch head, and check.py is writing to it. So this works in a
-# separate clone. The running bot is never touched, and there is no gap in
-# watching.
+# linked git WORKTREE -- a second checkout that shares the parent's .git.
+#
+# It was a clone first, and that silently did nothing for two hours.
+# actions/checkout writes the GitHub token into the workspace's LOCAL git
+# config as http.https://github.com/.extraheader; a fresh clone does not
+# inherit it, so every fetch failed authentication, retried three times and
+# gave up, once every five minutes, with the failure buried in a log nobody
+# read. A worktree shares the parent config, so credentials just work.
 #
 # Every merge here is union-based and idempotent (merge_state.py,
 # merge_books.py), so racing the hourly save costs nothing -- whichever lands
@@ -30,18 +36,19 @@ publish() {
     || { echo "  no memory yet"; return 0; }
   cp -r "$STATE/orderbook" /tmp/pub_mine/ 2>/dev/null || true
 
-  if [ ! -d "$WORK/.git" ]; then
+  if [ ! -e "$WORK/.git" ]; then
     rm -rf "$WORK"
-    git clone --quiet --branch "$BRANCH" --single-branch "$REPO" "$WORK" \
-      || { echo "  clone failed"; return 1; }
-    git -C "$WORK" remote set-url origin \
-      "$(git -C "$REPO" remote get-url origin)"
+    git -C "$REPO" fetch --quiet origin "$BRANCH" || true
+    # Detached, so it never fights the parent over the branch ref.
+    git -C "$REPO" worktree add --quiet --detach "$WORK" "origin/$BRANCH" \
+      || { echo "  PUBLISH: worktree add failed"; return 1; }
     git -C "$WORK" config user.name  "btcbot"
     git -C "$WORK" config user.email "btcbot@users.noreply.github.com"
   fi
 
   for i in 1 2 3; do
-    git -C "$WORK" fetch --quiet origin "$BRANCH" || { sleep $((2 ** i)); continue; }
+    git -C "$WORK" fetch --quiet origin "$BRANCH" \
+      || { echo "  PUBLISH: fetch failed (try $i)"; sleep $((2 ** i)); continue; }
     git -C "$WORK" reset --hard --quiet "origin/$BRANCH"
 
     python3 "$WORK/merge_state.py" /tmp/pub_mine/check_memory.json \
@@ -60,12 +67,13 @@ publish() {
     git -C "$WORK" add cloud_state docs README.md
     if git -C "$WORK" diff --staged --quiet; then echo "  no change"; return 0; fi
     git -C "$WORK" commit --quiet -m "state: $(date -u +%Y-%m-%dT%H:%MZ)"
-    if git -C "$WORK" push --quiet origin "HEAD:$BRANCH" 2>/dev/null; then
+    if git -C "$WORK" push --quiet origin "HEAD:$BRANCH"; then
       echo "  published $(date -u +%H:%MZ)"; return 0
     fi
+    echo "  PUBLISH: push rejected (try $i)"
     sleep $((2 ** i))
   done
-  echo "  publish failed after 3 tries"
+  echo "  PUBLISH FAILED after 3 tries -- the page is going stale"
   return 1
 }
 

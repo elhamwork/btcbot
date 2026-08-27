@@ -24,10 +24,15 @@ name: watch
 # so the bot was dark for four and a half hours and nobody could tell the
 # difference between "no setups" and "not running".
 #
-# Each run now lasts 2 hours and a new one starts every hour and takes over,
-# so the cover always overlaps. If GitHub skips or delays an hour -- it does
-# both -- the running job carries on regardless. The handover is lossless
-# because the outgoing run saves and the incoming one merges.
+# Each run lasts 5h30 and a new one starts every hour and takes over, so the
+# cover always overlaps and the handover is lossless -- the outgoing run
+# saves, the incoming one merges.
+#
+# It was 2 hours until 2026-08-27, when GitHub skipped three hourly schedules
+# in a row and the running job hit its own limit at 23:35 with no successor
+# until 02:47. Three hours and twelve minutes dark. Runs now last nearly as
+# long as a job is allowed to, so a skipped schedule cannot open a gap unless
+# the scheduler misses five hours' worth.
 on:
   schedule:
     - cron: "0 * * * *"
@@ -47,7 +52,7 @@ permissions:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 140
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
 
@@ -95,7 +100,7 @@ jobs:
           BOOK_OUT_DIR: ${{ github.workspace }}/cloud_state
           CHECK_LABEL: cloud
         run: |
-          python3 bookwatch.py --hours 2 > bookwatch.log 2>&1 &
+          python3 bookwatch.py --hours 5.5 > bookwatch.log 2>&1 &
           book=$!
           # Publish every five minutes from a separate clone, so the report
           # and the front page track the phone alerts instead of trailing the
@@ -104,7 +109,7 @@ jobs:
           STATE="$CHECK_STATE_DIR" BRANCH="$GITHUB_REF_NAME" \
             ./publish.sh loop 300 > publish.log 2>&1 &
           pub=$!
-          python3 check.py --loop --hours 2
+          python3 check.py --loop --hours 5.5
           kill "$book" "$pub" 2>/dev/null || true
           wait "$book" "$pub" 2>/dev/null || true
           tail -n 3 bookwatch.log || true
