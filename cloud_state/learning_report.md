@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 27 Aug 2026 7:33am California time by `check.py --report`.
+Written 27 Aug 2026 7:38am California time by `check.py --report`.
 
 ## The short version
 
@@ -14,6 +14,7 @@ Written 27 Aug 2026 7:33am California time by `check.py --report`.
 | of those, settled and learned from | 328 |
 | actual calls (graded GOOD) | 47 |
 | calls that have settled | 47 |
+| calls made before delivery was recorded | 47 |
 | calls right | 40 of 47 (85%) |
 | break-even needed | 80% |
 | paper P&L | +6.6% per dollar staked |
