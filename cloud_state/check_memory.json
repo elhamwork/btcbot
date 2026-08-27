@@ -6566,6 +6566,25 @@
    "dist": 64.98,
    "vol": 0.000669,
    "answered": false,
+   "outcome": 1,
+   "bet": null
+  },
+  {
+   "asked": "2026-08-27T14:45:29.672412+00:00",
+   "ticker": "KXBTC15M-26AUG271100-00",
+   "close_time": "2026-08-27T15:00:00Z",
+   "raw": 0.3769436598750353,
+   "p": 0.3325460714285714,
+   "side": "NO",
+   "price": 0.6599999999999999,
+   "edge": 0.007453928571428681,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.5,
+   "spot": 80291.02,
+   "strike": 80383.64,
+   "dist": -92.62,
+   "vol": 0.000965,
+   "answered": false,
    "outcome": null,
    "bet": null
   }
@@ -6583,7 +6602,7 @@
   60.0,
   74.0,
   48.0,
-  22.0,
+  23.0,
   17.0,
   6.0,
   7.0,
@@ -6605,7 +6624,7 @@
   27.0,
   37.0,
   27.0,
-  15.0,
+  16.0,
   10.0,
   6.0,
   5.0,
@@ -43751,6 +43770,78 @@
    {
     "mins": 1.79,
     "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26AUG271100-00": [
+   {
+    "mins": 14.51,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.25,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.0,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.74,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.48,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.97,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.46,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.2,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.95,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.69,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.44,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.18,
+    "side": "NO",
     "qual": false
    }
   ]
