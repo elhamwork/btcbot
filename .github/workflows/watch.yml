@@ -33,9 +33,15 @@ name: watch
 # until 02:47. Three hours and twelve minutes dark. Runs now last nearly as
 # long as a job is allowed to, so a skipped schedule cannot open a gap unless
 # the scheduler misses five hours' worth.
+# TWO schedules, half an hour apart. GitHub's scheduler is best-effort and on
+# 2026-08-27 it skipped roughly eight consecutive hourly slots, leaving the
+# bot dark from 10:21 to 13:36 -- the second three-hour gap in a day. Longer
+# runs did not fix it because the run still ends and nothing replaces it.
+# Two independent slots have to both be skipped for the same thing to happen.
 on:
   schedule:
     - cron: "0 * * * *"
+    - cron: "30 * * * *"
   workflow_dispatch:            # and a "Run workflow" button
 
 # A late-firing schedule used to queue behind the run it was meant to replace,
@@ -68,9 +74,14 @@ jobs:
       # $911.52 instead of $928.40.
       #
       # Wait for the outgoing run to finish saving, then take its work.
+      # 30s, not 90. This wait exists so the outgoing run finishes saving and
+      # the incoming one does not start from a stale account. With handovers
+      # now twice an hour, 90 seconds each was 3 minutes an hour of nobody
+      # watching. The publisher pushes every five minutes independently, so
+      # the checkout is fresh regardless and this is belt-and-braces.
       - name: Let the outgoing run save first
         run: |
-          sleep 90
+          sleep 30
           git fetch origin "$GITHUB_REF_NAME" --quiet || true
           git checkout "origin/$GITHUB_REF_NAME" -- cloud_state || true
           python3 - <<'PY'
