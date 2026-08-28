@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 28 Aug 2026 4:31am California time by `check.py --report`.
+Written 28 Aug 2026 4:36am California time by `check.py --report`.
 
 ## The short version
 
@@ -11,7 +11,7 @@ Written 28 Aug 2026 4:31am California time by `check.py --report`.
 | fees paid | $96.70 |
 | contracts looked at | 387 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 385 |
+| of those, settled and learned from | 386 |
 | actual calls (graded GOOD) | 61 |
 | calls that have settled | 61 |
 | alerts that reached the phone | 9 of 9 |
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 385 live
+The 63-day study is worth 30 observations per row below. So 386 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -46,7 +46,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.333 | 29 (9 hit) | -0.021 ** |
 | 40-45% | 0.384 | 0.357 | 50 (17 hit) | -0.028 ** |
 | 45-50% | 0.497 | 0.442 | 76 (32 hit) | -0.054 ** |
-| 50-55% | 0.558 | 0.524 | 84 (43 hit) | -0.034 ** |
+| 50-55% | 0.558 | 0.519 | 85 (43 hit) | -0.038 ** |
 | 55-60% | 0.605 | 0.575 | 52 (29 hit) | -0.030 ** |
 | 60-65% | 0.678 | 0.644 | 28 (17 hit) | -0.034 ** |
 | 65-70% | 0.738 | 0.697 | 19 (12 hit) | -0.041 ** |
