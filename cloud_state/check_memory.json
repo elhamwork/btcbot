@@ -8065,6 +8065,25 @@
    "dist": -91.31,
    "vol": 0.001474,
    "answered": false,
+   "outcome": 1,
+   "bet": null
+  },
+  {
+   "asked": "2026-08-28T14:30:48.312051+00:00",
+   "ticker": "KXBTC15M-26AUG281045-45",
+   "close_time": "2026-08-28T14:45:00Z",
+   "raw": 0.5086605910608883,
+   "p": 0.5190663247863249,
+   "side": "YES",
+   "price": 0.53,
+   "edge": -0.010933675213675165,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.2,
+   "spot": 78869.93,
+   "strike": 78861.22,
+   "dist": 8.71,
+   "vol": 0.00135,
+   "answered": false,
    "outcome": null,
    "bet": null
   }
@@ -8078,7 +8097,7 @@
   6.0,
   10.0,
   29.0,
-  52.0,
+  53.0,
   77.0,
   87.0,
   54.0,
@@ -8100,7 +8119,7 @@
   1.0,
   3.0,
   9.0,
-  17.0,
+  18.0,
   32.0,
   44.0,
   29.0,
@@ -38339,51 +38358,6 @@
   ],
   "KXBTC15M-26AUG281030-30": [
    {
-    "mins": 13.08,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.82,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.57,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.31,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.05,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.79,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.54,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.28,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.02,
-    "side": "YES",
-    "qual": true
-   },
-   {
     "mins": 10.77,
     "side": "YES",
     "qual": true
@@ -38535,6 +38509,83 @@
    },
    {
     "mins": 3.04,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.79,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.53,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.27,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.01,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.75,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.5,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.24,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.98,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.72,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26AUG281045-45": [
+   {
+    "mins": 14.2,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.94,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.68,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.42,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.17,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.91,
     "side": "YES",
     "qual": false
    }
