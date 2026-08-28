@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,165.35** &nbsp; +16.5% since $1,000 &nbsp;&middot;&nbsp; updated 28 Aug 4:16pm California time
+**$1,165.35** &nbsp; +16.5% since $1,000 &nbsp;&middot;&nbsp; updated 28 Aug 4:21pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -32,11 +32,13 @@ Best $1,279.61, worst $926.62, fees paid $106.20.
 | 28 Aug 4:15am | won | +13.47 | $1,176.09 | YES | 0.89 |
 | 28 Aug 4:00am | won | +39.41 | $1,162.62 | YES | 0.73 |
 
+1 call open right now.
+
 67 of the roughly 100 settled calls needed before this win rate
 means much. Two or three losses in the first dozen is ordinary;
 four or more in twenty would say the model is wrong.
 
-Collecting in the background: 11,596 order-book snapshots over 4 days (needs about three weeks).
+Collecting in the background: 11,611 order-book snapshots over 4 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
