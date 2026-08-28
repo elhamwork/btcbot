@@ -8020,13 +8020,13 @@
     "contracts": 139.2,
     "fee": 1.18,
     "to_win": 18.31,
-    "bank_before": 1197.16
+    "bank_before": 1197.17
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.3,
-   "bank_after": 1215.47,
+   "paid": 18.31,
+   "bank_after": 1215.48,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -38151,11 +38151,106 @@
     "mins": 13.03,
     "side": "NO",
     "qual": true
+   },
+   {
+    "mins": 12.77,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 12.52,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 12.26,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.0,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.74,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.49,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.23,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.97,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.45,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.19,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.93,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.68,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.42,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.16,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.9,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.64,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.39,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.13,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1215.47,
+  "cash": 1215.48,
   "start": 1000.0,
   "peak": 1279.61,
   "low": 926.62,
