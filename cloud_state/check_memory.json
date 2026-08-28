@@ -7533,6 +7533,25 @@
    "answered": false,
    "outcome": 0,
    "bet": null
+  },
+  {
+   "asked": "2026-08-28T08:35:31.116168+00:00",
+   "ticker": "KXBTC15M-26AUG280445-45",
+   "close_time": "2026-08-28T08:45:00Z",
+   "raw": 0.6339305113883384,
+   "p": 0.6550866666666666,
+   "side": "YES",
+   "price": 0.55,
+   "edge": 0.10508666666666655,
+   "grade": "WEAK (5-10 min)",
+   "mins": 9.5,
+   "spot": 79810.48,
+   "strike": 79795.05,
+   "dist": 15.43,
+   "vol": 0.000183,
+   "answered": false,
+   "outcome": null,
+   "bet": null
   }
  ],
  "bins_n": [
@@ -33163,6 +33182,108 @@
    },
    {
     "mins": 0.5,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26AUG280445-45": [
+   {
+    "mins": 9.48,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.23,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.98,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.72,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.47,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.22,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 7.96,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 7.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 7.46,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 7.2,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 6.95,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 6.7,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 6.44,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 6.19,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 5.93,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 5.68,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 5.43,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 5.17,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 4.92,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 4.67,
     "side": "NO",
     "qual": false
    }
