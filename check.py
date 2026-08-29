@@ -1558,6 +1558,64 @@ def calibrate(p):
     return CAL_Y[-1]
 
 
+def context(closes, strike, v, m, spread):
+    """
+    Everything about the moment that is not already recorded.
+
+    None of this is used to decide anything. It is recorded so that in a few
+    hundred calls the question "do the losses share something?" can be asked
+    with real data instead of a story built from nine trades. Every filter
+    tried so far failed because it was fitted to a handful of losses; this is
+    the only way to stop doing that.
+
+    closes is 124 minutes of 1-minute BTC closes, oldest first.
+    """
+    out = {}
+    try:
+        # How many times BTC crossed the target recently. A target it keeps
+        # crossing is one it will probably cross again -- the closest thing
+        # to support and resistance these contracts have.
+        for win in (15, 30):
+            seg = closes[-win:]
+            sign = [1 if c > strike else (-1 if c < strike else 0) for c in seg]
+            sign = [x for x in sign if x]
+            out["cross_%d" % win] = sum(
+                1 for a, b in zip(sign, sign[1:]) if a != b)
+    except Exception:                                         # noqa: BLE001
+        pass
+    try:
+        for win in (5, 15, 60):
+            if len(closes) > win:
+                out["move_%dm" % win] = round(
+                    math.log(closes[-1] / closes[-1 - win]), 6)
+    except (ValueError, ZeroDivisionError):
+        pass
+    try:
+        # Is this a fast minute by its own recent standards? A regime marker
+        # that does not depend on knowing the absolute level of volatility.
+        recent = [abs(math.log(b / a)) for a, b in zip(closes[-61:], closes[-60:])
+                  if a > 0 and b > 0]
+        if len(recent) > 20:
+            recent_sorted = sorted(recent)
+            med = recent_sorted[len(recent_sorted) // 2]
+            out["vol_ratio"] = round(v / med, 3) if med > 0 else None
+    except (ValueError, ZeroDivisionError):
+        pass
+    out["hour_utc"] = datetime.now(timezone.utc).hour
+    out["spread"] = round(spread, 4)
+    for src, dst in (("yes_bid_size_fp", "bid_size"),
+                     ("yes_ask_size_fp", "ask_size"),
+                     ("volume_fp", "volume"),
+                     ("open_interest_fp", "open_interest")):
+        try:
+            val = m.get(src)
+            if val is not None:
+                out[dst] = round(float(val), 2)
+        except (TypeError, ValueError):
+            pass
+    return out
+
+
 def bars():
     end = datetime.now(timezone.utc)
     start = end - timedelta(minutes=125)
@@ -2000,7 +2058,8 @@ def evaluate(mem, a):
                              "grade": grade_short, "mins": round(mins, 1),
                              "spot": round(spot, 2), "strike": round(strike, 2),
                              "dist": round(spot - strike, 2),
-                             "vol": round(v, 6)})
+                             "vol": round(v, 6),
+                             **context(closes, strike, v, m, spread)})
                 save_memory(mem)
             return
         mem["predictions"].append({
@@ -2015,7 +2074,8 @@ def evaluate(mem, a):
             "spot": round(spot, 2), "strike": round(strike, 2),
             "dist": round(spot - strike, 2), "vol": round(v, 6),
             "answered": bool(answered), "outcome": None,
-            "bet": plan_stake(mem, price) if answered else None})
+            "bet": plan_stake(mem, price) if answered else None,
+            **context(closes, strike, v, m, spread)})
         mem["predictions"] = mem["predictions"][-2000:]
         save_memory(mem)
 
