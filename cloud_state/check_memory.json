@@ -9439,6 +9439,25 @@
    "answered": false,
    "outcome": null,
    "bet": null
+  },
+  {
+   "asked": "2026-08-29T09:45:36.678977+00:00",
+   "ticker": "KXBTC15M-26AUG290600-00",
+   "close_time": "2026-08-29T10:00:00Z",
+   "raw": 0.3754425949927779,
+   "p": 0.3487512903225806,
+   "side": "NO",
+   "price": 0.64,
+   "edge": 0.01124870967741931,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.4,
+   "spot": 77664.2,
+   "strike": 77687.63,
+   "dist": -23.43,
+   "vol": 0.00025,
+   "answered": false,
+   "outcome": null,
+   "bet": null
   }
  ],
  "bins_n": [
@@ -32837,21 +32856,6 @@
   ],
   "KXBTC15M-26AUG290545-45": [
    {
-    "mins": 11.65,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.4,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.14,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.89,
     "side": "YES",
     "qual": false
@@ -33034,6 +33038,38 @@
    {
     "mins": 1.68,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.42,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.17,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.91,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26AUG290600-00": [
+   {
+    "mins": 14.39,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.14,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.88,
+    "side": "NO",
     "qual": false
    }
   ]
