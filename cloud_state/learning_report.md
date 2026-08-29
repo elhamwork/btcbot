@@ -1,24 +1,24 @@
 # What the bot has learned
 
-Written 29 Aug 2026 10:29am California time by `check.py --report`.
+Written 29 Aug 2026 10:34am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,229.47** (started $1,000, +22.9%) |
+| **paper account** | **$1,104.36** (started $1,000, +10.4%) |
 | best / worst it has been | $1,433.36 / $926.62 |
-| fees paid | $130.85 |
-| contracts looked at | 491 |
+| fees paid | $133.01 |
+| contracts looked at | 492 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 490 |
+| of those, settled and learned from | 491 |
 | actual calls (graded GOOD) | 81 |
-| calls that have settled | 80 |
+| calls that have settled | 81 |
 | alerts that reached the phone | 29 of 29 |
 | calls made before delivery was recorded | 52 |
-| calls right | 67 of 80 (84%) |
+| calls right | 67 of 81 (83%) |
 | break-even needed | 79% |
-| paper P&L | +5.4% per dollar staked |
+| paper P&L | +4.2% per dollar staked |
 
 ## What it is actually learning
 
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 490 live
+The 63-day study is worth 30 observations per row below. So 491 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.434 | 92 (38 hit) | -0.063 ** |
 | 50-55% | 0.558 | 0.519 | 114 (58 hit) | -0.039 ** |
 | 55-60% | 0.605 | 0.573 | 61 (34 hit) | -0.032 ** |
-| 60-65% | 0.678 | 0.677 | 37 (25 hit) | -0.001 |
+| 60-65% | 0.678 | 0.667 | 38 (25 hit) | -0.011 |
 | 65-70% | 0.738 | 0.704 | 27 (18 hit) | -0.034 ** |
 | 70-75% | 0.814 | 0.827 | 8 (7 hit) | +0.013 |
 | 75-80% | 0.836 | 0.818 | 8 (6 hit) | -0.018 |
@@ -60,7 +60,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 206 |
+| NONE (no disagreement) | 207 |
 | WEAK (50-70c) | 105 |
 | GOOD | 73 |
 | BAD (cheap side) | 57 |
@@ -69,18 +69,8 @@ three lucky wins should not rewrite the table.
 | ALMOST (not confirmed yet) | 5 |
 | WEAK (5-10 min) | 4 |
 
-Leaned YES 274 times, NO 217 times. Over 63 days of history the
+Leaned YES 275 times, NO 217 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 17:18 | KXBTC15M-26AUG291330-30 | YES | 0.75 | $122.95 | $38.82 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -166,6 +156,7 @@ publish the result, so this list is usually empty.
 | 14:48 | 2026-08-29 15:00 | YES | 0.84 | +191 | 12 | RIGHT | +23.74 | $1,348.45 |
 | 15:48 | 2026-08-29 16:00 | YES | 0.86 | +89 | 11 | RIGHT | +20.62 | $1,369.07 |
 | 16:18 | 2026-08-29 16:30 | YES | 0.72 | +67 | 12 | **wrong** | -139.60 | $1,229.47 |
+| 17:18 | 2026-08-29 17:30 | YES | 0.75 | +67 | 12 | **wrong** | -125.11 | $1,104.36 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -199,11 +190,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | 08-28 17:00 | YES | 0.71 | 13% | +117 | 12 |
 | 08-29 12:30 | YES | 0.83 | 7% | +49 | 12 |
 | 08-29 16:30 | YES | 0.72 | 11% | +66 | 12 |
+| 08-29 17:30 | YES | 0.75 | 12% | +67 | 12 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 67 | 0.80 | 11% | 12 |
-| lost | 13 | 0.77 | 10% | 11 |
+| lost | 14 | 0.77 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
