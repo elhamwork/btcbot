@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 29 Aug 2026 1:28pm California time by `check.py --report`.
+Written 29 Aug 2026 1:33pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,9 +9,9 @@ Written 29 Aug 2026 1:28pm California time by `check.py --report`.
 | **paper account** | **$1,143.12** (started $1,000, +14.3%) |
 | best / worst it has been | $1,433.36 / $926.62 |
 | fees paid | $135.10 |
-| contracts looked at | 503 |
+| contracts looked at | 504 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 502 |
+| of those, settled and learned from | 503 |
 | actual calls (graded GOOD) | 82 |
 | calls that have settled | 82 |
 | alerts that reached the phone | 30 of 30 |
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 502 live
+The 63-day study is worth 30 observations per row below. So 503 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -47,7 +47,7 @@ three lucky wins should not rewrite the table.
 | 40-45% | 0.384 | 0.356 | 67 (23 hit) | -0.028 ** |
 | 45-50% | 0.497 | 0.443 | 94 (40 hit) | -0.054 ** |
 | 50-55% | 0.558 | 0.529 | 117 (61 hit) | -0.029 ** |
-| 55-60% | 0.605 | 0.576 | 64 (36 hit) | -0.029 ** |
+| 55-60% | 0.605 | 0.570 | 65 (36 hit) | -0.035 ** |
 | 60-65% | 0.678 | 0.667 | 38 (25 hit) | -0.011 |
 | 65-70% | 0.738 | 0.692 | 28 (18 hit) | -0.046 ** |
 | 70-75% | 0.814 | 0.831 | 9 (8 hit) | +0.017 |
@@ -61,7 +61,7 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 211 |
-| WEAK (50-70c) | 108 |
+| WEAK (50-70c) | 109 |
 | GOOD | 74 |
 | BAD (cheap side) | 59 |
 | WEAK (small disagreement) | 31 |
@@ -69,7 +69,7 @@ three lucky wins should not rewrite the table.
 | ALMOST (not confirmed yet) | 5 |
 | WEAK (5-10 min) | 4 |
 
-Leaned YES 283 times, NO 220 times. Over 63 days of history the
+Leaned YES 283 times, NO 221 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
