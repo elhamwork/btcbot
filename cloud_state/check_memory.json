@@ -8664,17 +8664,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 120.83,
+    "stake": 120.84,
     "contracts": 142.2,
     "fee": 1.27,
     "to_win": 20.05,
-    "bank_before": 1208.33
+    "bank_before": 1208.38
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.1,
-   "bank_after": 1228.48,
+   "paid": 20.05,
+   "bank_after": 1228.43,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -44819,11 +44819,111 @@
     "mins": 13.1,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 12.84,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.59,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.33,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.08,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.83,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.57,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.32,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.07,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.81,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.56,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.06,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.8,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.54,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.29,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.04,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.78,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.53,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.28,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.02,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1228.48,
+  "cash": 1228.43,
   "start": 1000.0,
   "peak": 1279.61,
   "low": 926.62,
