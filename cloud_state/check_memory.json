@@ -9945,8 +9945,35 @@
    "dist": 39.46,
    "vol": 0.000338,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null
+  },
+  {
+   "asked": "2026-08-29T16:18:01.362506+00:00",
+   "ticker": "KXBTC15M-26AUG291230-30",
+   "close_time": "2026-08-29T16:30:00Z",
+   "raw": 0.8943029333070887,
+   "p": 0.9003344117647059,
+   "side": "YES",
+   "price": 0.72,
+   "edge": 0.10674499999999998,
+   "grade": "GOOD",
+   "mins": 12.0,
+   "spot": 78033.98,
+   "strike": 77967.4,
+   "dist": 66.58,
+   "vol": 0.0004,
+   "answered": true,
+   "outcome": null,
+   "bet": {
+    "stake": 136.91,
+    "contracts": 190.2,
+    "fee": 2.69,
+    "to_win": 50.55,
+    "bank_before": 1369.08
+   },
+   "call_alert": true,
+   "call_alert_detail": "HTTP 200"
   }
  ],
  "bins_n": [
@@ -9963,7 +9990,7 @@
   113.0,
   59.0,
   37.0,
-  26.0,
+  27.0,
   8.0,
   8.0,
   4.0,
@@ -9985,7 +10012,7 @@
   57.0,
   32.0,
   25.0,
-  17.0,
+  18.0,
   7.0,
   6.0,
   3.0,
@@ -38092,6 +38119,78 @@
     "side": "YES",
     "qual": false
    }
+  ],
+  "KXBTC15M-26AUG291230-30": [
+   {
+    "mins": 14.56,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 14.3,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 14.05,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 13.79,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.53,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 13.28,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 13.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.76,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.5,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.25,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.99,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.72,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.46,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.2,
+    "side": "YES",
+    "qual": false
+   }
   ]
  },
  "bank": {
@@ -38190,6 +38289,7 @@
   "KXBTC15M-26AUG290830-30",
   "KXBTC15M-26AUG291000-00",
   "KXBTC15M-26AUG291100-00",
-  "KXBTC15M-26AUG291200-00"
+  "KXBTC15M-26AUG291200-00",
+  "KXBTC15M-26AUG291230-30"
  ]
 }
