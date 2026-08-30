@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 30 Aug 2026 9:02am California time by `check.py --report`.
+Written 30 Aug 2026 9:07am California time by `check.py --report`.
 
 ## The short version
 
@@ -12,9 +12,9 @@ Written 30 Aug 2026 9:02am California time by `check.py --report`.
 | contracts looked at | 582 |
 | retired (old rule, not counted) | 10 |
 | of those, settled and learned from | 581 |
-| actual calls (graded GOOD) | 93 |
+| actual calls (graded GOOD) | 94 |
 | calls that have settled | 93 |
-| alerts that reached the phone | 41 of 41 |
+| alerts that reached the phone | 42 of 42 |
 | calls made before delivery was recorded | 52 |
 | calls right | 78 of 93 (84%) |
 | break-even needed | 79% |
@@ -60,9 +60,9 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 252 |
+| NONE (no disagreement) | 251 |
 | WEAK (50-70c) | 117 |
-| GOOD | 85 |
+| GOOD | 86 |
 | BAD (cheap side) | 72 |
 | WEAK (small disagreement) | 36 |
 | BAD (last 5 min) | 11 |
@@ -71,6 +71,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 327 times, NO 255 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 16:04 | KXBTC15M-26AUG301215-15 | YES | 0.87 | $133.96 | $18.80 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
