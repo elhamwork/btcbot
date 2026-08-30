@@ -11,18 +11,19 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,480.62** &nbsp; +48.1% since $1,000 &nbsp;&middot;&nbsp; updated 30 Aug 2:15pm California time
+**$1,511.25** &nbsp; +51.1% since $1,000 &nbsp;&middot;&nbsp; updated 30 Aug 2:20pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
-| 98 | 83 / 15 | 84.7% | 79.3% |
+| 99 | 84 / 15 | 84.8% | 79.3% |
 
-Best $1,480.62, worst $926.62, fees paid $163.71.
+Best $1,511.25, worst $926.62, fees paid $165.58.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
+| 30 Aug 2:15pm | won | +30.63 | $1,511.25 | NO | 0.82 |
 | 30 Aug 1:45pm | won | +32.05 | $1,480.62 | NO | 0.81 |
 | 30 Aug 1:15pm | won | +33.39 | $1,448.57 | YES | 0.80 |
 | 30 Aug 11:45am | won | +30.63 | $1,415.18 | YES | 0.81 |
@@ -30,15 +31,12 @@ Best $1,480.62, worst $926.62, fees paid $163.71.
 | 30 Aug 9:15am | won | +18.80 | $1,358.35 | YES | 0.87 |
 | 30 Aug 8:15am | won | +34.79 | $1,339.55 | NO | 0.78 |
 | 30 Aug 7:00am | won | +16.48 | $1,304.76 | YES | 0.88 |
-| 30 Aug 4:00am | won | +37.39 | $1,288.28 | YES | 0.76 |
 
-1 call open right now.
-
-98 of the roughly 100 settled calls needed before this win rate
+99 of the roughly 100 settled calls needed before this win rate
 means much. Two or three losses in the first dozen is ordinary;
 four or more in twenty would say the model is wrong.
 
-Collecting in the background: 19,210 order-book snapshots over 6 days (needs about three weeks).
+Collecting in the background: 19,224 order-book snapshots over 6 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
