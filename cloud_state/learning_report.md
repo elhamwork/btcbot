@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 30 Aug 2026 5:25am California time by `check.py --report`.
+Written 30 Aug 2026 5:30am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,7 +9,7 @@ Written 30 Aug 2026 5:25am California time by `check.py --report`.
 | **paper account** | **$1,288.28** (started $1,000, +28.8%) |
 | best / worst it has been | $1,433.36 / $926.62 |
 | fees paid | $152.00 |
-| contracts looked at | 567 |
+| contracts looked at | 568 |
 | retired (old rule, not counted) | 10 |
 | of those, settled and learned from | 566 |
 | actual calls (graded GOOD) | 91 |
@@ -60,7 +60,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 243 |
+| NONE (no disagreement) | 244 |
 | WEAK (50-70c) | 117 |
 | GOOD | 83 |
 | BAD (cheap side) | 69 |
@@ -69,7 +69,7 @@ three lucky wins should not rewrite the table.
 | ALMOST (not confirmed yet) | 5 |
 | WEAK (5-10 min) | 4 |
 
-Leaned YES 319 times, NO 248 times. Over 63 days of history the
+Leaned YES 320 times, NO 248 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
