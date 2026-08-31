@@ -1,24 +1,24 @@
 # What the bot has learned
 
-Written 31 Aug 2026 1:28pm California time by `check.py --report`.
+Written 31 Aug 2026 1:33pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,120.34** (started $1,000, +12.0%) |
+| **paper account** | **$1,007.36** (started $1,000, +0.7%) |
 | best / worst it has been | $1,511.25 / $926.62 |
-| fees paid | $183.09 |
-| contracts looked at | 692 |
+| fees paid | $184.04 |
+| contracts looked at | 693 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 691 |
+| of those, settled and learned from | 692 |
 | actual calls (graded GOOD) | 110 |
-| calls that have settled | 109 |
+| calls that have settled | 110 |
 | alerts that reached the phone | 58 of 58 |
 | calls made before delivery was recorded | 52 |
-| calls right | 90 of 109 (83%) |
+| calls right | 90 of 110 (82%) |
 | break-even needed | 79% |
-| paper P&L | +4.0% per dollar staked |
+| paper P&L | +3.0% per dollar staked |
 
 ## What it is actually learning
 
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 691 live
+The 63-day study is worth 30 observations per row below. So 692 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -47,7 +47,7 @@ three lucky wins should not rewrite the table.
 | 40-45% | 0.384 | 0.362 | 93 (33 hit) | -0.022 ** |
 | 45-50% | 0.497 | 0.455 | 137 (61 hit) | -0.042 ** |
 | 50-55% | 0.558 | 0.540 | 153 (82 hit) | -0.018 |
-| 55-60% | 0.605 | 0.561 | 88 (48 hit) | -0.044 ** |
+| 55-60% | 0.605 | 0.556 | 89 (48 hit) | -0.049 ** |
 | 60-65% | 0.678 | 0.679 | 53 (36 hit) | +0.001 |
 | 65-70% | 0.738 | 0.674 | 34 (21 hit) | -0.064 ** |
 | 70-75% | 0.814 | 0.824 | 13 (11 hit) | +0.010 |
@@ -61,7 +61,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 300 |
+| NONE (no disagreement) | 301 |
 | WEAK (50-70c) | 138 |
 | GOOD | 102 |
 | BAD (cheap side) | 87 |
@@ -70,18 +70,8 @@ three lucky wins should not rewrite the table.
 | WEAK (5-10 min) | 5 |
 | ALMOST (not confirmed yet) | 5 |
 
-Leaned YES 372 times, NO 320 times. Over 63 days of history the
+Leaned YES 373 times, NO 320 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 20:19 | KXBTC15M-26AUG311630-30 | YES | 0.88 | $112.03 | $14.33 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -196,6 +186,7 @@ publish the result, so this list is usually empty.
 | 17:18 | 2026-08-31 17:30 | NO | 0.87 | -225 | 12 | RIGHT | +16.97 | $1,227.18 |
 | 18:02 | 2026-08-31 18:15 | NO | 0.72 | -63 | 12 | **wrong** | -125.13 | $1,102.05 |
 | 19:18 | 2026-08-31 19:30 | NO | 0.85 | -145 | 12 | RIGHT | +18.29 | $1,120.34 |
+| 20:19 | 2026-08-31 20:30 | YES | 0.88 | +131 | 10 | **wrong** | -112.98 | $1,007.36 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -235,11 +226,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | 08-31 00:00 | NO | 0.88 | 8% | -322 | 11 |
 | 08-31 06:30 | YES | 0.71 | 11% | +104 | 10 |
 | 08-31 18:15 | NO | 0.72 | 11% | -63 | 12 |
+| 08-31 20:30 | YES | 0.88 | 11% | +131 | 10 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 90 | 0.80 | 12% | 12 |
-| lost | 19 | 0.77 | 11% | 11 |
+| lost | 20 | 0.77 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
