@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 01 Sep 2026 5:54am California time by `check.py --report`.
+Written 01 Sep 2026 5:58am California time by `check.py --report`.
 
 ## The short version
 
@@ -196,8 +196,8 @@ split is 49.5% YES, so anything near half and half is normal.
 | 06:19 | 2026-09-01 06:30 | NO | 0.84 | -114 | 11 | RIGHT | +18.16 | $1,031.17 |
 | 08:48 | 2026-09-01 09:00 | YES | 0.71 | +68 | 12 | **wrong** | -105.22 | $925.95 |
 | 10:03 | 2026-09-01 10:15 | YES | 0.70 | +47 | 11 | **wrong** | -94.55 | $831.40 |
-| 12:03 | 2026-09-01 12:15 | NO | 0.76 | -81 | 11 | RIGHT | +24.85 | $856.25 |
-| 12:33 | 2026-09-01 12:45 | NO | 0.74 | -86 | 12 | RIGHT | +28.52 | $884.77 |
+| 12:03 | 2026-09-01 12:15 | NO | 0.76 | -81 | 11 | RIGHT | +24.86 | $856.26 |
+| 12:33 | 2026-09-01 12:45 | NO | 0.74 | -86 | 12 | RIGHT | +28.51 | $884.77 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
