@@ -1,24 +1,24 @@
 # What the bot has learned
 
-Written 01 Sep 2026 1:57am California time by `check.py --report`.
+Written 01 Sep 2026 2:03am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,031.17** (started $1,000, +3.1%) |
-| best / worst it has been | $1,511.25 / $926.62 |
-| fees paid | $193.54 |
-| contracts looked at | 742 |
+| **paper account** | **$925.95** (started $1,000, -7.4%) |
+| best / worst it has been | $1,511.25 / $925.95 |
+| fees paid | $195.64 |
+| contracts looked at | 743 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 741 |
+| of those, settled and learned from | 742 |
 | actual calls (graded GOOD) | 118 |
-| calls that have settled | 117 |
+| calls that have settled | 118 |
 | alerts that reached the phone | 66 of 66 |
 | calls made before delivery was recorded | 52 |
-| calls right | 96 of 117 (82%) |
-| break-even needed | 80% |
-| paper P&L | +3.2% per dollar staked |
+| calls right | 96 of 118 (81%) |
+| break-even needed | 79% |
+| paper P&L | +2.4% per dollar staked |
 
 ## What it is actually learning
 
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 741 live
+The 63-day study is worth 30 observations per row below. So 742 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.445 | 143 (62 hit) | -0.052 ** |
 | 50-55% | 0.558 | 0.548 | 163 (89 hit) | -0.010 |
 | 55-60% | 0.605 | 0.531 | 102 (52 hit) | -0.074 ** |
-| 60-65% | 0.678 | 0.659 | 57 (37 hit) | -0.019 |
+| 60-65% | 0.678 | 0.652 | 58 (37 hit) | -0.026 ** |
 | 65-70% | 0.738 | 0.664 | 41 (25 hit) | -0.074 ** |
 | 70-75% | 0.814 | 0.809 | 15 (12 hit) | -0.005 |
 | 75-80% | 0.836 | 0.822 | 9 (7 hit) | -0.013 |
@@ -61,7 +61,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 329 |
+| NONE (no disagreement) | 330 |
 | WEAK (50-70c) | 144 |
 | GOOD | 110 |
 | BAD (cheap side) | 92 |
@@ -70,18 +70,8 @@ three lucky wins should not rewrite the table.
 | WEAK (5-10 min) | 5 |
 | ALMOST (not confirmed yet) | 5 |
 
-Leaned YES 408 times, NO 334 times. Over 63 days of history the
+Leaned YES 409 times, NO 334 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 08:48 | KXBTC15M-26SEP010500-00 | YES | 0.71 | $103.12 | $40.02 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -204,6 +194,7 @@ publish the result, so this list is usually empty.
 | 03:32 | 2026-09-01 03:45 | YES | 0.79 | +158 | 12 | RIGHT | +24.46 | $998.99 |
 | 05:04 | 2026-09-01 05:15 | YES | 0.87 | +174 | 10 | RIGHT | +14.02 | $1,013.01 |
 | 06:19 | 2026-09-01 06:30 | NO | 0.84 | -114 | 11 | RIGHT | +18.16 | $1,031.17 |
+| 08:48 | 2026-09-01 09:00 | YES | 0.71 | +68 | 12 | **wrong** | -105.22 | $925.95 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -245,11 +236,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | 08-31 18:15 | NO | 0.72 | 11% | -63 | 12 |
 | 08-31 20:30 | YES | 0.88 | 11% | +131 | 10 |
 | 09-01 01:15 | YES | 0.75 | 7% | +90 | 12 |
+| 09-01 09:00 | YES | 0.71 | 10% | +68 | 12 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 96 | 0.80 | 12% | 11 |
-| lost | 21 | 0.77 | 11% | 11 |
+| lost | 22 | 0.77 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
