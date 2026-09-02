@@ -20697,7 +20697,7 @@
     "contracts": 125.9,
     "fee": 1.82,
     "to_win": 34.7,
-    "bank_before": 894.24
+    "bank_before": 894.23
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -20714,8 +20714,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.7,
-   "bank_after": 928.94,
+   "paid": 34.66,
+   "bank_after": 928.9,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -56851,11 +56851,61 @@
     "mins": 12.38,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 12.13,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.87,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.62,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.36,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.11,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.85,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.6,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.35,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.09,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.84,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 928.94,
+  "cash": 928.9,
   "start": 1000.0,
   "peak": 1511.25,
   "low": 831.4,
