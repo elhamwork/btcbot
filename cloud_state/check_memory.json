@@ -23990,6 +23990,37 @@
    "ask_size": 3230.47,
    "volume": 67513.22,
    "open_interest": 49607.27
+  },
+  {
+   "asked": "2026-09-03T06:00:52.596418+00:00",
+   "ticker": "KXBTC15M-26SEP030215-15",
+   "close_time": "2026-09-03T06:15:00Z",
+   "raw": 0.3701147393673214,
+   "p": 0.3665458426966292,
+   "side": "NO",
+   "price": 0.62,
+   "edge": 0.01345415730337074,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.1,
+   "spot": 77726.93,
+   "strike": 77787.5,
+   "dist": -60.57,
+   "vol": 0.000625,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 2,
+   "cross_30": 2,
+   "move_5m": 0.001688,
+   "move_15m": 0.004227,
+   "move_60m": 0.000387,
+   "vol_ratio": 1.56,
+   "hour_utc": 6,
+   "spread": 0.01,
+   "bid_size": 4252.78,
+   "ask_size": 3190.99,
+   "volume": 47139.79,
+   "open_interest": 33550.53
   }
  ],
  "bins_n": [
@@ -58985,36 +59016,6 @@
   ],
   "KXBTC15M-26SEP030200-00": [
    {
-    "mins": 13.76,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.51,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.25,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.99,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.73,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.47,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 12.21,
     "side": "NO",
     "qual": false
@@ -59182,6 +59183,53 @@
    {
     "mins": 3.72,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 3.46,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 3.2,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.95,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.69,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.43,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.17,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP030215-15": [
+   {
+    "mins": 14.13,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.87,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.61,
+    "side": "NO",
     "qual": false
    }
   ]
