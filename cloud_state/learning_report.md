@@ -1,24 +1,24 @@
 # What the bot has learned
 
-Written 03 Sep 2026 2:42pm California time by `check.py --report`.
+Written 03 Sep 2026 2:47pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$891.41** (started $1,000, -10.9%) |
+| **paper account** | **$800.83** (started $1,000, -19.9%) |
 | best / worst it has been | $1,511.25 / $746.12 |
-| fees paid | $240.99 |
-| contracts looked at | 977 |
+| fees paid | $242.43 |
+| contracts looked at | 978 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 976 |
+| of those, settled and learned from | 977 |
 | actual calls (graded GOOD) | 156 |
-| calls that have settled | 155 |
+| calls that have settled | 156 |
 | alerts that reached the phone | 104 of 104 |
 | calls made before delivery was recorded | 52 |
-| calls right | 126 of 155 (81%) |
+| calls right | 126 of 156 (81%) |
 | break-even needed | 80% |
-| paper P&L | +2.2% per dollar staked |
+| paper P&L | +1.6% per dollar staked |
 
 ## What it is actually learning
 
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 976 live
+The 63-day study is worth 30 observations per row below. So 977 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -51,7 +51,7 @@ three lucky wins should not rewrite the table.
 | 60-65% | 0.678 | 0.596 | 78 (44 hit) | -0.082 ** |
 | 65-70% | 0.738 | 0.672 | 52 (33 hit) | -0.065 ** |
 | 70-75% | 0.814 | 0.781 | 23 (17 hit) | -0.032 ** |
-| 75-80% | 0.836 | 0.827 | 10 (8 hit) | -0.009 |
+| 75-80% | 0.836 | 0.807 | 11 (8 hit) | -0.029 ** |
 | 80-85% | 0.885 | 0.873 | 5 (4 hit) | -0.012 |
 | 85-90% | 0.920 | 0.881 | 7 (5 hit) | -0.039 ** |
 | 90-95% | 0.953 | 0.955 | 2 (2 hit) | +0.003 |
@@ -61,7 +61,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 445 |
+| NONE (no disagreement) | 446 |
 | WEAK (50-70c) | 186 |
 | GOOD | 148 |
 | BAD (cheap side) | 117 |
@@ -70,18 +70,8 @@ three lucky wins should not rewrite the table.
 | ALMOST (not confirmed yet) | 6 |
 | WEAK (5-10 min) | 5 |
 
-Leaned YES 531 times, NO 446 times. Over 63 days of history the
+Leaned YES 531 times, NO 447 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 21:31 | KXBTC15M-26SEP031745-45 | YES | 0.77 | $89.14 | $25.19 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -242,6 +232,7 @@ publish the result, so this list is usually empty.
 | 16:49 | 2026-09-03 17:00 | YES | 0.90 | +238 | 11 | RIGHT | +8.80 | $855.19 |
 | 17:34 | 2026-09-03 17:45 | YES | 0.78 | +107 | 11 | RIGHT | +22.80 | $877.99 |
 | 18:03 | 2026-09-03 18:15 | YES | 0.86 | +156 | 11 | RIGHT | +13.42 | $891.41 |
+| 21:31 | 2026-09-03 21:45 | YES | 0.77 | +227 | 13 | **wrong** | -90.58 | $800.83 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -291,11 +282,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | 09-02 10:45 | NO | 0.73 | 20% | -87 | 10 |
 | 09-02 13:45 | NO | 0.75 | 9% | -116 | 11 |
 | 09-03 03:15 | NO | 0.82 | 11% | -85 | 10 |
+| 09-03 21:45 | YES | 0.77 | 10% | +226 | 13 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 126 | 0.80 | 12% | 11 |
-| lost | 29 | 0.77 | 11% | 11 |
+| lost | 30 | 0.77 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
