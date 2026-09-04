@@ -1,24 +1,24 @@
 # What the bot has learned
 
-Written 03 Sep 2026 8:00pm California time by `check.py --report`.
+Written 03 Sep 2026 8:05pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$878.00** (started $1,000, -12.2%) |
+| **paper account** | **$788.47** (started $1,000, -21.2%) |
 | best / worst it has been | $1,511.25 / $746.12 |
-| fees paid | $246.71 |
-| contracts looked at | 998 |
+| fees paid | $248.44 |
+| contracts looked at | 999 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 997 |
+| of those, settled and learned from | 998 |
 | actual calls (graded GOOD) | 160 |
-| calls that have settled | 159 |
+| calls that have settled | 160 |
 | alerts that reached the phone | 108 of 108 |
 | calls made before delivery was recorded | 52 |
-| calls right | 129 of 159 (81%) |
+| calls right | 129 of 160 (81%) |
 | break-even needed | 79% |
-| paper P&L | +2.1% per dollar staked |
+| paper P&L | +1.6% per dollar staked |
 
 ## What it is actually learning
 
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 997 live
+The 63-day study is worth 30 observations per row below. So 998 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -42,7 +42,7 @@ three lucky wins should not rewrite the table.
 | 15-20% | 0.167 | 0.206 | 4 (2 hit) | +0.039 ** |
 | 20-25% | 0.178 | 0.149 | 6 (0 hit) | -0.030 ** |
 | 25-30% | 0.238 | 0.277 | 21 (7 hit) | +0.039 ** |
-| 30-35% | 0.286 | 0.292 | 37 (11 hit) | +0.007 |
+| 30-35% | 0.286 | 0.302 | 38 (12 hit) | +0.017 |
 | 35-40% | 0.354 | 0.374 | 68 (26 hit) | +0.020 |
 | 40-45% | 0.384 | 0.382 | 126 (48 hit) | -0.003 |
 | 45-50% | 0.497 | 0.474 | 185 (87 hit) | -0.023 ** |
@@ -61,7 +61,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 458 |
+| NONE (no disagreement) | 459 |
 | WEAK (50-70c) | 188 |
 | GOOD | 152 |
 | BAD (cheap side) | 119 |
@@ -70,18 +70,8 @@ three lucky wins should not rewrite the table.
 | ALMOST (not confirmed yet) | 6 |
 | WEAK (5-10 min) | 5 |
 
-Leaned YES 545 times, NO 453 times. Over 63 days of history the
+Leaned YES 546 times, NO 453 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 02:49 | KXBTC15M-26SEP032300-00 | NO | 0.72 | $87.80 | $32.41 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -246,6 +236,7 @@ publish the result, so this list is usually empty.
 | 00:34 | 2026-09-04 00:45 | YES | 0.77 | +135 | 11 | RIGHT | +22.63 | $823.46 |
 | 02:03 | 2026-09-04 02:15 | NO | 0.77 | -100 | 12 | RIGHT | +23.27 | $846.73 |
 | 02:32 | 2026-09-04 02:45 | YES | 0.72 | +83 | 13 | RIGHT | +31.27 | $878.00 |
+| 02:49 | 2026-09-04 03:00 | NO | 0.72 | -86 | 11 | **wrong** | -89.53 | $788.47 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -296,11 +287,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | 09-02 13:45 | NO | 0.75 | 9% | -116 | 11 |
 | 09-03 03:15 | NO | 0.82 | 11% | -85 | 10 |
 | 09-03 21:45 | YES | 0.77 | 10% | +226 | 13 |
+| 09-04 03:00 | NO | 0.72 | 13% | -85 | 11 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 129 | 0.80 | 12% | 11 |
-| lost | 30 | 0.77 | 11% | 11 |
+| lost | 31 | 0.77 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
