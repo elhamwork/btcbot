@@ -26353,8 +26353,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 23.27,
-   "bank_after": 846.73,
+   "paid": 23.22,
+   "bank_after": 846.68,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -26411,7 +26411,7 @@
     "contracts": 117.6,
     "fee": 1.66,
     "to_win": 31.27,
-    "bank_before": 846.73
+    "bank_before": 846.68
    },
    "cross_15": 6,
    "cross_30": 6,
@@ -26429,7 +26429,7 @@
    "call_alert_detail": "HTTP 200",
    "correct": true,
    "paid": 31.27,
-   "bank_after": 878.0,
+   "bank_after": 877.95,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -26455,7 +26455,7 @@
     "contracts": 121.9,
     "fee": 1.73,
     "to_win": 32.41,
-    "bank_before": 878.0
+    "bank_before": 877.95
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -26473,7 +26473,7 @@
    "call_alert_detail": "HTTP 200",
    "correct": false,
    "paid": -89.53,
-   "bank_after": 788.47,
+   "bank_after": 788.42,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -26650,11 +26650,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 78.85,
+    "stake": 78.84,
     "contracts": 109.5,
     "fee": 1.55,
     "to_win": 29.11,
-    "bank_before": 788.47
+    "bank_before": 788.42
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -26672,7 +26672,7 @@
    "call_alert_detail": "HTTP 200",
    "correct": true,
    "paid": 29.11,
-   "bank_after": 817.58,
+   "bank_after": 817.53,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -26692,7 +26692,7 @@
    "dist": -3.71,
    "vol": 0.000369,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 1,
    "cross_30": 1,
@@ -26749,7 +26749,7 @@
   38.0,
   69.0,
   126.0,
-  186.0,
+  187.0,
   214.0,
   147.0,
   79.0,
@@ -58316,11 +58316,106 @@
     "mins": 13.69,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 13.44,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 13.19,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.93,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.68,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.42,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.16,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.91,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.66,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.4,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.15,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.89,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.64,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.13,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.87,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.62,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.36,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.11,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.86,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 817.58,
+  "cash": 817.53,
   "start": 1000.0,
   "peak": 1511.25,
   "low": 746.12,

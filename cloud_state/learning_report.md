@@ -1,17 +1,17 @@
 # What the bot has learned
 
-Written 03 Sep 2026 9:46pm California time by `check.py --report`.
+Written 03 Sep 2026 9:51pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$817.58** (started $1,000, -18.2%) |
+| **paper account** | **$817.53** (started $1,000, -18.2%) |
 | best / worst it has been | $1,511.25 / $746.12 |
 | fees paid | $249.99 |
 | contracts looked at | 1006 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 1004 |
+| of those, settled and learned from | 1005 |
 | actual calls (graded GOOD) | 161 |
 | calls that have settled | 161 |
 | alerts that reached the phone | 109 of 109 |
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1004 live
+The 63-day study is worth 30 observations per row below. So 1005 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.302 | 38 (12 hit) | +0.017 |
 | 35-40% | 0.354 | 0.380 | 69 (27 hit) | +0.026 ** |
 | 40-45% | 0.384 | 0.382 | 126 (48 hit) | -0.003 |
-| 45-50% | 0.497 | 0.476 | 186 (88 hit) | -0.020 ** |
+| 45-50% | 0.497 | 0.474 | 187 (88 hit) | -0.023 ** |
 | 50-55% | 0.558 | 0.540 | 214 (115 hit) | -0.018 |
 | 55-60% | 0.605 | 0.543 | 147 (78 hit) | -0.062 ** |
 | 60-65% | 0.678 | 0.590 | 79 (44 hit) | -0.088 ** |
@@ -234,10 +234,10 @@ split is 49.5% YES, so anything near half and half is normal.
 | 18:03 | 2026-09-03 18:15 | YES | 0.86 | +156 | 11 | RIGHT | +13.42 | $891.41 |
 | 21:31 | 2026-09-03 21:45 | YES | 0.77 | +227 | 13 | **wrong** | -90.58 | $800.83 |
 | 00:34 | 2026-09-04 00:45 | YES | 0.77 | +135 | 11 | RIGHT | +22.63 | $823.46 |
-| 02:03 | 2026-09-04 02:15 | NO | 0.77 | -100 | 12 | RIGHT | +23.27 | $846.73 |
-| 02:32 | 2026-09-04 02:45 | YES | 0.72 | +83 | 13 | RIGHT | +31.27 | $878.00 |
-| 02:49 | 2026-09-04 03:00 | NO | 0.72 | -86 | 11 | **wrong** | -89.53 | $788.47 |
-| 04:19 | 2026-09-04 04:30 | YES | 0.72 | +118 | 11 | RIGHT | +29.11 | $817.58 |
+| 02:03 | 2026-09-04 02:15 | NO | 0.77 | -100 | 12 | RIGHT | +23.22 | $846.68 |
+| 02:32 | 2026-09-04 02:45 | YES | 0.72 | +83 | 13 | RIGHT | +31.27 | $877.95 |
+| 02:49 | 2026-09-04 03:00 | NO | 0.72 | -86 | 11 | **wrong** | -89.53 | $788.42 |
+| 04:19 | 2026-09-04 04:30 | YES | 0.72 | +118 | 11 | RIGHT | +29.11 | $817.53 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
