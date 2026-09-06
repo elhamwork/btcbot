@@ -77,7 +77,10 @@ a{color:var(--go)}
 <p class="note">best $1,511.25 &nbsp;&middot;&nbsp; worst $746.12 &nbsp;&middot;&nbsp; fees paid $288.68</p>
 </div>
 <h2>open right now</h2>
-<p class="none">Nothing open. Normal &mdash; calls last about fifteen minutes and the bot passes on most contracts.</p>
+<div class="scroll"><table><tr><th>placed</th><th>contract</th><th>side</th><th class="num">price</th><th class="num">risking</th><th class="num">to win</th></tr>
+<tr><td>06 Sep 6:48am</td><td>KXBTC15M-26SEP061000-00</td><td>YES</td><td class="num">0.78</td><td class="num">$118.01</td><td class="num">$31.46</td></tr>
+</table></div>
+<p class="note">Called but not settled. A 15-minute contract takes about that long plus a minute for Kalshi to publish, so this list is usually empty.</p>
 <h2>every call, newest first</h2>
 <div class="scroll"><table><tr><th>closed</th><th>result</th><th class="num">paid</th><th class="num">account</th><th>side</th><th class="num">price</th><th class="num">btc vs target</th><th class="num">min left</th></tr>
 <tr><td>06 Sep 5:30am</td><td class="win">won</td><td class="num win">+27.20</td><td class="num">$1,180.08</td><td>YES</td><td class="num">0.80</td><td class="num">+65</td><td class="num">13</td></tr>
@@ -273,7 +276,7 @@ a{color:var(--go)}
 <p class="note">Contracts looked at: 1234 &nbsp;&middot;&nbsp; settled and learned from: 1233 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
 </div>
 <footer>
-Updated 06 Sep 6:47am California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
+Updated 06 Sep 6:52am California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
 </footer>
 </div>
 </html>
