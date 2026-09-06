@@ -77,7 +77,10 @@ a{color:var(--go)}
 <p class="note">best $1,511.25 &nbsp;&middot;&nbsp; worst $746.12 &nbsp;&middot;&nbsp; fees paid $297.46</p>
 </div>
 <h2>open right now</h2>
-<p class="none">Nothing open. Normal &mdash; calls last about fifteen minutes and the bot passes on most contracts.</p>
+<div class="scroll"><table><tr><th>placed</th><th>contract</th><th>side</th><th class="num">price</th><th class="num">risking</th><th class="num">to win</th></tr>
+<tr><td>06 Sep 2:03pm</td><td>KXBTC15M-26SEP061715-15</td><td>YES</td><td class="num">0.75</td><td class="num">$118.38</td><td class="num">$37.38</td></tr>
+</table></div>
+<p class="note">Called but not settled. A 15-minute contract takes about that long plus a minute for Kalshi to publish, so this list is usually empty.</p>
 <h2>every call, newest first</h2>
 <div class="scroll"><table><tr><th>closed</th><th>result</th><th class="num">paid</th><th class="num">account</th><th>side</th><th class="num">price</th><th class="num">btc vs target</th><th class="num">min left</th></tr>
 <tr><td>06 Sep 12:15pm</td><td class="win">won</td><td class="num win">+34.36</td><td class="num">$1,183.84</td><td>NO</td><td class="num">0.76</td><td class="num">-56</td><td class="num">11</td></tr>
@@ -275,10 +278,10 @@ a{color:var(--go)}
 <h2>what this is measured against</h2>
 <div class="card">
 <p class="note" style="margin-top:0">Over 63 days of Kalshi history the shipped rule made 272 trades, won 89.3% of them against an 81.3% break-even, and returned +10.35% per dollar staked after fees. Its worst drawdown was 29%.</p>
-<p class="note">Contracts looked at: 1262 &nbsp;&middot;&nbsp; settled and learned from: 1261 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
+<p class="note">Contracts looked at: 1263 &nbsp;&middot;&nbsp; settled and learned from: 1262 &nbsp;&middot;&nbsp; retired under an older rule: 10</p>
 </div>
 <footer>
-Updated 06 Sep 2:01pm California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
+Updated 06 Sep 2:06pm California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
 </footer>
 </div>
 </html>
