@@ -41481,35 +41481,43 @@
    "open_interest": 28301.9
   },
   {
-   "asked": "2026-09-08T22:45:42.229444+00:00",
+   "asked": "2026-09-08T22:49:16.940191+00:00",
    "ticker": "KXBTC15M-26SEP081900-00",
    "close_time": "2026-09-08T23:00:00Z",
    "raw": 0.6264078367075789,
    "p": 0.5851794244604317,
    "side": "YES",
-   "price": 0.52,
-   "edge": 0.06517942446043168,
-   "grade": "WEAK (small disagreement)",
-   "mins": 14.3,
-   "spot": 78503.94,
+   "price": 0.73,
+   "edge": 0.14974351351351356,
+   "grade": "GOOD",
+   "mins": 10.7,
+   "spot": 78535.34,
    "strike": 78483.71,
-   "dist": 20.23,
-   "vol": 0.000211,
-   "answered": false,
+   "dist": 51.63,
+   "vol": 0.00023,
+   "answered": true,
    "outcome": null,
-   "bet": null,
-   "cross_15": 6,
-   "cross_30": 10,
-   "move_5m": -2.4e-05,
-   "move_15m": -0.000138,
-   "move_60m": -0.000518,
-   "vol_ratio": 1.157,
+   "bet": {
+    "stake": 95.58,
+    "contracts": 130.9,
+    "fee": 1.81,
+    "to_win": 33.54,
+    "bank_before": 955.84
+   },
+   "cross_15": 5,
+   "cross_30": 9,
+   "move_5m": 0.000619,
+   "move_15m": 0.000704,
+   "move_60m": 0.000144,
+   "vol_ratio": 1.103,
    "hour_utc": 22,
    "spread": 0.01,
-   "bid_size": 4862.55,
-   "ask_size": 4329.93,
-   "volume": 61431.71,
-   "open_interest": 42800.62
+   "bid_size": 139.12,
+   "ask_size": 6186.12,
+   "volume": 364252.87,
+   "open_interest": 187260.19,
+   "call_alert": true,
+   "call_alert_detail": "HTTP 200"
   }
  ],
  "bins_n": [
@@ -63071,6 +63079,21 @@
     "mins": 10.98,
     "side": "YES",
     "qual": true
+   },
+   {
+    "mins": 10.72,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 10.46,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.21,
+    "side": "YES",
+    "qual": true
    }
   ]
  },
@@ -63083,7 +63106,6 @@
   "fees": 329.05
  },
  "alerted": [
-  "KXBTC15M-26AUG241415-15",
   "KXBTC15M-26AUG241530-30",
   "KXBTC15M-26AUG242030-30",
   "KXBTC15M-26AUG242115-15",
@@ -63282,6 +63304,7 @@
   "KXBTC15M-26SEP081030-30",
   "KXBTC15M-26SEP081315-15",
   "KXBTC15M-26SEP081645-45",
-  "KXBTC15M-26SEP081815-15"
+  "KXBTC15M-26SEP081815-15",
+  "KXBTC15M-26SEP081900-00"
  ]
 }
