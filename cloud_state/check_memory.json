@@ -43176,7 +43176,7 @@
    "dist": -15.68,
    "vol": 0.000387,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 5,
    "cross_30": 5,
@@ -43190,6 +43190,37 @@
    "ask_size": 2476.83,
    "volume": 43518.72,
    "open_interest": 27592.95
+  },
+  {
+   "asked": "2026-09-09T11:30:17.833202+00:00",
+   "ticker": "KXBTC15M-26SEP090745-45",
+   "close_time": "2026-09-09T11:45:00Z",
+   "raw": 0.44583920238832686,
+   "p": 0.3870192307692308,
+   "side": "NO",
+   "price": 0.55,
+   "edge": 0.06298076923076912,
+   "grade": "WEAK (small disagreement)",
+   "mins": 14.7,
+   "spot": 78963.16,
+   "strike": 78977.08,
+   "dist": -13.92,
+   "vol": 0.000337,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 0,
+   "cross_30": 0,
+   "move_5m": 0.000793,
+   "move_15m": 0.001508,
+   "move_60m": -0.001214,
+   "vol_ratio": 1.499,
+   "hour_utc": 11,
+   "spread": 0.01,
+   "bid_size": 3505.91,
+   "ask_size": 3056.3,
+   "volume": 15667.55,
+   "open_interest": 14814.89
   }
  ],
  "bins_n": [
@@ -43201,7 +43232,7 @@
   29.0,
   54.0,
   108.0,
-  191.0,
+  192.0,
   302.0,
   319.0,
   219.0,
@@ -43223,7 +43254,7 @@
   9.0,
   16.0,
   42.0,
-  74.0,
+  75.0,
   143.0,
   167.0,
   115.0,
@@ -74768,21 +74799,6 @@
   ],
   "KXBTC15M-26SEP090730-30": [
    {
-    "mins": 11.29,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.03,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.77,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 10.51,
     "side": "NO",
     "qual": false
@@ -74964,6 +74980,98 @@
    },
    {
     "mins": 1.25,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.0,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.73,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.47,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP090745-45": [
+   {
+    "mins": 14.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.45,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.19,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.93,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.67,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.42,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.16,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.9,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.65,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.14,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.88,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.62,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.37,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.11,
     "side": "YES",
     "qual": false
    }
