@@ -571,6 +571,34 @@ PAPER_STAKE = 0.10
 FEE_RATE = 0.07
 
 # ---------------------------------------------------------------------------
+# "Get back in after a loss" -- added at the user's request, tested against
+# real history before being turned on.
+#
+# It is NOT this file's normal edge-based call. It ignores this model's own
+# estimate entirely and just buys whichever side the MARKET pushes to 90c,
+# and only once, on the very next contract after a paper trade loses.
+#
+# Measured on 5,993 real, finalized 15-minute Kalshi contracts: whichever
+# side's ask price first reached 90c during the contract's life won 93.6% of
+# the time. Break-even at 90c is ~90% -- so on that measurement alone this is
+# a real, if thin, edge, and a different one from this file's main model
+# (it's closer to "the favourite-longshot bias is strong enough that even
+# just following the market's own late-game price is worth something").
+#
+# The size is capped at 50% of the bank, not 100%, on purpose. The Kelly
+# fraction for a 93.6% win rate at 90c is about 36% of the bank -- so 100%
+# is nearly 3x Kelly, which guarantees eventual ruin no matter how good the
+# edge is (bet the whole account enough times and the ~6% loss WILL land on
+# a turn with nothing left to lose). 50% was chosen as something meaningfully
+# bigger than the normal 10% stake without being past the point where one
+# bad trade is unrecoverable. Simulated forward from the account's real
+# numbers: 0.6% chance of ever reaching zero over 300 calls, versus 0% doing
+# nothing differently -- a real added risk, taken on purpose, in exchange
+# for recovering faster after a loss.
+REVENGE_FRACTION = 0.50
+REVENGE_TRIGGER = 0.90
+
+# ---------------------------------------------------------------------------
 # Coinbase -> Kalshi index correction
 # ---------------------------------------------------------------------------
 # Kalshi does not settle on Coinbase. It settles on CF Benchmarks' BRTI, which
@@ -935,10 +963,10 @@ def bank_of(mem):
     return b
 
 
-def plan_stake(mem, price):
-    """What this call would risk, and what it would win. Nothing is sent."""
+def plan_stake_fraction(mem, price, fraction):
+    """What a bet of this fraction of the bank would risk and win."""
     b = bank_of(mem)
-    stake = round(b["cash"] * PAPER_STAKE, 2)
+    stake = round(b["cash"] * fraction, 2)
     contracts = stake / max(price, 0.01)
     # Kalshi rounds the fee UP to the nearest cent, not to nearest -- verified
     # against the published schedule. Rounding to nearest made every paper
@@ -947,6 +975,11 @@ def plan_stake(mem, price):
     return {"stake": stake, "contracts": round(contracts, 1), "fee": fee,
             "to_win": round(contracts * (1 - price) - fee, 2),
             "bank_before": round(b["cash"], 2)}
+
+
+def plan_stake(mem, price):
+    """What this call would risk, and what it would win. Nothing is sent."""
+    return plan_stake_fraction(mem, price, PAPER_STAKE)
 
 
 def apply_settle(mem, rec, won):
@@ -1022,9 +1055,14 @@ def settle_pending(mem, quiet=False):
             continue
         y = 1 if res == "yes" else 0
         rec["outcome"] = y
-        b = bin_of(rec["raw"])
-        mem["bins_n"][b] += 1.0
-        mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
+        # A revenge trade has no raw/p of its own (it isn't this model's
+        # estimate) -- it shares a ticker with the contract's normal look,
+        # which already feeds this same contract into the bins once. Feeding
+        # it again here would double-weight that one contract.
+        if rec.get("raw") is not None:
+            b = bin_of(rec["raw"])
+            mem["bins_n"][b] += 1.0
+            mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
         checked += 1
         if rec.get("answered"):
             ok = (rec["side"] == "YES" and y == 1) or (rec["side"] == "NO" and y == 0)
@@ -1034,6 +1072,13 @@ def settle_pending(mem, quiet=False):
             # This is the alert that matters: not "here is an idea" but "the
             # idea you were given settled, and here is what happened".
             paid = apply_settle(mem, rec, ok)
+            if not ok:
+                # Arm the revenge trade -- watch the very next contract for
+                # the market pushing either side to 90c, and take it at 50%
+                # of the (now smaller) bank. Chains after a revenge loss too,
+                # same as the simulation this was sized from.
+                rv = mem.setdefault("revenge", {"armed": False, "ticker": None})
+                rv["armed"], rv["ticker"] = True, None
             b = bank_of(mem)
             money = ("\n%s$%s. Paper account now $%s."
                      % ("Won " if paid and paid > 0 else "Lost ",
@@ -1357,7 +1402,7 @@ def write_report(mem):
         for r in lost:
             A("| %s | %s | %.2f | %.0f%% | %s | %s |"
               % (str(r["close_time"])[5:16].replace("T", " "), r["side"],
-                 r["price"], 100 * r.get("edge", 0),
+                 r["price"], 100 * (r.get("edge") or 0),
                  ("%+d" % r["dist"]) if r.get("dist") is not None else "-",
                  ("%.0f" % r["mins"]) if r.get("mins") is not None else "-"))
         A("")
@@ -1869,6 +1914,51 @@ def grade_of(price, edge, mins, spread, confirmed):
             "stats": (272, 89.3, "+10.3% / +9.6% / +10.7%")}
 
 
+def revenge_trade(mem, m, side, price, mins, spot, strike, v, closes, spread):
+    """
+    Place the "get back in after a loss" trade -- see the comment by
+    REVENGE_FRACTION for what this is and is not. A separate record from the
+    normal per-ticker one on purpose: it can share a ticker with a normal
+    look at the same contract without the two clobbering each other, and
+    raw/p are left None so settle_pending does not feed this contract into
+    the calibration bins twice.
+    """
+    bet = plan_stake_fraction(mem, price, REVENGE_FRACTION)
+    rec = {
+        "asked": datetime.now(timezone.utc).isoformat(),
+        "ticker": m.get("ticker"), "close_time": m.get("close_time"),
+        "raw": None, "p": None, "side": side, "price": price, "edge": None,
+        "grade": "REVENGE (50%% of bank, market at %.0fc after a loss)" % (100 * price),
+        "mins": round(mins, 1), "spot": round(spot, 2), "strike": round(strike, 2),
+        "dist": round(spot - strike, 2), "vol": round(v, 6),
+        "answered": True, "outcome": None, "bet": bet, "revenge": True,
+        **context(closes, strike, v, m, spread)}
+    mem["predictions"].append(rec)
+    mem["predictions"] = mem["predictions"][-2000:]
+    sent, detail = send_ntfy(
+        "REVENGE %s %.0fc" % (side, 100 * price),
+        "50%% of bank after a loss -- $%s at %.0fc, to win $%s"
+        % (format(bet["stake"], ",.2f"), 100 * price, format(bet["to_win"], ",.2f")),
+        tags="rotating_light", priority="high")
+    rec["call_alert"] = bool(sent)
+    rec["call_alert_detail"] = detail
+    save_memory(mem)
+    print()
+    line("=")
+    print("  REVENGE TRADE -- market pushed this contract to %.0fc" % (100 * price))
+    line("=")
+    print("  %s at %.0fc, %.1f minutes left" % (side, 100 * price, mins))
+    print("  Bet:  $%s of $%s bank (50%%), fee $%.2f, to win $%s"
+          % (format(bet["stake"], ",.2f"), format(bet["bank_before"], ",.2f"),
+             bet["fee"], format(bet["to_win"], ",.2f")))
+    print("  This is not this model's own signal -- it is buying whichever")
+    print("  side the market itself moved to 90c+, right after the last")
+    print("  loss. Measured on 5,993 real contracts: 93.6% win rate. Never")
+    print("  tested with real money. Paper only.")
+    print("  phone: %s (%s)" % ("sent" if sent else "NOT SENT", detail))
+    print()
+
+
 def evaluate(mem, a):
     # In --wait and --loop this runs every 30 seconds for hours. Printing the
     # full readout each time buries the one line that matters and, on a cloud
@@ -1953,6 +2043,26 @@ def evaluate(mem, a):
 
     no_ask = 1.0 - yb
     spread = ya - yb
+
+    # See the comment by REVENGE_FRACTION. Only watches the very first
+    # contract seen after a loss -- if that one closes without ever reaching
+    # 90c on either side, the attempt is given up rather than carried into a
+    # second contract, so this never becomes an open-ended wait.
+    rv = mem.setdefault("revenge", {"armed": False, "ticker": None})
+    if rv.get("armed"):
+        tkr = m.get("ticker")
+        if rv.get("ticker") is None:
+            rv["ticker"] = tkr
+        if rv["ticker"] != tkr:
+            rv["armed"], rv["ticker"] = False, None
+            save_memory(mem)
+        elif ya >= REVENGE_TRIGGER or no_ask >= REVENGE_TRIGGER:
+            r_side = "YES" if ya >= REVENGE_TRIGGER else "NO"
+            r_price = ya if r_side == "YES" else no_ask
+            rv["armed"], rv["ticker"] = False, None
+            revenge_trade(mem, m, r_side, r_price, mins, spot, strike, v,
+                           closes, spread)
+            return
 
     # The ANSWER is simply which way the model leans, so the confidence shown
     # is always the probability of the thing being asserted. Reporting "NO,
@@ -2488,9 +2598,10 @@ def main():
         rec = pend[-1]
         y = 1 if v == "YES" else 0
         rec["outcome"] = y
-        b = bin_of(rec["raw"])
-        mem["bins_n"][b] += 1.0
-        mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
+        if rec.get("raw") is not None:
+            b = bin_of(rec["raw"])
+            mem["bins_n"][b] += 1.0
+            mem["bins_wins"][b] += 1.0 if y == 1 else 0.0
         if rec.get("answered"):
             rec["correct"] = bool((rec["side"] == "YES") == (y == 1))
             print("  Recorded: %s settled %s -- my call was %s."

@@ -27,6 +27,7 @@ import sys
 N_BINS = 20
 PAPER_START = 1000.0
 PAPER_STAKE = 0.10
+REVENGE_FRACTION = 0.50   # must match check.py
 FEE_RATE = 0.07
 
 
@@ -80,8 +81,12 @@ def rebuild(preds):
         # but the raw pre-calibration number is NOT recoverable from an alert,
         # and guessing it would quietly corrupt the calibration table with a
         # made-up value. Recovered records therefore teach nothing.
-        if not rec.get("recovered"):
-            b = min(int(float(rec.get("raw", 0.0)) * N_BINS), N_BINS - 1)
+        # A revenge trade (see check.py, REVENGE_FRACTION) has no raw/p of
+        # its own -- it shares a ticker with that contract's normal look,
+        # which already feeds the bins once. Skip it here too, same as
+        # check.py's settle_pending does, or the contract gets double-counted.
+        if not rec.get("recovered") and rec.get("raw") is not None:
+            b = min(int(float(rec["raw"]) * N_BINS), N_BINS - 1)
             bins_n[b] += 1.0
             bins_wins[b] += 1.0 if y == 1 else 0.0
         if not rec.get("answered") or rec.get("retired"):
@@ -90,7 +95,12 @@ def rebuild(preds):
         if not 0.0 < price < 1.0:
             continue
         won = bool(rec.get("correct"))
-        stake = round(bank["cash"] * PAPER_STAKE, 2)
+        # A revenge trade stakes REVENGE_FRACTION of the bank, not the normal
+        # PAPER_STAKE -- must match check.py's plan_stake_fraction() or this
+        # replay silently erases the 50%-after-a-loss rule and restates
+        # every revenge trade as if it had only risked the normal 10%.
+        fraction = REVENGE_FRACTION if rec.get("revenge") else PAPER_STAKE
+        stake = round(bank["cash"] * fraction, 2)
         contracts = stake / price
         # Kalshi rounds the fee UP to the nearest cent, not to nearest.
         fee = math.ceil(FEE_RATE * contracts * price * (1 - price) * 100) / 100
