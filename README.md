@@ -11,18 +11,19 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,196.85** &nbsp; +19.7% since $1,000 &nbsp;&middot;&nbsp; updated 10 Sep 3:45am California time
+**$1,075.48** &nbsp; +7.5% since $1,000 &nbsp;&middot;&nbsp; updated 10 Sep 3:50am California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
-| 234 | 192 / 42 | 82.1% | 79.4% |
+| 235 | 192 / 43 | 81.7% | 79.4% |
 
-Best $1,511.25, worst $746.12, fees paid $368.85.
+Best $1,511.25, worst $746.12, fees paid $370.53.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
+| 10 Sep 3:45am | **LOST** | -121.37 | $1,075.48 | NO | 0.80 |
 | 10 Sep 2:45am | won | +19.54 | $1,196.85 | NO | 0.85 |
 | 10 Sep 12:00am | won | +19.22 | $1,177.31 | YES | 0.85 |
 | 09 Sep 11:30pm | won | +45.35 | $1,158.09 | NO | 0.70 |
@@ -30,11 +31,8 @@ Best $1,511.25, worst $746.12, fees paid $368.85.
 | 09 Sep 10:15pm | **LOST** | -123.73 | $1,100.67 | NO | 0.85 |
 | 09 Sep 9:15pm | won | +51.00 | $1,224.40 | YES | 0.92 |
 | 09 Sep 9:00pm | **LOST** | -132.41 | $1,173.40 | YES | 0.80 |
-| 09 Sep 8:15pm | won | +19.67 | $1,305.81 | YES | 0.86 |
 
-1 call open right now.
-
-Collecting in the background: 61,458 order-book snapshots over 17 days (needs about three weeks).
+Collecting in the background: 61,473 order-book snapshots over 17 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
