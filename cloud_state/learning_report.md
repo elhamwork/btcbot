@@ -1,23 +1,23 @@
 # What the bot has learned
 
-Written 13 Sep 2026 12:28pm California time by `check.py --report`.
+Written 13 Sep 2026 12:33pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,625.03** (started $1,000, +62.5%) |
+| **paper account** | **$1,650.06** (started $1,000, +65.0%) |
 | best / worst it has been | $1,809.68 / $746.12 |
-| fees paid | $434.81 |
-| contracts looked at | 1920 |
+| fees paid | $436.64 |
+| contracts looked at | 1921 |
 | retired (old rule, not counted) | 10 |
-| of those, settled and learned from | 1919 |
-| actual calls (graded GOOD) | 268 |
-| calls that have settled | 268 |
-| alerts that reached the phone | 216 of 216 |
+| of those, settled and learned from | 1920 |
+| actual calls (graded GOOD) | 269 |
+| calls that have settled | 269 |
+| alerts that reached the phone | 217 of 217 |
 | calls made before delivery was recorded | 52 |
-| calls right | 222 of 268 (83%) |
-| break-even needed | 79% |
+| calls right | 223 of 269 (83%) |
+| break-even needed | 80% |
 | paper P&L | +4.2% per dollar staked |
 
 ## What it is actually learning
@@ -29,7 +29,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1919 live
+The 63-day study is worth 30 observations per row below. So 1920 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -62,10 +62,10 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 993 |
+| NONE (no disagreement) | 994 |
 | WEAK (50-70c) | 285 |
 | GOOD | 256 |
-| BAD (cheap side) | 248 |
+| BAD (cheap side) | 247 |
 | WEAK (small disagreement) | 108 |
 | BAD (last 5 min) | 12 |
 | ALMOST (not confirmed yet) | 9 |
@@ -73,8 +73,9 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 92c after a loss) | 2 |
 | REVENGE (50% of bank, market at 98c after a loss) | 1 |
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
+| REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1037 times, NO 883 times. Over 63 days of history the
+Leaned YES 1037 times, NO 884 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -349,6 +350,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 17:34 | 2026-09-13 17:45 | NO | 0.85 | -51 | 10 | RIGHT | +28.86 | $1,767.96 |
 | 17:48 | 2026-09-13 18:00 | YES | 0.80 | +67 | 11 | RIGHT | +41.72 | $1,809.68 |
 | 19:04 | 2026-09-13 19:15 | YES | 0.71 | +37 | 11 | **wrong** | -184.65 | $1,625.03 |
+| 19:29 | 2026-09-13 19:30 | NO | 0.97 | -9 | 1 | RIGHT | +25.03 | $1,650.06 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -418,7 +420,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 222 | 0.80 | 12% | 11 |
+| won | 223 | 0.80 | 12% | 11 |
 | lost | 46 | 0.77 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
