@@ -56908,7 +56908,7 @@
    "dist": -1.89,
    "vol": 0.000533,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 4,
    "cross_30": 4,
@@ -56965,7 +56965,7 @@
   65.0,
   131.0,
   236.0,
-  387.0,
+  388.0,
   411.0,
   296.0,
   152.0,
@@ -92379,6 +92379,21 @@
    {
     "mins": 13.59,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.34,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.08,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.82,
+    "side": "NO",
     "qual": false
    }
   ]
