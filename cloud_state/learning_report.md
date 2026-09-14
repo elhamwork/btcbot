@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 13 Sep 2026 11:54pm California time by `check.py --report`.
+Written 13 Sep 2026 11:59pm California time by `check.py --report`.
 
 ## The short version
 
@@ -12,9 +12,9 @@ Written 13 Sep 2026 11:54pm California time by `check.py --report`.
 | contracts looked at | 1966 |
 | retired (old rule, not counted) | 10 |
 | of those, settled and learned from | 1965 |
-| actual calls (graded GOOD) | 278 |
+| actual calls (graded GOOD) | 279 |
 | calls that have settled | 278 |
-| alerts that reached the phone | 226 of 226 |
+| alerts that reached the phone | 227 of 227 |
 | calls made before delivery was recorded | 52 |
 | calls right | 231 of 278 (83%) |
 | break-even needed | 80% |
@@ -62,7 +62,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1020 |
+| NONE (no disagreement) | 1019 |
 | WEAK (50-70c) | 289 |
 | GOOD | 265 |
 | BAD (cheap side) | 252 |
@@ -70,13 +70,23 @@ three lucky wins should not rewrite the table.
 | BAD (last 5 min) | 12 |
 | ALMOST (not confirmed yet) | 9 |
 | WEAK (5-10 min) | 5 |
-| REVENGE (50% of bank, market at 92c after a loss) | 2 |
+| REVENGE (50% of bank, market at 92c after a loss) | 3 |
 | REVENGE (50% of bank, market at 98c after a loss) | 1 |
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1062 times, NO 904 times. Over 63 days of history the
+Leaned YES 1061 times, NO 905 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 06:54 | KXBTC15M-26SEP140300-00 | NO | 0.92 | $869.16 | $74.58 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
