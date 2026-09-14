@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Sep 2026 1:43pm California time by `check.py --report`.
+Written 14 Sep 2026 1:48pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 14 Sep 2026 1:43pm California time by `check.py --report`.
 | best / worst it has been | $2,170.76 / $746.12 |
 | fees paid | $481.94 |
 | contracts looked at | 2000 |
-| retired (old rule, not counted) | 2 |
+| retired (old rule, not counted) | 1 |
 | of those, settled and learned from | 1999 |
 | actual calls (graded GOOD) | 288 |
 | calls that have settled | 288 |
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 40-45% | 0.384 | 0.416 | 243 (102 hit) | +0.031 ** |
 | 45-50% | 0.497 | 0.466 | 403 (187 hit) | -0.030 ** |
 | 50-55% | 0.558 | 0.516 | 429 (220 hit) | -0.042 ** |
-| 55-60% | 0.605 | 0.544 | 305 (164 hit) | -0.061 ** |
+| 55-60% | 0.605 | 0.542 | 306 (164 hit) | -0.063 ** |
 | 60-65% | 0.678 | 0.611 | 157 (94 hit) | -0.067 ** |
 | 65-70% | 0.738 | 0.670 | 94 (61 hit) | -0.067 ** |
 | 70-75% | 0.814 | 0.759 | 43 (31 hit) | -0.055 ** |
@@ -62,20 +62,20 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1045 |
+| NONE (no disagreement) | 1046 |
 | WEAK (50-70c) | 287 |
 | GOOD | 273 |
 | BAD (cheap side) | 255 |
 | WEAK (small disagreement) | 110 |
 | BAD (last 5 min) | 11 |
-| ALMOST (not confirmed yet) | 9 |
+| ALMOST (not confirmed yet) | 8 |
 | WEAK (5-10 min) | 4 |
 | REVENGE (50% of bank, market at 92c after a loss) | 3 |
 | REVENGE (50% of bank, market at 98c after a loss) | 1 |
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1081 times, NO 919 times. Over 63 days of history the
+Leaned YES 1080 times, NO 920 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
