@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Sep 2026 11:29am California time by `check.py --report`.
+Written 14 Sep 2026 11:35am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 14 Sep 2026 11:29am California time by `check.py --report`.
 | best / worst it has been | $2,118.67 / $746.12 |
 | fees paid | $478.50 |
 | contracts looked at | 2000 |
-| retired (old rule, not counted) | 6 |
+| retired (old rule, not counted) | 5 |
 | of those, settled and learned from | 1999 |
 | actual calls (graded GOOD) | 286 |
 | calls that have settled | 286 |
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 25-30% | 0.238 | 0.276 | 32 (10 hit) | +0.039 ** |
 | 30-35% | 0.286 | 0.315 | 67 (22 hit) | +0.030 ** |
 | 35-40% | 0.354 | 0.366 | 133 (49 hit) | +0.012 |
-| 40-45% | 0.384 | 0.412 | 243 (101 hit) | +0.028 ** |
+| 40-45% | 0.384 | 0.414 | 244 (102 hit) | +0.030 ** |
 | 45-50% | 0.497 | 0.464 | 405 (187 hit) | -0.033 ** |
 | 50-55% | 0.558 | 0.514 | 427 (218 hit) | -0.044 ** |
 | 55-60% | 0.605 | 0.544 | 305 (164 hit) | -0.061 ** |
@@ -63,9 +63,9 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1043 |
-| WEAK (50-70c) | 291 |
+| WEAK (50-70c) | 290 |
 | GOOD | 271 |
-| BAD (cheap side) | 255 |
+| BAD (cheap side) | 256 |
 | WEAK (small disagreement) | 110 |
 | BAD (last 5 min) | 11 |
 | ALMOST (not confirmed yet) | 9 |
