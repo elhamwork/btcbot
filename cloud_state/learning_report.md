@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Sep 2026 10:12am California time by `check.py --report`.
+Written 14 Sep 2026 10:17am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 14 Sep 2026 10:12am California time by `check.py --report`.
 | best / worst it has been | $2,118.67 / $746.12 |
 | fees paid | $478.50 |
 | contracts looked at | 2000 |
-| retired (old rule, not counted) | 8 |
+| retired (old rule, not counted) | 7 |
 | of those, settled and learned from | 1999 |
 | actual calls (graded GOOD) | 286 |
 | calls that have settled | 286 |
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 25-30% | 0.238 | 0.272 | 33 (10 hit) | +0.034 ** |
 | 30-35% | 0.286 | 0.315 | 67 (22 hit) | +0.030 ** |
 | 35-40% | 0.354 | 0.367 | 135 (50 hit) | +0.013 |
-| 40-45% | 0.384 | 0.410 | 242 (100 hit) | +0.026 ** |
+| 40-45% | 0.384 | 0.412 | 243 (101 hit) | +0.028 ** |
 | 45-50% | 0.497 | 0.462 | 403 (185 hit) | -0.035 ** |
 | 50-55% | 0.558 | 0.516 | 427 (219 hit) | -0.042 ** |
 | 55-60% | 0.605 | 0.545 | 304 (164 hit) | -0.060 ** |
