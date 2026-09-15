@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Sep 2026 11:02pm California time by `check.py --report`.
+Written 14 Sep 2026 11:07pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 14 Sep 2026 11:02pm California time by `check.py --report`.
 | fees paid | $501.88 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 290 |
+| actual calls (graded GOOD) | 291 |
 | calls that have settled | 290 |
-| alerts that reached the phone | 243 of 243 |
+| alerts that reached the phone | 244 of 244 |
 | calls made before delivery was recorded | 47 |
 | calls right | 243 of 290 (84%) |
 | break-even needed | 80% |
@@ -46,7 +46,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.362 | 132 (48 hit) | +0.008 |
 | 40-45% | 0.384 | 0.416 | 245 (103 hit) | +0.032 ** |
 | 45-50% | 0.497 | 0.466 | 401 (186 hit) | -0.031 ** |
-| 50-55% | 0.558 | 0.517 | 436 (224 hit) | -0.041 ** |
+| 50-55% | 0.558 | 0.518 | 435 (224 hit) | -0.040 ** |
 | 55-60% | 0.605 | 0.539 | 306 (163 hit) | -0.066 ** |
 | 60-65% | 0.678 | 0.606 | 157 (93 hit) | -0.072 ** |
 | 65-70% | 0.738 | 0.679 | 91 (60 hit) | -0.059 ** |
@@ -62,10 +62,10 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1049 |
-| GOOD | 280 |
+| GOOD | 281 |
 | WEAK (50-70c) | 279 |
 | BAD (cheap side) | 257 |
-| WEAK (small disagreement) | 110 |
+| WEAK (small disagreement) | 109 |
 | ALMOST (not confirmed yet) | 8 |
 | BAD (last 5 min) | 7 |
 | WEAK (5-10 min) | 4 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1080 times, NO 920 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 06:03 | KXBTC15M-26SEP150215-15 | YES | 0.76 | $223.05 | $66.69 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
