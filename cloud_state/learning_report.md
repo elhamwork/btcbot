@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Sep 2026 11:48pm California time by `check.py --report`.
+Written 14 Sep 2026 11:53pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 14 Sep 2026 11:48pm California time by `check.py --report`.
 | fees paid | $497.07 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 290 |
+| actual calls (graded GOOD) | 291 |
 | calls that have settled | 290 |
-| alerts that reached the phone | 244 of 244 |
+| alerts that reached the phone | 245 of 245 |
 | calls made before delivery was recorded | 46 |
 | calls right | 242 of 290 (83%) |
 | break-even needed | 80% |
@@ -51,7 +51,7 @@ three lucky wins should not rewrite the table.
 | 60-65% | 0.678 | 0.606 | 157 (93 hit) | -0.072 ** |
 | 65-70% | 0.738 | 0.673 | 92 (60 hit) | -0.065 ** |
 | 70-75% | 0.814 | 0.756 | 42 (30 hit) | -0.058 ** |
-| 75-80% | 0.836 | 0.821 | 20 (16 hit) | -0.014 |
+| 75-80% | 0.836 | 0.818 | 19 (15 hit) | -0.018 |
 | 80-85% | 0.885 | 0.889 | 10 (9 hit) | +0.004 |
 | 85-90% | 0.920 | 0.890 | 10 (8 hit) | -0.030 ** |
 | 90-95% | 0.953 | 0.957 | 3 (3 hit) | +0.004 |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1050 |
-| GOOD | 281 |
+| NONE (no disagreement) | 1049 |
+| GOOD | 282 |
 | WEAK (50-70c) | 279 |
 | BAD (cheap side) | 258 |
 | WEAK (small disagreement) | 109 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1078 times, NO 922 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 06:49 | KXBTC15M-26SEP150300-00 | NO | 0.89 | $200.37 | $23.21 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
