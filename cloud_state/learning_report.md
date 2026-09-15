@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Sep 2026 8:40pm California time by `check.py --report`.
+Written 14 Sep 2026 8:45pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,14 +10,14 @@ Written 14 Sep 2026 8:40pm California time by `check.py --report`.
 | best / worst it has been | $2,336.49 / $711.03 |
 | fees paid | $473.03 |
 | contracts looked at | 2000 |
-| of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 292 |
-| calls that have settled | 292 |
+| of those, settled and learned from | 1998 |
+| actual calls (graded GOOD) | 291 |
+| calls that have settled | 291 |
 | alerts that reached the phone | 242 of 242 |
-| calls made before delivery was recorded | 50 |
-| calls right | 245 of 292 (84%) |
+| calls made before delivery was recorded | 49 |
+| calls right | 244 of 291 (84%) |
 | break-even needed | 80% |
-| paper P&L | +5.1% per dollar staked |
+| paper P&L | +5.0% per dollar staked |
 
 ## What it is actually learning
 
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1999 live
+The 63-day study is worth 30 observations per row below. So 1998 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -74,14 +74,13 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1077 times, NO 923 times. Over 63 days of history the
+Leaned YES 1078 times, NO 922 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 06:30 | 2026-08-24 06:45 | NO | 0.74 | -2 | 14 | RIGHT | +33.32 | $1,033.32 |
 | 06:45 | 2026-08-24 07:00 | YES | 0.87 | +54 | 14 | RIGHT | +14.49 | $1,047.81 |
 | 07:45 | 2026-08-24 08:00 | YES | 0.73 | -17 | 15 | **wrong** | -106.77 | $941.04 |
 | 09:00 | 2026-08-24 09:15 | YES | 0.86 | -2 | 14 | RIGHT | +14.39 | $955.43 |
@@ -374,7 +373,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 01:04 | 2026-09-15 01:15 | NO | 0.80 | -107 | 10 | RIGHT | +52.84 | $2,292.27 |
 | 03:04 | 2026-09-15 03:15 | NO | 0.83 | -114 | 10 | RIGHT | +44.22 | $2,336.49 |
 
-**The 9 rows above dated before 24 Aug 19:00 UTC may show a stale
+**The 8 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
 kept the distance from that first look, not from the moment it was
 called -- so a call made once BTC had crossed the line can appear
@@ -443,7 +442,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 245 | 0.80 | 12% | 11 |
+| won | 244 | 0.80 | 12% | 11 |
 | lost | 47 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
