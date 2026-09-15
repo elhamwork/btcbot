@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 15 Sep 2026 10:32am California time by `check.py --report`.
+Written 15 Sep 2026 10:37am California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 15 Sep 2026 10:32am California time by `check.py --report`.
 | fees paid | $505.41 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 291 |
+| actual calls (graded GOOD) | 292 |
 | calls that have settled | 291 |
-| alerts that reached the phone | 251 of 251 |
+| alerts that reached the phone | 252 of 252 |
 | calls made before delivery was recorded | 40 |
 | calls right | 244 of 291 (84%) |
 | break-even needed | 80% |
@@ -52,7 +52,7 @@ three lucky wins should not rewrite the table.
 | 65-70% | 0.738 | 0.679 | 91 (60 hit) | -0.059 ** |
 | 70-75% | 0.814 | 0.745 | 39 (27 hit) | -0.069 ** |
 | 75-80% | 0.836 | 0.831 | 17 (14 hit) | -0.004 |
-| 80-85% | 0.885 | 0.886 | 9 (8 hit) | +0.001 |
+| 80-85% | 0.885 | 0.883 | 8 (7 hit) | -0.002 |
 | 85-90% | 0.920 | 0.890 | 10 (8 hit) | -0.030 ** |
 | 90-95% | 0.953 | 0.957 | 3 (3 hit) | +0.004 |
 | 95-100% | 0.990 | 0.992 | 5 (5 hit) | +0.001 |
@@ -62,9 +62,9 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1060 |
-| GOOD | 285 |
+| GOOD | 286 |
 | WEAK (50-70c) | 270 |
-| BAD (cheap side) | 258 |
+| BAD (cheap side) | 257 |
 | WEAK (small disagreement) | 107 |
 | ALMOST (not confirmed yet) | 7 |
 | BAD (last 5 min) | 5 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1077 times, NO 923 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 17:33 | KXBTC15M-26SEP151345-45 | YES | 0.88 | $237.59 | $30.40 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
