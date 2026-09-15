@@ -1,23 +1,23 @@
 # What the bot has learned
 
-Written 15 Sep 2026 4:45pm California time by `check.py --report`.
+Written 15 Sep 2026 4:50pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$2,137.33** (started $1,000, +113.7%) |
+| **paper account** | **$2,172.80** (started $1,000, +117.3%) |
 | best / worst it has been | $2,646.50 / $805.23 |
-| fees paid | $560.97 |
+| fees paid | $563.22 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
 | actual calls (graded GOOD) | 294 |
-| calls that have settled | 293 |
+| calls that have settled | 294 |
 | alerts that reached the phone | 256 of 256 |
 | calls made before delivery was recorded | 38 |
-| calls right | 245 of 293 (84%) |
+| calls right | 246 of 294 (84%) |
 | break-even needed | 80% |
-| paper P&L | +4.7% per dollar staked |
+| paper P&L | +4.8% per dollar staked |
 
 ## What it is actually learning
 
@@ -39,7 +39,7 @@ three lucky wins should not rewrite the table.
 | 0-5% | 0.019 | 0.049 | 2 (1 hit) | +0.030 ** |
 | 5-10% | 0.044 | 0.041 | 2 (0 hit) | -0.003 |
 | 10-15% | 0.071 | 0.098 | 2 (1 hit) | +0.027 ** |
-| 15-20% | 0.167 | 0.171 | 5 (1 hit) | +0.005 |
+| 15-20% | 0.167 | 0.167 | 6 (1 hit) | -0.000 |
 | 20-25% | 0.178 | 0.199 | 22 (5 hit) | +0.021 ** |
 | 25-30% | 0.238 | 0.268 | 34 (10 hit) | +0.030 ** |
 | 30-35% | 0.286 | 0.296 | 70 (21 hit) | +0.010 |
@@ -61,10 +61,10 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1060 |
+| NONE (no disagreement) | 1061 |
 | GOOD | 288 |
 | WEAK (50-70c) | 270 |
-| BAD (cheap side) | 256 |
+| BAD (cheap side) | 255 |
 | WEAK (small disagreement) | 107 |
 | ALMOST (not confirmed yet) | 7 |
 | BAD (last 5 min) | 4 |
@@ -76,16 +76,6 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1072 times, NO 928 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 23:32 | KXBTC15M-26SEP151945-45 | NO | 0.85 | $213.73 | $35.47 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -384,6 +374,7 @@ publish the result, so this list is usually empty.
 | 18:19 | 2026-09-15 18:30 | NO | 0.89 | -272 | 11 | **wrong** | -261.16 | $2,330.48 |
 | 21:04 | 2026-09-15 21:15 | NO | 0.82 | -172 | 10 | RIGHT | +48.22 | $2,378.70 |
 | 22:18 | 2026-09-15 22:30 | NO | 0.79 | -156 | 11 | **wrong** | -241.37 | $2,137.33 |
+| 23:32 | 2026-09-15 23:45 | NO | 0.85 | -149 | 13 | RIGHT | +35.47 | $2,172.80 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
@@ -446,7 +437,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 245 | 0.80 | 12% | 11 |
+| won | 246 | 0.80 | 12% | 11 |
 | lost | 48 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
