@@ -1,23 +1,23 @@
 # What the bot has learned
 
-Written 14 Sep 2026 11:12pm California time by `check.py --report`.
+Written 14 Sep 2026 11:17pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$2,230.54** (started $1,000, +123.1%) |
+| **paper account** | **$2,003.74** (started $1,000, +100.4%) |
 | best / worst it has been | $2,483.21 / $755.59 |
-| fees paid | $501.88 |
+| fees paid | $505.63 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 291 |
+| actual calls (graded GOOD) | 290 |
 | calls that have settled | 290 |
 | alerts that reached the phone | 244 of 244 |
-| calls made before delivery was recorded | 47 |
-| calls right | 243 of 290 (84%) |
+| calls made before delivery was recorded | 46 |
+| calls right | 242 of 290 (83%) |
 | break-even needed | 80% |
-| paper P&L | +4.9% per dollar staked |
+| paper P&L | +4.5% per dollar staked |
 
 ## What it is actually learning
 
@@ -49,7 +49,7 @@ three lucky wins should not rewrite the table.
 | 50-55% | 0.558 | 0.518 | 435 (224 hit) | -0.040 ** |
 | 55-60% | 0.605 | 0.539 | 306 (163 hit) | -0.066 ** |
 | 60-65% | 0.678 | 0.606 | 157 (93 hit) | -0.072 ** |
-| 65-70% | 0.738 | 0.679 | 91 (60 hit) | -0.059 ** |
+| 65-70% | 0.738 | 0.673 | 92 (60 hit) | -0.065 ** |
 | 70-75% | 0.814 | 0.756 | 42 (30 hit) | -0.058 ** |
 | 75-80% | 0.836 | 0.821 | 20 (16 hit) | -0.014 |
 | 80-85% | 0.885 | 0.889 | 10 (9 hit) | +0.004 |
@@ -74,24 +74,13 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1080 times, NO 920 times. Over 63 days of history the
+Leaned YES 1079 times, NO 921 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 06:03 | KXBTC15M-26SEP150215-15 | YES | 0.76 | $223.05 | $66.69 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 09:00 | 2026-08-24 09:15 | YES | 0.86 | -2 | 14 | RIGHT | +15.29 | $1,015.29 |
 | 12:45 | 2026-08-24 13:00 | YES | 0.84 | +47 | 15 | RIGHT | +18.20 | $1,033.49 |
 | 13:30 | 2026-08-24 13:45 | NO | 0.75 | -39 | 15 | RIGHT | +32.64 | $1,066.13 |
 | 14:00 | 2026-08-24 14:15 | YES | 0.80 | +68 | 14 | RIGHT | +25.15 | $1,091.28 |
@@ -381,8 +370,9 @@ publish the result, so this list is usually empty.
 | 01:04 | 2026-09-15 01:15 | NO | 0.80 | -107 | 10 | RIGHT | +56.16 | $2,436.21 |
 | 03:04 | 2026-09-15 03:15 | NO | 0.83 | -114 | 10 | RIGHT | +47.00 | $2,483.21 |
 | 04:04 | 2026-09-15 04:15 | YES | 0.75 | +47 | 11 | **wrong** | -252.67 | $2,230.54 |
+| 06:03 | 2026-09-15 06:15 | YES | 0.76 | +75 | 11 | **wrong** | -226.80 | $2,003.74 |
 
-**The 6 rows above dated before 24 Aug 19:00 UTC may show a stale
+**The 5 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
 kept the distance from that first look, not from the moment it was
 called -- so a call made once BTC had crossed the line can appear
@@ -448,11 +438,12 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | 09-13 19:15 | YES | 0.71 | 16% | +36 | 11 |
 | 09-14 06:45 | NO | 0.88 | 7% | -198 | 12 |
 | 09-15 04:15 | YES | 0.75 | 9% | +47 | 11 |
+| 09-15 06:15 | YES | 0.76 | 13% | +75 | 11 |
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 243 | 0.80 | 12% | 11 |
-| lost | 47 | 0.78 | 11% | 11 |
+| won | 242 | 0.80 | 12% | 11 |
+| lost | 48 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
