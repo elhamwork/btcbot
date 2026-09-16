@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 15 Sep 2026 6:30pm California time by `check.py --report`.
+Written 15 Sep 2026 6:35pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 15 Sep 2026 6:30pm California time by `check.py --report`.
 | fees paid | $548.83 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 293 |
+| actual calls (graded GOOD) | 294 |
 | calls that have settled | 293 |
-| alerts that reached the phone | 256 of 256 |
+| alerts that reached the phone | 257 of 257 |
 | calls made before delivery was recorded | 37 |
 | calls right | 245 of 293 (84%) |
 | break-even needed | 80% |
@@ -43,7 +43,7 @@ three lucky wins should not rewrite the table.
 | 20-25% | 0.178 | 0.199 | 22 (5 hit) | +0.021 ** |
 | 25-30% | 0.238 | 0.268 | 34 (10 hit) | +0.030 ** |
 | 30-35% | 0.286 | 0.296 | 70 (21 hit) | +0.010 |
-| 35-40% | 0.354 | 0.362 | 129 (47 hit) | +0.008 |
+| 35-40% | 0.354 | 0.366 | 130 (48 hit) | +0.012 |
 | 40-45% | 0.384 | 0.422 | 246 (105 hit) | +0.038 ** |
 | 45-50% | 0.497 | 0.456 | 406 (184 hit) | -0.041 ** |
 | 50-55% | 0.558 | 0.523 | 436 (227 hit) | -0.035 ** |
@@ -62,8 +62,8 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1063 |
-| GOOD | 287 |
-| WEAK (50-70c) | 268 |
+| GOOD | 288 |
+| WEAK (50-70c) | 267 |
 | BAD (cheap side) | 257 |
 | WEAK (small disagreement) | 106 |
 | ALMOST (not confirmed yet) | 7 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1071 times, NO 929 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 01:33 | KXBTC15M-26SEP152145-45 | NO | 0.75 | $212.26 | $67.03 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
