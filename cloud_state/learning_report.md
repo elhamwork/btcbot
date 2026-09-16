@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 15 Sep 2026 11:13pm California time by `check.py --report`.
+Written 15 Sep 2026 11:18pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,13 +11,13 @@ Written 15 Sep 2026 11:13pm California time by `check.py --report`.
 | fees paid | $492.83 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 294 |
-| calls that have settled | 294 |
+| actual calls (graded GOOD) | 293 |
+| calls that have settled | 293 |
 | alerts that reached the phone | 262 of 262 |
-| calls made before delivery was recorded | 32 |
-| calls right | 245 of 294 (83%) |
+| calls made before delivery was recorded | 31 |
+| calls right | 244 of 293 (83%) |
 | break-even needed | 80% |
-| paper P&L | +4.4% per dollar staked |
+| paper P&L | +4.3% per dollar staked |
 
 ## What it is actually learning
 
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.458 | 406 (185 hit) | -0.038 ** |
 | 50-55% | 0.558 | 0.520 | 435 (225 hit) | -0.038 ** |
 | 55-60% | 0.605 | 0.529 | 307 (160 hit) | -0.076 ** |
-| 60-65% | 0.678 | 0.611 | 162 (97 hit) | -0.067 ** |
+| 60-65% | 0.678 | 0.613 | 163 (98 hit) | -0.065 ** |
 | 65-70% | 0.738 | 0.673 | 92 (60 hit) | -0.065 ** |
 | 70-75% | 0.814 | 0.745 | 39 (27 hit) | -0.069 ** |
 | 75-80% | 0.836 | 0.831 | 17 (14 hit) | -0.004 |
@@ -62,11 +62,11 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1063 |
-| GOOD | 288 |
+| GOOD | 287 |
 | WEAK (50-70c) | 263 |
 | BAD (cheap side) | 260 |
 | WEAK (small disagreement) | 107 |
-| ALMOST (not confirmed yet) | 7 |
+| ALMOST (not confirmed yet) | 8 |
 | BAD (last 5 min) | 4 |
 | REVENGE (50% of bank, market at 92c after a loss) | 3 |
 | WEAK (5-10 min) | 2 |
@@ -81,7 +81,6 @@ split is 49.5% YES, so anything near half and half is normal.
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 09:03 | 2026-08-25 09:15 | NO | 0.83 | -128 | 12 | RIGHT | +19.28 | $1,019.28 |
 | 09:47 | 2026-08-25 10:00 | NO | 0.78 | -152 | 12 | RIGHT | +27.18 | $1,046.46 |
 | 10:47 | 2026-08-25 11:00 | YES | 0.90 | +191 | 12 | RIGHT | +10.89 | $1,057.35 |
 | 11:34 | 2026-08-25 11:45 | YES | 0.74 | +99 | 11 | **wrong** | -107.66 | $949.69 |
@@ -438,7 +437,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 245 | 0.80 | 12% | 11 |
+| won | 244 | 0.80 | 12% | 11 |
 | lost | 49 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
