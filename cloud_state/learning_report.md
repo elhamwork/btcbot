@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 15 Sep 2026 10:03pm California time by `check.py --report`.
+Written 15 Sep 2026 10:08pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 15 Sep 2026 10:03pm California time by `check.py --report`.
 | fees paid | $514.72 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 295 |
+| actual calls (graded GOOD) | 296 |
 | calls that have settled | 295 |
-| alerts that reached the phone | 261 of 261 |
+| alerts that reached the phone | 262 of 262 |
 | calls made before delivery was recorded | 34 |
 | calls right | 246 of 295 (83%) |
 | break-even needed | 80% |
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.296 | 70 (21 hit) | +0.010 |
 | 35-40% | 0.354 | 0.365 | 128 (47 hit) | +0.011 |
 | 40-45% | 0.384 | 0.422 | 244 (104 hit) | +0.037 ** |
-| 45-50% | 0.497 | 0.457 | 407 (185 hit) | -0.039 ** |
+| 45-50% | 0.497 | 0.458 | 406 (185 hit) | -0.038 ** |
 | 50-55% | 0.558 | 0.520 | 435 (225 hit) | -0.038 ** |
 | 55-60% | 0.605 | 0.527 | 306 (159 hit) | -0.078 ** |
 | 60-65% | 0.678 | 0.611 | 162 (97 hit) | -0.067 ** |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1063 |
-| GOOD | 289 |
+| NONE (no disagreement) | 1062 |
+| GOOD | 290 |
 | WEAK (50-70c) | 263 |
 | BAD (cheap side) | 259 |
 | WEAK (small disagreement) | 107 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1071 times, NO 929 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 05:03 | KXBTC15M-26SEP160115-15 | NO | 0.85 | $213.66 | $35.45 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
