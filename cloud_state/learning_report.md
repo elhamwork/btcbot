@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 15 Sep 2026 7:00pm California time by `check.py --report`.
+Written 15 Sep 2026 7:05pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 15 Sep 2026 7:00pm California time by `check.py --report`.
 | fees paid | $552.55 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 294 |
+| actual calls (graded GOOD) | 295 |
 | calls that have settled | 294 |
-| alerts that reached the phone | 257 of 257 |
+| alerts that reached the phone | 258 of 258 |
 | calls made before delivery was recorded | 37 |
 | calls right | 246 of 294 (84%) |
 | break-even needed | 80% |
@@ -47,7 +47,7 @@ three lucky wins should not rewrite the table.
 | 40-45% | 0.384 | 0.425 | 244 (105 hit) | +0.041 ** |
 | 45-50% | 0.497 | 0.456 | 406 (184 hit) | -0.041 ** |
 | 50-55% | 0.558 | 0.523 | 436 (227 hit) | -0.035 ** |
-| 55-60% | 0.605 | 0.529 | 305 (159 hit) | -0.076 ** |
+| 55-60% | 0.605 | 0.527 | 306 (159 hit) | -0.078 ** |
 | 60-65% | 0.678 | 0.606 | 162 (96 hit) | -0.072 ** |
 | 65-70% | 0.738 | 0.676 | 90 (59 hit) | -0.062 ** |
 | 70-75% | 0.814 | 0.745 | 39 (27 hit) | -0.069 ** |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1064 |
-| GOOD | 288 |
+| NONE (no disagreement) | 1063 |
+| GOOD | 289 |
 | WEAK (50-70c) | 266 |
 | BAD (cheap side) | 257 |
 | WEAK (small disagreement) | 106 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1072 times, NO 928 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 02:04 | KXBTC15M-26SEP152215-15 | YES | 0.75 | $218.96 | $69.15 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
