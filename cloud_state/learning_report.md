@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 16 Sep 2026 1:15pm California time by `check.py --report`.
+Written 16 Sep 2026 1:19pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,13 +11,13 @@ Written 16 Sep 2026 1:15pm California time by `check.py --report`.
 | fees paid | $492.34 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 293 |
-| calls that have settled | 293 |
+| actual calls (graded GOOD) | 292 |
+| calls that have settled | 292 |
 | alerts that reached the phone | 269 of 269 |
-| calls made before delivery was recorded | 24 |
-| calls right | 244 of 293 (83%) |
+| calls made before delivery was recorded | 23 |
+| calls right | 243 of 292 (83%) |
 | break-even needed | 80% |
-| paper P&L | +4.4% per dollar staked |
+| paper P&L | +4.3% per dollar staked |
 
 ## What it is actually learning
 
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.299 | 69 (21 hit) | +0.013 |
 | 35-40% | 0.354 | 0.367 | 127 (47 hit) | +0.013 |
 | 40-45% | 0.384 | 0.413 | 247 (103 hit) | +0.029 ** |
-| 45-50% | 0.497 | 0.459 | 410 (187 hit) | -0.038 ** |
+| 45-50% | 0.497 | 0.460 | 411 (188 hit) | -0.037 ** |
 | 50-55% | 0.558 | 0.519 | 432 (223 hit) | -0.039 ** |
 | 55-60% | 0.605 | 0.542 | 297 (159 hit) | -0.063 ** |
 | 60-65% | 0.678 | 0.619 | 166 (101 hit) | -0.059 ** |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1071 |
-| GOOD | 287 |
+| NONE (no disagreement) | 1072 |
+| GOOD | 286 |
 | BAD (cheap side) | 262 |
 | WEAK (50-70c) | 250 |
 | WEAK (small disagreement) | 110 |
@@ -74,14 +74,13 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1065 times, NO 935 times. Over 63 days of history the
+Leaned YES 1064 times, NO 936 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 23:03 | 2026-08-25 23:15 | YES | 0.70 | +83 | 12 | RIGHT | +40.75 | $1,040.75 |
 | 23:49 | 2026-08-26 00:00 | NO | 0.75 | -83 | 10 | RIGHT | +32.86 | $1,073.61 |
 | 01:04 | 2026-08-26 01:15 | YES | 0.79 | +155 | 10 | RIGHT | +26.96 | $1,100.57 |
 | 01:19 | 2026-08-26 01:30 | YES | 0.75 | +112 | 10 | **wrong** | -111.99 | $988.58 |
@@ -437,7 +436,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 244 | 0.80 | 12% | 11 |
+| won | 243 | 0.80 | 12% | 11 |
 | lost | 49 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
