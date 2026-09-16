@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 16 Sep 2026 3:47am California time by `check.py --report`.
+Written 16 Sep 2026 3:52am California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 16 Sep 2026 3:47am California time by `check.py --report`.
 | fees paid | $500.61 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 291 |
+| actual calls (graded GOOD) | 292 |
 | calls that have settled | 291 |
-| alerts that reached the phone | 265 of 265 |
+| alerts that reached the phone | 266 of 266 |
 | calls made before delivery was recorded | 26 |
 | calls right | 242 of 291 (83%) |
 | break-even needed | 80% |
@@ -49,7 +49,7 @@ three lucky wins should not rewrite the table.
 | 50-55% | 0.558 | 0.521 | 432 (224 hit) | -0.037 ** |
 | 55-60% | 0.605 | 0.532 | 307 (161 hit) | -0.073 ** |
 | 60-65% | 0.678 | 0.616 | 167 (101 hit) | -0.062 ** |
-| 65-70% | 0.738 | 0.673 | 92 (60 hit) | -0.065 ** |
+| 65-70% | 0.738 | 0.671 | 91 (59 hit) | -0.067 ** |
 | 70-75% | 0.814 | 0.735 | 40 (27 hit) | -0.079 ** |
 | 75-80% | 0.836 | 0.831 | 17 (14 hit) | -0.004 |
 | 80-85% | 0.885 | 0.883 | 8 (7 hit) | -0.002 |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1066 |
-| GOOD | 285 |
+| NONE (no disagreement) | 1065 |
+| GOOD | 286 |
 | WEAK (50-70c) | 261 |
 | BAD (cheap side) | 261 |
 | WEAK (small disagreement) | 107 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1072 times, NO 928 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 10:49 | KXBTC15M-26SEP160700-00 | NO | 0.71 | $181.98 | $70.63 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
