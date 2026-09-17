@@ -11,28 +11,28 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,779.45** &nbsp; +77.9% since $1,000 &nbsp;&middot;&nbsp; updated 16 Sep 11:33pm California time
+**$1,759.07** &nbsp; +75.9% since $1,000 &nbsp;&middot;&nbsp; updated 16 Sep 11:39pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
 | 290 | 241 / 49 | 83.1% | 79.8% |
 
-Best $2,065.85, worst $628.70, fees paid $458.92.
+Best $2,042.20, worst $621.54, fees paid $452.97.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 16 Sep 10:30pm | **LOST** | -200.49 | $1,779.45 | NO | 0.82 |
-| 16 Sep 9:15pm | won | +48.50 | $1,979.94 | NO | 0.79 |
-| 16 Sep 6:15pm | won | +31.53 | $1,931.44 | NO | 0.85 |
-| 16 Sep 5:30pm | won | +43.80 | $1,899.91 | YES | 0.80 |
-| 16 Sep 4:30pm | won | +21.26 | $1,856.11 | YES | 0.89 |
-| 16 Sep 3:15pm | won | +25.39 | $1,834.85 | NO | 0.87 |
-| 16 Sep 8:00am | won | +39.17 | $1,809.46 | NO | 0.81 |
-| 16 Sep 7:30am | won | +51.39 | $1,770.29 | YES | 0.76 |
+| 16 Sep 10:30pm | **LOST** | -198.20 | $1,759.07 | NO | 0.82 |
+| 16 Sep 9:15pm | won | +47.94 | $1,957.27 | NO | 0.79 |
+| 16 Sep 6:15pm | won | +31.16 | $1,909.33 | NO | 0.85 |
+| 16 Sep 5:30pm | won | +43.30 | $1,878.17 | YES | 0.80 |
+| 16 Sep 4:30pm | won | +21.02 | $1,834.87 | YES | 0.89 |
+| 16 Sep 3:15pm | won | +25.10 | $1,813.85 | NO | 0.87 |
+| 16 Sep 8:00am | won | +38.72 | $1,788.75 | NO | 0.81 |
+| 16 Sep 7:30am | won | +50.80 | $1,750.03 | YES | 0.76 |
 
-Collecting in the background: 89,304 order-book snapshots over 24 days (needs about three weeks).
+Collecting in the background: 89,319 order-book snapshots over 24 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
