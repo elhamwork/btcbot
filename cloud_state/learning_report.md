@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 17 Sep 2026 2:45pm California time by `check.py --report`.
+Written 17 Sep 2026 2:50pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 17 Sep 2026 2:45pm California time by `check.py --report`.
 | fees paid | $416.35 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 284 |
+| actual calls (graded GOOD) | 285 |
 | calls that have settled | 284 |
-| alerts that reached the phone | 276 of 276 |
+| alerts that reached the phone | 277 of 277 |
 | calls made before delivery was recorded | 8 |
 | calls right | 236 of 284 (83%) |
 | break-even needed | 80% |
@@ -42,7 +42,7 @@ three lucky wins should not rewrite the table.
 | 15-20% | 0.167 | 0.162 | 7 (1 hit) | -0.005 |
 | 20-25% | 0.178 | 0.195 | 23 (5 hit) | +0.017 |
 | 25-30% | 0.238 | 0.272 | 33 (10 hit) | +0.034 ** |
-| 30-35% | 0.286 | 0.303 | 71 (22 hit) | +0.017 |
+| 30-35% | 0.286 | 0.300 | 72 (22 hit) | +0.014 |
 | 35-40% | 0.354 | 0.367 | 127 (47 hit) | +0.013 |
 | 40-45% | 0.384 | 0.415 | 253 (106 hit) | +0.031 ** |
 | 45-50% | 0.497 | 0.458 | 404 (184 hit) | -0.038 ** |
@@ -62,8 +62,8 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1089 |
-| GOOD | 278 |
-| BAD (cheap side) | 254 |
+| GOOD | 279 |
+| BAD (cheap side) | 253 |
 | WEAK (50-70c) | 247 |
 | WEAK (small disagreement) | 114 |
 | ALMOST (not confirmed yet) | 7 |
@@ -74,8 +74,18 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1063 times, NO 937 times. Over 63 days of history the
+Leaned YES 1062 times, NO 938 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 21:49 | KXBTC15M-26SEP171800-00 | NO | 0.75 | $167.12 | $52.78 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
