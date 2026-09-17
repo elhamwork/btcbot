@@ -1,14 +1,14 @@
 # What the bot has learned
 
-Written 16 Sep 2026 9:17pm California time by `check.py --report`.
+Written 16 Sep 2026 9:22pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,981.30** (started $1,000, +98.1%) |
+| **paper account** | **$1,979.94** (started $1,000, +98.0%) |
 | best / worst it has been | $2,065.85 / $628.70 |
-| fees paid | $456.50 |
+| fees paid | $456.42 |
 | contracts looked at | 2000 |
 | of those, settled and learned from | 1999 |
 | actual calls (graded GOOD) | 290 |
@@ -47,7 +47,7 @@ three lucky wins should not rewrite the table.
 | 40-45% | 0.384 | 0.415 | 253 (106 hit) | +0.031 ** |
 | 45-50% | 0.497 | 0.457 | 410 (186 hit) | -0.040 ** |
 | 50-55% | 0.558 | 0.522 | 429 (223 hit) | -0.035 ** |
-| 55-60% | 0.605 | 0.546 | 296 (160 hit) | -0.059 ** |
+| 55-60% | 0.605 | 0.545 | 295 (159 hit) | -0.060 ** |
 | 60-65% | 0.678 | 0.608 | 168 (100 hit) | -0.070 ** |
 | 65-70% | 0.738 | 0.676 | 93 (61 hit) | -0.062 ** |
 | 70-75% | 0.814 | 0.738 | 41 (28 hit) | -0.076 ** |
@@ -370,7 +370,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 23:19 | 2026-09-16 23:30 | YES | 0.89 | +215 | 11 | RIGHT | +21.26 | $1,856.11 |
 | 00:19 | 2026-09-17 00:30 | YES | 0.80 | +147 | 10 | RIGHT | +43.80 | $1,899.91 |
 | 01:04 | 2026-09-17 01:15 | NO | 0.85 | -121 | 11 | RIGHT | +31.53 | $1,931.44 |
-| 04:04 | 2026-09-17 04:15 | NO | 0.79 | -74 | 10 | RIGHT | +49.86 | $1,981.30 |
+| 04:04 | 2026-09-17 04:15 | NO | 0.79 | -74 | 10 | RIGHT | +48.50 | $1,979.94 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
