@@ -62521,7 +62521,7 @@
    "dist": -6.7,
    "vol": 0.000266,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 0,
    "cross_30": 0,
@@ -62547,7 +62547,7 @@
   69.0,
   126.0,
   252.0,
-  412.0,
+  413.0,
   429.0,
   293.0,
   167.0,
@@ -101368,16 +101368,6 @@
   ],
   "KXBTC15M-26SEP170300-00": [
    {
-    "mins": 10.7,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.44,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.19,
     "side": "NO",
     "qual": false
@@ -101564,6 +101554,16 @@
    },
    {
     "mins": 0.7,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.44,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.18,
     "side": "NO",
     "qual": false
    }
