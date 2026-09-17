@@ -75,15 +75,15 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 101.79,
-    "contracts": 135.7,
-    "fee": 1.79,
-    "to_win": 32.14,
-    "bank_before": 1017.92
+    "stake": 100.0,
+    "contracts": 133.3,
+    "fee": 1.76,
+    "to_win": 31.57,
+    "bank_before": 1000.0
    },
    "correct": true,
-   "paid": 32.14,
-   "bank_after": 1050.06
+   "paid": 31.57,
+   "bank_after": 1031.57
   },
   {
    "asked": "2026-08-27T06:00:23.353671+00:00",
@@ -464,15 +464,15 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 105.01,
-    "contracts": 131.3,
-    "fee": 1.48,
-    "to_win": 24.77,
-    "bank_before": 1050.06
+    "stake": 103.16,
+    "contracts": 128.9,
+    "fee": 1.45,
+    "to_win": 24.34,
+    "bank_before": 1031.57
    },
    "correct": true,
-   "paid": 24.77,
-   "bank_after": 1074.83
+   "paid": 24.34,
+   "bank_after": 1055.91
   },
   {
    "asked": "2026-08-27T16:00:54.372945+00:00",
@@ -530,15 +530,15 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 107.48,
-    "contracts": 143.3,
-    "fee": 1.89,
-    "to_win": 33.94,
-    "bank_before": 1074.83
+    "stake": 105.59,
+    "contracts": 140.8,
+    "fee": 1.85,
+    "to_win": 33.35,
+    "bank_before": 1055.91
    },
    "correct": false,
-   "paid": -109.37,
-   "bank_after": 965.46
+   "paid": -107.44,
+   "bank_after": 948.47
   },
   {
    "asked": "2026-08-27T16:45:50.902410+00:00",
@@ -577,15 +577,15 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 96.55,
-    "contracts": 119.2,
-    "fee": 1.29,
-    "to_win": 21.36,
-    "bank_before": 965.46
+    "stake": 94.85,
+    "contracts": 117.1,
+    "fee": 1.27,
+    "to_win": 20.98,
+    "bank_before": 948.47
    },
    "correct": false,
-   "paid": -97.84,
-   "bank_after": 867.62
+   "paid": -96.12,
+   "bank_after": 852.35
   },
   {
    "asked": "2026-08-27T17:19:33.292526+00:00",
@@ -605,15 +605,15 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 86.76,
-    "contracts": 107.1,
-    "fee": 1.16,
-    "to_win": 19.19,
-    "bank_before": 867.62
+    "stake": 85.24,
+    "contracts": 105.2,
+    "fee": 1.14,
+    "to_win": 18.85,
+    "bank_before": 852.35
    },
    "correct": true,
-   "paid": 19.19,
-   "bank_after": 886.81
+   "paid": 18.85,
+   "bank_after": 871.2
   },
   {
    "asked": "2026-08-27T17:30:27.265071+00:00",
@@ -671,15 +671,15 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 88.68,
-    "contracts": 126.7,
-    "fee": 1.87,
-    "to_win": 36.14,
-    "bank_before": 886.81
+    "stake": 87.12,
+    "contracts": 124.5,
+    "fee": 1.83,
+    "to_win": 35.51,
+    "bank_before": 871.2
    },
    "correct": true,
-   "paid": 36.14,
-   "bank_after": 922.95
+   "paid": 35.51,
+   "bank_after": 906.71
   },
   {
    "asked": "2026-08-27T18:15:25.379743+00:00",
@@ -851,17 +851,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 92.3,
-    "contracts": 111.2,
-    "fee": 1.1,
-    "to_win": 17.8,
-    "bank_before": 922.95
+    "stake": 90.67,
+    "contracts": 109.2,
+    "fee": 1.08,
+    "to_win": 17.49,
+    "bank_before": 906.71
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.8,
-   "bank_after": 940.75,
+   "paid": 17.49,
+   "bank_after": 924.2,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -921,17 +921,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 94.08,
-    "contracts": 123.8,
-    "fee": 1.59,
-    "to_win": 28.12,
-    "bank_before": 940.75
+    "stake": 92.42,
+    "contracts": 121.6,
+    "fee": 1.56,
+    "to_win": 27.63,
+    "bank_before": 924.2
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 28.12,
-   "bank_after": 968.87,
+   "paid": 27.63,
+   "bank_after": 951.83,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1029,17 +1029,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 96.89,
-    "contracts": 121.1,
-    "fee": 1.36,
-    "to_win": 22.86,
-    "bank_before": 968.87
+    "stake": 95.18,
+    "contracts": 119.0,
+    "fee": 1.34,
+    "to_win": 22.45,
+    "bank_before": 951.83
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.86,
-   "bank_after": 991.73,
+   "paid": 22.46,
+   "bank_after": 974.29,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1194,17 +1194,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 99.17,
-    "contracts": 137.7,
-    "fee": 1.95,
-    "to_win": 36.62,
-    "bank_before": 991.73
+    "stake": 97.43,
+    "contracts": 135.3,
+    "fee": 1.91,
+    "to_win": 35.98,
+    "bank_before": 974.29
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -101.12,
-   "bank_after": 890.61,
+   "paid": -99.34,
+   "bank_after": 874.95,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1226,17 +1226,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 89.06,
-    "contracts": 123.7,
-    "fee": 1.75,
-    "to_win": 32.88,
-    "bank_before": 890.61
+    "stake": 87.5,
+    "contracts": 121.5,
+    "fee": 1.72,
+    "to_win": 32.31,
+    "bank_before": 874.95
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.88,
-   "bank_after": 923.49,
+   "paid": 32.31,
+   "bank_after": 907.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1372,17 +1372,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 92.35,
-    "contracts": 112.6,
-    "fee": 1.17,
-    "to_win": 19.1,
-    "bank_before": 923.49
+    "stake": 90.73,
+    "contracts": 110.6,
+    "fee": 1.15,
+    "to_win": 18.77,
+    "bank_before": 907.26
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.1,
-   "bank_after": 942.59,
+   "paid": 18.77,
+   "bank_after": 926.03,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1518,17 +1518,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 94.26,
-    "contracts": 130.9,
-    "fee": 1.85,
-    "to_win": 34.81,
-    "bank_before": 942.59
+    "stake": 92.6,
+    "contracts": 128.6,
+    "fee": 1.82,
+    "to_win": 34.19,
+    "bank_before": 926.03
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.81,
-   "bank_after": 977.4,
+   "paid": 34.19,
+   "bank_after": 960.22,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1550,17 +1550,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 97.74,
-    "contracts": 133.9,
-    "fee": 1.85,
-    "to_win": 34.3,
-    "bank_before": 977.4
+    "stake": 96.02,
+    "contracts": 131.5,
+    "fee": 1.82,
+    "to_win": 33.69,
+    "bank_before": 960.22
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.3,
-   "bank_after": 1011.7,
+   "paid": 33.69,
+   "bank_after": 993.91,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1582,17 +1582,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 101.17,
-    "contracts": 113.7,
-    "fee": 0.78,
-    "to_win": 11.72,
-    "bank_before": 1011.7
+    "stake": 99.39,
+    "contracts": 111.7,
+    "fee": 0.77,
+    "to_win": 11.51,
+    "bank_before": 993.91
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.72,
-   "bank_after": 1023.42,
+   "paid": 11.51,
+   "bank_after": 1005.42,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1690,17 +1690,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.34,
-    "contracts": 121.8,
-    "fee": 1.15,
-    "to_win": 18.34,
-    "bank_before": 1023.42
+    "stake": 100.54,
+    "contracts": 119.7,
+    "fee": 1.13,
+    "to_win": 18.02,
+    "bank_before": 1005.42
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.34,
-   "bank_after": 1041.76,
+   "paid": 18.02,
+   "bank_after": 1023.44,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1817,17 +1817,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 104.18,
-    "contracts": 121.1,
-    "fee": 1.03,
-    "to_win": 15.93,
-    "bank_before": 1041.76
+    "stake": 102.34,
+    "contracts": 119.0,
+    "fee": 1.01,
+    "to_win": 15.65,
+    "bank_before": 1023.44
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.93,
-   "bank_after": 1057.69,
+   "paid": 15.65,
+   "bank_after": 1039.09,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -2001,17 +2001,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 105.77,
-    "contracts": 121.6,
-    "fee": 0.97,
-    "to_win": 14.83,
-    "bank_before": 1057.69
+    "stake": 103.91,
+    "contracts": 119.4,
+    "fee": 0.95,
+    "to_win": 14.58,
+    "bank_before": 1039.09
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.83,
-   "bank_after": 1072.52,
+   "paid": 14.58,
+   "bank_after": 1053.67,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2071,17 +2071,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 107.25,
-    "contracts": 151.1,
-    "fee": 2.18,
-    "to_win": 41.63,
-    "bank_before": 1072.52
+    "stake": 105.37,
+    "contracts": 148.4,
+    "fee": 2.14,
+    "to_win": 40.9,
+    "bank_before": 1053.67
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -109.43,
-   "bank_after": 963.09,
+   "paid": -107.51,
+   "bank_after": 946.16,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2198,17 +2198,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 96.31,
-    "contracts": 117.5,
-    "fee": 1.22,
-    "to_win": 19.92,
-    "bank_before": 963.09
+    "stake": 94.62,
+    "contracts": 115.4,
+    "fee": 1.2,
+    "to_win": 19.57,
+    "bank_before": 946.16
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.92,
-   "bank_after": 983.01,
+   "paid": 19.57,
+   "bank_after": 965.73,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2249,17 +2249,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 98.3,
-    "contracts": 131.1,
-    "fee": 1.73,
-    "to_win": 31.04,
-    "bank_before": 983.01
+    "stake": 96.57,
+    "contracts": 128.8,
+    "fee": 1.69,
+    "to_win": 30.5,
+    "bank_before": 965.73
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.04,
-   "bank_after": 1014.05,
+   "paid": 30.5,
+   "bank_after": 996.23,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2357,17 +2357,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 101.41,
-    "contracts": 140.8,
-    "fee": 1.99,
-    "to_win": 37.45,
-    "bank_before": 1014.05
+    "stake": 99.62,
+    "contracts": 138.4,
+    "fee": 1.96,
+    "to_win": 36.78,
+    "bank_before": 996.23
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 37.45,
-   "bank_after": 1051.5,
+   "paid": 36.78,
+   "bank_after": 1033.01,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2465,17 +2465,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 105.15,
-    "contracts": 123.7,
-    "fee": 1.11,
-    "to_win": 17.45,
-    "bank_before": 1051.5
+    "stake": 103.3,
+    "contracts": 121.5,
+    "fee": 1.09,
+    "to_win": 17.14,
+    "bank_before": 1033.01
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.45,
-   "bank_after": 1068.95,
+   "paid": 17.14,
+   "bank_after": 1050.15,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -2611,17 +2611,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 106.9,
-    "contracts": 130.4,
-    "fee": 1.35,
-    "to_win": 22.12,
-    "bank_before": 1068.95
+    "stake": 105.02,
+    "contracts": 128.1,
+    "fee": 1.33,
+    "to_win": 21.72,
+    "bank_before": 1050.15
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.12,
-   "bank_after": 1091.07,
+   "paid": 21.72,
+   "bank_after": 1071.87,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2681,17 +2681,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 109.11,
-    "contracts": 151.5,
-    "fee": 2.14,
-    "to_win": 40.29,
-    "bank_before": 1091.07
+    "stake": 107.19,
+    "contracts": 148.9,
+    "fee": 2.11,
+    "to_win": 39.58,
+    "bank_before": 1071.87
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 40.29,
-   "bank_after": 1131.36,
+   "paid": 39.58,
+   "bank_after": 1111.44,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2751,17 +2751,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 113.14,
-    "contracts": 146.9,
-    "fee": 1.83,
-    "to_win": 31.97,
-    "bank_before": 1131.36
+    "stake": 111.14,
+    "contracts": 144.3,
+    "fee": 1.79,
+    "to_win": 31.41,
+    "bank_before": 1111.44
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.97,
-   "bank_after": 1163.33,
+   "paid": 31.41,
+   "bank_after": 1142.85,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -2973,17 +2973,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 116.33,
-    "contracts": 157.2,
-    "fee": 2.12,
-    "to_win": 38.75,
-    "bank_before": 1163.33
+    "stake": 114.28,
+    "contracts": 154.4,
+    "fee": 2.08,
+    "to_win": 38.07,
+    "bank_before": 1142.85
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 38.75,
-   "bank_after": 1202.08,
+   "paid": 38.07,
+   "bank_after": 1180.92,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3024,17 +3024,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 120.21,
-    "contracts": 146.6,
-    "fee": 1.52,
-    "to_win": 24.87,
-    "bank_before": 1202.08
+    "stake": 118.09,
+    "contracts": 144.0,
+    "fee": 1.49,
+    "to_win": 24.43,
+    "bank_before": 1180.92
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.87,
-   "bank_after": 1226.95,
+   "paid": 24.43,
+   "bank_after": 1205.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3113,17 +3113,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 122.7,
-    "contracts": 144.4,
-    "fee": 1.29,
-    "to_win": 20.36,
-    "bank_before": 1226.95
+    "stake": 120.53,
+    "contracts": 141.8,
+    "fee": 1.27,
+    "to_win": 20.0,
+    "bank_before": 1205.35
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.36,
-   "bank_after": 1247.31,
+   "paid": 20.0,
+   "bank_after": 1225.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3411,17 +3411,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 124.73,
-    "contracts": 150.3,
-    "fee": 1.49,
-    "to_win": 24.06,
-    "bank_before": 1247.31
+    "stake": 122.53,
+    "contracts": 147.6,
+    "fee": 1.46,
+    "to_win": 23.64,
+    "bank_before": 1225.35
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -126.22,
-   "bank_after": 1121.09,
+   "paid": -123.99,
+   "bank_after": 1101.36,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3538,17 +3538,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 112.11,
-    "contracts": 145.6,
-    "fee": 1.81,
-    "to_win": 31.68,
-    "bank_before": 1121.09
+    "stake": 110.14,
+    "contracts": 143.0,
+    "fee": 1.78,
+    "to_win": 31.12,
+    "bank_before": 1101.36
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.68,
-   "bank_after": 1152.77,
+   "paid": 31.12,
+   "bank_after": 1132.48,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3627,17 +3627,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 115.28,
-    "contracts": 137.2,
-    "fee": 1.3,
-    "to_win": 20.66,
-    "bank_before": 1152.77
+    "stake": 113.25,
+    "contracts": 134.8,
+    "fee": 1.27,
+    "to_win": 20.3,
+    "bank_before": 1132.48
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.66,
-   "bank_after": 1173.43,
+   "paid": 20.3,
+   "bank_after": 1152.78,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3716,17 +3716,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 117.34,
-    "contracts": 136.4,
-    "fee": 1.15,
-    "to_win": 17.95,
-    "bank_before": 1173.43
+    "stake": 115.28,
+    "contracts": 134.0,
+    "fee": 1.13,
+    "to_win": 17.64,
+    "bank_before": 1152.78
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.95,
-   "bank_after": 1191.38,
+   "paid": 17.64,
+   "bank_after": 1170.42,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3767,17 +3767,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 119.14,
-    "contracts": 165.5,
-    "fee": 2.34,
-    "to_win": 43.99,
-    "bank_before": 1191.38
+    "stake": 117.04,
+    "contracts": 162.6,
+    "fee": 2.3,
+    "to_win": 43.22,
+    "bank_before": 1170.42
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -121.48,
-   "bank_after": 1069.9,
+   "paid": -119.34,
+   "bank_after": 1051.08,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3856,17 +3856,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 106.99,
-    "contracts": 142.7,
-    "fee": 1.88,
-    "to_win": 33.78,
-    "bank_before": 1069.9
+    "stake": 105.11,
+    "contracts": 140.1,
+    "fee": 1.84,
+    "to_win": 33.2,
+    "bank_before": 1051.08
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -108.87,
-   "bank_after": 961.03,
+   "paid": -106.95,
+   "bank_after": 944.13,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3926,17 +3926,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 96.1,
-    "contracts": 131.6,
-    "fee": 1.82,
-    "to_win": 33.72,
-    "bank_before": 961.03
+    "stake": 94.41,
+    "contracts": 129.3,
+    "fee": 1.79,
+    "to_win": 33.13,
+    "bank_before": 944.13
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.72,
-   "bank_after": 994.75,
+   "paid": 33.13,
+   "bank_after": 977.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4129,17 +4129,17 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 99.48,
-    "contracts": 136.3,
-    "fee": 1.89,
-    "to_win": 34.9,
-    "bank_before": 994.75
+    "stake": 97.73,
+    "contracts": 133.9,
+    "fee": 1.85,
+    "to_win": 34.3,
+    "bank_before": 977.26
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.9,
-   "bank_after": 1029.65,
+   "paid": 34.3,
+   "bank_after": 1011.56,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4180,17 +4180,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.97,
-    "contracts": 135.5,
-    "fee": 1.73,
-    "to_win": 30.79,
-    "bank_before": 1029.65
+    "stake": 101.16,
+    "contracts": 133.1,
+    "fee": 1.7,
+    "to_win": 30.25,
+    "bank_before": 1011.56
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -104.7,
-   "bank_after": 924.95,
+   "paid": -102.86,
+   "bank_after": 908.7,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4440,17 +4440,17 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 92.5,
-    "contracts": 108.8,
-    "fee": 0.98,
-    "to_win": 15.34,
-    "bank_before": 924.95
+    "stake": 90.87,
+    "contracts": 106.9,
+    "fee": 0.96,
+    "to_win": 15.08,
+    "bank_before": 908.7
    },
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.34,
-   "bank_after": 940.29,
+   "paid": 15.08,
+   "bank_after": 923.78,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4565,11 +4565,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 94.03,
-    "contracts": 130.6,
-    "fee": 1.85,
-    "to_win": 34.72,
-    "bank_before": 940.29
+    "stake": 92.38,
+    "contracts": 128.3,
+    "fee": 1.82,
+    "to_win": 34.11,
+    "bank_before": 923.78
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -4586,8 +4586,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.72,
-   "bank_after": 975.01,
+   "paid": 34.11,
+   "bank_after": 957.89,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4640,11 +4640,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 97.5,
-    "contracts": 135.4,
-    "fee": 1.92,
-    "to_win": 36.0,
-    "bank_before": 975.01
+    "stake": 95.79,
+    "contracts": 133.0,
+    "fee": 1.88,
+    "to_win": 35.37,
+    "bank_before": 957.89
    },
    "cross_15": 5,
    "cross_30": 7,
@@ -4661,8 +4661,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 36.0,
-   "bank_after": 1011.01,
+   "paid": 35.37,
+   "bank_after": 993.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4684,11 +4684,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 101.1,
-    "contracts": 136.6,
-    "fee": 1.85,
-    "to_win": 33.67,
-    "bank_before": 1011.01
+    "stake": 99.33,
+    "contracts": 134.2,
+    "fee": 1.81,
+    "to_win": 33.09,
+    "bank_before": 993.26
    },
    "cross_15": 6,
    "cross_30": 7,
@@ -4705,8 +4705,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.67,
-   "bank_after": 1044.68,
+   "paid": 33.09,
+   "bank_after": 1026.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4883,11 +4883,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 104.47,
-    "contracts": 130.6,
-    "fee": 1.47,
-    "to_win": 24.65,
-    "bank_before": 1044.68
+    "stake": 102.63,
+    "contracts": 128.3,
+    "fee": 1.44,
+    "to_win": 24.22,
+    "bank_before": 1026.35
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -4904,8 +4904,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.65,
-   "bank_after": 1069.33,
+   "paid": 24.22,
+   "bank_after": 1050.57,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -4958,11 +4958,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 106.93,
-    "contracts": 127.3,
-    "fee": 1.2,
-    "to_win": 19.17,
-    "bank_before": 1069.33
+    "stake": 105.06,
+    "contracts": 125.1,
+    "fee": 1.18,
+    "to_win": 18.83,
+    "bank_before": 1050.57
    },
    "cross_15": 6,
    "cross_30": 6,
@@ -4979,8 +4979,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.17,
-   "bank_after": 1088.5,
+   "paid": 18.83,
+   "bank_after": 1069.4,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -5808,11 +5808,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 108.85,
-    "contracts": 143.2,
-    "fee": 1.83,
-    "to_win": 32.54,
-    "bank_before": 1088.5
+    "stake": 106.94,
+    "contracts": 140.7,
+    "fee": 1.8,
+    "to_win": 31.97,
+    "bank_before": 1069.4
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -5829,8 +5829,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.54,
-   "bank_after": 1121.04,
+   "paid": 31.97,
+   "bank_after": 1101.37,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -6193,11 +6193,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 112.1,
-    "contracts": 127.4,
-    "fee": 0.95,
-    "to_win": 14.34,
-    "bank_before": 1121.04
+    "stake": 110.14,
+    "contracts": 125.2,
+    "fee": 0.93,
+    "to_win": 14.09,
+    "bank_before": 1101.37
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -6214,8 +6214,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.34,
-   "bank_after": 1135.38,
+   "paid": 14.09,
+   "bank_after": 1115.46,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -6361,11 +6361,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 113.54,
-    "contracts": 145.6,
-    "fee": 1.75,
-    "to_win": 30.27,
-    "bank_before": 1135.38
+    "stake": 111.55,
+    "contracts": 143.0,
+    "fee": 1.72,
+    "to_win": 29.74,
+    "bank_before": 1115.46
    },
    "cross_15": 2,
    "cross_30": 5,
@@ -6382,8 +6382,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 30.27,
-   "bank_after": 1165.65,
+   "paid": 29.74,
+   "bank_after": 1145.2,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -6498,11 +6498,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 116.57,
-    "contracts": 134.0,
-    "fee": 1.07,
-    "to_win": 16.35,
-    "bank_before": 1165.65
+    "stake": 114.52,
+    "contracts": 131.6,
+    "fee": 1.05,
+    "to_win": 16.06,
+    "bank_before": 1145.2
    },
    "cross_15": 6,
    "cross_30": 9,
@@ -6519,8 +6519,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 16.35,
-   "bank_after": 1182.0,
+   "paid": 16.06,
+   "bank_after": 1161.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -6666,11 +6666,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 118.2,
-    "contracts": 142.4,
-    "fee": 1.41,
-    "to_win": 22.8,
-    "bank_before": 1182.0
+    "stake": 116.13,
+    "contracts": 139.9,
+    "fee": 1.39,
+    "to_win": 22.4,
+    "bank_before": 1161.26
    },
    "cross_15": 5,
    "cross_30": 8,
@@ -6687,8 +6687,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.8,
-   "bank_after": 1204.8,
+   "paid": 22.4,
+   "bank_after": 1183.66,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -6834,11 +6834,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 120.48,
-    "contracts": 148.7,
-    "fee": 1.61,
-    "to_win": 26.65,
-    "bank_before": 1204.8
+    "stake": 118.37,
+    "contracts": 146.1,
+    "fee": 1.58,
+    "to_win": 26.19,
+    "bank_before": 1183.66
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -6855,8 +6855,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.65,
-   "bank_after": 1231.45,
+   "paid": 26.19,
+   "bank_after": 1209.85,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -7033,11 +7033,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 123.15,
-    "contracts": 153.9,
-    "fee": 1.73,
-    "to_win": 29.06,
-    "bank_before": 1231.45
+    "stake": 120.98,
+    "contracts": 151.2,
+    "fee": 1.7,
+    "to_win": 28.54,
+    "bank_before": 1209.85
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -7054,8 +7054,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.06,
-   "bank_after": 1260.51,
+   "paid": 28.54,
+   "bank_after": 1238.39,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -7108,11 +7108,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 126.05,
-    "contracts": 155.6,
-    "fee": 1.68,
-    "to_win": 27.89,
-    "bank_before": 1260.51
+    "stake": 123.84,
+    "contracts": 152.9,
+    "fee": 1.65,
+    "to_win": 27.4,
+    "bank_before": 1238.39
    },
    "cross_15": 5,
    "cross_30": 11,
@@ -7129,8 +7129,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 27.89,
-   "bank_after": 1288.4,
+   "paid": 27.4,
+   "bank_after": 1265.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -7183,11 +7183,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 128.84,
-    "contracts": 157.1,
-    "fee": 1.63,
-    "to_win": 26.65,
-    "bank_before": 1288.4
+    "stake": 126.58,
+    "contracts": 154.4,
+    "fee": 1.6,
+    "to_win": 26.19,
+    "bank_before": 1265.79
    },
    "cross_15": 1,
    "cross_30": 3,
@@ -7204,8 +7204,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.65,
-   "bank_after": 1315.05,
+   "paid": 26.19,
+   "bank_after": 1291.98,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -7320,11 +7320,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 131.5,
-    "contracts": 173.0,
-    "fee": 2.21,
-    "to_win": 39.32,
-    "bank_before": 1315.05
+    "stake": 129.2,
+    "contracts": 170.0,
+    "fee": 2.18,
+    "to_win": 38.62,
+    "bank_before": 1291.98
    },
    "cross_15": 5,
    "cross_30": 8,
@@ -7341,8 +7341,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -133.71,
-   "bank_after": 1181.34,
+   "paid": -131.38,
+   "bank_after": 1160.6,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -7550,11 +7550,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 118.13,
-    "contracts": 134.2,
-    "fee": 1.0,
-    "to_win": 15.11,
-    "bank_before": 1181.34
+    "stake": 116.06,
+    "contracts": 131.9,
+    "fee": 0.98,
+    "to_win": 14.85,
+    "bank_before": 1160.6
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -7571,8 +7571,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -119.13,
-   "bank_after": 1062.21,
+   "paid": -117.04,
+   "bank_after": 1043.56,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -8090,11 +8090,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 106.22,
-    "contracts": 118.0,
-    "fee": 0.75,
-    "to_win": 11.05,
-    "bank_before": 1062.21
+    "stake": 104.36,
+    "contracts": 116.0,
+    "fee": 0.74,
+    "to_win": 10.86,
+    "bank_before": 1043.56
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -8111,8 +8111,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.05,
-   "bank_after": 1073.26,
+   "paid": 10.86,
+   "bank_after": 1054.42,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -8382,11 +8382,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 107.33,
-    "contracts": 151.2,
-    "fee": 2.18,
-    "to_win": 41.66,
-    "bank_before": 1073.26
+    "stake": 105.44,
+    "contracts": 148.5,
+    "fee": 2.15,
+    "to_win": 40.92,
+    "bank_before": 1054.42
    },
    "cross_15": 2,
    "cross_30": 7,
@@ -8403,8 +8403,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -109.51,
-   "bank_after": 963.75,
+   "paid": -107.59,
+   "bank_after": 946.83,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -8519,11 +8519,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 96.38,
-    "contracts": 132.0,
-    "fee": 1.83,
-    "to_win": 33.82,
-    "bank_before": 963.75
+    "stake": 94.68,
+    "contracts": 129.7,
+    "fee": 1.79,
+    "to_win": 33.23,
+    "bank_before": 946.83
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -8540,8 +8540,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.82,
-   "bank_after": 997.57,
+   "paid": 33.23,
+   "bank_after": 980.06,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -8873,11 +8873,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 99.76,
-    "contracts": 127.9,
-    "fee": 1.54,
-    "to_win": 26.6,
-    "bank_before": 997.57
+    "stake": 98.01,
+    "contracts": 125.7,
+    "fee": 1.51,
+    "to_win": 26.13,
+    "bank_before": 980.06
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -8894,8 +8894,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.6,
-   "bank_after": 1024.17,
+   "paid": 26.13,
+   "bank_after": 1006.19,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -9258,11 +9258,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.42,
-    "contracts": 133.0,
-    "fee": 1.65,
-    "to_win": 28.94,
-    "bank_before": 1024.17
+    "stake": 100.62,
+    "contracts": 130.7,
+    "fee": 1.62,
+    "to_win": 28.44,
+    "bank_before": 1006.19
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -9279,8 +9279,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 28.94,
-   "bank_after": 1053.11,
+   "paid": 28.44,
+   "bank_after": 1034.63,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -9736,11 +9736,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 105.31,
-    "contracts": 121.0,
-    "fee": 0.96,
-    "to_win": 14.78,
-    "bank_before": 1053.11
+    "stake": 103.46,
+    "contracts": 118.9,
+    "fee": 0.95,
+    "to_win": 14.51,
+    "bank_before": 1034.63
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -9757,8 +9757,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.78,
-   "bank_after": 1067.89,
+   "paid": 14.51,
+   "bank_after": 1049.14,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -9842,11 +9842,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 106.79,
-    "contracts": 148.3,
-    "fee": 2.1,
-    "to_win": 39.43,
-    "bank_before": 1067.89
+    "stake": 104.91,
+    "contracts": 145.7,
+    "fee": 2.06,
+    "to_win": 38.74,
+    "bank_before": 1049.14
    },
    "cross_15": 4,
    "cross_30": 6,
@@ -9863,8 +9863,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -108.89,
-   "bank_after": 959.0,
+   "paid": -106.97,
+   "bank_after": 942.17,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -9979,11 +9979,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 95.9,
-    "contracts": 112.8,
-    "fee": 1.01,
-    "to_win": 15.91,
-    "bank_before": 959.0
+    "stake": 94.22,
+    "contracts": 110.8,
+    "fee": 0.99,
+    "to_win": 15.64,
+    "bank_before": 942.17
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -10000,8 +10000,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.91,
-   "bank_after": 974.91,
+   "paid": 15.64,
+   "bank_after": 957.81,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -10116,11 +10116,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 97.49,
-    "contracts": 110.8,
-    "fee": 0.82,
-    "to_win": 12.47,
-    "bank_before": 974.91
+    "stake": 95.78,
+    "contracts": 108.8,
+    "fee": 0.81,
+    "to_win": 12.25,
+    "bank_before": 957.81
    },
    "cross_15": 5,
    "cross_30": 6,
@@ -10137,8 +10137,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -98.31,
-   "bank_after": 876.6,
+   "paid": -96.59,
+   "bank_after": 861.22,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -10470,11 +10470,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 87.66,
-    "contracts": 103.1,
-    "fee": 0.93,
-    "to_win": 14.54,
-    "bank_before": 876.6
+    "stake": 86.12,
+    "contracts": 101.3,
+    "fee": 0.91,
+    "to_win": 14.29,
+    "bank_before": 861.22
    },
    "cross_15": 6,
    "cross_30": 7,
@@ -10491,8 +10491,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.54,
-   "bank_after": 891.14,
+   "paid": 14.29,
+   "bank_after": 875.51,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -10669,11 +10669,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 89.11,
-    "contracts": 106.1,
-    "fee": 1.0,
-    "to_win": 15.97,
-    "bank_before": 891.14
+    "stake": 87.55,
+    "contracts": 104.2,
+    "fee": 0.99,
+    "to_win": 15.69,
+    "bank_before": 875.51
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -10690,8 +10690,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.97,
-   "bank_after": 907.11,
+   "paid": 15.69,
+   "bank_after": 891.2,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -10744,11 +10744,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 90.71,
-    "contracts": 120.9,
-    "fee": 1.59,
-    "to_win": 28.65,
-    "bank_before": 907.11
+    "stake": 89.12,
+    "contracts": 118.8,
+    "fee": 1.56,
+    "to_win": 28.15,
+    "bank_before": 891.2
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -10765,8 +10765,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -92.3,
-   "bank_after": 814.81,
+   "paid": -90.68,
+   "bank_after": 800.52,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -11036,11 +11036,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 81.48,
-    "contracts": 116.4,
-    "fee": 1.72,
-    "to_win": 33.2,
-    "bank_before": 814.81
+    "stake": 80.05,
+    "contracts": 114.4,
+    "fee": 1.69,
+    "to_win": 32.62,
+    "bank_before": 800.52
    },
    "cross_15": 2,
    "cross_30": 7,
@@ -11057,8 +11057,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.2,
-   "bank_after": 848.01,
+   "paid": 32.62,
+   "bank_after": 833.14,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -11080,11 +11080,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 84.8,
-    "contracts": 107.3,
-    "fee": 1.25,
-    "to_win": 21.29,
-    "bank_before": 848.01
+    "stake": 83.31,
+    "contracts": 105.5,
+    "fee": 1.23,
+    "to_win": 20.92,
+    "bank_before": 833.14
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -11101,8 +11101,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.29,
-   "bank_after": 869.3,
+   "paid": 20.92,
+   "bank_after": 854.06,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -11279,11 +11279,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 86.93,
-    "contracts": 99.9,
-    "fee": 0.8,
-    "to_win": 12.19,
-    "bank_before": 869.3
+    "stake": 85.41,
+    "contracts": 98.2,
+    "fee": 0.78,
+    "to_win": 11.98,
+    "bank_before": 854.06
    },
    "cross_15": 4,
    "cross_30": 8,
@@ -11300,8 +11300,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 12.19,
-   "bank_after": 881.49,
+   "paid": 11.98,
+   "bank_after": 866.04,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -11447,11 +11447,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 88.15,
-    "contracts": 104.9,
-    "fee": 0.99,
-    "to_win": 15.8,
-    "bank_before": 881.49
+    "stake": 86.6,
+    "contracts": 103.1,
+    "fee": 0.97,
+    "to_win": 15.53,
+    "bank_before": 866.04
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -11468,8 +11468,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.8,
-   "bank_after": 897.29,
+   "paid": 15.53,
+   "bank_after": 881.57,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -11770,11 +11770,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 89.73,
-    "contracts": 126.4,
-    "fee": 1.83,
-    "to_win": 34.82,
-    "bank_before": 897.29
+    "stake": 88.16,
+    "contracts": 124.2,
+    "fee": 1.79,
+    "to_win": 34.22,
+    "bank_before": 881.57
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -11791,8 +11791,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -91.56,
-   "bank_after": 805.73,
+   "paid": -89.95,
+   "bank_after": 791.62,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -11938,11 +11938,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 80.57,
-    "contracts": 115.1,
-    "fee": 1.7,
-    "to_win": 32.83,
-    "bank_before": 805.73
+    "stake": 79.16,
+    "contracts": 113.1,
+    "fee": 1.67,
+    "to_win": 32.26,
+    "bank_before": 791.62
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -11959,8 +11959,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -82.27,
-   "bank_after": 723.46,
+   "paid": -80.83,
+   "bank_after": 710.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -12199,11 +12199,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 72.35,
-    "contracts": 95.2,
-    "fee": 1.22,
-    "to_win": 21.63,
-    "bank_before": 723.46
+    "stake": 71.08,
+    "contracts": 93.5,
+    "fee": 1.2,
+    "to_win": 21.25,
+    "bank_before": 710.79
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -12220,8 +12220,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.63,
-   "bank_after": 745.09,
+   "paid": 21.25,
+   "bank_after": 732.04,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -12274,11 +12274,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 74.51,
-    "contracts": 100.7,
-    "fee": 1.36,
-    "to_win": 24.82,
-    "bank_before": 745.09
+    "stake": 73.2,
+    "contracts": 98.9,
+    "fee": 1.34,
+    "to_win": 24.38,
+    "bank_before": 732.04
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -12295,8 +12295,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.82,
-   "bank_after": 769.91,
+   "paid": 24.38,
+   "bank_after": 756.42,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -12349,11 +12349,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 76.99,
-    "contracts": 89.5,
-    "fee": 0.76,
-    "to_win": 11.77,
-    "bank_before": 769.91
+    "stake": 75.64,
+    "contracts": 88.0,
+    "fee": 0.75,
+    "to_win": 11.56,
+    "bank_before": 756.42
    },
    "cross_15": 4,
    "cross_30": 6,
@@ -12370,8 +12370,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.77,
-   "bank_after": 781.68,
+   "paid": 11.56,
+   "bank_after": 767.98,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -12486,11 +12486,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 78.17,
-    "contracts": 104.2,
-    "fee": 1.37,
-    "to_win": 24.69,
-    "bank_before": 781.68
+    "stake": 76.8,
+    "contracts": 102.4,
+    "fee": 1.35,
+    "to_win": 24.25,
+    "bank_before": 767.98
    },
    "cross_15": 5,
    "cross_30": 7,
@@ -12507,8 +12507,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.69,
-   "bank_after": 806.37,
+   "paid": 24.25,
+   "bank_after": 792.23,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -12623,11 +12623,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 80.64,
-    "contracts": 93.8,
-    "fee": 0.8,
-    "to_win": 12.33,
-    "bank_before": 806.37
+    "stake": 79.22,
+    "contracts": 92.1,
+    "fee": 0.78,
+    "to_win": 12.12,
+    "bank_before": 792.23
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -12644,8 +12644,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 12.33,
-   "bank_after": 818.7,
+   "paid": 12.12,
+   "bank_after": 804.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -13411,11 +13411,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 81.87,
-    "contracts": 96.3,
-    "fee": 0.86,
-    "to_win": 13.59,
-    "bank_before": 818.7
+    "stake": 80.44,
+    "contracts": 94.6,
+    "fee": 0.85,
+    "to_win": 13.35,
+    "bank_before": 804.35
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -13432,8 +13432,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -82.73,
-   "bank_after": 735.97,
+   "paid": -81.29,
+   "bank_after": 723.06,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -13610,11 +13610,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 73.6,
-    "contracts": 100.8,
-    "fee": 1.4,
-    "to_win": 25.82,
-    "bank_before": 735.97
+    "stake": 72.31,
+    "contracts": 99.1,
+    "fee": 1.37,
+    "to_win": 25.37,
+    "bank_before": 723.06
    },
    "cross_15": 5,
    "cross_30": 10,
@@ -13631,8 +13631,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.82,
-   "bank_after": 761.79,
+   "paid": 25.37,
+   "bank_after": 748.43,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -13716,11 +13716,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 76.18,
-    "contracts": 107.3,
-    "fee": 1.55,
-    "to_win": 29.57,
-    "bank_before": 761.79
+    "stake": 74.84,
+    "contracts": 105.4,
+    "fee": 1.52,
+    "to_win": 29.05,
+    "bank_before": 748.43
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -13737,8 +13737,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.57,
-   "bank_after": 791.36,
+   "paid": 29.05,
+   "bank_after": 777.48,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14163,11 +14163,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 79.14,
-    "contracts": 106.9,
-    "fee": 1.45,
-    "to_win": 26.36,
-    "bank_before": 791.36
+    "stake": 77.75,
+    "contracts": 105.1,
+    "fee": 1.42,
+    "to_win": 25.9,
+    "bank_before": 777.48
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -14184,8 +14184,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.36,
-   "bank_after": 817.72,
+   "paid": 25.9,
+   "bank_after": 803.38,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14300,11 +14300,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 81.77,
-    "contracts": 107.6,
-    "fee": 1.38,
-    "to_win": 24.44,
-    "bank_before": 817.72
+    "stake": 80.34,
+    "contracts": 105.7,
+    "fee": 1.35,
+    "to_win": 24.02,
+    "bank_before": 803.38
    },
    "cross_15": 5,
    "cross_30": 8,
@@ -14321,8 +14321,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.44,
-   "bank_after": 842.16,
+   "paid": 24.02,
+   "bank_after": 827.4,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14375,11 +14375,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 84.22,
-    "contracts": 109.4,
-    "fee": 1.36,
-    "to_win": 23.8,
-    "bank_before": 842.16
+    "stake": 82.74,
+    "contracts": 107.5,
+    "fee": 1.34,
+    "to_win": 23.37,
+    "bank_before": 827.4
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -14396,8 +14396,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 23.8,
-   "bank_after": 865.96,
+   "paid": 23.37,
+   "bank_after": 850.77,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14450,11 +14450,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 86.6,
-    "contracts": 108.2,
-    "fee": 1.22,
-    "to_win": 20.43,
-    "bank_before": 865.96
+    "stake": 85.08,
+    "contracts": 106.3,
+    "fee": 1.2,
+    "to_win": 20.07,
+    "bank_before": 850.77
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -14471,8 +14471,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -87.82,
-   "bank_after": 778.14,
+   "paid": -86.28,
+   "bank_after": 764.49,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14494,11 +14494,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 77.81,
-    "contracts": 109.6,
-    "fee": 1.58,
-    "to_win": 30.2,
-    "bank_before": 778.14
+    "stake": 76.45,
+    "contracts": 107.7,
+    "fee": 1.56,
+    "to_win": 29.67,
+    "bank_before": 764.49
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -14515,8 +14515,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 30.2,
-   "bank_after": 808.34,
+   "paid": 29.67,
+   "bank_after": 794.16,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14662,11 +14662,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 80.83,
-    "contracts": 101.0,
-    "fee": 1.14,
-    "to_win": 19.07,
-    "bank_before": 808.34
+    "stake": 79.42,
+    "contracts": 99.3,
+    "fee": 1.12,
+    "to_win": 18.73,
+    "bank_before": 794.16
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -14683,8 +14683,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -81.97,
-   "bank_after": 726.37,
+   "paid": -80.54,
+   "bank_after": 713.62,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -14923,11 +14923,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 72.64,
-    "contracts": 90.8,
-    "fee": 1.02,
-    "to_win": 17.14,
-    "bank_before": 726.37
+    "stake": 71.36,
+    "contracts": 89.2,
+    "fee": 1.0,
+    "to_win": 16.84,
+    "bank_before": 713.62
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -14944,8 +14944,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.14,
-   "bank_after": 743.51,
+   "paid": 16.84,
+   "bank_after": 730.46,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15029,11 +15029,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 74.35,
-    "contracts": 90.7,
-    "fee": 0.94,
-    "to_win": 15.38,
-    "bank_before": 743.51
+    "stake": 73.05,
+    "contracts": 89.1,
+    "fee": 0.93,
+    "to_win": 15.11,
+    "bank_before": 730.46
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -15050,8 +15050,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.38,
-   "bank_after": 758.89,
+   "paid": 15.11,
+   "bank_after": 745.57,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15073,11 +15073,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 75.89,
-    "contracts": 90.3,
-    "fee": 0.85,
-    "to_win": 13.61,
-    "bank_before": 758.89
+    "stake": 74.56,
+    "contracts": 88.8,
+    "fee": 0.84,
+    "to_win": 13.36,
+    "bank_before": 745.57
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -15094,8 +15094,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 13.61,
-   "bank_after": 772.5,
+   "paid": 13.36,
+   "bank_after": 758.93,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15210,11 +15210,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 77.25,
-    "contracts": 105.8,
-    "fee": 1.47,
-    "to_win": 27.1,
-    "bank_before": 772.5
+    "stake": 75.89,
+    "contracts": 104.0,
+    "fee": 1.44,
+    "to_win": 26.63,
+    "bank_before": 758.93
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -15231,8 +15231,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -78.72,
-   "bank_after": 693.78,
+   "paid": -77.33,
+   "bank_after": 681.6,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15440,11 +15440,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 69.38,
-    "contracts": 91.3,
-    "fee": 1.17,
-    "to_win": 20.74,
-    "bank_before": 693.78
+    "stake": 68.16,
+    "contracts": 89.7,
+    "fee": 1.15,
+    "to_win": 20.37,
+    "bank_before": 681.6
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -15461,8 +15461,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.74,
-   "bank_after": 714.52,
+   "paid": 20.37,
+   "bank_after": 701.97,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15546,11 +15546,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 71.45,
-    "contracts": 80.3,
-    "fee": 0.56,
-    "to_win": 8.27,
-    "bank_before": 714.52
+    "stake": 70.2,
+    "contracts": 78.9,
+    "fee": 0.55,
+    "to_win": 8.13,
+    "bank_before": 701.97
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -15567,8 +15567,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 8.27,
-   "bank_after": 722.79,
+   "paid": 8.13,
+   "bank_after": 710.1,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15621,11 +15621,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 72.28,
-    "contracts": 96.4,
-    "fee": 1.27,
-    "to_win": 22.82,
-    "bank_before": 722.79
+    "stake": 71.01,
+    "contracts": 94.7,
+    "fee": 1.25,
+    "to_win": 22.42,
+    "bank_before": 710.1
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -15642,8 +15642,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -73.55,
-   "bank_after": 649.24,
+   "paid": -72.26,
+   "bank_after": 637.84,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15789,11 +15789,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 64.92,
-    "contracts": 86.6,
-    "fee": 1.14,
-    "to_win": 20.5,
-    "bank_before": 649.24
+    "stake": 63.78,
+    "contracts": 85.0,
+    "fee": 1.12,
+    "to_win": 20.14,
+    "bank_before": 637.84
    },
    "cross_15": 0,
    "cross_30": 2,
@@ -15810,8 +15810,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.5,
-   "bank_after": 669.74,
+   "paid": 20.14,
+   "bank_after": 657.98,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -15926,11 +15926,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 66.97,
-    "contracts": 78.8,
-    "fee": 0.71,
-    "to_win": 11.11,
-    "bank_before": 669.74
+    "stake": 65.8,
+    "contracts": 77.4,
+    "fee": 0.7,
+    "to_win": 10.91,
+    "bank_before": 657.98
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -15947,8 +15947,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.11,
-   "bank_after": 680.85,
+   "paid": 10.91,
+   "bank_after": 668.89,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -16156,11 +16156,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 68.09,
-    "contracts": 77.4,
-    "fee": 0.58,
-    "to_win": 8.71,
-    "bank_before": 680.85
+    "stake": 66.89,
+    "contracts": 76.0,
+    "fee": 0.57,
+    "to_win": 8.55,
+    "bank_before": 668.89
    },
    "cross_15": 1,
    "cross_30": 4,
@@ -16177,8 +16177,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 8.7,
-   "bank_after": 689.56,
+   "paid": 8.55,
+   "bank_after": 677.44,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -16200,11 +16200,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 68.96,
-    "contracts": 97.1,
-    "fee": 1.4,
-    "to_win": 26.77,
-    "bank_before": 689.56
+    "stake": 67.74,
+    "contracts": 95.4,
+    "fee": 1.38,
+    "to_win": 26.29,
+    "bank_before": 677.44
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -16221,8 +16221,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.77,
-   "bank_after": 716.33,
+   "paid": 26.29,
+   "bank_after": 703.73,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -16709,11 +16709,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 71.63,
-    "contracts": 84.3,
-    "fee": 0.76,
-    "to_win": 11.88,
-    "bank_before": 716.33
+    "stake": 70.37,
+    "contracts": 82.8,
+    "fee": 0.74,
+    "to_win": 11.68,
+    "bank_before": 703.73
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -16730,8 +16730,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.88,
-   "bank_after": 728.21,
+   "paid": 11.68,
+   "bank_after": 715.41,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -16753,11 +16753,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 72.82,
-    "contracts": 94.6,
-    "fee": 1.18,
-    "to_win": 20.57,
-    "bank_before": 728.21
+    "stake": 71.54,
+    "contracts": 92.9,
+    "fee": 1.16,
+    "to_win": 20.21,
+    "bank_before": 715.41
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -16774,8 +16774,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.57,
-   "bank_after": 748.78,
+   "paid": 20.21,
+   "bank_after": 735.62,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -16983,11 +16983,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 74.88,
-    "contracts": 84.1,
-    "fee": 0.58,
-    "to_win": 8.67,
-    "bank_before": 748.78
+    "stake": 73.56,
+    "contracts": 82.7,
+    "fee": 0.57,
+    "to_win": 8.52,
+    "bank_before": 735.62
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -17004,8 +17004,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 8.67,
-   "bank_after": 757.45,
+   "paid": 8.52,
+   "bank_after": 744.14,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -17399,11 +17399,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 75.75,
-    "contracts": 92.4,
-    "fee": 0.96,
-    "to_win": 15.67,
-    "bank_before": 757.45
+    "stake": 74.41,
+    "contracts": 90.7,
+    "fee": 0.94,
+    "to_win": 15.39,
+    "bank_before": 744.14
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -17420,8 +17420,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -76.71,
-   "bank_after": 680.74,
+   "paid": -75.35,
+   "bank_after": 668.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -17629,11 +17629,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 68.07,
-    "contracts": 92.0,
-    "fee": 1.24,
-    "to_win": 22.68,
-    "bank_before": 680.74
+    "stake": 66.88,
+    "contracts": 90.4,
+    "fee": 1.22,
+    "to_win": 22.28,
+    "bank_before": 668.79
    },
    "cross_15": 2,
    "cross_30": 6,
@@ -17650,8 +17650,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.68,
-   "bank_after": 703.42,
+   "paid": 22.28,
+   "bank_after": 691.07,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -17704,11 +17704,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 70.34,
-    "contracts": 84.7,
-    "fee": 0.84,
-    "to_win": 13.57,
-    "bank_before": 703.42
+    "stake": 69.11,
+    "contracts": 83.3,
+    "fee": 0.83,
+    "to_win": 13.33,
+    "bank_before": 691.07
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -17725,8 +17725,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 13.57,
-   "bank_after": 716.99,
+   "paid": 13.33,
+   "bank_after": 704.4,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -18368,11 +18368,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 71.7,
-    "contracts": 84.4,
-    "fee": 0.76,
-    "to_win": 11.89,
-    "bank_before": 716.99
+    "stake": 70.44,
+    "contracts": 82.9,
+    "fee": 0.74,
+    "to_win": 11.69,
+    "bank_before": 704.4
    },
    "cross_15": 6,
    "cross_30": 7,
@@ -18389,8 +18389,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.89,
-   "bank_after": 728.88,
+   "paid": 11.69,
+   "bank_after": 716.09,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -18660,11 +18660,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 72.89,
-    "contracts": 81.0,
-    "fee": 0.52,
-    "to_win": 7.58,
-    "bank_before": 728.88
+    "stake": 71.61,
+    "contracts": 79.6,
+    "fee": 0.51,
+    "to_win": 7.45,
+    "bank_before": 716.09
    },
    "cross_15": 5,
    "cross_30": 7,
@@ -18681,8 +18681,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 7.58,
-   "bank_after": 736.46,
+   "paid": 7.45,
+   "bank_after": 723.54,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -18921,11 +18921,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 73.65,
-    "contracts": 81.8,
-    "fee": 0.52,
-    "to_win": 7.66,
-    "bank_before": 736.46
+    "stake": 72.35,
+    "contracts": 80.4,
+    "fee": 0.51,
+    "to_win": 7.53,
+    "bank_before": 723.54
    },
    "cross_15": 2,
    "cross_30": 5,
@@ -18942,8 +18942,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 7.66,
-   "bank_after": 744.12,
+   "paid": 7.53,
+   "bank_after": 731.07,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -19027,11 +19027,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 74.41,
-    "contracts": 95.4,
-    "fee": 1.15,
-    "to_win": 19.84,
-    "bank_before": 744.12
+    "stake": 73.11,
+    "contracts": 93.7,
+    "fee": 1.13,
+    "to_win": 19.49,
+    "bank_before": 731.07
    },
    "cross_15": 2,
    "cross_30": 5,
@@ -19048,8 +19048,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.84,
-   "bank_after": 763.96,
+   "paid": 19.49,
+   "bank_after": 750.56,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -19102,11 +19102,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 76.4,
-    "contracts": 88.8,
-    "fee": 0.75,
-    "to_win": 11.69,
-    "bank_before": 763.96
+    "stake": 75.06,
+    "contracts": 87.3,
+    "fee": 0.74,
+    "to_win": 11.48,
+    "bank_before": 750.56
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -19123,8 +19123,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 11.69,
-   "bank_after": 775.65,
+   "paid": 11.48,
+   "bank_after": 762.04,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -19549,11 +19549,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 77.56,
-    "contracts": 100.7,
-    "fee": 1.25,
-    "to_win": 21.92,
-    "bank_before": 775.65
+    "stake": 76.2,
+    "contracts": 99.0,
+    "fee": 1.23,
+    "to_win": 21.53,
+    "bank_before": 762.04
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -19570,8 +19570,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -78.81,
-   "bank_after": 696.84,
+   "paid": -77.43,
+   "bank_after": 684.61,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -19934,11 +19934,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 69.68,
-    "contracts": 90.5,
-    "fee": 1.13,
-    "to_win": 19.68,
-    "bank_before": 696.84
+    "stake": 68.46,
+    "contracts": 88.9,
+    "fee": 1.11,
+    "to_win": 19.34,
+    "bank_before": 684.61
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -19955,8 +19955,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.68,
-   "bank_after": 716.52,
+   "paid": 19.34,
+   "bank_after": 703.95,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20133,11 +20133,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 71.65,
-    "contracts": 93.1,
-    "fee": 1.16,
-    "to_win": 20.24,
-    "bank_before": 716.52
+    "stake": 70.4,
+    "contracts": 91.4,
+    "fee": 1.14,
+    "to_win": 19.89,
+    "bank_before": 703.95
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -20154,8 +20154,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.24,
-   "bank_after": 736.76,
+   "paid": 19.89,
+   "bank_after": 723.84,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20208,11 +20208,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 73.68,
-    "contracts": 102.3,
-    "fee": 1.45,
-    "to_win": 27.2,
-    "bank_before": 736.76
+    "stake": 72.38,
+    "contracts": 100.5,
+    "fee": 1.42,
+    "to_win": 26.73,
+    "bank_before": 723.84
    },
    "cross_15": 6,
    "cross_30": 6,
@@ -20229,8 +20229,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 27.2,
-   "bank_after": 763.96,
+   "paid": 26.73,
+   "bank_after": 750.57,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20252,11 +20252,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 76.4,
-    "contracts": 106.1,
-    "fee": 1.5,
-    "to_win": 28.21,
-    "bank_before": 763.96
+    "stake": 75.06,
+    "contracts": 104.2,
+    "fee": 1.48,
+    "to_win": 27.71,
+    "bank_before": 750.57
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -20273,8 +20273,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -77.9,
-   "bank_after": 686.06,
+   "paid": -76.54,
+   "bank_after": 674.03,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20451,11 +20451,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 68.61,
-    "contracts": 95.3,
-    "fee": 1.35,
-    "to_win": 25.33,
-    "bank_before": 686.06
+    "stake": 67.4,
+    "contracts": 93.6,
+    "fee": 1.33,
+    "to_win": 24.88,
+    "bank_before": 674.03
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -20472,8 +20472,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.33,
-   "bank_after": 711.39,
+   "paid": 24.88,
+   "bank_after": 698.91,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20805,11 +20805,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 71.14,
-    "contracts": 97.5,
-    "fee": 1.35,
-    "to_win": 24.96,
-    "bank_before": 711.39
+    "stake": 69.89,
+    "contracts": 95.7,
+    "fee": 1.33,
+    "to_win": 24.52,
+    "bank_before": 698.91
    },
    "cross_15": 1,
    "cross_30": 3,
@@ -20826,8 +20826,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.96,
-   "bank_after": 736.35,
+   "paid": 24.52,
+   "bank_after": 723.43,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20973,11 +20973,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 73.64,
-    "contracts": 92.0,
-    "fee": 1.04,
-    "to_win": 17.37,
-    "bank_before": 736.35
+    "stake": 72.34,
+    "contracts": 90.4,
+    "fee": 1.02,
+    "to_win": 17.06,
+    "bank_before": 723.43
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -20994,8 +20994,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.37,
-   "bank_after": 753.72,
+   "paid": 17.06,
+   "bank_after": 740.49,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -21017,11 +21017,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 75.37,
-    "contracts": 94.2,
-    "fee": 1.06,
-    "to_win": 17.78,
-    "bank_before": 753.72
+    "stake": 74.05,
+    "contracts": 92.6,
+    "fee": 1.04,
+    "to_win": 17.47,
+    "bank_before": 740.49
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -21038,8 +21038,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.78,
-   "bank_after": 771.5,
+   "paid": 17.47,
+   "bank_after": 757.96,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -21402,11 +21402,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 77.15,
-    "contracts": 102.9,
-    "fee": 1.36,
-    "to_win": 24.36,
-    "bank_before": 771.5
+    "stake": 75.8,
+    "contracts": 101.1,
+    "fee": 1.33,
+    "to_win": 23.94,
+    "bank_before": 757.96
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -21423,8 +21423,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.36,
-   "bank_after": 795.86,
+   "paid": 23.94,
+   "bank_after": 781.9,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -21756,11 +21756,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 79.59,
-    "contracts": 107.6,
-    "fee": 1.45,
-    "to_win": 26.51,
-    "bank_before": 795.86
+    "stake": 78.19,
+    "contracts": 105.7,
+    "fee": 1.43,
+    "to_win": 26.04,
+    "bank_before": 781.9
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -21777,8 +21777,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.51,
-   "bank_after": 822.37,
+   "paid": 26.04,
+   "bank_after": 807.94,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -22141,11 +22141,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 82.24,
-    "contracts": 109.7,
-    "fee": 1.44,
-    "to_win": 25.97,
-    "bank_before": 822.37
+    "stake": 80.79,
+    "contracts": 107.7,
+    "fee": 1.42,
+    "to_win": 25.51,
+    "bank_before": 807.94
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -22162,8 +22162,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.97,
-   "bank_after": 848.34,
+   "paid": 25.51,
+   "bank_after": 833.45,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -22309,11 +22309,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 84.83,
-    "contracts": 104.7,
-    "fee": 1.13,
-    "to_win": 18.77,
-    "bank_before": 848.34
+    "stake": 83.35,
+    "contracts": 102.9,
+    "fee": 1.11,
+    "to_win": 18.44,
+    "bank_before": 833.45
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -22330,8 +22330,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.77,
-   "bank_after": 867.11,
+   "paid": 18.44,
+   "bank_after": 851.89,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -22415,11 +22415,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 86.71,
-    "contracts": 102.0,
-    "fee": 0.92,
-    "to_win": 14.38,
-    "bank_before": 867.11
+    "stake": 85.19,
+    "contracts": 100.2,
+    "fee": 0.9,
+    "to_win": 14.13,
+    "bank_before": 851.89
    },
    "cross_15": 2,
    "cross_30": 5,
@@ -22436,8 +22436,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.38,
-   "bank_after": 881.49,
+   "paid": 14.13,
+   "bank_after": 866.02,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -22459,11 +22459,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 88.15,
-    "contracts": 107.5,
-    "fee": 1.12,
-    "to_win": 18.23,
-    "bank_before": 881.49
+    "stake": 86.6,
+    "contracts": 105.6,
+    "fee": 1.1,
+    "to_win": 17.91,
+    "bank_before": 866.02
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -22480,8 +22480,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.23,
-   "bank_after": 899.72,
+   "paid": 17.91,
+   "bank_after": 883.93,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -22503,11 +22503,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 89.97,
-    "contracts": 112.5,
-    "fee": 1.26,
-    "to_win": 21.23,
-    "bank_before": 899.72
+    "stake": 88.39,
+    "contracts": 110.5,
+    "fee": 1.24,
+    "to_win": 20.86,
+    "bank_before": 883.93
    },
    "cross_15": 6,
    "cross_30": 6,
@@ -22524,8 +22524,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.23,
-   "bank_after": 920.95,
+   "paid": 20.86,
+   "bank_after": 904.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -22981,11 +22981,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 92.1,
-    "contracts": 115.1,
-    "fee": 1.29,
-    "to_win": 21.73,
-    "bank_before": 920.95
+    "stake": 90.48,
+    "contracts": 113.1,
+    "fee": 1.27,
+    "to_win": 21.35,
+    "bank_before": 904.79
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -23002,8 +23002,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.73,
-   "bank_after": 942.69,
+   "paid": 21.35,
+   "bank_after": 926.14,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -23087,11 +23087,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 94.27,
-    "contracts": 120.9,
-    "fee": 1.46,
-    "to_win": 25.13,
-    "bank_before": 942.69
+    "stake": 92.61,
+    "contracts": 118.7,
+    "fee": 1.43,
+    "to_win": 24.69,
+    "bank_before": 926.14
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -23108,8 +23108,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.13,
-   "bank_after": 967.82,
+   "paid": 24.69,
+   "bank_after": 950.83,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -23565,11 +23565,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 96.78,
-    "contracts": 130.8,
-    "fee": 1.77,
-    "to_win": 32.23,
-    "bank_before": 967.82
+    "stake": 95.08,
+    "contracts": 128.5,
+    "fee": 1.74,
+    "to_win": 31.67,
+    "bank_before": 950.83
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -23586,8 +23586,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.23,
-   "bank_after": 1000.05,
+   "paid": 31.67,
+   "bank_after": 982.5,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -24043,11 +24043,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 100.0,
-    "contracts": 137.0,
-    "fee": 1.9,
-    "to_win": 35.09,
-    "bank_before": 1000.05
+    "stake": 98.25,
+    "contracts": 134.6,
+    "fee": 1.86,
+    "to_win": 34.48,
+    "bank_before": 982.5
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -24064,8 +24064,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -101.9,
-   "bank_after": 898.15,
+   "paid": -100.11,
+   "bank_after": 882.39,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -24211,11 +24211,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 89.81,
-    "contracts": 121.4,
-    "fee": 1.64,
-    "to_win": 29.91,
-    "bank_before": 898.15
+    "stake": 88.24,
+    "contracts": 119.2,
+    "fee": 1.61,
+    "to_win": 29.39,
+    "bank_before": 882.39
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -24232,8 +24232,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.91,
-   "bank_after": 928.06,
+   "paid": 29.39,
+   "bank_after": 911.78,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -25154,11 +25154,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 92.81,
-    "contracts": 116.0,
-    "fee": 1.3,
-    "to_win": 21.9,
-    "bank_before": 928.06
+    "stake": 91.18,
+    "contracts": 114.0,
+    "fee": 1.28,
+    "to_win": 21.51,
+    "bank_before": 911.78
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -25175,8 +25175,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.9,
-   "bank_after": 949.96,
+   "paid": 21.52,
+   "bank_after": 933.29,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -25291,11 +25291,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 95.0,
-    "contracts": 121.8,
-    "fee": 1.47,
-    "to_win": 25.32,
-    "bank_before": 949.96
+    "stake": 93.33,
+    "contracts": 119.7,
+    "fee": 1.44,
+    "to_win": 24.88,
+    "bank_before": 933.29
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -25312,8 +25312,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.32,
-   "bank_after": 975.28,
+   "paid": 24.88,
+   "bank_after": 958.17,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -25490,11 +25490,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 97.53,
-    "contracts": 131.8,
-    "fee": 1.78,
-    "to_win": 32.49,
-    "bank_before": 975.28
+    "stake": 95.82,
+    "contracts": 129.5,
+    "fee": 1.75,
+    "to_win": 31.92,
+    "bank_before": 958.17
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -25511,8 +25511,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.49,
-   "bank_after": 1007.77,
+   "paid": 31.92,
+   "bank_after": 990.09,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -25937,11 +25937,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 100.78,
-    "contracts": 138.1,
-    "fee": 1.91,
-    "to_win": 35.36,
-    "bank_before": 1007.77
+    "stake": 99.01,
+    "contracts": 135.6,
+    "fee": 1.88,
+    "to_win": 34.74,
+    "bank_before": 990.09
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -25958,8 +25958,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -102.69,
-   "bank_after": 905.08,
+   "paid": -100.89,
+   "bank_after": 889.2,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -26043,11 +26043,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 90.51,
-    "contracts": 124.0,
-    "fee": 1.72,
-    "to_win": 31.76,
-    "bank_before": 905.08
+    "stake": 88.92,
+    "contracts": 121.8,
+    "fee": 1.69,
+    "to_win": 31.2,
+    "bank_before": 889.2
    },
    "cross_15": 5,
    "cross_30": 6,
@@ -26064,8 +26064,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.76,
-   "bank_after": 936.84,
+   "paid": 31.2,
+   "bank_after": 920.4,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -26583,11 +26583,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 93.68,
-    "contracts": 124.9,
-    "fee": 1.64,
-    "to_win": 29.59,
-    "bank_before": 936.84
+    "stake": 92.04,
+    "contracts": 122.7,
+    "fee": 1.62,
+    "to_win": 29.06,
+    "bank_before": 920.4
    },
    "cross_15": 2,
    "cross_30": 7,
@@ -26604,8 +26604,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.59,
-   "bank_after": 966.43,
+   "paid": 29.06,
+   "bank_after": 949.46,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -27061,11 +27061,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 96.64,
-    "contracts": 111.1,
-    "fee": 0.88,
-    "to_win": 13.56,
-    "bank_before": 966.43
+    "stake": 94.95,
+    "contracts": 109.1,
+    "fee": 0.87,
+    "to_win": 13.32,
+    "bank_before": 949.46
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -27082,8 +27082,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 13.56,
-   "bank_after": 979.99,
+   "paid": 13.32,
+   "bank_after": 962.78,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -27508,11 +27508,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 98.0,
-    "contracts": 122.5,
-    "fee": 1.38,
-    "to_win": 23.12,
-    "bank_before": 979.99
+    "stake": 96.28,
+    "contracts": 120.3,
+    "fee": 1.35,
+    "to_win": 22.72,
+    "bank_before": 962.78
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -27529,8 +27529,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 23.12,
-   "bank_after": 1003.11,
+   "paid": 22.72,
+   "bank_after": 985.5,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -27707,11 +27707,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 100.31,
-    "contracts": 125.4,
-    "fee": 1.41,
-    "to_win": 23.67,
-    "bank_before": 1003.11
+    "stake": 98.55,
+    "contracts": 123.2,
+    "fee": 1.38,
+    "to_win": 23.26,
+    "bank_before": 985.5
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -27728,8 +27728,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 23.67,
-   "bank_after": 1026.78,
+   "paid": 23.26,
+   "bank_after": 1008.76,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -27906,11 +27906,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.68,
-    "contracts": 131.6,
-    "fee": 1.59,
-    "to_win": 27.37,
-    "bank_before": 1026.78
+    "stake": 100.88,
+    "contracts": 129.3,
+    "fee": 1.56,
+    "to_win": 26.89,
+    "bank_before": 1008.76
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -27927,8 +27927,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 27.37,
-   "bank_after": 1054.15,
+   "paid": 26.89,
+   "bank_after": 1035.65,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -28012,11 +28012,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 105.42,
-    "contracts": 128.6,
-    "fee": 1.33,
-    "to_win": 21.81,
-    "bank_before": 1054.15
+    "stake": 103.57,
+    "contracts": 126.3,
+    "fee": 1.31,
+    "to_win": 21.42,
+    "bank_before": 1035.65
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -28033,8 +28033,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -106.75,
-   "bank_after": 947.4,
+   "paid": -104.88,
+   "bank_after": 930.77,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -28366,11 +28366,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 94.74,
-    "contracts": 123.0,
-    "fee": 1.53,
-    "to_win": 26.77,
-    "bank_before": 947.4
+    "stake": 93.08,
+    "contracts": 120.9,
+    "fee": 1.5,
+    "to_win": 26.3,
+    "bank_before": 930.77
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -28387,8 +28387,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.77,
-   "bank_after": 974.17,
+   "paid": 26.3,
+   "bank_after": 957.07,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -28472,11 +28472,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 97.42,
-    "contracts": 124.9,
-    "fee": 1.51,
-    "to_win": 25.97,
-    "bank_before": 974.17
+    "stake": 95.71,
+    "contracts": 122.7,
+    "fee": 1.48,
+    "to_win": 25.52,
+    "bank_before": 957.07
    },
    "cross_15": 6,
    "cross_30": 13,
@@ -28493,8 +28493,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.97,
-   "bank_after": 1000.14,
+   "paid": 25.52,
+   "bank_after": 982.59,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -28609,11 +28609,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 100.01,
-    "contracts": 131.6,
-    "fee": 1.69,
-    "to_win": 29.89,
-    "bank_before": 1000.14
+    "stake": 98.26,
+    "contracts": 129.3,
+    "fee": 1.66,
+    "to_win": 29.37,
+    "bank_before": 982.59
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -28630,8 +28630,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.89,
-   "bank_after": 1030.03,
+   "paid": 29.37,
+   "bank_after": 1011.96,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -28870,11 +28870,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 103.0,
-    "contracts": 137.3,
-    "fee": 1.81,
-    "to_win": 32.52,
-    "bank_before": 1030.03
+    "stake": 101.2,
+    "contracts": 134.9,
+    "fee": 1.78,
+    "to_win": 31.95,
+    "bank_before": 1011.96
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -28891,8 +28891,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.52,
-   "bank_after": 1062.55,
+   "paid": 31.95,
+   "bank_after": 1043.91,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -28976,11 +28976,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 106.25,
-    "contracts": 138.0,
-    "fee": 1.72,
-    "to_win": 30.02,
-    "bank_before": 1062.55
+    "stake": 104.39,
+    "contracts": 135.6,
+    "fee": 1.69,
+    "to_win": 29.49,
+    "bank_before": 1043.91
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -28997,8 +28997,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 30.02,
-   "bank_after": 1092.57,
+   "paid": 29.49,
+   "bank_after": 1073.4,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -29020,11 +29020,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 109.26,
-    "contracts": 134.9,
-    "fee": 1.46,
-    "to_win": 24.17,
-    "bank_before": 1092.57
+    "stake": 107.34,
+    "contracts": 132.5,
+    "fee": 1.43,
+    "to_win": 23.75,
+    "bank_before": 1073.4
    },
    "cross_15": 0,
    "cross_30": 2,
@@ -29041,8 +29041,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.17,
-   "bank_after": 1116.74,
+   "paid": 23.75,
+   "bank_after": 1097.15,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -29095,11 +29095,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 111.67,
-    "contracts": 134.5,
-    "fee": 1.33,
-    "to_win": 21.54,
-    "bank_before": 1116.74
+    "stake": 109.72,
+    "contracts": 132.2,
+    "fee": 1.31,
+    "to_win": 21.16,
+    "bank_before": 1097.15
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -29116,8 +29116,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.54,
-   "bank_after": 1138.28,
+   "paid": 21.16,
+   "bank_after": 1118.31,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -29418,11 +29418,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 113.83,
-    "contracts": 147.8,
-    "fee": 1.84,
-    "to_win": 32.16,
-    "bank_before": 1138.28
+    "stake": 111.83,
+    "contracts": 145.2,
+    "fee": 1.81,
+    "to_win": 31.59,
+    "bank_before": 1118.31
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -29439,8 +29439,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -115.67,
-   "bank_after": 1022.61,
+   "paid": -113.64,
+   "bank_after": 1004.67,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -30547,11 +30547,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.26,
-    "contracts": 129.4,
-    "fee": 1.51,
-    "to_win": 25.67,
-    "bank_before": 1022.61
+    "stake": 100.47,
+    "contracts": 127.2,
+    "fee": 1.48,
+    "to_win": 25.23,
+    "bank_before": 1004.67
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -30568,8 +30568,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.67,
-   "bank_after": 1048.28,
+   "paid": 25.23,
+   "bank_after": 1029.9,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -30994,11 +30994,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 104.83,
-    "contracts": 120.5,
-    "fee": 0.96,
-    "to_win": 14.7,
-    "bank_before": 1048.28
+    "stake": 102.99,
+    "contracts": 118.4,
+    "fee": 0.94,
+    "to_win": 14.45,
+    "bank_before": 1029.9
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -31015,8 +31015,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.7,
-   "bank_after": 1062.98,
+   "paid": 14.45,
+   "bank_after": 1044.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -31255,11 +31255,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 106.3,
-    "contracts": 134.6,
-    "fee": 1.57,
-    "to_win": 26.69,
-    "bank_before": 1062.98
+    "stake": 104.44,
+    "contracts": 132.2,
+    "fee": 1.54,
+    "to_win": 26.22,
+    "bank_before": 1044.35
    },
    "cross_15": 1,
    "cross_30": 3,
@@ -31276,8 +31276,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.69,
-   "bank_after": 1089.67,
+   "paid": 26.22,
+   "bank_after": 1070.57,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -31764,11 +31764,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 108.97,
-    "contracts": 126.7,
-    "fee": 1.07,
-    "to_win": 16.67,
-    "bank_before": 1089.67
+    "stake": 107.06,
+    "contracts": 124.5,
+    "fee": 1.05,
+    "to_win": 16.38,
+    "bank_before": 1070.57
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -31785,8 +31785,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 16.67,
-   "bank_after": 1106.34,
+   "paid": 16.38,
+   "bank_after": 1086.95,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -32304,11 +32304,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 110.63,
-    "contracts": 130.2,
-    "fee": 1.17,
-    "to_win": 18.35,
-    "bank_before": 1106.34
+    "stake": 108.7,
+    "contracts": 127.9,
+    "fee": 1.15,
+    "to_win": 18.03,
+    "bank_before": 1086.95
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -32325,8 +32325,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.35,
-   "bank_after": 1124.69,
+   "paid": 18.03,
+   "bank_after": 1104.98,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -32906,11 +32906,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 112.47,
-    "contracts": 146.1,
-    "fee": 1.82,
-    "to_win": 31.77,
-    "bank_before": 1124.69
+    "stake": 110.5,
+    "contracts": 143.5,
+    "fee": 1.78,
+    "to_win": 31.23,
+    "bank_before": 1104.98
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -32927,8 +32927,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -114.29,
-   "bank_after": 1010.4,
+   "paid": -112.28,
+   "bank_after": 992.7,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -33043,11 +33043,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 101.04,
-    "contracts": 120.3,
-    "fee": 1.14,
-    "to_win": 18.11,
-    "bank_before": 1010.4
+    "stake": 99.27,
+    "contracts": 118.2,
+    "fee": 1.12,
+    "to_win": 17.79,
+    "bank_before": 992.7
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -33064,8 +33064,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.11,
-   "bank_after": 1028.51,
+   "paid": 17.79,
+   "bank_after": 1010.49,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -33335,11 +33335,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.85,
-    "contracts": 123.9,
-    "fee": 1.23,
-    "to_win": 19.84,
-    "bank_before": 1028.51
+    "stake": 101.05,
+    "contracts": 121.7,
+    "fee": 1.21,
+    "to_win": 19.49,
+    "bank_before": 1010.49
    },
    "cross_15": 1,
    "cross_30": 4,
@@ -33356,8 +33356,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -104.08,
-   "bank_after": 924.43,
+   "paid": -102.26,
+   "bank_after": 908.23,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -33751,11 +33751,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 92.44,
-    "contracts": 112.7,
-    "fee": 1.17,
-    "to_win": 19.12,
-    "bank_before": 924.43
+    "stake": 90.82,
+    "contracts": 110.8,
+    "fee": 1.15,
+    "to_win": 18.79,
+    "bank_before": 908.23
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -33772,8 +33772,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.12,
-   "bank_after": 943.55,
+   "paid": 18.79,
+   "bank_after": 927.02,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -33888,11 +33888,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 94.36,
-    "contracts": 106.0,
-    "fee": 0.73,
-    "to_win": 10.93,
-    "bank_before": 943.55
+    "stake": 92.7,
+    "contracts": 104.2,
+    "fee": 0.72,
+    "to_win": 10.74,
+    "bank_before": 927.02
    },
    "cross_15": 4,
    "cross_30": 7,
@@ -33909,8 +33909,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 10.93,
-   "bank_after": 954.48,
+   "paid": 10.74,
+   "bank_after": 937.76,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -34087,11 +34087,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 95.45,
-    "contracts": 124.0,
-    "fee": 1.54,
-    "to_win": 26.97,
-    "bank_before": 954.48
+    "stake": 93.78,
+    "contracts": 121.8,
+    "fee": 1.51,
+    "to_win": 26.5,
+    "bank_before": 937.76
    },
    "cross_15": 7,
    "cross_30": 7,
@@ -34108,8 +34108,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.97,
-   "bank_after": 981.45,
+   "paid": 26.5,
+   "bank_after": 964.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -34193,11 +34193,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 98.15,
-    "contracts": 125.8,
-    "fee": 1.52,
-    "to_win": 26.16,
-    "bank_before": 981.45
+    "stake": 96.43,
+    "contracts": 123.6,
+    "fee": 1.49,
+    "to_win": 25.71,
+    "bank_before": 964.26
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -34214,8 +34214,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.16,
-   "bank_after": 1007.61,
+   "paid": 25.71,
+   "bank_after": 989.97,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -34547,11 +34547,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 100.76,
-    "contracts": 127.5,
-    "fee": 1.49,
-    "to_win": 25.29,
-    "bank_before": 1007.61
+    "stake": 99.0,
+    "contracts": 125.3,
+    "fee": 1.46,
+    "to_win": 24.86,
+    "bank_before": 989.97
    },
    "cross_15": 2,
    "cross_30": 3,
@@ -34568,8 +34568,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -102.25,
-   "bank_after": 905.36,
+   "paid": -100.46,
+   "bank_after": 889.51,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -34994,11 +34994,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 90.54,
-    "contracts": 111.8,
-    "fee": 1.21,
-    "to_win": 20.03,
-    "bank_before": 905.36
+    "stake": 88.95,
+    "contracts": 109.8,
+    "fee": 1.19,
+    "to_win": 19.67,
+    "bank_before": 889.51
    },
    "cross_15": 2,
    "cross_30": 6,
@@ -35015,8 +35015,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.03,
-   "bank_after": 925.39,
+   "paid": 19.67,
+   "bank_after": 909.18,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -35193,11 +35193,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 92.54,
-    "contracts": 114.2,
-    "fee": 1.24,
-    "to_win": 20.47,
-    "bank_before": 925.39
+    "stake": 90.92,
+    "contracts": 112.2,
+    "fee": 1.21,
+    "to_win": 20.12,
+    "bank_before": 909.18
    },
    "cross_15": 2,
    "cross_30": 6,
@@ -35214,8 +35214,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -93.78,
-   "bank_after": 831.61,
+   "paid": -92.13,
+   "bank_after": 817.05,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -35299,11 +35299,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 83.16,
-    "contracts": 113.9,
-    "fee": 1.58,
-    "to_win": 29.18,
-    "bank_before": 831.61
+    "stake": 81.7,
+    "contracts": 111.9,
+    "fee": 1.55,
+    "to_win": 28.67,
+    "bank_before": 817.05
    },
    "cross_15": 5,
    "cross_30": 9,
@@ -35320,8 +35320,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.18,
-   "bank_after": 860.79,
+   "paid": 28.67,
+   "bank_after": 845.72,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -35467,11 +35467,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 86.08,
-    "contracts": 100.1,
-    "fee": 0.85,
-    "to_win": 13.16,
-    "bank_before": 860.79
+    "stake": 84.57,
+    "contracts": 98.3,
+    "fee": 0.83,
+    "to_win": 12.94,
+    "bank_before": 845.72
    },
    "cross_15": 3,
    "cross_30": 10,
@@ -35488,8 +35488,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 13.16,
-   "bank_after": 873.95,
+   "paid": 12.94,
+   "bank_after": 858.66,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -35852,11 +35852,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 87.4,
-    "contracts": 123.1,
-    "fee": 1.78,
-    "to_win": 33.92,
-    "bank_before": 873.95
+    "stake": 85.87,
+    "contracts": 120.9,
+    "fee": 1.75,
+    "to_win": 33.32,
+    "bank_before": 858.66
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -35873,8 +35873,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.92,
-   "bank_after": 907.87,
+   "paid": 33.32,
+   "bank_after": 891.98,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -36144,11 +36144,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 90.79,
-    "contracts": 114.9,
-    "fee": 1.34,
-    "to_win": 22.79,
-    "bank_before": 907.87
+    "stake": 89.2,
+    "contracts": 112.9,
+    "fee": 1.32,
+    "to_win": 22.39,
+    "bank_before": 891.98
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -36165,8 +36165,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -92.13,
-   "bank_after": 815.74,
+   "paid": -90.52,
+   "bank_after": 801.46,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -36188,11 +36188,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 81.57,
-    "contracts": 103.3,
-    "fee": 1.2,
-    "to_win": 20.48,
-    "bank_before": 815.74
+    "stake": 80.15,
+    "contracts": 101.5,
+    "fee": 1.18,
+    "to_win": 20.13,
+    "bank_before": 801.46
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -36209,8 +36209,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.48,
-   "bank_after": 836.22,
+   "paid": 20.13,
+   "bank_after": 821.59,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -36232,11 +36232,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 83.62,
-    "contracts": 119.5,
-    "fee": 1.76,
-    "to_win": 34.08,
-    "bank_before": 836.22
+    "stake": 82.16,
+    "contracts": 117.4,
+    "fee": 1.73,
+    "to_win": 33.48,
+    "bank_before": 821.59
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -36253,8 +36253,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.08,
-   "bank_after": 870.3,
+   "paid": 33.48,
+   "bank_after": 855.07,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -36524,11 +36524,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 87.03,
-    "contracts": 102.4,
-    "fee": 0.92,
-    "to_win": 14.44,
-    "bank_before": 870.3
+    "stake": 85.51,
+    "contracts": 100.6,
+    "fee": 0.9,
+    "to_win": 14.19,
+    "bank_before": 855.07
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -36545,8 +36545,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.44,
-   "bank_after": 884.74,
+   "paid": 14.19,
+   "bank_after": 869.26,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -36723,11 +36723,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 88.47,
-    "contracts": 121.2,
-    "fee": 1.68,
-    "to_win": 31.04,
-    "bank_before": 884.74
+    "stake": 86.93,
+    "contracts": 119.1,
+    "fee": 1.65,
+    "to_win": 30.5,
+    "bank_before": 869.26
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -36744,8 +36744,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.04,
-   "bank_after": 915.78,
+   "paid": 30.5,
+   "bank_after": 899.76,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -36798,11 +36798,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 91.58,
-    "contracts": 114.5,
-    "fee": 1.29,
-    "to_win": 21.6,
-    "bank_before": 915.78
+    "stake": 89.98,
+    "contracts": 112.5,
+    "fee": 1.26,
+    "to_win": 21.23,
+    "bank_before": 899.76
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -36819,8 +36819,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.6,
-   "bank_after": 937.38,
+   "paid": 21.23,
+   "bank_after": 921.0,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -36935,11 +36935,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 93.74,
-    "contracts": 109.0,
-    "fee": 0.92,
-    "to_win": 14.34,
-    "bank_before": 937.38
+    "stake": 92.1,
+    "contracts": 107.1,
+    "fee": 0.91,
+    "to_win": 14.08,
+    "bank_before": 921.0
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -36956,8 +36956,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.34,
-   "bank_after": 951.72,
+   "paid": 14.08,
+   "bank_after": 935.08,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -37134,11 +37134,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 95.17,
-    "contracts": 122.0,
-    "fee": 1.47,
-    "to_win": 25.37,
-    "bank_before": 951.72
+    "stake": 93.51,
+    "contracts": 119.9,
+    "fee": 1.45,
+    "to_win": 24.92,
+    "bank_before": 935.08
    },
    "cross_15": 5,
    "cross_30": 9,
@@ -37155,8 +37155,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.37,
-   "bank_after": 977.09,
+   "paid": 24.92,
+   "bank_after": 960.0,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -37767,11 +37767,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 97.71,
-    "contracts": 132.0,
-    "fee": 1.78,
-    "to_win": 32.55,
-    "bank_before": 977.09
+    "stake": 96.0,
+    "contracts": 129.7,
+    "fee": 1.75,
+    "to_win": 31.98,
+    "bank_before": 960.0
    },
    "cross_15": 4,
    "cross_30": 6,
@@ -37788,8 +37788,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.55,
-   "bank_after": 1009.64,
+   "paid": 31.98,
+   "bank_after": 991.98,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -38307,11 +38307,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 100.96,
-    "contracts": 132.8,
-    "fee": 1.7,
-    "to_win": 30.18,
-    "bank_before": 1009.64
+    "stake": 99.2,
+    "contracts": 130.5,
+    "fee": 1.67,
+    "to_win": 29.66,
+    "bank_before": 991.98
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -38328,8 +38328,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 30.18,
-   "bank_after": 1039.82,
+   "paid": 29.66,
+   "bank_after": 1021.64,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -38568,11 +38568,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 103.98,
-    "contracts": 140.5,
-    "fee": 1.9,
-    "to_win": 34.63,
-    "bank_before": 1039.82
+    "stake": 102.16,
+    "contracts": 138.1,
+    "fee": 1.86,
+    "to_win": 34.03,
+    "bank_before": 1021.64
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -38589,8 +38589,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.63,
-   "bank_after": 1074.45,
+   "paid": 34.03,
+   "bank_after": 1055.67,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -38736,11 +38736,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 107.45,
-    "contracts": 139.5,
-    "fee": 1.73,
-    "to_win": 30.37,
-    "bank_before": 1074.45
+    "stake": 105.57,
+    "contracts": 137.1,
+    "fee": 1.7,
+    "to_win": 29.83,
+    "bank_before": 1055.67
    },
    "cross_15": 1,
    "cross_30": 4,
@@ -38757,8 +38757,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 30.37,
-   "bank_after": 1104.82,
+   "paid": 29.83,
+   "bank_after": 1085.5,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -38935,11 +38935,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 110.48,
-    "contracts": 125.5,
-    "fee": 0.93,
-    "to_win": 14.14,
-    "bank_before": 1104.82
+    "stake": 108.55,
+    "contracts": 123.4,
+    "fee": 0.92,
+    "to_win": 13.88,
+    "bank_before": 1085.5
    },
    "cross_15": 2,
    "cross_30": 6,
@@ -38956,8 +38956,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.14,
-   "bank_after": 1118.96,
+   "paid": 13.88,
+   "bank_after": 1099.38,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39010,11 +39010,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 111.9,
-    "contracts": 130.1,
-    "fee": 1.1,
-    "to_win": 17.12,
-    "bank_before": 1118.96
+    "stake": 109.94,
+    "contracts": 127.8,
+    "fee": 1.08,
+    "to_win": 16.82,
+    "bank_before": 1099.38
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -39031,8 +39031,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.12,
-   "bank_after": 1136.08,
+   "paid": 16.82,
+   "bank_after": 1116.2,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39116,11 +39116,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 113.61,
-    "contracts": 142.0,
-    "fee": 1.6,
-    "to_win": 26.8,
-    "bank_before": 1136.08
+    "stake": 111.62,
+    "contracts": 139.5,
+    "fee": 1.57,
+    "to_win": 26.33,
+    "bank_before": 1116.2
    },
    "cross_15": 4,
    "cross_30": 7,
@@ -39137,8 +39137,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -115.21,
-   "bank_after": 1020.87,
+   "paid": -113.19,
+   "bank_after": 1003.01,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39160,11 +39160,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 510.44,
-    "contracts": 557.9,
-    "fee": 3.04,
-    "to_win": 44.38,
-    "bank_before": 1020.87
+    "stake": 501.5,
+    "contracts": 548.1,
+    "fee": 2.99,
+    "to_win": 43.6,
+    "bank_before": 1003.01
    },
    "revenge": true,
    "cross_15": 1,
@@ -39182,8 +39182,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 44.38,
-   "bank_after": 1065.25,
+   "paid": 43.6,
+   "bank_after": 1046.61,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39298,11 +39298,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 106.53,
-    "contracts": 125.3,
-    "fee": 1.12,
-    "to_win": 17.68,
-    "bank_before": 1065.25
+    "stake": 104.66,
+    "contracts": 123.1,
+    "fee": 1.1,
+    "to_win": 17.37,
+    "bank_before": 1046.61
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -39319,8 +39319,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -107.65,
-   "bank_after": 957.6,
+   "paid": -105.76,
+   "bank_after": 940.85,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39342,11 +39342,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 478.8,
-    "contracts": 490.1,
-    "fee": 0.78,
-    "to_win": 10.49,
-    "bank_before": 957.6
+    "stake": 470.43,
+    "contracts": 481.5,
+    "fee": 0.76,
+    "to_win": 10.31,
+    "bank_before": 940.85
    },
    "revenge": true,
    "cross_15": 2,
@@ -39364,8 +39364,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 10.49,
-   "bank_after": 968.09,
+   "paid": 10.31,
+   "bank_after": 951.16,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39480,11 +39480,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 96.81,
-    "contracts": 138.3,
-    "fee": 2.04,
-    "to_win": 39.45,
-    "bank_before": 968.09
+    "stake": 95.12,
+    "contracts": 135.9,
+    "fee": 2.0,
+    "to_win": 38.77,
+    "bank_before": 951.16
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -39501,8 +39501,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 39.45,
-   "bank_after": 1007.54,
+   "paid": 38.77,
+   "bank_after": 989.93,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39555,11 +39555,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 100.75,
-    "contracts": 118.5,
-    "fee": 1.06,
-    "to_win": 16.72,
-    "bank_before": 1007.54
+    "stake": 98.99,
+    "contracts": 116.5,
+    "fee": 1.04,
+    "to_win": 16.43,
+    "bank_before": 989.93
    },
    "cross_15": 3,
    "cross_30": 6,
@@ -39576,8 +39576,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 16.72,
-   "bank_after": 1024.26,
+   "paid": 16.43,
+   "bank_after": 1006.36,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -39661,11 +39661,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 102.43,
-    "contracts": 120.5,
-    "fee": 1.08,
-    "to_win": 17.0,
-    "bank_before": 1024.26
+    "stake": 100.64,
+    "contracts": 118.4,
+    "fee": 1.06,
+    "to_win": 16.7,
+    "bank_before": 1006.36
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -39682,8 +39682,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.0,
-   "bank_after": 1041.26,
+   "paid": 16.7,
+   "bank_after": 1023.06,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39798,11 +39798,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 104.13,
-    "contracts": 130.2,
-    "fee": 1.46,
-    "to_win": 24.57,
-    "bank_before": 1041.26
+    "stake": 102.31,
+    "contracts": 127.9,
+    "fee": 1.44,
+    "to_win": 24.14,
+    "bank_before": 1023.06
    },
    "cross_15": 2,
    "cross_30": 9,
@@ -39819,8 +39819,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -105.59,
-   "bank_after": 935.67,
+   "paid": -103.75,
+   "bank_after": 919.31,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -39842,11 +39842,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 467.83,
-    "contracts": 506.9,
-    "fee": 2.53,
-    "to_win": 36.5,
-    "bank_before": 935.67
+    "stake": 459.65,
+    "contracts": 498.0,
+    "fee": 2.48,
+    "to_win": 35.87,
+    "bank_before": 919.31
    },
    "revenge": true,
    "cross_15": 1,
@@ -39864,8 +39864,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 36.5,
-   "bank_after": 972.17,
+   "paid": 35.87,
+   "bank_after": 955.18,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -40073,11 +40073,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 97.22,
-    "contracts": 115.7,
-    "fee": 1.09,
-    "to_win": 17.43,
-    "bank_before": 972.17
+    "stake": 95.52,
+    "contracts": 113.7,
+    "fee": 1.07,
+    "to_win": 17.12,
+    "bank_before": 955.18
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -40094,8 +40094,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.43,
-   "bank_after": 989.6,
+   "paid": 17.12,
+   "bank_after": 972.3,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -40303,11 +40303,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 98.96,
-    "contracts": 125.3,
-    "fee": 1.46,
-    "to_win": 24.85,
-    "bank_before": 989.6
+    "stake": 97.23,
+    "contracts": 123.1,
+    "fee": 1.43,
+    "to_win": 24.42,
+    "bank_before": 972.3
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -40324,8 +40324,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -100.42,
-   "bank_after": 889.18,
+   "paid": -98.66,
+   "bank_after": 873.64,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -40347,11 +40347,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 444.59,
-    "contracts": 468.0,
-    "fee": 1.56,
-    "to_win": 21.84,
-    "bank_before": 889.18
+    "stake": 436.82,
+    "contracts": 459.8,
+    "fee": 1.53,
+    "to_win": 21.46,
+    "bank_before": 873.64
    },
    "revenge": true,
    "cross_15": 1,
@@ -40369,8 +40369,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.84,
-   "bank_after": 911.02,
+   "paid": 21.46,
+   "bank_after": 895.1,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -40423,11 +40423,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 91.1,
-    "contracts": 112.5,
-    "fee": 1.22,
-    "to_win": 20.15,
-    "bank_before": 911.02
+    "stake": 89.51,
+    "contracts": 110.5,
+    "fee": 1.2,
+    "to_win": 19.8,
+    "bank_before": 895.1
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -40444,8 +40444,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.15,
-   "bank_after": 931.17,
+   "paid": 19.8,
+   "bank_after": 914.9,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -40560,11 +40560,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 93.12,
-    "contracts": 112.2,
-    "fee": 1.11,
-    "to_win": 17.96,
-    "bank_before": 931.17
+    "stake": 91.49,
+    "contracts": 110.2,
+    "fee": 1.09,
+    "to_win": 17.65,
+    "bank_before": 914.9
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -40581,8 +40581,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 17.96,
-   "bank_after": 949.13,
+   "paid": 17.65,
+   "bank_after": 932.55,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -40759,11 +40759,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 94.91,
-    "contracts": 114.3,
-    "fee": 1.13,
-    "to_win": 18.31,
-    "bank_before": 949.13
+    "stake": 93.25,
+    "contracts": 112.3,
+    "fee": 1.11,
+    "to_win": 17.99,
+    "bank_before": 932.55
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -40780,8 +40780,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.31,
-   "bank_after": 967.44,
+   "paid": 17.99,
+   "bank_after": 950.54,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -41020,11 +41020,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 96.74,
-    "contracts": 124.0,
-    "fee": 1.49,
-    "to_win": 25.8,
-    "bank_before": 967.44
+    "stake": 95.05,
+    "contracts": 121.9,
+    "fee": 1.47,
+    "to_win": 25.34,
+    "bank_before": 950.54
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -41041,8 +41041,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -98.23,
-   "bank_after": 869.21,
+   "paid": -96.52,
+   "bank_after": 854.02,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -41064,11 +41064,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 86.92,
-    "contracts": 115.9,
-    "fee": 1.53,
-    "to_win": 27.44,
-    "bank_before": 869.21
+    "stake": 85.4,
+    "contracts": 113.9,
+    "fee": 1.5,
+    "to_win": 26.97,
+    "bank_before": 854.02
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -41085,8 +41085,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 27.44,
-   "bank_after": 896.65,
+   "paid": 26.97,
+   "bank_after": 880.99,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -41728,11 +41728,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 89.67,
-    "contracts": 116.5,
-    "fee": 1.45,
-    "to_win": 25.33,
-    "bank_before": 896.65
+    "stake": 88.1,
+    "contracts": 114.4,
+    "fee": 1.42,
+    "to_win": 24.9,
+    "bank_before": 880.99
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -41749,8 +41749,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.33,
-   "bank_after": 921.98,
+   "paid": 24.9,
+   "bank_after": 905.89,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -42640,11 +42640,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 92.2,
-    "contracts": 113.8,
-    "fee": 1.23,
-    "to_win": 20.4,
-    "bank_before": 921.98
+    "stake": 90.59,
+    "contracts": 111.8,
+    "fee": 1.21,
+    "to_win": 20.04,
+    "bank_before": 905.89
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -42661,8 +42661,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.4,
-   "bank_after": 942.38,
+   "paid": 20.04,
+   "bank_after": 925.93,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -42994,11 +42994,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 94.24,
-    "contracts": 112.2,
-    "fee": 1.06,
-    "to_win": 16.89,
-    "bank_before": 942.38
+    "stake": 92.59,
+    "contracts": 110.2,
+    "fee": 1.04,
+    "to_win": 16.6,
+    "bank_before": 925.93
    },
    "cross_15": 2,
    "cross_30": 5,
@@ -43015,8 +43015,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 16.89,
-   "bank_after": 959.27,
+   "paid": 16.6,
+   "bank_after": 942.53,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -43162,11 +43162,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 95.93,
-    "contracts": 126.2,
-    "fee": 1.62,
-    "to_win": 28.67,
-    "bank_before": 959.27
+    "stake": 94.25,
+    "contracts": 124.0,
+    "fee": 1.59,
+    "to_win": 28.17,
+    "bank_before": 942.53
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -43183,8 +43183,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 28.67,
-   "bank_after": 987.94,
+   "paid": 28.17,
+   "bank_after": 970.7,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -43733,11 +43733,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 98.79,
-    "contracts": 125.1,
-    "fee": 1.46,
-    "to_win": 24.8,
-    "bank_before": 987.94
+    "stake": 97.07,
+    "contracts": 122.9,
+    "fee": 1.43,
+    "to_win": 24.37,
+    "bank_before": 970.7
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -43754,8 +43754,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.8,
-   "bank_after": 1012.74,
+   "paid": 24.37,
+   "bank_after": 995.07,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -43901,11 +43901,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 101.27,
-    "contracts": 119.1,
-    "fee": 1.07,
-    "to_win": 16.8,
-    "bank_before": 1012.74
+    "stake": 99.51,
+    "contracts": 117.1,
+    "fee": 1.05,
+    "to_win": 16.51,
+    "bank_before": 995.07
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -43922,8 +43922,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 16.8,
-   "bank_after": 1029.54,
+   "paid": 16.51,
+   "bank_after": 1011.58,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -44317,11 +44317,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 102.95,
-    "contracts": 143.0,
-    "fee": 2.02,
-    "to_win": 38.02,
-    "bank_before": 1029.54
+    "stake": 101.16,
+    "contracts": 140.5,
+    "fee": 1.99,
+    "to_win": 37.35,
+    "bank_before": 1011.58
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -44338,8 +44338,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 38.02,
-   "bank_after": 1067.56,
+   "paid": 37.35,
+   "bank_after": 1048.93,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -44671,11 +44671,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 106.76,
-    "contracts": 140.5,
-    "fee": 1.8,
-    "to_win": 31.91,
-    "bank_before": 1067.56
+    "stake": 104.89,
+    "contracts": 138.0,
+    "fee": 1.77,
+    "to_win": 31.35,
+    "bank_before": 1048.93
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -44692,8 +44692,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.91,
-   "bank_after": 1099.47,
+   "paid": 31.35,
+   "bank_after": 1080.28,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -45211,11 +45211,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 109.95,
-    "contracts": 137.4,
-    "fee": 1.54,
-    "to_win": 25.95,
-    "bank_before": 1099.47
+    "stake": 108.03,
+    "contracts": 135.0,
+    "fee": 1.52,
+    "to_win": 25.49,
+    "bank_before": 1080.28
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -45232,8 +45232,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.95,
-   "bank_after": 1125.42,
+   "paid": 25.49,
+   "bank_after": 1105.77,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -45255,11 +45255,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 112.54,
-    "contracts": 152.1,
-    "fee": 2.05,
-    "to_win": 37.49,
-    "bank_before": 1125.42
+    "stake": 110.58,
+    "contracts": 149.4,
+    "fee": 2.02,
+    "to_win": 36.83,
+    "bank_before": 1105.77
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -45276,8 +45276,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 37.49,
-   "bank_after": 1162.91,
+   "paid": 36.83,
+   "bank_after": 1142.6,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -45485,11 +45485,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 116.29,
-    "contracts": 153.0,
-    "fee": 1.96,
-    "to_win": 34.76,
-    "bank_before": 1162.91
+    "stake": 114.26,
+    "contracts": 150.3,
+    "fee": 1.92,
+    "to_win": 34.16,
+    "bank_before": 1142.6
    },
    "cross_15": 5,
    "cross_30": 8,
@@ -45506,8 +45506,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.76,
-   "bank_after": 1197.67,
+   "paid": 34.16,
+   "bank_after": 1176.76,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -45529,11 +45529,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 119.77,
-    "contracts": 153.6,
-    "fee": 1.85,
-    "to_win": 31.93,
-    "bank_before": 1197.67
+    "stake": 117.68,
+    "contracts": 150.9,
+    "fee": 1.82,
+    "to_win": 31.37,
+    "bank_before": 1176.76
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -45550,8 +45550,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 31.93,
-   "bank_after": 1229.6,
+   "paid": 31.37,
+   "bank_after": 1208.13,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -46534,11 +46534,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 122.96,
-    "contracts": 151.8,
-    "fee": 1.64,
-    "to_win": 27.2,
-    "bank_before": 1229.6
+    "stake": 120.81,
+    "contracts": 149.1,
+    "fee": 1.61,
+    "to_win": 26.73,
+    "bank_before": 1208.13
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -46555,8 +46555,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 27.2,
-   "bank_after": 1256.8,
+   "paid": 26.73,
+   "bank_after": 1234.86,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -47198,11 +47198,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 125.68,
-    "contracts": 161.1,
-    "fee": 1.94,
-    "to_win": 33.51,
-    "bank_before": 1256.8
+    "stake": 123.49,
+    "contracts": 158.3,
+    "fee": 1.91,
+    "to_win": 32.92,
+    "bank_before": 1234.86
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -47219,8 +47219,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.51,
-   "bank_after": 1290.31,
+   "paid": 32.92,
+   "bank_after": 1267.78,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -48792,11 +48792,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 129.03,
-    "contracts": 151.8,
-    "fee": 1.36,
-    "to_win": 21.41,
-    "bank_before": 1290.31
+    "stake": 126.78,
+    "contracts": 149.2,
+    "fee": 1.34,
+    "to_win": 21.03,
+    "bank_before": 1267.78
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -48813,8 +48813,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.41,
-   "bank_after": 1311.72,
+   "paid": 21.03,
+   "bank_after": 1288.81,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49270,11 +49270,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 131.17,
-    "contracts": 168.2,
-    "fee": 2.03,
-    "to_win": 34.97,
-    "bank_before": 1311.72
+    "stake": 128.88,
+    "contracts": 165.2,
+    "fee": 1.99,
+    "to_win": 34.36,
+    "bank_before": 1288.81
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -49291,8 +49291,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 34.97,
-   "bank_after": 1346.69,
+   "paid": 34.36,
+   "bank_after": 1323.17,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49469,11 +49469,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 134.67,
-    "contracts": 182.0,
-    "fee": 2.46,
-    "to_win": 44.86,
-    "bank_before": 1346.69
+    "stake": 132.32,
+    "contracts": 178.8,
+    "fee": 2.41,
+    "to_win": 44.08,
+    "bank_before": 1323.17
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -49490,8 +49490,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 44.86,
-   "bank_after": 1391.55,
+   "paid": 44.08,
+   "bank_after": 1367.25,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49544,11 +49544,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 139.16,
-    "contracts": 167.7,
-    "fee": 1.66,
-    "to_win": 26.84,
-    "bank_before": 1391.55
+    "stake": 136.72,
+    "contracts": 164.7,
+    "fee": 1.63,
+    "to_win": 26.37,
+    "bank_before": 1367.25
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -49565,8 +49565,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.84,
-   "bank_after": 1418.39,
+   "paid": 26.37,
+   "bank_after": 1393.62,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49650,11 +49650,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 141.84,
-    "contracts": 173.0,
-    "fee": 1.79,
-    "to_win": 29.35,
-    "bank_before": 1418.39
+    "stake": 139.36,
+    "contracts": 170.0,
+    "fee": 1.76,
+    "to_win": 28.83,
+    "bank_before": 1393.62
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -49671,8 +49671,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.35,
-   "bank_after": 1447.74,
+   "paid": 28.83,
+   "bank_after": 1422.45,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49694,11 +49694,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 144.77,
-    "contracts": 172.3,
-    "fee": 1.63,
-    "to_win": 25.95,
-    "bank_before": 1447.74
+    "stake": 142.25,
+    "contracts": 169.3,
+    "fee": 1.6,
+    "to_win": 25.5,
+    "bank_before": 1422.45
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -49715,8 +49715,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.95,
-   "bank_after": 1473.69,
+   "paid": 25.5,
+   "bank_after": 1447.95,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49800,11 +49800,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 147.37,
-    "contracts": 188.9,
-    "fee": 2.27,
-    "to_win": 39.3,
-    "bank_before": 1473.69
+    "stake": 144.8,
+    "contracts": 185.6,
+    "fee": 2.23,
+    "to_win": 38.61,
+    "bank_before": 1447.95
    },
    "cross_15": 6,
    "cross_30": 7,
@@ -49821,8 +49821,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 39.3,
-   "bank_after": 1512.99,
+   "paid": 38.61,
+   "bank_after": 1486.56,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -49999,11 +49999,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 151.3,
-    "contracts": 178.0,
-    "fee": 1.59,
-    "to_win": 25.11,
-    "bank_before": 1512.99
+    "stake": 148.66,
+    "contracts": 174.9,
+    "fee": 1.57,
+    "to_win": 24.66,
+    "bank_before": 1486.56
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -50020,8 +50020,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.11,
-   "bank_after": 1538.1,
+   "paid": 24.66,
+   "bank_after": 1511.22,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50043,11 +50043,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 153.81,
-    "contracts": 192.3,
-    "fee": 2.16,
-    "to_win": 36.29,
-    "bank_before": 1538.1
+    "stake": 151.12,
+    "contracts": 188.9,
+    "fee": 2.12,
+    "to_win": 35.66,
+    "bank_before": 1511.22
    },
    "cross_15": 5,
    "cross_30": 6,
@@ -50064,8 +50064,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 36.29,
-   "bank_after": 1574.39,
+   "paid": 35.66,
+   "bank_after": 1546.88,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50211,11 +50211,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 157.44,
-    "contracts": 221.7,
-    "fee": 3.2,
-    "to_win": 61.11,
-    "bank_before": 1574.39
+    "stake": 154.69,
+    "contracts": 217.9,
+    "fee": 3.15,
+    "to_win": 60.03,
+    "bank_before": 1546.88
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -50232,8 +50232,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -160.64,
-   "bank_after": 1413.75,
+   "paid": -157.84,
+   "bank_after": 1389.04,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50255,11 +50255,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 706.88,
-    "contracts": 730.2,
-    "fee": 1.59,
-    "to_win": 21.78,
-    "bank_before": 1413.75
+    "stake": 694.52,
+    "contracts": 717.5,
+    "fee": 1.56,
+    "to_win": 21.4,
+    "bank_before": 1389.04
    },
    "revenge": true,
    "cross_15": 2,
@@ -50277,8 +50277,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.78,
-   "bank_after": 1435.53,
+   "paid": 21.4,
+   "bank_after": 1410.44,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50424,11 +50424,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 143.55,
-    "contracts": 181.7,
-    "fee": 2.12,
-    "to_win": 36.04,
-    "bank_before": 1435.53
+    "stake": 141.04,
+    "contracts": 178.5,
+    "fee": 2.08,
+    "to_win": 35.41,
+    "bank_before": 1410.44
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -50445,8 +50445,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 36.04,
-   "bank_after": 1471.57,
+   "paid": 35.41,
+   "bank_after": 1445.85,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50623,11 +50623,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 147.16,
-    "contracts": 167.2,
-    "fee": 1.24,
-    "to_win": 18.83,
-    "bank_before": 1471.57
+    "stake": 144.59,
+    "contracts": 164.3,
+    "fee": 1.22,
+    "to_win": 18.5,
+    "bank_before": 1445.85
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -50644,8 +50644,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.83,
-   "bank_after": 1490.4,
+   "paid": 18.5,
+   "bank_after": 1464.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50667,11 +50667,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 149.04,
-    "contracts": 175.3,
-    "fee": 1.57,
-    "to_win": 24.73,
-    "bank_before": 1490.4
+    "stake": 146.44,
+    "contracts": 172.3,
+    "fee": 1.54,
+    "to_win": 24.3,
+    "bank_before": 1464.35
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -50688,8 +50688,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.73,
-   "bank_after": 1515.13,
+   "paid": 24.3,
+   "bank_after": 1488.65,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -50835,11 +50835,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 151.51,
-    "contracts": 202.0,
-    "fee": 2.66,
-    "to_win": 47.84,
-    "bank_before": 1515.13
+    "stake": 148.87,
+    "contracts": 198.5,
+    "fee": 2.61,
+    "to_win": 47.01,
+    "bank_before": 1488.65
    },
    "cross_15": 3,
    "cross_30": 8,
@@ -50856,8 +50856,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 47.84,
-   "bank_after": 1562.97,
+   "paid": 47.01,
+   "bank_after": 1535.66,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -51096,11 +51096,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 156.3,
-    "contracts": 179.7,
-    "fee": 1.43,
-    "to_win": 21.93,
-    "bank_before": 1562.97
+    "stake": 153.57,
+    "contracts": 176.5,
+    "fee": 1.4,
+    "to_win": 21.55,
+    "bank_before": 1535.66
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -51117,8 +51117,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.93,
-   "bank_after": 1584.9,
+   "paid": 21.55,
+   "bank_after": 1557.21,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -51264,11 +51264,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 158.49,
-    "contracts": 214.2,
-    "fee": 2.89,
-    "to_win": 52.8,
-    "bank_before": 1584.9
+    "stake": 155.72,
+    "contracts": 210.4,
+    "fee": 2.84,
+    "to_win": 51.87,
+    "bank_before": 1557.21
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -51285,8 +51285,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 52.8,
-   "bank_after": 1637.7,
+   "paid": 51.87,
+   "bank_after": 1609.08,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -51370,11 +51370,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 163.77,
-    "contracts": 188.2,
-    "fee": 1.5,
-    "to_win": 22.97,
-    "bank_before": 1637.7
+    "stake": 160.91,
+    "contracts": 185.0,
+    "fee": 1.47,
+    "to_win": 22.57,
+    "bank_before": 1609.08
    },
    "cross_15": 0,
    "cross_30": 0,
@@ -51391,8 +51391,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.97,
-   "bank_after": 1660.67,
+   "paid": 22.57,
+   "bank_after": 1631.65,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -51693,11 +51693,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 166.07,
-    "contracts": 188.7,
-    "fee": 1.4,
-    "to_win": 21.25,
-    "bank_before": 1660.67
+    "stake": 163.17,
+    "contracts": 185.4,
+    "fee": 1.38,
+    "to_win": 20.87,
+    "bank_before": 1631.65
    },
    "cross_15": 1,
    "cross_30": 3,
@@ -51714,8 +51714,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.25,
-   "bank_after": 1681.92,
+   "paid": 20.87,
+   "bank_after": 1652.52,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -51768,11 +51768,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 168.19,
-    "contracts": 191.1,
-    "fee": 1.42,
-    "to_win": 21.52,
-    "bank_before": 1681.92
+    "stake": 165.25,
+    "contracts": 187.8,
+    "fee": 1.39,
+    "to_win": 21.14,
+    "bank_before": 1652.52
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -51789,8 +51789,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -169.61,
-   "bank_after": 1512.31,
+   "paid": -166.64,
+   "bank_after": 1485.88,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -51812,11 +51812,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 756.15,
-    "contracts": 825.5,
-    "fee": 4.45,
-    "to_win": 64.89,
-    "bank_before": 1512.31
+    "stake": 742.94,
+    "contracts": 811.1,
+    "fee": 4.37,
+    "to_win": 63.76,
+    "bank_before": 1485.88
    },
    "revenge": true,
    "cross_15": 4,
@@ -51834,8 +51834,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 64.89,
-   "bank_after": 1577.2,
+   "paid": 63.76,
+   "bank_after": 1549.64,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -52167,11 +52167,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 157.72,
-    "contracts": 210.3,
-    "fee": 2.77,
-    "to_win": 49.8,
-    "bank_before": 1577.2
+    "stake": 154.96,
+    "contracts": 206.6,
+    "fee": 2.72,
+    "to_win": 48.93,
+    "bank_before": 1549.64
    },
    "cross_15": 1,
    "cross_30": 6,
@@ -52188,8 +52188,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 49.8,
-   "bank_after": 1627.0,
+   "paid": 48.93,
+   "bank_after": 1598.57,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -52211,11 +52211,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 162.7,
-    "contracts": 205.9,
-    "fee": 2.4,
-    "to_win": 40.85,
-    "bank_before": 1627.0
+    "stake": 159.86,
+    "contracts": 202.4,
+    "fee": 2.35,
+    "to_win": 40.14,
+    "bank_before": 1598.57
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -52232,8 +52232,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 40.85,
-   "bank_after": 1667.85,
+   "paid": 40.14,
+   "bank_after": 1638.71,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -52534,11 +52534,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 166.78,
-    "contracts": 216.6,
-    "fee": 2.69,
-    "to_win": 47.13,
-    "bank_before": 1667.85
+    "stake": 163.87,
+    "contracts": 212.8,
+    "fee": 2.64,
+    "to_win": 46.31,
+    "bank_before": 1638.71
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -52555,8 +52555,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 47.13,
-   "bank_after": 1714.98,
+   "paid": 46.31,
+   "bank_after": 1685.02,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -52702,11 +52702,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 171.5,
-    "contracts": 214.4,
-    "fee": 2.41,
-    "to_win": 40.46,
-    "bank_before": 1714.98
+    "stake": 168.5,
+    "contracts": 210.6,
+    "fee": 2.36,
+    "to_win": 39.76,
+    "bank_before": 1685.02
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -52723,8 +52723,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 40.47,
-   "bank_after": 1755.44,
+   "paid": 39.77,
+   "bank_after": 1724.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -52746,11 +52746,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 175.54,
-    "contracts": 219.4,
-    "fee": 2.46,
-    "to_win": 41.42,
-    "bank_before": 1755.44
+    "stake": 172.48,
+    "contracts": 215.6,
+    "fee": 2.42,
+    "to_win": 40.7,
+    "bank_before": 1724.79
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -52767,8 +52767,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 41.42,
-   "bank_after": 1796.87,
+   "paid": 40.7,
+   "bank_after": 1765.49,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53069,11 +53069,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 179.69,
-    "contracts": 206.5,
-    "fee": 1.64,
-    "to_win": 25.21,
-    "bank_before": 1796.87
+    "stake": 176.55,
+    "contracts": 202.9,
+    "fee": 1.61,
+    "to_win": 24.77,
+    "bank_before": 1765.49
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -53090,8 +53090,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.21,
-   "bank_after": 1822.08,
+   "paid": 24.77,
+   "bank_after": 1790.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53144,11 +53144,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 182.21,
-    "contracts": 204.7,
-    "fee": 1.41,
-    "to_win": 21.11,
-    "bank_before": 1822.08
+    "stake": 179.03,
+    "contracts": 201.2,
+    "fee": 1.38,
+    "to_win": 20.75,
+    "bank_before": 1790.26
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -53165,8 +53165,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.11,
-   "bank_after": 1843.19,
+   "paid": 20.75,
+   "bank_after": 1811.01,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53436,11 +53436,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 184.32,
-    "contracts": 211.9,
-    "fee": 1.68,
-    "to_win": 25.86,
-    "bank_before": 1843.19
+    "stake": 181.1,
+    "contracts": 208.2,
+    "fee": 1.65,
+    "to_win": 25.41,
+    "bank_before": 1811.01
    },
    "cross_15": 5,
    "cross_30": 6,
@@ -53457,8 +53457,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.86,
-   "bank_after": 1869.05,
+   "paid": 25.41,
+   "bank_after": 1836.42,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53604,11 +53604,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 186.91,
-    "contracts": 207.7,
-    "fee": 1.31,
-    "to_win": 19.46,
-    "bank_before": 1869.05
+    "stake": 183.64,
+    "contracts": 204.0,
+    "fee": 1.29,
+    "to_win": 19.11,
+    "bank_before": 1836.42
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -53625,8 +53625,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.46,
-   "bank_after": 1888.51,
+   "paid": 19.11,
+   "bank_after": 1855.53,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53710,11 +53710,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 188.85,
-    "contracts": 239.1,
-    "fee": 2.78,
-    "to_win": 47.42,
-    "bank_before": 1888.51
+    "stake": 185.55,
+    "contracts": 234.9,
+    "fee": 2.73,
+    "to_win": 46.59,
+    "bank_before": 1855.53
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -53731,8 +53731,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 47.42,
-   "bank_after": 1935.93,
+   "paid": 46.59,
+   "bank_after": 1902.12,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53878,11 +53878,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 193.59,
-    "contracts": 233.2,
-    "fee": 2.31,
-    "to_win": 37.34,
-    "bank_before": 1935.93
+    "stake": 190.21,
+    "contracts": 229.2,
+    "fee": 2.27,
+    "to_win": 36.69,
+    "bank_before": 1902.12
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -53899,8 +53899,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 37.34,
-   "bank_after": 1973.27,
+   "paid": 36.69,
+   "bank_after": 1938.81,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -53984,11 +53984,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 197.33,
-    "contracts": 237.7,
-    "fee": 2.35,
-    "to_win": 38.07,
-    "bank_before": 1973.27
+    "stake": 193.88,
+    "contracts": 233.6,
+    "fee": 2.31,
+    "to_win": 37.4,
+    "bank_before": 1938.81
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -54005,8 +54005,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 38.07,
-   "bank_after": 2011.34,
+   "paid": 37.4,
+   "bank_after": 1976.21,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -54059,11 +54059,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 201.13,
-    "contracts": 236.6,
-    "fee": 2.12,
-    "to_win": 33.37,
-    "bank_before": 2011.34
+    "stake": 197.62,
+    "contracts": 232.5,
+    "fee": 2.08,
+    "to_win": 32.79,
+    "bank_before": 1976.21
    },
    "cross_15": 4,
    "cross_30": 7,
@@ -54080,8 +54080,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 33.37,
-   "bank_after": 2044.71,
+   "paid": 32.79,
+   "bank_after": 2009.0,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -54258,11 +54258,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 204.47,
-    "contracts": 255.6,
-    "fee": 2.87,
-    "to_win": 48.25,
-    "bank_before": 2044.71
+    "stake": 200.9,
+    "contracts": 251.1,
+    "fee": 2.82,
+    "to_win": 47.4,
+    "bank_before": 2009.0
    },
    "cross_15": 3,
    "cross_30": 7,
@@ -54279,8 +54279,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 48.25,
-   "bank_after": 2092.96,
+   "paid": 47.4,
+   "bank_after": 2056.41,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -54519,11 +54519,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 209.3,
-    "contracts": 252.2,
-    "fee": 2.5,
-    "to_win": 40.37,
-    "bank_before": 2092.96
+    "stake": 205.64,
+    "contracts": 247.8,
+    "fee": 2.45,
+    "to_win": 39.67,
+    "bank_before": 2056.41
    },
    "cross_15": 2,
    "cross_30": 3,
@@ -54540,8 +54540,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 40.37,
-   "bank_after": 2133.33,
+   "paid": 39.67,
+   "bank_after": 2096.08,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -54656,11 +54656,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 213.33,
-    "contracts": 284.4,
-    "fee": 3.74,
-    "to_win": 67.37,
-    "bank_before": 2133.33
+    "stake": 209.61,
+    "contracts": 279.5,
+    "fee": 3.67,
+    "to_win": 66.2,
+    "bank_before": 2096.08
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -54677,8 +54677,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -217.07,
-   "bank_after": 1916.26,
+   "paid": -213.28,
+   "bank_after": 1882.8,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -54917,11 +54917,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 191.63,
-    "contracts": 252.1,
-    "fee": 3.22,
-    "to_win": 57.29,
-    "bank_before": 1916.26
+    "stake": 188.28,
+    "contracts": 247.7,
+    "fee": 3.17,
+    "to_win": 56.29,
+    "bank_before": 1882.8
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -54938,8 +54938,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -194.85,
-   "bank_after": 1721.41,
+   "paid": -191.45,
+   "bank_after": 1691.35,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -55023,11 +55023,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 172.14,
-    "contracts": 193.4,
-    "fee": 1.33,
-    "to_win": 19.95,
-    "bank_before": 1721.41
+    "stake": 169.13,
+    "contracts": 190.0,
+    "fee": 1.31,
+    "to_win": 19.59,
+    "bank_before": 1691.35
    },
    "cross_15": 5,
    "cross_30": 9,
@@ -55044,8 +55044,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 19.95,
-   "bank_after": 1741.36,
+   "paid": 19.59,
+   "bank_after": 1710.94,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -55129,11 +55129,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 174.14,
-    "contracts": 215.0,
-    "fee": 2.32,
-    "to_win": 38.53,
-    "bank_before": 1741.36
+    "stake": 171.09,
+    "contracts": 211.2,
+    "fee": 2.28,
+    "to_win": 37.85,
+    "bank_before": 1710.94
    },
    "cross_15": 5,
    "cross_30": 7,
@@ -55150,8 +55150,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 38.53,
-   "bank_after": 1779.89,
+   "paid": 37.85,
+   "bank_after": 1748.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -55204,11 +55204,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 177.99,
-    "contracts": 250.7,
-    "fee": 3.62,
-    "to_win": 69.08,
-    "bank_before": 1779.89
+    "stake": 174.88,
+    "contracts": 246.3,
+    "fee": 3.56,
+    "to_win": 67.87,
+    "bank_before": 1748.79
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -55225,8 +55225,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 69.08,
-   "bank_after": 1848.97,
+   "paid": 67.87,
+   "bank_after": 1816.66,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -55558,11 +55558,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 184.9,
-    "contracts": 256.8,
-    "fee": 3.63,
-    "to_win": 68.28,
-    "bank_before": 1848.97
+    "stake": 181.67,
+    "contracts": 252.3,
+    "fee": 3.57,
+    "to_win": 67.08,
+    "bank_before": 1816.66
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -55579,8 +55579,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 68.28,
-   "bank_after": 1917.25,
+   "paid": 67.08,
+   "bank_after": 1883.74,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -55664,11 +55664,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 191.73,
-    "contracts": 242.7,
-    "fee": 2.82,
-    "to_win": 48.15,
-    "bank_before": 1917.25
+    "stake": 188.37,
+    "contracts": 238.4,
+    "fee": 2.77,
+    "to_win": 47.3,
+    "bank_before": 1883.74
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -55685,8 +55685,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 48.15,
-   "bank_after": 1965.4,
+   "paid": 47.3,
+   "bank_after": 1931.04,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -55925,11 +55925,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 196.54,
-    "contracts": 239.7,
-    "fee": 2.48,
-    "to_win": 40.66,
-    "bank_before": 1965.4
+    "stake": 193.1,
+    "contracts": 235.5,
+    "fee": 2.44,
+    "to_win": 39.95,
+    "bank_before": 1931.04
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -55946,8 +55946,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 40.66,
-   "bank_after": 2006.06,
+   "paid": 39.95,
+   "bank_after": 1970.99,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -56062,11 +56062,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 200.61,
-    "contracts": 260.5,
-    "fee": 3.23,
-    "to_win": 56.69,
-    "bank_before": 2006.06
+    "stake": 197.1,
+    "contracts": 256.0,
+    "fee": 3.18,
+    "to_win": 55.69,
+    "bank_before": 1970.99
    },
    "cross_15": 4,
    "cross_30": 7,
@@ -56083,8 +56083,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 56.69,
-   "bank_after": 2062.75,
+   "paid": 55.69,
+   "bank_after": 2026.68,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -56447,11 +56447,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 206.28,
-    "contracts": 234.4,
-    "fee": 1.74,
-    "to_win": 26.39,
-    "bank_before": 2062.75
+    "stake": 202.67,
+    "contracts": 230.3,
+    "fee": 1.71,
+    "to_win": 25.93,
+    "bank_before": 2026.68
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -56468,8 +56468,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.39,
-   "bank_after": 2089.14,
+   "paid": 25.93,
+   "bank_after": 2052.61,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -56553,11 +56553,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 208.91,
-    "contracts": 234.7,
-    "fee": 1.61,
-    "to_win": 24.21,
-    "bank_before": 2089.14
+    "stake": 205.26,
+    "contracts": 230.6,
+    "fee": 1.59,
+    "to_win": 23.78,
+    "bank_before": 2052.61
    },
    "cross_15": 3,
    "cross_30": 5,
@@ -56574,8 +56574,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -210.52,
-   "bank_after": 1878.62,
+   "paid": -206.85,
+   "bank_after": 1845.76,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -56907,11 +56907,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 187.86,
-    "contracts": 229.1,
-    "fee": 2.37,
-    "to_win": 38.87,
-    "bank_before": 1878.62
+    "stake": 184.58,
+    "contracts": 225.1,
+    "fee": 2.33,
+    "to_win": 38.19,
+    "bank_before": 1845.76
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -56928,8 +56928,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 38.87,
-   "bank_after": 1917.49,
+   "paid": 38.19,
+   "bank_after": 1883.95,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57075,11 +57075,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 191.75,
-    "contracts": 242.7,
-    "fee": 2.82,
-    "to_win": 48.15,
-    "bank_before": 1917.49
+    "stake": 188.4,
+    "contracts": 238.5,
+    "fee": 2.77,
+    "to_win": 47.31,
+    "bank_before": 1883.95
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -57096,8 +57096,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -194.57,
-   "bank_after": 1722.92,
+   "paid": -191.17,
+   "bank_after": 1692.78,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57243,11 +57243,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 172.29,
-    "contracts": 202.7,
-    "fee": 1.81,
-    "to_win": 28.59,
-    "bank_before": 1722.92
+    "stake": 169.28,
+    "contracts": 199.2,
+    "fee": 1.78,
+    "to_win": 28.09,
+    "bank_before": 1692.78
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -57264,8 +57264,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 28.59,
-   "bank_after": 1751.51,
+   "paid": 28.09,
+   "bank_after": 1720.87,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57504,11 +57504,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 175.15,
-    "contracts": 233.5,
-    "fee": 3.07,
-    "to_win": 55.31,
-    "bank_before": 1751.51
+    "stake": 172.09,
+    "contracts": 229.5,
+    "fee": 3.02,
+    "to_win": 54.34,
+    "bank_before": 1720.87
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -57525,8 +57525,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 55.31,
-   "bank_after": 1806.82,
+   "paid": 54.34,
+   "bank_after": 1775.21,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57579,11 +57579,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 180.68,
-    "contracts": 240.9,
-    "fee": 3.17,
-    "to_win": 57.06,
-    "bank_before": 1806.82
+    "stake": 177.52,
+    "contracts": 236.7,
+    "fee": 3.11,
+    "to_win": 56.06,
+    "bank_before": 1775.21
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -57600,8 +57600,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 57.06,
-   "bank_after": 1863.88,
+   "paid": 56.06,
+   "bank_after": 1831.27,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57623,11 +57623,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 186.39,
-    "contracts": 230.1,
-    "fee": 2.48,
-    "to_win": 41.24,
-    "bank_before": 1863.88
+    "stake": 183.13,
+    "contracts": 226.1,
+    "fee": 2.44,
+    "to_win": 40.52,
+    "bank_before": 1831.27
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -57644,8 +57644,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 41.24,
-   "bank_after": 1905.12,
+   "paid": 40.52,
+   "bank_after": 1871.79,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57667,11 +57667,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 190.51,
-    "contracts": 250.7,
-    "fee": 3.21,
-    "to_win": 56.95,
-    "bank_before": 1905.12
+    "stake": 187.18,
+    "contracts": 246.3,
+    "fee": 3.15,
+    "to_win": 55.96,
+    "bank_before": 1871.79
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -57688,8 +57688,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 56.95,
-   "bank_after": 1962.07,
+   "paid": 55.96,
+   "bank_after": 1927.75,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -57773,11 +57773,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 196.21,
-    "contracts": 245.3,
-    "fee": 2.75,
-    "to_win": 46.3,
-    "bank_before": 1962.07
+    "stake": 192.78,
+    "contracts": 241.0,
+    "fee": 2.7,
+    "to_win": 45.49,
+    "bank_before": 1927.75
    },
    "cross_15": 1,
    "cross_30": 6,
@@ -57794,8 +57794,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -198.96,
-   "bank_after": 1763.11,
+   "paid": -195.48,
+   "bank_after": 1732.27,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -58003,11 +58003,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 176.31,
-    "contracts": 207.4,
-    "fee": 1.86,
-    "to_win": 29.25,
-    "bank_before": 1763.11
+    "stake": 173.23,
+    "contracts": 203.8,
+    "fee": 1.82,
+    "to_win": 28.75,
+    "bank_before": 1732.27
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -58024,8 +58024,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 29.25,
-   "bank_after": 1792.36,
+   "paid": 28.75,
+   "bank_after": 1761.02,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -58512,11 +58512,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 179.24,
-    "contracts": 203.7,
-    "fee": 1.51,
-    "to_win": 22.93,
-    "bank_before": 1792.36
+    "stake": 176.1,
+    "contracts": 200.1,
+    "fee": 1.48,
+    "to_win": 22.53,
+    "bank_before": 1761.02
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -58533,8 +58533,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.93,
-   "bank_after": 1815.29,
+   "paid": 22.53,
+   "bank_after": 1783.55,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -58649,11 +58649,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 181.53,
-    "contracts": 259.3,
-    "fee": 3.82,
-    "to_win": 73.98,
-    "bank_before": 1815.29
+    "stake": 178.36,
+    "contracts": 254.8,
+    "fee": 3.75,
+    "to_win": 72.69,
+    "bank_before": 1783.55
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -58670,8 +58670,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -185.35,
-   "bank_after": 1629.94,
+   "paid": -182.11,
+   "bank_after": 1601.44,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -58693,11 +58693,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 162.99,
-    "contracts": 223.3,
-    "fee": 3.09,
-    "to_win": 57.19,
-    "bank_before": 1629.94
+    "stake": 160.14,
+    "contracts": 219.4,
+    "fee": 3.03,
+    "to_win": 56.2,
+    "bank_before": 1601.44
    },
    "cross_15": 2,
    "cross_30": 3,
@@ -58714,8 +58714,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 57.19,
-   "bank_after": 1687.13,
+   "paid": 56.2,
+   "bank_after": 1657.64,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -58768,11 +58768,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 168.71,
-    "contracts": 237.6,
-    "fee": 3.43,
-    "to_win": 65.48,
-    "bank_before": 1687.13
+    "stake": 165.76,
+    "contracts": 233.5,
+    "fee": 3.37,
+    "to_win": 64.33,
+    "bank_before": 1657.64
    },
    "cross_15": 2,
    "cross_30": 5,
@@ -58789,8 +58789,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 65.48,
-   "bank_after": 1752.61,
+   "paid": 64.33,
+   "bank_after": 1721.97,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -59060,11 +59060,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 175.26,
-    "contracts": 199.2,
-    "fee": 1.48,
-    "to_win": 22.42,
-    "bank_before": 1752.61
+    "stake": 172.2,
+    "contracts": 195.7,
+    "fee": 1.45,
+    "to_win": 22.03,
+    "bank_before": 1721.97
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -59081,8 +59081,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 22.42,
-   "bank_after": 1775.03,
+   "paid": 22.03,
+   "bank_after": 1744.0,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -59228,11 +59228,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 177.5,
-    "contracts": 233.6,
-    "fee": 2.99,
-    "to_win": 53.06,
-    "bank_before": 1775.03
+    "stake": 174.4,
+    "contracts": 229.5,
+    "fee": 2.93,
+    "to_win": 52.14,
+    "bank_before": 1744.0
    },
    "cross_15": 4,
    "cross_30": 4,
@@ -59249,8 +59249,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 53.06,
-   "bank_after": 1828.09,
+   "paid": 52.14,
+   "bank_after": 1796.14,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -59303,11 +59303,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 182.81,
-    "contracts": 225.7,
-    "fee": 2.44,
-    "to_win": 40.44,
-    "bank_before": 1828.09
+    "stake": 179.61,
+    "contracts": 221.7,
+    "fee": 2.39,
+    "to_win": 39.74,
+    "bank_before": 1796.14
    },
    "cross_15": 0,
    "cross_30": 2,
@@ -59324,8 +59324,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 40.44,
-   "bank_after": 1868.53,
+   "paid": 39.74,
+   "bank_after": 1835.88,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -60215,11 +60215,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 186.85,
-    "contracts": 214.8,
-    "fee": 1.71,
-    "to_win": 26.21,
-    "bank_before": 1868.53
+    "stake": 183.59,
+    "contracts": 211.0,
+    "fee": 1.68,
+    "to_win": 25.75,
+    "bank_before": 1835.88
    },
    "cross_15": 4,
    "cross_30": 5,
@@ -60236,8 +60236,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.21,
-   "bank_after": 1894.74,
+   "paid": 25.75,
+   "bank_after": 1861.63,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -60383,11 +60383,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 189.47,
-    "contracts": 212.9,
-    "fee": 1.46,
-    "to_win": 21.96,
-    "bank_before": 1894.74
+    "stake": 186.16,
+    "contracts": 209.2,
+    "fee": 1.44,
+    "to_win": 21.57,
+    "bank_before": 1861.63
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -60404,8 +60404,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 21.96,
-   "bank_after": 1916.7,
+   "paid": 21.57,
+   "bank_after": 1883.2,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -60520,11 +60520,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 191.67,
-    "contracts": 239.6,
-    "fee": 2.69,
-    "to_win": 45.23,
-    "bank_before": 1916.7
+    "stake": 188.32,
+    "contracts": 235.4,
+    "fee": 2.64,
+    "to_win": 44.44,
+    "bank_before": 1883.2
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -60541,8 +60541,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 45.23,
-   "bank_after": 1961.93,
+   "paid": 44.44,
+   "bank_after": 1927.64,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -60626,11 +60626,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 196.19,
-    "contracts": 230.8,
-    "fee": 2.06,
-    "to_win": 32.56,
-    "bank_before": 1961.93
+    "stake": 192.76,
+    "contracts": 226.8,
+    "fee": 2.03,
+    "to_win": 31.99,
+    "bank_before": 1927.64
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -60647,8 +60647,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.56,
-   "bank_after": 1994.49,
+   "paid": 31.99,
+   "bank_after": 1959.63,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -61011,11 +61011,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 199.45,
-    "contracts": 252.5,
-    "fee": 2.94,
-    "to_win": 50.08,
-    "bank_before": 1994.49
+    "stake": 195.96,
+    "contracts": 248.1,
+    "fee": 2.89,
+    "to_win": 49.2,
+    "bank_before": 1959.63
    },
    "cross_15": 3,
    "cross_30": 3,
@@ -61032,8 +61032,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 50.08,
-   "bank_after": 2044.57,
+   "paid": 49.2,
+   "bank_after": 2008.83,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -61179,11 +61179,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 204.46,
-    "contracts": 249.3,
-    "fee": 2.58,
-    "to_win": 42.3,
-    "bank_before": 2044.57
+    "stake": 200.88,
+    "contracts": 245.0,
+    "fee": 2.54,
+    "to_win": 41.56,
+    "bank_before": 2008.83
    },
    "cross_15": 1,
    "cross_30": 4,
@@ -61200,8 +61200,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -207.04,
-   "bank_after": 1837.53,
+   "paid": -203.42,
+   "bank_after": 1805.41,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -62494,11 +62494,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 183.75,
-    "contracts": 208.8,
-    "fee": 1.55,
-    "to_win": 23.51,
-    "bank_before": 1837.53
+    "stake": 180.54,
+    "contracts": 205.2,
+    "fee": 1.52,
+    "to_win": 23.1,
+    "bank_before": 1805.41
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -62515,8 +62515,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 23.51,
-   "bank_after": 1861.04,
+   "paid": 23.1,
+   "bank_after": 1828.51,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -63003,11 +63003,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 186.1,
-    "contracts": 248.1,
-    "fee": 3.26,
-    "to_win": 58.77,
-    "bank_before": 1861.04
+    "stake": 182.85,
+    "contracts": 243.8,
+    "fee": 3.2,
+    "to_win": 57.75,
+    "bank_before": 1828.51
    },
    "cross_15": 1,
    "cross_30": 4,
@@ -63024,8 +63024,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 58.77,
-   "bank_after": 1919.81,
+   "paid": 57.75,
+   "bank_after": 1886.26,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -63107,7 +63107,7 @@
    "dist": -15.38,
    "vol": 0.000327,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 3,
    "cross_30": 3,
@@ -63163,9 +63163,9 @@
   32.0,
   72.0,
   127.0,
-  254.0,
+  255.0,
   405.0,
-  428.0,
+  427.0,
   293.0,
   170.0,
   95.0,
@@ -63185,7 +63185,7 @@
   9.0,
   22.0,
   47.0,
-  106.0,
+  107.0,
   184.0,
   224.0,
   159.0,
@@ -92913,16 +92913,116 @@
     "mins": 13.83,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 13.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.32,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.07,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.81,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.56,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.3,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.05,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.79,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.54,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.28,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.03,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.77,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.52,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.26,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.01,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.75,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.5,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.24,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.99,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.73,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1919.81,
+  "cash": 1886.26,
   "start": 1000.0,
-  "peak": 2133.33,
-  "low": 649.24,
-  "settled": 284,
-  "fees": 464.69
+  "peak": 2096.08,
+  "low": 637.84,
+  "settled": 283,
+  "fees": 455.31
  },
  "alerted": [
   "KXBTC15M-26SEP011115-15",
