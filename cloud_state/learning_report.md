@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 17 Sep 2026 11:55am California time by `check.py --report`.
+Written 17 Sep 2026 12:01pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,14 +10,14 @@ Written 17 Sep 2026 11:55am California time by `check.py --report`.
 | best / worst it has been | $2,046.12 / $622.64 |
 | fees paid | $448.32 |
 | contracts looked at | 2000 |
-| of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 286 |
-| calls that have settled | 286 |
+| of those, settled and learned from | 1998 |
+| actual calls (graded GOOD) | 285 |
+| calls that have settled | 285 |
 | alerts that reached the phone | 276 of 276 |
-| calls made before delivery was recorded | 10 |
-| calls right | 238 of 286 (83%) |
+| calls made before delivery was recorded | 9 |
+| calls right | 237 of 285 (83%) |
 | break-even needed | 80% |
-| paper P&L | +4.2% per dollar staked |
+| paper P&L | +4.1% per dollar staked |
 
 ## What it is actually learning
 
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1999 live
+The 63-day study is worth 30 observations per row below. So 1998 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1086 |
-| GOOD | 280 |
+| NONE (no disagreement) | 1087 |
+| GOOD | 279 |
 | BAD (cheap side) | 256 |
 | WEAK (50-70c) | 247 |
 | WEAK (small disagreement) | 113 |
@@ -74,14 +74,13 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1061 times, NO 939 times. Over 63 days of history the
+Leaned YES 1060 times, NO 940 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 22:04 | 2026-08-26 22:15 | YES | 0.72 | +85 | 10 | RIGHT | +36.92 | $1,036.92 |
 | 22:19 | 2026-08-26 22:30 | YES | 0.76 | +155 | 11 | RIGHT | +30.99 | $1,067.91 |
 | 04:33 | 2026-08-27 04:45 | NO | 0.72 | -63 | 12 | **wrong** | -108.89 | $959.02 |
 | 04:49 | 2026-08-27 05:00 | NO | 0.84 | -84 | 11 | RIGHT | +17.19 | $976.21 |
@@ -429,7 +428,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 238 | 0.80 | 12% | 11 |
+| won | 237 | 0.80 | 12% | 11 |
 | lost | 48 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
