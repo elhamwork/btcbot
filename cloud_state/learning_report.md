@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 18 Sep 2026 11:41am California time by `check.py --report`.
+Written 18 Sep 2026 11:46am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,11 +10,11 @@ Written 18 Sep 2026 11:41am California time by `check.py --report`.
 | best / worst it has been | $2,201.40 / $634.40 |
 | fees paid | $449.14 |
 | contracts looked at | 2000 |
-| of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 274 |
-| calls that have settled | 274 |
-| alerts that reached the phone | 274 of 274 |
-| calls right | 230 of 274 (84%) |
+| of those, settled and learned from | 1998 |
+| actual calls (graded GOOD) | 273 |
+| calls that have settled | 273 |
+| alerts that reached the phone | 273 of 273 |
+| calls right | 229 of 273 (84%) |
 | break-even needed | 80% |
 | paper P&L | +4.9% per dollar staked |
 
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1999 live
+The 63-day study is worth 30 observations per row below. So 1998 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1107 |
-| GOOD | 268 |
-| BAD (cheap side) | 253 |
+| GOOD | 267 |
+| BAD (cheap side) | 254 |
 | WEAK (50-70c) | 243 |
 | WEAK (small disagreement) | 114 |
 | ALMOST (not confirmed yet) | 6 |
@@ -80,7 +80,6 @@ split is 49.5% YES, so anything near half and half is normal.
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 12:17 | 2026-08-28 12:30 | YES | 0.84 | +150 | 13 | RIGHT | +17.92 | $1,017.92 |
 | 13:49 | 2026-08-28 14:00 | YES | 0.86 | +221 | 11 | RIGHT | +15.57 | $1,033.49 |
 | 16:03 | 2026-08-28 16:15 | NO | 0.87 | -324 | 11 | RIGHT | +14.49 | $1,047.98 |
 | 16:48 | 2026-08-28 17:00 | YES | 0.71 | +118 | 12 | **wrong** | -106.93 | $941.05 |
@@ -412,7 +411,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 230 | 0.80 | 12% | 11 |
+| won | 229 | 0.80 | 12% | 11 |
 | lost | 44 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
