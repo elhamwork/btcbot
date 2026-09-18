@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 18 Sep 2026 3:46am California time by `check.py --report`.
+Written 18 Sep 2026 3:51am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 18 Sep 2026 3:46am California time by `check.py --report`.
 | best / worst it has been | $2,202.46 / $670.12 |
 | fees paid | $478.32 |
 | contracts looked at | 2000 |
-| of those, settled and learned from | 1998 |
+| of those, settled and learned from | 1999 |
 | actual calls (graded GOOD) | 279 |
 | calls that have settled | 279 |
 | alerts that reached the phone | 279 of 279 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1998 live
+The 63-day study is worth 30 observations per row below. So 1999 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
