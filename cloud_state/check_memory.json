@@ -1,25 +1,6 @@
 {
  "predictions": [
   {
-   "asked": "2026-08-27T15:00:33.160602+00:00",
-   "ticker": "KXBTC15M-26AUG271115-15",
-   "close_time": "2026-08-27T15:15:00Z",
-   "raw": 0.4246470400599357,
-   "p": 0.36075367647058826,
-   "side": "NO",
-   "price": 0.56,
-   "edge": 0.07924632352941163,
-   "grade": "WEAK (50-70c)",
-   "mins": 14.5,
-   "spot": 80190.56,
-   "strike": 80241.25,
-   "dist": -50.69,
-   "vol": 0.000875,
-   "answered": false,
-   "outcome": 1,
-   "bet": null
-  },
-  {
    "asked": "2026-08-27T15:15:22.344791+00:00",
    "ticker": "KXBTC15M-26AUG271130-30",
    "close_time": "2026-08-27T15:30:00Z",
@@ -63408,7 +63389,7 @@
    "dist": 28.45,
    "vol": 0.0004,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 3,
    "cross_30": 8,
@@ -63422,6 +63403,37 @@
    "ask_size": 5863.33,
    "volume": 96143.14,
    "open_interest": 73281.86
+  },
+  {
+   "asked": "2026-09-18T04:00:33.741098+00:00",
+   "ticker": "KXBTC15M-26SEP180015-15",
+   "close_time": "2026-09-18T04:15:00Z",
+   "raw": 0.5082030653008416,
+   "p": 0.5243617353579175,
+   "side": "YES",
+   "price": 0.52,
+   "edge": 0.004361735357917507,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.4,
+   "spot": 77310.35,
+   "strike": 77308.26,
+   "dist": 2.09,
+   "vol": 0.000346,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 2,
+   "cross_30": 6,
+   "move_5m": -0.000306,
+   "move_15m": 0.000618,
+   "move_60m": 0.005224,
+   "vol_ratio": 1.228,
+   "hour_utc": 4,
+   "spread": 0.01,
+   "bid_size": 497.84,
+   "ask_size": 8246.18,
+   "volume": 149820.3,
+   "open_interest": 107617.49
   }
  ],
  "bins_n": [
@@ -63436,7 +63448,7 @@
   253.0,
   402.0,
   430.0,
-  292.0,
+  293.0,
   169.0,
   95.0,
   44.0,
@@ -63458,7 +63470,7 @@
   107.0,
   184.0,
   224.0,
-  158.0,
+  159.0,
   100.0,
   62.0,
   30.0,
@@ -97205,51 +97217,6 @@
   ],
   "KXBTC15M-26SEP180000-00": [
    {
-    "mins": 12.5,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.24,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.98,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.73,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.47,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.22,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.96,
-    "side": "YES",
-    "qual": true
-   },
-   {
-    "mins": 10.7,
-    "side": "YES",
-    "qual": true
-   },
-   {
-    "mins": 10.45,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.19,
     "side": "YES",
     "qual": true
@@ -97401,6 +97368,98 @@
    },
    {
     "mins": 2.51,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.25,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.0,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.74,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.48,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.23,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.97,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.71,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.46,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.2,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP180015-15": [
+   {
+    "mins": 14.44,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.18,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.93,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.67,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.41,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.16,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.9,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.64,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.39,
     "side": "YES",
     "qual": false
    }
