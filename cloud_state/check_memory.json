@@ -1,25 +1,6 @@
 {
  "predictions": [
   {
-   "asked": "2026-08-29T19:30:38.206270+00:00",
-   "ticker": "KXBTC15M-26AUG291545-45",
-   "close_time": "2026-08-29T19:45:00Z",
-   "raw": 0.5392614207818467,
-   "p": 0.5255531506849316,
-   "side": "YES",
-   "price": 0.49,
-   "edge": 0.03555315068493159,
-   "grade": "BAD (cheap side)",
-   "mins": 14.4,
-   "spot": 78255.55,
-   "strike": 78249.61,
-   "dist": 5.94,
-   "vol": 0.000203,
-   "answered": false,
-   "outcome": 1,
-   "bet": null
-  },
-  {
    "asked": "2026-08-29T19:45:35.958449+00:00",
    "ticker": "KXBTC15M-26AUG291600-00",
    "close_time": "2026-08-29T20:00:00Z",
@@ -65183,13 +65164,13 @@
    "dist": -122.26,
    "vol": 0.000344,
    "answered": true,
-   "outcome": null,
+   "outcome": 0,
    "bet": {
     "stake": 259.04,
     "contracts": 301.2,
     "fee": 2.54,
     "to_win": 39.63,
-    "bank_before": 2590.36
+    "bank_before": 2590.38
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -65204,7 +65185,43 @@
    "volume": 480177.79,
    "open_interest": 277006.29,
    "call_alert": true,
-   "call_alert_detail": "HTTP 200"
+   "call_alert_detail": "HTTP 200",
+   "correct": true,
+   "paid": 39.63,
+   "bank_after": 2630.01,
+   "settle_alert": true,
+   "settle_alert_detail": "HTTP 200"
+  },
+  {
+   "asked": "2026-09-19T22:15:32.907172+00:00",
+   "ticker": "KXBTC15M-26SEP191830-30",
+   "close_time": "2026-09-19T22:30:00Z",
+   "raw": 0.6092650155691816,
+   "p": 0.6100940566037737,
+   "side": "YES",
+   "price": 0.54,
+   "edge": 0.07009405660377366,
+   "grade": "WEAK (50-70c)",
+   "mins": 14.5,
+   "spot": 81013.46,
+   "strike": 80983.62,
+   "dist": 29.84,
+   "vol": 0.000349,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 5,
+   "cross_30": 5,
+   "move_5m": -0.000551,
+   "move_15m": -0.001083,
+   "move_60m": -2.8e-05,
+   "vol_ratio": 1.58,
+   "hour_utc": 22,
+   "spread": 0.01,
+   "bid_size": 5262.5,
+   "ask_size": 5063.51,
+   "volume": 34034.97,
+   "open_interest": 26100.4
   }
  ],
  "bins_n": [
@@ -65215,7 +65232,7 @@
   25.0,
   28.0,
   72.0,
-  133.0,
+  134.0,
   247.0,
   400.0,
   420.0,
@@ -92322,16 +92339,6 @@
   ],
   "KXBTC15M-26SEP191815-15": [
    {
-    "mins": 10.68,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.42,
-    "side": "NO",
-    "qual": true
-   },
-   {
     "mins": 10.16,
     "side": "NO",
     "qual": true
@@ -92520,16 +92527,108 @@
     "mins": 0.72,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 0.47,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.21,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP191830-30": [
+   {
+    "mins": 14.45,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.2,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.94,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.69,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.43,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.18,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.92,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.66,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.41,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.15,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.9,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.65,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.14,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.88,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.63,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 2590.38,
+  "cash": 2630.01,
   "start": 1000.0,
-  "peak": 2590.38,
+  "peak": 2630.01,
   "low": 652.64,
-  "settled": 264,
-  "fees": 464.96
+  "settled": 265,
+  "fees": 467.5
  },
  "alerted": [
   "KXBTC15M-26SEP021200-00",
