@@ -1,25 +1,6 @@
 {
  "predictions": [
   {
-   "asked": "2026-08-29T01:15:32.302695+00:00",
-   "ticker": "KXBTC15M-26AUG282130-30",
-   "close_time": "2026-08-29T01:30:00Z",
-   "raw": 0.4868470627631893,
-   "p": 0.4366332142857143,
-   "side": "NO",
-   "price": 0.5,
-   "edge": 0.06336678571428567,
-   "grade": "WEAK (small disagreement)",
-   "mins": 14.5,
-   "spot": 77651.43,
-   "strike": 77653.86,
-   "dist": -2.43,
-   "vol": 0.00025,
-   "answered": false,
-   "outcome": 1,
-   "bet": null
-  },
-  {
    "asked": "2026-08-29T01:30:30.017037+00:00",
    "ticker": "KXBTC15M-26AUG282145-45",
    "close_time": "2026-08-29T01:45:00Z",
@@ -64383,7 +64364,7 @@
    "dist": 22.23,
    "vol": 0.000226,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 1,
    "cross_30": 1,
@@ -64397,6 +64378,45 @@
    "ask_size": 3480.0,
    "volume": 55268.72,
    "open_interest": 48769.62
+  },
+  {
+   "asked": "2026-09-19T04:33:45.535393+00:00",
+   "ticker": "KXBTC15M-26SEP190045-45",
+   "close_time": "2026-09-19T04:45:00Z",
+   "raw": 0.42331654927582596,
+   "p": 0.42637140287769787,
+   "side": "NO",
+   "price": 0.77,
+   "edge": 0.10485239393939394,
+   "grade": "GOOD",
+   "mins": 11.2,
+   "spot": 81022.56,
+   "strike": 81114.92,
+   "dist": -92.36,
+   "vol": 0.000277,
+   "answered": true,
+   "outcome": null,
+   "bet": {
+    "stake": 240.68,
+    "contracts": 312.6,
+    "fee": 3.88,
+    "to_win": 68.01,
+    "bank_before": 2406.77
+   },
+   "cross_15": 7,
+   "cross_30": 9,
+   "move_5m": -0.001448,
+   "move_15m": -0.001461,
+   "move_60m": -0.001184,
+   "vol_ratio": 2.341,
+   "hour_utc": 4,
+   "spread": 0.01,
+   "bid_size": 5405.81,
+   "ask_size": 2677.36,
+   "volume": 562131.97,
+   "open_interest": 381797.88,
+   "call_alert": true,
+   "call_alert_detail": "HTTP 200"
   }
  ],
  "bins_n": [
@@ -64412,7 +64432,7 @@
   398.0,
   431.0,
   302.0,
-  173.0,
+  174.0,
   96.0,
   44.0,
   13.0,
@@ -97574,16 +97594,6 @@
   ],
   "KXBTC15M-26SEP190030-30": [
    {
-    "mins": 10.53,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.28,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 10.02,
     "side": "NO",
     "qual": false
@@ -97772,6 +97782,103 @@
     "mins": 0.58,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 0.32,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.07,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP190045-45": [
+   {
+    "mins": 14.56,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.05,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.8,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.54,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.29,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.03,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.77,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 12.52,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 12.26,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 12.01,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.76,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.5,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.25,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.98,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.73,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.47,
+    "side": "NO",
+    "qual": true
    }
   ]
  },
@@ -97784,7 +97891,6 @@
   "fees": 425.49
  },
  "alerted": [
-  "KXBTC15M-26SEP020130-30",
   "KXBTC15M-26SEP020245-45",
   "KXBTC15M-26SEP020445-45",
   "KXBTC15M-26SEP020530-30",
@@ -97983,7 +98089,8 @@
   "KXBTC15M-26SEP180945-45",
   "KXBTC15M-26SEP181400-00",
   "KXBTC15M-26SEP181845-45",
-  "KXBTC15M-26SEP182030-30"
+  "KXBTC15M-26SEP182030-30",
+  "KXBTC15M-26SEP190045-45"
  ],
  "revenge": {
   "armed": false,
