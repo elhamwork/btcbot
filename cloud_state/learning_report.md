@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 19 Sep 2026 12:55pm California time by `check.py --report`.
+Written 19 Sep 2026 1:00pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,13 +10,13 @@ Written 19 Sep 2026 12:55pm California time by `check.py --report`.
 | best / worst it has been | $2,407.72 / $606.80 |
 | fees paid | $427.78 |
 | contracts looked at | 2000 |
-| of those, settled and learned from | 1999 |
-| actual calls (graded GOOD) | 263 |
-| calls that have settled | 263 |
-| alerts that reached the phone | 263 of 263 |
-| calls right | 221 of 263 (84%) |
+| of those, settled and learned from | 1998 |
+| actual calls (graded GOOD) | 262 |
+| calls that have settled | 262 |
+| alerts that reached the phone | 262 of 262 |
+| calls right | 221 of 262 (84%) |
 | break-even needed | 80% |
-| paper P&L | +5.1% per dollar staked |
+| paper P&L | +5.4% per dollar staked |
 
 ## What it is actually learning
 
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 1999 live
+The 63-day study is worth 30 observations per row below. So 1998 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -60,9 +60,9 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1124 |
+| NONE (no disagreement) | 1125 |
 | BAD (cheap side) | 265 |
-| GOOD | 257 |
+| GOOD | 256 |
 | WEAK (50-70c) | 234 |
 | WEAK (small disagreement) | 106 |
 | ALMOST (not confirmed yet) | 6 |
@@ -80,7 +80,6 @@ split is 49.5% YES, so anything near half and half is normal.
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 17:18 | 2026-08-29 17:30 | YES | 0.75 | +67 | 12 | **wrong** | -101.76 | $898.24 |
 | 18:01 | 2026-08-29 18:15 | YES | 0.73 | +90 | 13 | RIGHT | +31.52 | $929.76 |
 | 20:33 | 2026-08-29 20:45 | NO | 0.73 | -58 | 11 | RIGHT | +32.63 | $962.39 |
 | 21:03 | 2026-08-29 21:15 | NO | 0.76 | -65 | 12 | **wrong** | -97.86 | $864.53 |
@@ -354,7 +353,6 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | closed | side | price | edge | BTC vs target | min left |
 |---|---|---|---|---|---|
-| 08-29 17:30 | YES | 0.75 | 12% | +67 | 12 |
 | 08-29 21:15 | NO | 0.76 | 22% | -64 | 12 |
 | 08-30 22:15 | YES | 0.76 | 8% | +117 | 11 |
 | 08-31 00:00 | NO | 0.88 | 8% | -322 | 11 |
@@ -400,7 +398,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
 | won | 221 | 0.80 | 12% | 11 |
-| lost | 42 | 0.78 | 12% | 11 |
+| lost | 41 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
 avoid these particular losses was built and measured: it reached a
