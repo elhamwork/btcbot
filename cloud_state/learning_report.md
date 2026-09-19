@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 19 Sep 2026 12:20pm California time by `check.py --report`.
+Written 19 Sep 2026 12:25pm California time by `check.py --report`.
 
 ## The short version
 
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.374 | 132 (50 hit) | +0.020 ** |
 | 40-45% | 0.384 | 0.428 | 247 (107 hit) | +0.044 ** |
 | 45-50% | 0.497 | 0.480 | 399 (191 hit) | -0.017 |
-| 50-55% | 0.558 | 0.524 | 422 (220 hit) | -0.034 ** |
+| 50-55% | 0.558 | 0.523 | 421 (219 hit) | -0.035 ** |
 | 55-60% | 0.605 | 0.556 | 310 (171 hit) | -0.049 ** |
 | 60-65% | 0.678 | 0.607 | 178 (106 hit) | -0.071 ** |
 | 65-70% | 0.738 | 0.665 | 92 (59 hit) | -0.073 ** |
