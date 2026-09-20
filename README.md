@@ -32,7 +32,7 @@ Best $2,829.03, worst $701.94, fees paid $498.75.
 | 19 Sep 12:30am | **LOST** | -281.25 | $2,503.99 | YES | 0.86 |
 | 19 Sep 12:15am | won | +104.06 | $2,785.24 | YES | 0.71 |
 
-Collecting in the background: 100,277 order-book snapshots over 27 days (needs about three weeks).
+Collecting in the background: 100,278 order-book snapshots over 27 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
