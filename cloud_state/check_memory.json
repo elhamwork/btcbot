@@ -1,37 +1,6 @@
 {
  "predictions": [
   {
-   "asked": "2026-08-30T07:45:26.599295+00:00",
-   "ticker": "KXBTC15M-26AUG300400-00",
-   "close_time": "2026-08-30T08:00:00Z",
-   "raw": 0.5133114455305448,
-   "p": 0.5431458974358975,
-   "side": "YES",
-   "price": 0.57,
-   "edge": -0.026854102564102478,
-   "grade": "NONE (no disagreement)",
-   "mins": 14.6,
-   "spot": 78148.96,
-   "strike": 78147.27,
-   "dist": 1.69,
-   "vol": 0.00017,
-   "answered": false,
-   "outcome": 0,
-   "bet": null,
-   "cross_15": 1,
-   "cross_30": 1,
-   "move_5m": -0.000504,
-   "move_15m": -0.001041,
-   "move_60m": -0.001308,
-   "vol_ratio": 3.416,
-   "hour_utc": 7,
-   "spread": 0.01,
-   "bid_size": 4013.46,
-   "ask_size": 3990.68,
-   "volume": 6349.57,
-   "open_interest": 6100.62
-  },
-  {
    "asked": "2026-08-30T08:00:41.080674+00:00",
    "ticker": "KXBTC15M-26AUG300415-15",
    "close_time": "2026-08-30T08:15:00Z",
@@ -65345,7 +65314,7 @@
    "dist": 50.36,
    "vol": 0.000443,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 6,
    "cross_30": 6,
@@ -65359,6 +65328,37 @@
    "ask_size": 4436.89,
    "volume": 40663.28,
    "open_interest": 35258.01
+  },
+  {
+   "asked": "2026-09-20T10:30:50.846989+00:00",
+   "ticker": "KXBTC15M-26SEP200645-45",
+   "close_time": "2026-09-20T10:45:00Z",
+   "raw": 0.6645710666227935,
+   "p": 0.6650450819672131,
+   "side": "YES",
+   "price": 0.65,
+   "edge": 0.015045081967213103,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.2,
+   "spot": 80370.01,
+   "strike": 80336.54,
+   "dist": 33.47,
+   "vol": 0.000261,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 2,
+   "cross_30": 6,
+   "move_5m": 0.000486,
+   "move_15m": -0.000392,
+   "move_60m": 4e-06,
+   "vol_ratio": 1.548,
+   "hour_utc": 10,
+   "spread": 0.01,
+   "bid_size": 5693.42,
+   "ask_size": 5677.09,
+   "volume": 61260.8,
+   "open_interest": 47527.92
   }
  ],
  "bins_n": [
@@ -65374,7 +65374,7 @@
   398.0,
   414.0,
   304.0,
-  182.0,
+  183.0,
   92.0,
   43.0,
   12.0,
@@ -65396,7 +65396,7 @@
   190.0,
   211.0,
   167.0,
-  110.0,
+  111.0,
   59.0,
   28.0,
   9.0,
@@ -102374,36 +102374,6 @@
   ],
   "KXBTC15M-26SEP200630-30": [
    {
-    "mins": 12.31,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.06,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.8,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.55,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.29,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.04,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.78,
     "side": "YES",
     "qual": false
@@ -102571,6 +102541,93 @@
    {
     "mins": 2.27,
     "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.44,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.18,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.93,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.67,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.42,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.16,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP200645-45": [
+   {
+    "mins": 14.16,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.9,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.64,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.13,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.88,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.62,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.37,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.11,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.86,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.6,
+    "side": "YES",
     "qual": false
    }
   ]
