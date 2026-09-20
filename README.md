@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$2,504.19** &nbsp; +150.4% since $1,000 &nbsp;&middot;&nbsp; updated 19 Sep 10:37pm California time
+**$2,504.19** &nbsp; +150.4% since $1,000 &nbsp;&middot;&nbsp; updated 19 Sep 10:38pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
