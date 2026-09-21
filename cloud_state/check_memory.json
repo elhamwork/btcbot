@@ -65288,7 +65288,7 @@
    "dist": 9.79,
    "vol": 0.000985,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 1,
    "cross_30": 1,
@@ -65346,8 +65346,8 @@
   133.0,
   254.0,
   400.0,
-  410.0,
-  304.0,
+  411.0,
+  303.0,
   184.0,
   92.0,
   46.0,
@@ -65368,8 +65368,8 @@
   49.0,
   111.0,
   190.0,
-  207.0,
-  171.0,
+  208.0,
+  170.0,
   110.0,
   59.0,
   31.0,
@@ -93461,6 +93461,106 @@
   "KXBTC15M-26SEP202045-45": [
    {
     "mins": 14.38,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.12,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.86,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.61,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.35,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.1,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.84,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.33,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.07,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.82,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.56,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.05,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.8,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.54,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.29,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.03,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 9.78,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.52,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.27,
     "side": "NO",
     "qual": false
    }
