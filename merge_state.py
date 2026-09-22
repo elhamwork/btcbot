@@ -27,6 +27,7 @@ import sys
 N_BINS = 20
 PAPER_START = 1000.0
 PAPER_STAKE = 0.10
+LOOK_CAP = 2000   # must match check.py
 REVENGE_FRACTION = 0.50   # must match check.py
 FEE_RATE = 0.07
 
@@ -118,6 +119,28 @@ def rebuild(preds):
     return bins_n, bins_wins, bank
 
 
+def trim_predictions(preds):
+    """
+    Cap the never-traded look history; never cap the actual trade ledger.
+
+    Only about 1 look in 8 becomes an actual bet, so a flat "keep the last
+    LOOK_CAP records" cap -- which is what this used to be -- quietly
+    deletes real trade history once the bot has run longer than the cap
+    covers in look-volume. On 2026-09-22 that had already happened: 296
+    settled calls on 2026-09-16 had become 259 on 2026-09-22, with the
+    oldest real trades pushed out of this very list by newer declines on
+    each merge, silently turning "every trade ever made" into a rolling
+    ~20-day window. Every stat this project reports depends on that
+    history actually accumulating, not resetting.
+    """
+    bets = [p for p in preds if p.get("bet")]
+    looks = [p for p in preds if not p.get("bet")]
+    looks.sort(key=lambda r: str(r.get("close_time") or r.get("asked") or ""))
+    kept = bets + looks[-LOOK_CAP:]
+    kept.sort(key=lambda r: str(r.get("close_time") or r.get("asked") or ""))
+    return kept
+
+
 def merge(mine, theirs):
     by_ticker = {}
     for src in (theirs, mine):        # mine second so it wins ties
@@ -130,7 +153,7 @@ def merge(mine, theirs):
                    key=lambda r: str(r.get("close_time") or r.get("asked") or ""))
     bins_n, bins_wins, bank = rebuild(preds)
     out = dict(mine)
-    out["predictions"] = preds[-2000:]
+    out["predictions"] = trim_predictions(preds)
     out["bins_n"], out["bins_wins"], out["bank"] = bins_n, bins_wins, bank
     out["polls"] = mine.get("polls") or {}
     seen = set(mine.get("alerted") or []) | set(theirs.get("alerted") or [])

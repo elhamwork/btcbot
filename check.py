@@ -918,6 +918,33 @@ def save_memory(m):
     os.replace(tmp, MEMORY)      # atomic; a crash cannot corrupt the memory
 
 
+# Only about 1 look in 8 becomes an actual bet, so a flat "keep the last
+# LOOK_CAP records" cap -- which is what this used to be -- quietly deletes
+# real trade history once the bot has been running longer than the cap
+# covers in look-volume. On 2026-09-22 that had already happened: 296
+# settled calls on 2026-09-16 had become 259 on 2026-09-22, with the oldest
+# real trades pushed out by newer declines, silently turning "every trade
+# ever made" into a rolling ~20-day window without anyone deciding that on
+# purpose. Every stat this file reports -- win rate, margin, the calibration
+# bins, "chance the edge is real" -- depends on that history actually
+# accumulating, not resetting.
+#
+# So a look that was never bet on is still capped (there is no reason to
+# keep every coin-flip decline forever), but a look that WAS bet on never
+# ages out here. Those records are the actual paper-trading ledger.
+LOOK_CAP = 2000
+
+
+def trim_predictions(preds):
+    """Cap the never-traded look history; never cap the actual trade ledger."""
+    bets = [p for p in preds if p.get("bet")]
+    looks = [p for p in preds if not p.get("bet")]
+    looks.sort(key=lambda r: str(r.get("close_time") or r.get("asked") or ""))
+    kept = bets + looks[-LOOK_CAP:]
+    kept.sort(key=lambda r: str(r.get("close_time") or r.get("asked") or ""))
+    return kept
+
+
 def learned(mem, raw):
     """Prior blended with whatever this tool has since observed."""
     b = bin_of(raw)
@@ -2106,7 +2133,7 @@ def evaluate(mem, a):
             "answered": bool(answered), "outcome": None,
             "bet": plan_stake(mem, price) if answered else None,
             **context(closes, strike, v, m, spread)})
-        mem["predictions"] = mem["predictions"][-2000:]
+        mem["predictions"] = trim_predictions(mem["predictions"])
         save_memory(mem)
 
     # ---- grade it ------------------------------------------------------
