@@ -1,0 +1,66 @@
+# A single, on-demand check -- for trading it by hand instead of leaving the
+# 5.5-hour watcher running.
+#
+# Click "Run workflow" (or the button in the README/front page), wait under
+# a minute, then look at the run's log for the answer: buy YES or NO, at
+# what price, or CAN'T SAY if nothing qualifies right now. Nothing stays
+# running afterward -- the job finishes and GitHub tears the machine down.
+#
+# This still records the look (and the paper bet, if it calls one) into
+# cloud_state, the same as every other run, so it counts toward the real
+# track record and merges cleanly with the scheduled watcher if that is
+# also running.
+
+name: check-once
+
+on:
+  workflow_dispatch:            # only a manual "Run workflow" click -- no schedule
+
+permissions:
+  contents: write               # to save the look it took
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check once
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+          CHECK_LABEL: cloud
+        run: python3 check.py --once
+
+      # Same merge-and-push pattern as watch.yml's save step, so a single
+      # check taken while the watcher is also running cannot clobber it.
+      - name: Save what it learned
+        if: always()
+        env:
+          CHECK_STATE_DIR: ${{ github.workspace }}/cloud_state
+        run: |
+          set -u
+          git config user.name  "btcbot"
+          git config user.email "btcbot@users.noreply.github.com"
+          cp cloud_state/check_memory.json /tmp/mine.json 2>/dev/null || echo '{}' > /tmp/mine.json
+          for i in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME" || { sleep $((2 ** i)); continue; }
+            git reset --hard "origin/$GITHUB_REF_NAME"
+            git show "origin/$GITHUB_REF_NAME:cloud_state/check_memory.json" \
+              > /tmp/theirs.json 2>/dev/null || echo '{}' > /tmp/theirs.json
+            python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
+              cloud_state/check_memory.json
+            python3 check.py --report || true
+            python3 make_page.py || true
+            git add cloud_state docs README.md
+            if git diff --staged --quiet; then echo "nothing new"; exit 0; fi
+            git commit -m "check-once: $(date -u +%Y-%m-%dT%H:%MZ)"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep $((2 ** i))
+          done
+          exit 1
