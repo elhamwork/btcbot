@@ -75196,7 +75196,7 @@
    "dist": 11.51,
    "vol": 0.000618,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 2,
    "cross_30": 2,
@@ -75210,6 +75210,37 @@
    "ask_size": 3228.3,
    "volume": 7567.8,
    "open_interest": 6653.06
+  },
+  {
+   "asked": "2026-09-23T22:30:22.156067+00:00",
+   "ticker": "KXBTC15M-26SEP231845-45",
+   "close_time": "2026-09-23T22:45:00Z",
+   "raw": 0.290149301395499,
+   "p": 0.330245,
+   "side": "NO",
+   "price": 0.5800000000000001,
+   "edge": 0.08975499999999992,
+   "grade": "WEAK (50-70c)",
+   "mins": 14.6,
+   "spot": 84438.79,
+   "strike": 84484.97,
+   "dist": -46.18,
+   "vol": 0.000258,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 3,
+   "cross_30": 4,
+   "move_5m": -0.000464,
+   "move_15m": -0.001361,
+   "move_60m": 0.000633,
+   "vol_ratio": 1.606,
+   "hour_utc": 22,
+   "spread": 0.01,
+   "bid_size": 81.0,
+   "ask_size": 6596.0,
+   "volume": 634.36,
+   "open_interest": 634.36
   }
  ],
  "bins_n": [
@@ -75223,7 +75254,7 @@
   151.0,
   289.0,
   442.0,
-  471.0,
+  472.0,
   341.0,
   227.0,
   120.0,
@@ -98489,21 +98520,6 @@
   ],
   "KXBTC15M-26SEP231830-30": [
    {
-    "mins": 10.88,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.63,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.37,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 10.12,
     "side": "NO",
     "qual": false
@@ -98685,6 +98701,103 @@
    },
    {
     "mins": 0.91,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.65,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.4,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.14,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP231845-45": [
+   {
+    "mins": 14.64,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.38,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.12,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.87,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.61,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.83,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.32,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.06,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.81,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.55,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.3,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.04,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.78,
     "side": "NO",
     "qual": false
    }
