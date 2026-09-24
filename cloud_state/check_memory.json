@@ -76174,6 +76174,37 @@
    "ask_size": 7438.4,
    "volume": 51795.95,
    "open_interest": 37462.65
+  },
+  {
+   "asked": "2026-09-24T05:45:08.483581+00:00",
+   "ticker": "KXBTC15M-26SEP240200-00",
+   "close_time": "2026-09-24T06:00:00Z",
+   "raw": 0.4631192435591214,
+   "p": 0.45032193684210525,
+   "side": "NO",
+   "price": 0.53,
+   "edge": 0.019678063157894776,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.9,
+   "spot": 84179.26,
+   "strike": 84191.53,
+   "dist": -12.27,
+   "vol": 0.000408,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 5,
+   "cross_30": 7,
+   "move_5m": 9.3e-05,
+   "move_15m": 0.000394,
+   "move_60m": 0.004203,
+   "vol_ratio": 1.753,
+   "hour_utc": 5,
+   "spread": 0.01,
+   "bid_size": 4760.0,
+   "ask_size": 674.0,
+   "volume": 79.42,
+   "open_interest": 79.42
   }
  ],
  "bins_n": [
@@ -105311,26 +105342,6 @@
   ],
   "KXBTC15M-26SEP240145-45": [
    {
-    "mins": 11.15,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.89,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.64,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.38,
-    "side": "NO",
-    "qual": true
-   },
-   {
     "mins": 10.12,
     "side": "NO",
     "qual": false
@@ -105508,6 +105519,53 @@
    {
     "mins": 1.15,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.89,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.63,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.38,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.12,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP240200-00": [
+   {
+    "mins": 14.86,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.6,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.84,
+    "side": "NO",
     "qual": false
    }
   ]
