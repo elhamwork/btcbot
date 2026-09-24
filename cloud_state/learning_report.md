@@ -1,23 +1,23 @@
 # What the bot has learned
 
-Written 24 Sep 2026 2:46am California time by `check.py --report`.
+Written 24 Sep 2026 2:51am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$3,204.76** (started $1,000, +220.5%) |
+| **paper account** | **$3,245.76** (started $1,000, +224.6%) |
 | best / worst it has been | $4,035.82 / $852.14 |
-| fees paid | $1,011.27 |
+| fees paid | $1,013.97 |
 | contracts looked at | 2341 |
-| of those, settled and learned from | 2339 |
+| of those, settled and learned from | 2340 |
 | actual calls (graded GOOD) | 409 |
-| calls that have settled | 408 |
+| calls that have settled | 409 |
 | alerts that reached the phone | 345 of 347  **2 FAILED** |
 | calls made before delivery was recorded | 62 |
-| calls right | 343 of 408 (84%) |
+| calls right | 344 of 409 (84%) |
 | break-even needed | 80% |
-| paper P&L | +4.9% per dollar staked |
+| paper P&L | +5.0% per dollar staked |
 
 ## What it is actually learning
 
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2339 live
+The 63-day study is worth 30 observations per row below. So 2340 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -43,7 +43,7 @@ three lucky wins should not rewrite the table.
 | 20-25% | 0.178 | 0.188 | 25 (5 hit) | +0.010 |
 | 25-30% | 0.238 | 0.341 | 35 (15 hit) | +0.103 ** |
 | 30-35% | 0.286 | 0.279 | 76 (21 hit) | -0.007 |
-| 35-40% | 0.354 | 0.355 | 152 (54 hit) | +0.001 |
+| 35-40% | 0.354 | 0.353 | 153 (54 hit) | -0.001 |
 | 40-45% | 0.384 | 0.431 | 294 (128 hit) | +0.046 ** |
 | 45-50% | 0.497 | 0.449 | 446 (199 hit) | -0.047 ** |
 | 50-55% | 0.558 | 0.509 | 482 (244 hit) | -0.048 ** |
@@ -75,16 +75,6 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1298 times, NO 1043 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 09:33 | KXBTC15M-26SEP240545-45 | NO | 0.88 | $320.48 | $41.00 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -498,6 +488,7 @@ publish the result, so this list is usually empty.
 | 00:33 | 2026-09-24 00:45 | YES | 0.76 | +70 | 11 | RIGHT | +115.16 | $3,966.99 |
 | 03:03 | 2026-09-24 03:15 | YES | 0.82 | +102 | 11 | **wrong** | -401.70 | $3,565.29 |
 | 04:49 | 2026-09-24 05:00 | NO | 0.84 | -83 | 11 | **wrong** | -360.53 | $3,204.76 |
+| 09:33 | 2026-09-24 09:45 | NO | 0.88 | -255 | 12 | RIGHT | +41.00 | $3,245.76 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -586,7 +577,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 343 | 0.80 | 12% | 11 |
+| won | 344 | 0.80 | 12% | 11 |
 | lost | 65 | 0.79 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
