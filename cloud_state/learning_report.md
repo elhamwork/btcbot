@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 23 Sep 2026 5:27pm California time by `check.py --report`.
+Written 23 Sep 2026 5:32pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 23 Sep 2026 5:27pm California time by `check.py --report`.
 | **paper account** | **$3,851.83** (started $1,000, +285.2%) |
 | best / worst it has been | $4,035.82 / $852.14 |
 | fees paid | $995.79 |
-| contracts looked at | 2311 |
-| of those, settled and learned from | 2310 |
+| contracts looked at | 2312 |
+| of those, settled and learned from | 2311 |
 | actual calls (graded GOOD) | 405 |
 | calls that have settled | 405 |
 | alerts that reached the phone | 341 of 343  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2310 live
+The 63-day study is worth 30 observations per row below. So 2311 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.448 | 443 (197 hit) | -0.049 ** |
 | 50-55% | 0.558 | 0.510 | 473 (240 hit) | -0.047 ** |
 | 55-60% | 0.605 | 0.576 | 342 (196 hit) | -0.029 ** |
-| 60-65% | 0.678 | 0.623 | 229 (141 hit) | -0.055 ** |
+| 60-65% | 0.678 | 0.621 | 230 (141 hit) | -0.057 ** |
 | 65-70% | 0.738 | 0.668 | 120 (78 hit) | -0.070 ** |
 | 70-75% | 0.814 | 0.749 | 64 (46 hit) | -0.065 ** |
 | 75-80% | 0.836 | 0.835 | 18 (15 hit) | -0.001 |
@@ -63,7 +63,7 @@ three lucky wins should not rewrite the table.
 |---|---|
 | NONE (no disagreement) | 1244 |
 | GOOD | 381 |
-| BAD (cheap side) | 284 |
+| BAD (cheap side) | 285 |
 | WEAK (50-70c) | 256 |
 | WEAK (small disagreement) | 131 |
 | ALMOST (not confirmed yet) | 8 |
@@ -73,7 +73,7 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1278 times, NO 1033 times. Over 63 days of history the
+Leaned YES 1278 times, NO 1034 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
