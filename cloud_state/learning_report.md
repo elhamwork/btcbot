@@ -1,12 +1,12 @@
 # What the bot has learned
 
-Written 24 Sep 2026 3:17am California time by `check.py --report`.
+Written 24 Sep 2026 3:18am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$3,245.78** (started $1,000, +224.6%) |
+| **paper account** | **$3,245.76** (started $1,000, +224.6%) |
 | best / worst it has been | $4,035.82 / $852.14 |
 | fees paid | $1,013.97 |
 | contracts looked at | 2343 |
@@ -488,7 +488,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 00:33 | 2026-09-24 00:45 | YES | 0.76 | +70 | 11 | RIGHT | +115.16 | $3,966.99 |
 | 03:03 | 2026-09-24 03:15 | YES | 0.82 | +102 | 11 | **wrong** | -401.70 | $3,565.29 |
 | 04:49 | 2026-09-24 05:00 | NO | 0.84 | -83 | 11 | **wrong** | -360.53 | $3,204.76 |
-| 09:33 | 2026-09-24 09:45 | NO | 0.88 | -255 | 12 | RIGHT | +41.02 | $3,245.78 |
+| 09:33 | 2026-09-24 09:45 | NO | 0.88 | -255 | 12 | RIGHT | +41.00 | $3,245.76 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
