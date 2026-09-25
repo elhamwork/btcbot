@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 25 Sep 2026 6:32am California time by `check.py --report`.
+Written 25 Sep 2026 6:37am California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 25 Sep 2026 6:32am California time by `check.py --report`.
 | fees paid | $1,044.20 |
 | contracts looked at | 2417 |
 | of those, settled and learned from | 2416 |
-| actual calls (graded GOOD) | 417 |
+| actual calls (graded GOOD) | 418 |
 | calls that have settled | 417 |
-| alerts that reached the phone | 353 of 355  **2 FAILED** |
+| alerts that reached the phone | 354 of 356  **2 FAILED** |
 | calls made before delivery was recorded | 62 |
 | calls right | 350 of 417 (84%) |
 | break-even needed | 80% |
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.274 | 78 (21 hit) | -0.012 |
 | 35-40% | 0.354 | 0.371 | 166 (62 hit) | +0.016 |
 | 40-45% | 0.384 | 0.428 | 308 (133 hit) | +0.043 ** |
-| 45-50% | 0.497 | 0.455 | 458 (207 hit) | -0.042 ** |
+| 45-50% | 0.497 | 0.454 | 457 (206 hit) | -0.043 ** |
 | 50-55% | 0.558 | 0.508 | 495 (250 hit) | -0.050 ** |
 | 55-60% | 0.605 | 0.575 | 351 (201 hit) | -0.030 ** |
 | 60-65% | 0.678 | 0.624 | 248 (153 hit) | -0.054 ** |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1296 |
-| GOOD | 393 |
+| NONE (no disagreement) | 1295 |
+| GOOD | 394 |
 | BAD (cheap side) | 302 |
 | WEAK (50-70c) | 264 |
 | WEAK (small disagreement) | 145 |
@@ -75,6 +75,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1329 times, NO 1088 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 13:32 | KXBTC15M-26SEP250945-45 | NO | 0.84 | $299.89 | $53.76 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
