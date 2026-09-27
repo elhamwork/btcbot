@@ -1,22 +1,22 @@
 # What the bot has learned
 
-Written 27 Sep 2026 6:45am California time by `check.py --report`.
+Written 27 Sep 2026 6:50am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,154.38** (started $1,000, +15.4%) |
+| **paper account** | **$1,038.13** (started $1,000, +3.8%) |
 | best / worst it has been | $1,154.38 / $1,000.00 |
-| fees paid | $9.02 |
-| contracts looked at | 55 |
-| of those, settled and learned from | 54 |
+| fees paid | $9.83 |
+| contracts looked at | 56 |
+| of those, settled and learned from | 55 |
 | actual calls (graded GOOD) | 7 |
-| calls that have settled | 6 |
+| calls that have settled | 7 |
 | alerts that reached the phone | 7 of 7 |
-| calls right | 6 of 6 (100%) |
-| break-even needed | 80% |
-| paper P&L | +25.3% per dollar staked |
+| calls right | 6 of 7 (86%) |
+| break-even needed | 81% |
+| paper P&L | +5.4% per dollar staked |
 
 ## What it is actually learning
 
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 54 live
+The 63-day study is worth 30 observations per row below. So 55 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -45,32 +45,22 @@ three lucky wins should not rewrite the table.
 | 55-60% | 0.605 | 0.587 | 6 (3 hit) | -0.017 |
 | 60-65% | 0.678 | 0.695 | 5 (4 hit) | +0.017 |
 | 70-75% | 0.814 | 0.800 | 3 (2 hit) | -0.013 |
-| 75-80% | 0.836 | 0.841 | 1 (1 hit) | +0.005 |
+| 75-80% | 0.836 | 0.815 | 2 (1 hit) | -0.021 ** |
 | 80-85% | 0.885 | 0.856 | 1 (0 hit) | -0.029 ** |
 
 ## How it graded what it saw
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 19 |
+| NONE (no disagreement) | 20 |
 | BAD (cheap side) | 15 |
 | WEAK (50-70c) | 10 |
 | GOOD | 7 |
 | WEAK (small disagreement) | 3 |
 | WEAK (5-10 min) | 1 |
 
-Leaned YES 39 times, NO 16 times. Over 63 days of history the
+Leaned YES 39 times, NO 17 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 13:32 | KXBTC15M-26SEP270945-45 | YES | 0.90 | $115.44 | $12.02 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -82,12 +72,40 @@ publish the result, so this list is usually empty.
 | 09:03 | 2026-09-27 09:15 | NO | 0.81 | -56 | 11 | RIGHT | +23.59 | $1,089.81 |
 | 09:34 | 2026-09-27 09:45 | YES | 0.74 | +83 | 11 | RIGHT | +36.30 | $1,126.11 |
 | 12:03 | 2026-09-27 12:15 | YES | 0.79 | +62 | 12 | RIGHT | +28.27 | $1,154.38 |
+| 13:32 | 2026-09-27 13:45 | YES | 0.90 | +159 | 12 | **wrong** | -116.25 | $1,038.13 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
 left, and how fast BTC had been moving are the whole basis of every
 call -- so a losing row with a small gap and a lot of time left is
 the bot being unlucky, and one with a big gap is it being wrong.
+
+## Why the losses happened
+
+| closed | side | price | edge | BTC vs target | min left |
+|---|---|---|---|---|---|
+| 09-27 13:45 | YES | 0.90 | 9% | +158 | 12 |
+
+| | n | avg price | avg edge | avg min left |
+|---|---|---|---|---|
+| won | 6 | 0.80 | 14% | 12 |
+| lost | 1 | 0.90 | 9% | 12 |
+
+**Read this as a thermometer, not a filter.** A rule fitted to
+avoid these particular losses was built and measured: it reached a
+100% win rate on the losses it had studied and did *worse than
+nothing* on new trades. It memorised them; it did not learn from
+them. Losing trades in the 63-day study had, if anything, slightly
+*more* edge than winners -- 11.6 points against 11.4 -- and the
+biggest signals ever taken include two losses. They are not
+distinguishable in advance, and that is not a gap in the bot: a
+contract trades at 80c precisely because nobody knows which fifth
+of them fail.
+
+What this table is for is spotting a pattern that is *large and
+persistent* -- losses clustered at one price, one time of day, one
+side -- over dozens of trades, not three. If one appears here and
+holds up, it is worth acting on. Until then it is a thermometer.
 
 ## What would change the conclusion
 
