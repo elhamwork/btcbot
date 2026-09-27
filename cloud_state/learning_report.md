@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 26 Sep 2026 7:44pm California time by `check.py --report`.
+Written 26 Sep 2026 7:49pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 26 Sep 2026 7:44pm California time by `check.py --report`.
 | **paper account** | **$1,031.57** (started $1,000, +3.2%) |
 | best / worst it has been | $1,031.57 / $1,000.00 |
 | fees paid | $1.76 |
-| contracts looked at | 11 |
-| of those, settled and learned from | 10 |
+| contracts looked at | 12 |
+| of those, settled and learned from | 11 |
 | actual calls (graded GOOD) | 1 |
 | calls that have settled | 1 |
 | alerts that reached the phone | 1 of 1 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 10 live
+The 63-day study is worth 30 observations per row below. So 11 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,7 +40,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.528 | 2 (2 hit) | +0.031 ** |
 | 50-55% | 0.558 | 0.554 | 2 (1 hit) | -0.004 |
 | 55-60% | 0.605 | 0.585 | 1 (0 hit) | -0.020 |
-| 60-65% | 0.678 | 0.688 | 1 (1 hit) | +0.010 |
+| 60-65% | 0.678 | 0.667 | 2 (1 hit) | -0.011 |
 | 70-75% | 0.814 | 0.788 | 1 (0 hit) | -0.026 ** |
 | 75-80% | 0.836 | 0.841 | 1 (1 hit) | +0.005 |
 
@@ -49,12 +49,12 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | BAD (cheap side) | 4 |
-| NONE (no disagreement) | 3 |
+| NONE (no disagreement) | 4 |
 | WEAK (50-70c) | 2 |
 | WEAK (5-10 min) | 1 |
 | GOOD | 1 |
 
-Leaned YES 8 times, NO 3 times. Over 63 days of history the
+Leaned YES 9 times, NO 3 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
