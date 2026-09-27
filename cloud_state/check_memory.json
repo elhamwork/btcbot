@@ -1177,7 +1177,7 @@
     "contracts": 131.6,
     "fee": 1.42,
     "to_win": 23.59,
-    "bank_before": 1066.25
+    "bank_before": 1066.22
    },
    "cross_15": 6,
    "cross_30": 7,
@@ -1194,8 +1194,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 23.56,
-   "bank_after": 1089.78,
+   "paid": 23.59,
+   "bank_after": 1089.81,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -8735,13 +8735,113 @@
     "mins": 13.15,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 12.9,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.64,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.14,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.88,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.63,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.38,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.12,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.87,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.62,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.36,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.11,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.86,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.6,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.84,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.59,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.33,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.08,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1089.78,
+  "cash": 1089.81,
   "start": 1000.0,
-  "peak": 1089.78,
+  "peak": 1089.81,
   "low": 1000.0,
   "settled": 4,
   "fees": 5.37
