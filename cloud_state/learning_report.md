@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 27 Sep 2026 6:14am California time by `check.py --report`.
+Written 27 Sep 2026 6:19am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 27 Sep 2026 6:14am California time by `check.py --report`.
 | **paper account** | **$1,154.38** (started $1,000, +15.4%) |
 | best / worst it has been | $1,154.38 / $1,000.00 |
 | fees paid | $9.02 |
-| contracts looked at | 53 |
-| of those, settled and learned from | 52 |
+| contracts looked at | 54 |
+| of those, settled and learned from | 53 |
 | actual calls (graded GOOD) | 6 |
 | calls that have settled | 6 |
 | alerts that reached the phone | 6 of 6 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 52 live
+The 63-day study is worth 30 observations per row below. So 53 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -36,6 +36,7 @@ three lucky wins should not rewrite the table.
 | formula says | started at | now says | live results | moved |
 |---|---|---|---|---|
 | 0-5% | 0.019 | 0.019 | 1 (0 hit) | -0.001 |
+| 10-15% | 0.071 | 0.069 | 1 (0 hit) | -0.002 |
 | 25-30% | 0.238 | 0.230 | 1 (0 hit) | -0.008 |
 | 35-40% | 0.354 | 0.371 | 4 (2 hit) | +0.017 |
 | 40-45% | 0.384 | 0.393 | 7 (3 hit) | +0.008 |
@@ -51,14 +52,14 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 18 |
+| NONE (no disagreement) | 19 |
 | BAD (cheap side) | 15 |
 | WEAK (50-70c) | 10 |
 | GOOD | 6 |
 | WEAK (small disagreement) | 3 |
 | WEAK (5-10 min) | 1 |
 
-Leaned YES 37 times, NO 16 times. Over 63 days of history the
+Leaned YES 38 times, NO 16 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
