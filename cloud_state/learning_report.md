@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 27 Sep 2026 3:12am California time by `check.py --report`.
+Written 27 Sep 2026 3:18am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 27 Sep 2026 3:12am California time by `check.py --report`.
 | **paper account** | **$1,126.11** (started $1,000, +12.6%) |
 | best / worst it has been | $1,126.11 / $1,000.00 |
 | fees paid | $7.36 |
-| contracts looked at | 41 |
-| of those, settled and learned from | 40 |
+| contracts looked at | 42 |
+| of those, settled and learned from | 41 |
 | actual calls (graded GOOD) | 5 |
 | calls that have settled | 5 |
 | alerts that reached the phone | 5 of 5 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 40 live
+The 63-day study is worth 30 observations per row below. So 41 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,7 +40,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.371 | 4 (2 hit) | +0.017 |
 | 40-45% | 0.384 | 0.398 | 4 (2 hit) | +0.014 |
 | 45-50% | 0.497 | 0.569 | 12 (9 hit) | +0.072 ** |
-| 50-55% | 0.558 | 0.587 | 7 (5 hit) | +0.030 ** |
+| 50-55% | 0.558 | 0.598 | 8 (6 hit) | +0.040 ** |
 | 55-60% | 0.605 | 0.593 | 4 (2 hit) | -0.012 |
 | 60-65% | 0.678 | 0.677 | 3 (2 hit) | -0.001 |
 | 70-75% | 0.814 | 0.800 | 3 (2 hit) | -0.013 |
@@ -52,12 +52,12 @@ three lucky wins should not rewrite the table.
 |---|---|
 | NONE (no disagreement) | 15 |
 | BAD (cheap side) | 14 |
-| WEAK (50-70c) | 5 |
+| WEAK (50-70c) | 6 |
 | GOOD | 5 |
 | WEAK (5-10 min) | 1 |
 | WEAK (small disagreement) | 1 |
 
-Leaned YES 29 times, NO 12 times. Over 63 days of history the
+Leaned YES 30 times, NO 12 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
