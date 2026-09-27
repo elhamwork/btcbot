@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 26 Sep 2026 9:30pm California time by `check.py --report`.
+Written 26 Sep 2026 9:36pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,10 +10,10 @@ Written 26 Sep 2026 9:30pm California time by `check.py --report`.
 | best / worst it has been | $1,031.57 / $1,000.00 |
 | fees paid | $1.76 |
 | contracts looked at | 19 |
-| of those, settled and learned from | 17 |
-| actual calls (graded GOOD) | 1 |
+| of those, settled and learned from | 18 |
+| actual calls (graded GOOD) | 2 |
 | calls that have settled | 1 |
-| alerts that reached the phone | 1 of 1 |
+| alerts that reached the phone | 2 of 2 |
 | calls right | 1 of 1 (100%) |
 | break-even needed | 75% |
 | paper P&L | +33.3% per dollar staked |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 17 live
+The 63-day study is worth 30 observations per row below. So 18 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,7 +40,7 @@ three lucky wins should not rewrite the table.
 | 40-45% | 0.384 | 0.392 | 2 (1 hit) | +0.007 |
 | 45-50% | 0.497 | 0.512 | 5 (3 hit) | +0.015 |
 | 50-55% | 0.558 | 0.568 | 3 (2 hit) | +0.010 |
-| 55-60% | 0.605 | 0.585 | 1 (0 hit) | -0.020 |
+| 55-60% | 0.605 | 0.567 | 2 (0 hit) | -0.038 ** |
 | 60-65% | 0.678 | 0.667 | 2 (1 hit) | -0.011 |
 | 70-75% | 0.814 | 0.788 | 1 (0 hit) | -0.026 ** |
 | 75-80% | 0.836 | 0.841 | 1 (1 hit) | +0.005 |
@@ -51,12 +51,22 @@ three lucky wins should not rewrite the table.
 |---|---|
 | NONE (no disagreement) | 7 |
 | BAD (cheap side) | 6 |
-| WEAK (50-70c) | 4 |
+| WEAK (50-70c) | 3 |
+| GOOD | 2 |
 | WEAK (5-10 min) | 1 |
-| GOOD | 1 |
 
 Leaned YES 13 times, NO 6 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 04:32 | KXBTC15M-26SEP270045-45 | NO | 0.83 | $103.15 | $19.90 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
