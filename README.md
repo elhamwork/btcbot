@@ -11,19 +11,19 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$3,182.23** &nbsp; +218.2% since $1,000 &nbsp;&middot;&nbsp; updated 26 Sep 10:47pm California time
+**$3,211.88** &nbsp; +221.2% since $1,000 &nbsp;&middot;&nbsp; updated 26 Sep 10:52pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
 | 433 | 364 / 69 | 84.1% | 80.2% |
 
-Best $4,035.82, worst $852.14, fees paid $1,106.40.
+Best $4,035.82, worst $852.14, fees paid $1,108.33.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 26 Sep 10:45pm | won | +14.79 | $3,182.23 | YES | 0.87 |
+| 26 Sep 10:45pm | won | +44.44 | $3,211.88 | YES | 0.87 |
 | 26 Sep 9:45pm | won | +59.95 | $3,167.44 | NO | 0.83 |
 | 26 Sep 7:00pm | won | +95.13 | $3,107.49 | YES | 0.75 |
 | 26 Sep 4:15pm | won | +53.05 | $3,012.36 | YES | 0.84 |
@@ -32,7 +32,7 @@ Best $4,035.82, worst $852.14, fees paid $1,106.40.
 | 26 Sep 8:45am | won | +44.54 | $3,218.58 | YES | 0.87 |
 | 26 Sep 7:45am | won | +92.14 | $3,174.04 | YES | 0.76 |
 
-Collecting in the background: 129,192 order-book snapshots over 34 days (needs about three weeks).
+Collecting in the background: 129,207 order-book snapshots over 34 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
