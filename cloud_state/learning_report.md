@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 26 Sep 2026 6:43pm California time by `check.py --report`.
+Written 26 Sep 2026 6:48pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,10 +9,11 @@ Written 26 Sep 2026 6:43pm California time by `check.py --report`.
 | **paper account** | **$1,000.00** (started $1,000, +0.0%) |
 | best / worst it has been | $1,000.00 / $1,000.00 |
 | fees paid | $0.00 |
-| contracts looked at | 7 |
-| of those, settled and learned from | 6 |
-| actual calls (graded GOOD) | 0 |
+| contracts looked at | 8 |
+| of those, settled and learned from | 7 |
+| actual calls (graded GOOD) | 1 |
 | calls that have settled | 0 |
+| alerts that reached the phone | 1 of 1 |
 
 ## What it is actually learning
 
@@ -23,7 +24,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 6 live
+The 63-day study is worth 30 observations per row below. So 7 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -33,7 +34,7 @@ three lucky wins should not rewrite the table.
 |---|---|---|---|---|
 | 0-5% | 0.019 | 0.019 | 1 (0 hit) | -0.001 |
 | 40-45% | 0.384 | 0.372 | 1 (0 hit) | -0.012 |
-| 45-50% | 0.497 | 0.513 | 1 (1 hit) | +0.016 |
+| 45-50% | 0.497 | 0.528 | 2 (2 hit) | +0.031 ** |
 | 55-60% | 0.605 | 0.585 | 1 (0 hit) | -0.020 |
 | 60-65% | 0.678 | 0.688 | 1 (1 hit) | +0.010 |
 | 70-75% | 0.814 | 0.788 | 1 (0 hit) | -0.026 ** |
@@ -46,9 +47,20 @@ three lucky wins should not rewrite the table.
 | WEAK (50-70c) | 2 |
 | WEAK (5-10 min) | 1 |
 | NONE (no disagreement) | 1 |
+| GOOD | 1 |
 
-Leaned YES 4 times, NO 3 times. Over 63 days of history the
+Leaned YES 5 times, NO 3 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 01:47 | KXBTC15M-26SEP262200-00 | YES | 0.75 | $100.00 | $31.57 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## What would change the conclusion
 
