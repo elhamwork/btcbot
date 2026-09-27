@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 27 Sep 2026 9:42am California time by `check.py --report`.
+Written 27 Sep 2026 9:47am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 27 Sep 2026 9:42am California time by `check.py --report`.
 | **paper account** | **$1,038.13** (started $1,000, +3.8%) |
 | best / worst it has been | $1,154.38 / $1,000.00 |
 | fees paid | $9.83 |
-| contracts looked at | 67 |
-| of those, settled and learned from | 66 |
+| contracts looked at | 68 |
+| of those, settled and learned from | 67 |
 | actual calls (graded GOOD) | 7 |
 | calls that have settled | 7 |
 | alerts that reached the phone | 7 of 7 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 66 live
+The 63-day study is worth 30 observations per row below. So 67 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -38,6 +38,7 @@ three lucky wins should not rewrite the table.
 | 0-5% | 0.019 | 0.019 | 1 (0 hit) | -0.001 |
 | 10-15% | 0.071 | 0.069 | 1 (0 hit) | -0.002 |
 | 25-30% | 0.238 | 0.230 | 1 (0 hit) | -0.008 |
+| 30-35% | 0.286 | 0.276 | 1 (0 hit) | -0.009 |
 | 35-40% | 0.354 | 0.361 | 5 (2 hit) | +0.007 |
 | 40-45% | 0.384 | 0.409 | 8 (4 hit) | +0.024 ** |
 | 45-50% | 0.497 | 0.551 | 17 (11 hit) | +0.054 ** |
@@ -52,14 +53,14 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 25 |
+| NONE (no disagreement) | 26 |
 | BAD (cheap side) | 18 |
 | WEAK (50-70c) | 12 |
 | GOOD | 7 |
 | WEAK (small disagreement) | 4 |
 | WEAK (5-10 min) | 1 |
 
-Leaned YES 48 times, NO 19 times. Over 63 days of history the
+Leaned YES 49 times, NO 19 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
