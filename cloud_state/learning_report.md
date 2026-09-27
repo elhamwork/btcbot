@@ -1,13 +1,13 @@
 # What the bot has learned
 
-Written 27 Sep 2026 1:25am California time by `check.py --report`.
+Written 27 Sep 2026 1:26am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,066.25** (started $1,000, +6.6%) |
-| best / worst it has been | $1,066.25 / $1,000.00 |
+| **paper account** | **$1,066.22** (started $1,000, +6.6%) |
+| best / worst it has been | $1,066.22 / $1,000.00 |
 | fees paid | $3.95 |
 | contracts looked at | 34 |
 | of those, settled and learned from | 33 |
@@ -64,9 +64,9 @@ split is 49.5% YES, so anything near half and half is normal.
 
 | placed | closed | side | price | BTC vs target | min left | result | paid | account after |
 |---|---|---|---|---|---|---|---|---|
-| 01:47 | 2026-09-27 02:00 | YES | 0.75 | +53 | 13 | RIGHT | +31.54 | $1,031.54 |
-| 04:32 | 2026-09-27 04:45 | NO | 0.83 | -66 | 12 | RIGHT | +19.92 | $1,051.46 |
-| 05:33 | 2026-09-27 05:45 | YES | 0.87 | +76 | 12 | RIGHT | +14.79 | $1,066.25 |
+| 01:47 | 2026-09-27 02:00 | YES | 0.75 | +53 | 13 | RIGHT | +31.57 | $1,031.57 |
+| 04:32 | 2026-09-27 04:45 | NO | 0.83 | -66 | 12 | RIGHT | +19.90 | $1,051.47 |
+| 05:33 | 2026-09-27 05:45 | YES | 0.87 | +76 | 12 | RIGHT | +14.75 | $1,066.22 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
