@@ -21,8 +21,9 @@ Standard library only.
 """
 
 import json
-import math
+import os
 import sys
+import math
 
 N_BINS = 20
 PAPER_START = 1000.0
@@ -33,11 +34,36 @@ FEE_RATE = 0.07
 
 
 def load(path):
-    try:
-        with open(path) as f:
-            return json.load(f)
-    except Exception:                                         # noqa: BLE001
+    """
+    Read one copy of the memory.
+
+    A MISSING file is legitimately empty -- the first run ever, or a side
+    that has nothing yet -- and merges as {}. A file that EXISTS but will
+    not parse is something else entirely, and must never be treated as
+    "no trades": on 2026-09-27 it was, and it cost the whole account.
+
+    What happened: merge_state.py wrote its output with a plain open(w),
+    which is not atomic, so a shorter write over a longer file left 662
+    bytes of the previous file's tail dangling after the new JSON ended.
+    The next run read that, hit "Extra data", quietly returned {} here,
+    merged nothing with nothing, replayed an empty ledger, and published a
+    brand-new $1,000 account over a real $3,012 one with 430 settled calls.
+    Recovered from git, but only because git happened to have it.
+
+    So: a corrupt file is fatal now. Stop, say so, touch nothing. A crashed
+    merge leaves the branch alone; a silent one overwrites history.
+    """
+    if not os.path.exists(path):
         return {}
+    with open(path) as f:
+        text = f.read()
+    try:
+        return json.loads(text)
+    except ValueError as e:
+        sys.exit("  REFUSING TO MERGE: %s is corrupt (%s).\n"
+                 "  Not overwriting anything. The good copy is still on the\n"
+                 "  branch and in git history; fix or delete this file."
+                 % (path, e))
 
 
 def better(a, b):
@@ -161,13 +187,36 @@ def merge(mine, theirs):
     return out
 
 
+def bet_count(state):
+    return sum(1 for r in (state.get("predictions") or []) if r.get("bet"))
+
+
 def main():
     if len(sys.argv) != 4:
         sys.exit(__doc__.strip())
     mine, theirs, out = load(sys.argv[1]), load(sys.argv[2]), sys.argv[3]
     merged = merge(mine, theirs)
-    with open(out, "w") as f:
+
+    # A merge is a union: it can only ever learn about MORE trades, never
+    # fewer. If the result knows about fewer than either side walked in
+    # with, something upstream is wrong and writing it would destroy the
+    # ledger -- which is exactly the shape of the 2026-09-27 wipe. Refuse.
+    # (Belt and braces: load() already makes the corrupt-input case fatal.)
+    have = bet_count(merged)
+    for name, side in (("mine", mine), ("theirs", theirs)):
+        if have < bet_count(side):
+            sys.exit("  REFUSING TO WRITE: merge produced %d trades but %s "
+                     "already had %d.\n  A merge can only add trades. Not "
+                     "overwriting %s." % (have, name, bet_count(side), out))
+
+    # Atomically, so a short write can never leave the tail of the old file
+    # dangling after the new JSON -- see load().
+    tmp = out + ".tmp"
+    with open(tmp, "w") as f:
         json.dump(merged, f, indent=1)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, out)
     b = merged["bank"]
     print("  merged %d + %d -> %d contracts, %d settled calls, account $%s"
           % (len(mine.get("predictions") or []),
