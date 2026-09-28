@@ -5957,8 +5957,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 24.42,
-   "bank_after": 720.17,
+   "paid": 24.4,
+   "bank_after": 720.15,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -5984,7 +5984,7 @@
     "contracts": 90.0,
     "fee": 1.01,
     "to_win": 16.99,
-    "bank_before": 720.17
+    "bank_before": 720.15
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -6001,8 +6001,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 16.99,
-   "bank_after": 737.16,
+   "paid": 16.97,
+   "bank_after": 737.12,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -43270,21 +43270,6 @@
   ],
   "KXBTC15M-26SEP281815-15": [
    {
-    "mins": 13.64,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.39,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.13,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 12.88,
     "side": "NO",
     "qual": false
@@ -43468,11 +43453,26 @@
     "mins": 3.68,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 3.43,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 3.17,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.92,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 737.16,
+  "cash": 737.12,
   "start": 1000.0,
   "peak": 1211.12,
   "low": 662.33,
