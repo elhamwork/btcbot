@@ -3696,13 +3696,13 @@
    "dist": -91.88,
    "vol": 0.00035,
    "answered": true,
-   "outcome": null,
+   "outcome": 1,
    "bet": {
     "stake": 116.52,
     "contracts": 161.8,
     "fee": 2.29,
     "to_win": 43.02,
-    "bank_before": 1165.19
+    "bank_before": 1165.17
    },
    "cross_15": 3,
    "cross_30": 4,
@@ -3717,14 +3717,50 @@
    "volume": 689280.93,
    "open_interest": 391789.73,
    "call_alert": true,
-   "call_alert_detail": "HTTP 200"
+   "call_alert_detail": "HTTP 200",
+   "correct": false,
+   "paid": -118.81,
+   "bank_after": 1046.36,
+   "settle_alert": true,
+   "settle_alert_detail": "HTTP 200"
+  },
+  {
+   "asked": "2026-09-28T04:15:39.205407+00:00",
+   "ticker": "KXBTC15M-26SEP280030-30",
+   "close_time": "2026-09-28T04:30:00Z",
+   "raw": 0.4162450705598077,
+   "p": 0.4211647727272727,
+   "side": "NO",
+   "price": 0.52,
+   "edge": 0.058835227272727275,
+   "grade": "WEAK (small disagreement)",
+   "mins": 14.4,
+   "spot": 83377.74,
+   "strike": 83410.26,
+   "dist": -32.52,
+   "vol": 0.000487,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 1,
+   "cross_30": 4,
+   "move_5m": 0.001262,
+   "move_15m": 0.001044,
+   "move_60m": -1.5e-05,
+   "vol_ratio": 1.635,
+   "hour_utc": 4,
+   "spread": 0.01,
+   "bid_size": 1016.89,
+   "ask_size": 6653.42,
+   "volume": 35625.5,
+   "open_interest": 21880.51
   }
  ],
  "bins_n": [
   1.0,
   0.0,
   1.0,
-  0.0,
+  1.0,
   0.0,
   2.0,
   2.0,
@@ -3746,7 +3782,7 @@
   0.0,
   0.0,
   0.0,
-  0.0,
+  1.0,
   0.0,
   0.0,
   0.0,
@@ -26545,15 +26581,102 @@
     "side": "YES",
     "qual": false
    }
+  ],
+  "KXBTC15M-26SEP280030-30": [
+   {
+    "mins": 14.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.09,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.84,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.33,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.07,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.81,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.55,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.3,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.04,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.79,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.53,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.28,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.77,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.51,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.26,
+    "side": "YES",
+    "qual": false
+   }
   ]
  },
  "bank": {
-  "cash": 1165.17,
+  "cash": 1046.36,
   "start": 1000.0,
   "peak": 1211.12,
   "low": 1000.0,
-  "settled": 16,
-  "fees": 25.76
+  "settled": 17,
+  "fees": 28.05
  },
  "alerted": [
   "KXBTC15M-26SEP262200-00",
