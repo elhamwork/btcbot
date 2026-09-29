@@ -8734,6 +8734,37 @@
    "ask_size": 1005.0,
    "volume": 98853.31,
    "open_interest": 78923.96
+  },
+  {
+   "asked": "2026-09-29T18:15:25.114036+00:00",
+   "ticker": "KXBTC15M-26SEP291430-30",
+   "close_time": "2026-09-29T18:30:00Z",
+   "raw": 0.593651550962386,
+   "p": 0.6047854794520549,
+   "side": "YES",
+   "price": 0.54,
+   "edge": 0.06478547945205482,
+   "grade": "WEAK (small disagreement)",
+   "mins": 14.6,
+   "spot": 83449.5,
+   "strike": 83388.93,
+   "dist": 60.57,
+   "vol": 0.000802,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 1,
+   "cross_30": 1,
+   "move_5m": 0.001768,
+   "move_15m": 0.00429,
+   "move_60m": 0.003035,
+   "vol_ratio": 2.757,
+   "hour_utc": 18,
+   "spread": 0.01,
+   "bid_size": 2346.97,
+   "ask_size": 6447.18,
+   "volume": 1369.6,
+   "open_interest": 1367.73
   }
  ],
  "bins_n": [
@@ -41604,26 +41635,6 @@
   ],
   "KXBTC15M-26SEP291415-15": [
    {
-    "mins": 13.63,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 13.37,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 13.11,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.86,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 12.6,
     "side": "YES",
     "qual": false
@@ -41800,6 +41811,53 @@
    },
    {
     "mins": 3.65,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 3.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 3.14,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.88,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.63,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP291430-30": [
+   {
+    "mins": 14.58,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.33,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.08,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.82,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.57,
     "side": "YES",
     "qual": false
    }
