@@ -7738,7 +7738,7 @@
    "dist": -7.47,
    "vol": 0.000269,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 4,
    "cross_30": 4,
@@ -7795,7 +7795,7 @@
   7.0,
   18.0,
   31.0,
-  48.0,
+  49.0,
   38.0,
   36.0,
   23.0,
@@ -34901,6 +34901,101 @@
   "KXBTC15M-26SEP290700-00": [
    {
     "mins": 14.53,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.27,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.76,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.51,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.25,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.0,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.74,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.49,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.97,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.72,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.47,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.21,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.95,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.7,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.44,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.18,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.93,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.67,
     "side": "YES",
     "qual": false
    }
