@@ -7402,13 +7402,13 @@
    "dist": 95.16,
    "vol": 0.000374,
    "answered": true,
-   "outcome": null,
+   "outcome": 1,
    "bet": {
     "stake": 67.59,
     "contracts": 90.1,
     "fee": 1.19,
     "to_win": 21.34,
-    "bank_before": 675.85
+    "bank_before": 675.86
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -7423,7 +7423,12 @@
    "volume": 271260.8,
    "open_interest": 166944.56,
    "call_alert": true,
-   "call_alert_detail": "HTTP 200"
+   "call_alert_detail": "HTTP 200",
+   "correct": true,
+   "paid": 21.34,
+   "bank_after": 697.2,
+   "settle_alert": true,
+   "settle_alert_detail": "HTTP 200"
   },
   {
    "asked": "2026-09-29T08:15:17.122816+00:00",
@@ -7475,7 +7480,7 @@
   5.0,
   3.0,
   2.0,
-  1.0,
+  2.0,
   1.0,
   0.0
  ],
@@ -7497,7 +7502,7 @@
   4.0,
   2.0,
   1.0,
-  1.0,
+  2.0,
   0.0,
   0.0
  ],
@@ -32580,16 +32585,116 @@
     "mins": 13.45,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 13.19,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.94,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.69,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.43,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.18,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.93,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.67,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.42,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.17,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.91,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.66,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.41,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.16,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.9,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.65,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.39,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.14,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.88,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.63,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.38,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 675.86,
+  "cash": 697.2,
   "start": 1000.0,
   "peak": 1211.12,
   "low": 650.62,
-  "settled": 34,
-  "fees": 48.52
+  "settled": 35,
+  "fees": 49.71
  },
  "alerted": [
   "KXBTC15M-26SEP262200-00",
