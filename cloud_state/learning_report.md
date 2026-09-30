@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 30 Sep 2026 3:29am California time by `check.py --report`.
+Written 30 Sep 2026 3:34am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 30 Sep 2026 3:29am California time by `check.py --report`.
 | **paper account** | **$1,088.76** (started $1,000, +8.9%) |
 | best / worst it has been | $1,211.12 / $650.62 |
 | fees paid | $78.57 |
-| contracts looked at | 330 |
-| of those, settled and learned from | 329 |
+| contracts looked at | 331 |
+| of those, settled and learned from | 330 |
 | actual calls (graded GOOD) | 56 |
 | calls that have settled | 56 |
 | alerts that reached the phone | 56 of 56 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 329 live
+The 63-day study is worth 30 observations per row below. So 330 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -41,7 +41,7 @@ three lucky wins should not rewrite the table.
 | 20-25% | 0.178 | 0.167 | 2 (0 hit) | -0.011 |
 | 25-30% | 0.238 | 0.210 | 4 (0 hit) | -0.028 ** |
 | 30-35% | 0.286 | 0.263 | 14 (3 hit) | -0.023 ** |
-| 35-40% | 0.354 | 0.397 | 27 (12 hit) | +0.043 ** |
+| 35-40% | 0.354 | 0.407 | 28 (13 hit) | +0.053 ** |
 | 40-45% | 0.384 | 0.413 | 39 (17 hit) | +0.029 ** |
 | 45-50% | 0.497 | 0.504 | 65 (33 hit) | +0.007 |
 | 50-55% | 0.558 | 0.540 | 51 (27 hit) | -0.018 |
@@ -60,14 +60,14 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 115 |
-| BAD (cheap side) | 70 |
+| BAD (cheap side) | 71 |
 | WEAK (50-70c) | 64 |
 | GOOD | 56 |
 | WEAK (small disagreement) | 21 |
 | ALMOST (not confirmed yet) | 3 |
 | WEAK (5-10 min) | 1 |
 
-Leaned YES 230 times, NO 100 times. Over 63 days of history the
+Leaned YES 231 times, NO 100 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
