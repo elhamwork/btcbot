@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 30 Sep 2026 8:29am California time by `check.py --report`.
+Written 30 Sep 2026 8:34am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 30 Sep 2026 8:29am California time by `check.py --report`.
 | **paper account** | **$1,105.41** (started $1,000, +10.5%) |
 | best / worst it has been | $1,211.12 / $650.62 |
 | fees paid | $79.64 |
-| contracts looked at | 348 |
-| of those, settled and learned from | 347 |
+| contracts looked at | 349 |
+| of those, settled and learned from | 348 |
 | actual calls (graded GOOD) | 57 |
 | calls that have settled | 57 |
 | alerts that reached the phone | 57 of 57 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 347 live
+The 63-day study is worth 30 observations per row below. So 348 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -44,7 +44,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.417 | 29 (14 hit) | +0.063 ** |
 | 40-45% | 0.384 | 0.424 | 42 (19 hit) | +0.040 ** |
 | 45-50% | 0.497 | 0.494 | 67 (33 hit) | -0.003 |
-| 50-55% | 0.558 | 0.542 | 58 (31 hit) | -0.015 |
+| 50-55% | 0.558 | 0.536 | 59 (31 hit) | -0.021 ** |
 | 55-60% | 0.605 | 0.637 | 55 (36 hit) | +0.032 ** |
 | 60-65% | 0.678 | 0.624 | 33 (19 hit) | -0.054 ** |
 | 65-70% | 0.738 | 0.726 | 17 (12 hit) | -0.012 |
@@ -63,11 +63,11 @@ three lucky wins should not rewrite the table.
 | BAD (cheap side) | 75 |
 | WEAK (50-70c) | 65 |
 | GOOD | 57 |
-| WEAK (small disagreement) | 23 |
+| WEAK (small disagreement) | 24 |
 | ALMOST (not confirmed yet) | 4 |
 | WEAK (5-10 min) | 1 |
 
-Leaned YES 242 times, NO 106 times. Over 63 days of history the
+Leaned YES 243 times, NO 106 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
