@@ -36,7 +36,7 @@ Best $1,211.12, worst $650.62, fees paid $66.13.
 means much. Two or three losses in the first dozen is ordinary;
 four or more in twenty would say the model is wrong.
 
-Collecting in the background: 140,504 order-book snapshots over 37 days (needs about three weeks).
+Collecting in the background: 140,506 order-book snapshots over 37 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
