@@ -11,32 +11,28 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,210.61** &nbsp; +21.1% since $1,000 &nbsp;&middot;&nbsp; updated 30 Sep 11:10pm California time
+**$3,193.50** &nbsp; +219.3% since $1,000 &nbsp;&middot;&nbsp; updated 30 Sep 11:15pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
-| 60 | 49 / 11 | 81.7% | 77.8% |
+| 480 | 401 / 79 | 83.5% | 79.9% |
 
-Best $1,211.12, worst $650.62, fees paid $85.47.
+Best $3,533.39, worst $746.12, fees paid $1,170.24.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 30 Sep 5:15pm | won | +43.11 | $1,210.61 | NO | 0.72 |
-| 30 Sep 1:45pm | won | +25.27 | $1,167.50 | NO | 0.81 |
-| 30 Sep 12:30pm | won | +36.82 | $1,142.23 | NO | 0.74 |
-| 30 Sep 7:30am | won | +16.65 | $1,105.41 | NO | 0.86 |
-| 30 Sep 3:15am | won | +35.10 | $1,088.76 | YES | 0.74 |
-| 30 Sep 1:45am | won | +30.59 | $1,053.66 | NO | 0.76 |
-| 30 Sep 12:30am | won | +10.54 | $1,023.07 | YES | 0.90 |
-| 30 Sep 12:00am | won | +36.05 | $1,012.53 | NO | 0.72 |
+| 30 Sep 5:15pm | won | +113.73 | $3,193.50 | NO | 0.72 |
+| 30 Sep 1:45pm | won | +66.67 | $3,079.77 | NO | 0.81 |
+| 30 Sep 12:30pm | won | +97.14 | $3,013.10 | NO | 0.74 |
+| 30 Sep 7:30am | won | +43.93 | $2,915.96 | NO | 0.86 |
+| 30 Sep 3:15am | won | +92.59 | $2,872.03 | YES | 0.74 |
+| 30 Sep 1:45am | won | +80.69 | $2,779.44 | NO | 0.76 |
+| 30 Sep 12:30am | won | +27.81 | $2,698.75 | YES | 0.90 |
+| 30 Sep 12:00am | won | +95.12 | $2,670.94 | NO | 0.72 |
 
-60 of the roughly 100 settled calls needed before this win rate
-means much. Two or three losses in the first dozen is ordinary;
-four or more in twenty would say the model is wrong.
-
-Collecting in the background: 145,420 order-book snapshots over 38 days (needs about three weeks).
+Collecting in the background: 145,433 order-book snapshots over 38 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
