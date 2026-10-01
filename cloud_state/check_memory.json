@@ -12793,7 +12793,7 @@
    "dist": -27.89,
    "vol": 0.000286,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 0,
    "cross_30": 0,
@@ -12807,6 +12807,37 @@
    "ask_size": 1182.65,
    "volume": 96261.91,
    "open_interest": 78820.78
+  },
+  {
+   "asked": "2026-10-01T01:30:27.099742+00:00",
+   "ticker": "KXBTC15M-26SEP302145-45",
+   "close_time": "2026-10-01T01:45:00Z",
+   "raw": 0.33521627905745344,
+   "p": 0.2792362222222222,
+   "side": "NO",
+   "price": 0.61,
+   "edge": 0.1107637777777778,
+   "grade": "WEAK (50-70c)",
+   "mins": 14.6,
+   "spot": 83553.09,
+   "strike": 83587.92,
+   "dist": -34.83,
+   "vol": 0.000257,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 4,
+   "cross_30": 4,
+   "move_5m": -0.000617,
+   "move_15m": 0.000521,
+   "move_60m": 0.001645,
+   "vol_ratio": 1.399,
+   "hour_utc": 1,
+   "spread": 0.01,
+   "bid_size": 1347.02,
+   "ask_size": 1452.42,
+   "volume": 5390.85,
+   "open_interest": 3930.24
   }
  ],
  "bins_n": [
@@ -12817,7 +12848,7 @@
   2.0,
   7.0,
   15.0,
-  31.0,
+  32.0,
   51.0,
   76.0,
   67.0,
@@ -12839,7 +12870,7 @@
   0.0,
   1.0,
   4.0,
-  14.0,
+  15.0,
   21.0,
   38.0,
   33.0,
@@ -49926,26 +49957,6 @@
   ],
   "KXBTC15M-26SEP302130-30": [
    {
-    "mins": 11.23,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.98,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.72,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.47,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.21,
     "side": "YES",
     "qual": false
@@ -50124,6 +50135,98 @@
     "mins": 1.32,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 1.07,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.82,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.56,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.31,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26SEP302145-45": [
+   {
+    "mins": 14.55,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.3,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.04,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.79,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.53,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.28,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.03,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 12.77,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.52,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.27,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.01,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.76,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.51,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.25,
+    "side": "NO",
+    "qual": true
    }
   ]
  },
