@@ -209,6 +209,35 @@ def main():
                      "already had %d.\n  A merge can only add trades. Not "
                      "overwriting %s." % (have, name, bet_count(side), out))
 
+    # And the same check against the DESTINATION, which is the one that
+    # actually saves you. The guard above only knows what it was handed, so
+    # it cannot help when a caller hands it a lie -- and on 2026-09-27 one
+    # did. watch.yml read the branch's state with
+    #
+    #     git show origin/$BRANCH:cloud_state/check_memory.json \
+    #       > /tmp/theirs.json 2>/dev/null || echo '{}' > /tmp/theirs.json
+    #
+    # so a failed read did not look like a failure, it looked like "the
+    # branch has no trades". Merging a 3-trade workspace with that "empty"
+    # branch gave 3 trades, which is >= both inputs, so the guard above was
+    # satisfied -- and 3 trades got committed over the 432 that were really
+    # there, 42 minutes after they had been restored.
+    #
+    # The destination file does not lie. If it already holds more trades
+    # than we are about to write, something upstream is wrong, whoever the
+    # caller is and whatever they claim their inputs were. Stop.
+    if os.path.exists(out):
+        try:
+            with open(out) as f:
+                existing = json.load(f)
+        except ValueError:
+            existing = None          # corrupt; load() handles that path
+        if existing is not None and have < bet_count(existing):
+            sys.exit("  REFUSING TO WRITE: %s already holds %d trades and "
+                     "this merge only has %d.\n  Refusing to shrink the "
+                     "ledger. Check what fed this merge."
+                     % (out, bet_count(existing), have))
+
     # Atomically, so a short write can never leave the tail of the old file
     # dangling after the new JSON -- see load().
     tmp = out + ".tmp"

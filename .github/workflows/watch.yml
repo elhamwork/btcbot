@@ -148,8 +148,17 @@ jobs:
             # handover, a re-run, the laptop -- and a plain overwrite would
             # silently drop one side's settled calls.
             git reset --hard "origin/$GITHUB_REF_NAME"
-            git show "origin/$GITHUB_REF_NAME:cloud_state/check_memory.json" \
-              > /tmp/theirs.json 2>/dev/null || echo '{}' > /tmp/theirs.json
+            # NOT "|| echo '{}'". That fallback cost the account on
+            # 2026-09-27: a failed read looked like "the branch has no
+            # trades", so a 3-trade workspace merged with "nothing" came to
+            # 3 trades and was committed over the 432 that were really
+            # there. A read that fails is a reason to stop and retry, never
+            # a reason to assume the history is empty.
+            if ! git show "origin/$GITHUB_REF_NAME:cloud_state/check_memory.json" \
+                 > /tmp/theirs.json; then
+              echo "  cannot read the branch's state -- retrying, NOT assuming empty"
+              sleep $((2 ** i)); continue
+            fi
             python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
               cloud_state/check_memory.json
             # cloud_state now holds the branch's copy, so it is 'theirs'.

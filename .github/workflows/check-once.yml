@@ -51,8 +51,13 @@ jobs:
           for i in 1 2 3 4 5; do
             git fetch origin "$GITHUB_REF_NAME" || { sleep $((2 ** i)); continue; }
             git reset --hard "origin/$GITHUB_REF_NAME"
-            git show "origin/$GITHUB_REF_NAME:cloud_state/check_memory.json" \
-              > /tmp/theirs.json 2>/dev/null || echo '{}' > /tmp/theirs.json
+            # Never "|| echo '{}'" -- see watch.yml. A failed read is not
+            # an empty history.
+            if ! git show "origin/$GITHUB_REF_NAME:cloud_state/check_memory.json" \
+                 > /tmp/theirs.json; then
+              echo "  cannot read the branch's state -- retrying, NOT assuming empty"
+              sleep $((2 ** i)); continue
+            fi
             python3 merge_state.py /tmp/mine.json /tmp/theirs.json \
               cloud_state/check_memory.json
             python3 check.py --report || true
