@@ -81653,8 +81653,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 39.11,
-   "bank_after": 3413.61,
+   "paid": 39.15,
+   "bank_after": 3413.65,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -82039,12 +82039,12 @@
   24.0,
   40.0,
   78.0,
-  161.0,
-  313.0,
-  450.0,
-  497.0,
-  370.0,
-  266.0,
+  163.0,
+  315.0,
+  454.0,
+  501.0,
+  371.0,
+  267.0,
   126.0,
   73.0,
   27.0,
@@ -82061,11 +82061,11 @@
   5.0,
   15.0,
   20.0,
-  63.0,
-  124.0,
-  199.0,
-  253.0,
-  226.0,
+  64.0,
+  125.0,
+  201.0,
+  254.0,
+  227.0,
   168.0,
   84.0,
   53.0,
@@ -112084,11 +112084,106 @@
     "mins": 9.36,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 9.11,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.85,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.6,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.34,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.09,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 7.83,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 7.58,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 7.32,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 7.07,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 6.81,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 6.55,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 6.3,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 6.04,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.79,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.53,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.28,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.77,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.51,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 3413.61,
+  "cash": 3413.65,
   "start": 1000.0,
   "peak": 3533.39,
   "low": 746.12,
@@ -112098,7 +112193,6 @@
  "alerted": [
   "KXBTC15M-26OCT010915-15",
   "KXBTC15M-26OCT011145-45",
-  "KXBTC15M-26OCT011245-45",
   "KXBTC15M-26SEP262200-00",
   "KXBTC15M-26SEP270045-45",
   "KXBTC15M-26SEP270145-45",
@@ -112158,6 +112252,7 @@
   "KXBTC15M-26SEP301030-30",
   "KXBTC15M-26SEP301530-30",
   "KXBTC15M-26SEP301645-45",
-  "KXBTC15M-26SEP302015-15"
+  "KXBTC15M-26SEP302015-15",
+  "KXBTC15M-26OCT011245-45"
  ]
 }
