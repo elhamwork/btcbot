@@ -1,15 +1,15 @@
 # What the bot has learned
 
-Written 02 Oct 2026 5:57am California time by `check.py --report`.
+Written 02 Oct 2026 6:02am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$3,479.32** (started $1,000, +247.9%) |
+| **paper account** | **$3,479.33** (started $1,000, +247.9%) |
 | best / worst it has been | $3,639.91 / $746.12 |
 | fees paid | $1,214.26 |
-| contracts looked at | 2488 |
+| contracts looked at | 2489 |
 | of those, settled and learned from | 2488 |
 | actual calls (graded GOOD) | 489 |
 | calls that have settled | 489 |
@@ -55,7 +55,7 @@ three lucky wins should not rewrite the table.
 | 80-85% | 0.885 | 0.879 | 15 (13 hit) | -0.006 |
 | 85-90% | 0.920 | 0.872 | 12 (9 hit) | -0.049 ** |
 | 90-95% | 0.953 | 0.929 | 4 (3 hit) | -0.024 ** |
-| 95-100% | 0.990 | 0.992 | 4 (4 hit) | +0.001 |
+| 95-100% | 0.990 | 0.992 | 5 (5 hit) | +0.001 |
 
 ## How it graded what it saw
 
@@ -68,13 +68,13 @@ three lucky wins should not rewrite the table.
 | WEAK (small disagreement) | 155 |
 | ALMOST (not confirmed yet) | 12 |
 | REVENGE (50% of bank, market at 92c after a loss) | 3 |
-| BAD (last 5 min) | 1 |
+| BAD (last 5 min) | 2 |
 | REVENGE (50% of bank, market at 98c after a loss) | 1 |
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 | WEAK (5-10 min) | 1 |
 
-Leaned YES 1458 times, NO 1030 times. Over 63 days of history the
+Leaned YES 1459 times, NO 1030 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -569,7 +569,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 03:33 | 2026-10-02 03:45 | YES | 0.89 | +170 | 12 | RIGHT | +41.69 | $3,639.91 |
 | 04:03 | 2026-10-02 04:15 | YES | 0.75 | +87 | 11 | **wrong** | -370.36 | $3,269.55 |
 | 04:17 | 2026-10-02 04:30 | YES | 0.75 | +93 | 12 | RIGHT | +103.26 | $3,372.81 |
-| 12:03 | 2026-10-02 12:15 | NO | 0.75 | -104 | 11 | RIGHT | +106.51 | $3,479.32 |
+| 12:03 | 2026-10-02 12:15 | NO | 0.75 | -104 | 11 | RIGHT | +106.52 | $3,479.33 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
