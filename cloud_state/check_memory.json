@@ -83146,8 +83146,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 75.66,
-   "bank_after": 2607.44,
+   "paid": 75.69,
+   "bank_after": 2607.47,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -83169,11 +83169,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 260.74,
-    "contracts": 314.1,
+    "stake": 260.75,
+    "contracts": 314.2,
     "fee": 3.11,
-    "to_win": 50.29,
-    "bank_before": 2607.44
+    "to_win": 50.3,
+    "bank_before": 2607.47
    },
    "cross_15": 1,
    "cross_30": 2,
@@ -83190,8 +83190,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -263.85,
-   "bank_after": 2343.59,
+   "paid": -263.86,
+   "bank_after": 2343.61,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -83367,10 +83367,10 @@
   26.0,
   40.0,
   73.0,
-  164.0,
-  308.0,
+  163.0,
+  307.0,
   445.0,
-  510.0,
+  507.0,
   388.0,
   271.0,
   134.0,
@@ -83389,10 +83389,10 @@
   7.0,
   16.0,
   19.0,
-  62.0,
+  61.0,
   122.0,
   193.0,
-  266.0,
+  265.0,
   235.0,
   170.0,
   85.0,
@@ -122199,7 +122199,7 @@
   ]
  },
  "bank": {
-  "cash": 2343.59,
+  "cash": 2343.61,
   "start": 1000.0,
   "peak": 3639.91,
   "low": 746.12,
@@ -122238,6 +122238,9 @@
   "KXBTC15M-26OCT032015-15",
   "KXBTC15M-26OCT032345-45",
   "KXBTC15M-26OCT040115-15",
+  "KXBTC15M-26OCT040500-00",
+  "KXBTC15M-26OCT040515-15",
+  "KXBTC15M-26OCT040630-30",
   "KXBTC15M-26SEP262200-00",
   "KXBTC15M-26SEP270045-45",
   "KXBTC15M-26SEP270145-45",
@@ -122297,9 +122300,6 @@
   "KXBTC15M-26SEP301030-30",
   "KXBTC15M-26SEP301530-30",
   "KXBTC15M-26SEP301645-45",
-  "KXBTC15M-26SEP302015-15",
-  "KXBTC15M-26OCT040500-00",
-  "KXBTC15M-26OCT040515-15",
-  "KXBTC15M-26OCT040630-30"
+  "KXBTC15M-26SEP302015-15"
  ]
 }
