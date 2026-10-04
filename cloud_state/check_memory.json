@@ -9071,37 +9071,6 @@
    "settle_alert_detail": "HTTP 200"
   },
   {
-   "asked": "2026-09-10T09:45:51.057158+00:00",
-   "ticker": "KXBTC15M-26SEP100600-00",
-   "close_time": "2026-09-10T10:00:00Z",
-   "raw": 0.5609696923525823,
-   "p": 0.5354625581395349,
-   "side": "YES",
-   "price": 0.59,
-   "edge": -0.05453744186046505,
-   "grade": "NONE (no disagreement)",
-   "mins": 14.2,
-   "spot": 77969.3,
-   "strike": 77950.71,
-   "dist": 18.59,
-   "vol": 0.000413,
-   "answered": false,
-   "outcome": 0,
-   "bet": null,
-   "cross_15": 3,
-   "cross_30": 3,
-   "move_5m": -0.000369,
-   "move_15m": -0.00305,
-   "move_60m": -0.001833,
-   "vol_ratio": 2.281,
-   "hour_utc": 9,
-   "spread": 0.01,
-   "bid_size": 3140.62,
-   "ask_size": 1396.98,
-   "volume": 32376.95,
-   "open_interest": 20772.04
-  },
-  {
    "asked": "2026-09-10T10:00:20.375926+00:00",
    "ticker": "KXBTC15M-26SEP100615-15",
    "close_time": "2026-09-10T10:15:00Z",
@@ -83423,7 +83392,7 @@
    "dist": 13.87,
    "vol": 0.000136,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 3,
    "cross_30": 3,
@@ -83437,6 +83406,37 @@
    "ask_size": 2180.72,
    "volume": 272.58,
    "open_interest": 268.58
+  },
+  {
+   "asked": "2026-10-04T11:45:10.395348+00:00",
+   "ticker": "KXBTC15M-26OCT040800-00",
+   "close_time": "2026-10-04T12:00:00Z",
+   "raw": 0.605648370211317,
+   "p": 0.6323586046511628,
+   "side": "YES",
+   "price": 0.6,
+   "edge": 0.0323586046511628,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.8,
+   "spot": 85274.39,
+   "strike": 85263.95,
+   "dist": 10.44,
+   "vol": 0.000119,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 4,
+   "cross_30": 6,
+   "move_5m": 9.2e-05,
+   "move_15m": -0.000478,
+   "move_60m": -0.000748,
+   "vol_ratio": 2.37,
+   "hour_utc": 11,
+   "spread": 0.01,
+   "bid_size": 527.49,
+   "ask_size": 4313.66,
+   "volume": 5760.47,
+   "open_interest": 3787.06
   }
  ],
  "bins_n": [
@@ -83452,7 +83452,7 @@
   445.0,
   508.0,
   387.0,
-  271.0,
+  272.0,
   134.0,
   77.0,
   26.0,
@@ -123167,31 +123167,6 @@
   ],
   "KXBTC15M-26OCT040745-45": [
    {
-    "mins": 11.33,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.07,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.82,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.56,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.31,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.05,
     "side": "YES",
     "qual": false
@@ -123364,6 +123339,108 @@
    {
     "mins": 1.36,
     "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.11,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.85,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.6,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.08,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26OCT040800-00": [
+   {
+    "mins": 14.83,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.57,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.31,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.06,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.8,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.55,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.29,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.04,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.78,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.52,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.27,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.01,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.76,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.5,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.25,
+    "side": "YES",
     "qual": false
    }
   ]
