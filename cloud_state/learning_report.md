@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 04 Oct 2026 5:16pm California time by `check.py --report`.
+Written 04 Oct 2026 5:21pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 04 Oct 2026 5:16pm California time by `check.py --report`.
 | best / worst it has been | $3,639.91 / $746.12 |
 | fees paid | $1,339.24 |
 | contracts looked at | 2522 |
-| of those, settled and learned from | 2520 |
+| of those, settled and learned from | 2521 |
 | actual calls (graded GOOD) | 522 |
 | calls that have settled | 522 |
 | alerts that reached the phone | 468 of 470  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2520 live
+The 63-day study is worth 30 observations per row below. So 2521 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,7 +40,7 @@ three lucky wins should not rewrite the table.
 | 5-10% | 0.044 | 0.041 | 2 (0 hit) | -0.003 |
 | 10-15% | 0.071 | 0.092 | 4 (1 hit) | +0.021 ** |
 | 15-20% | 0.167 | 0.162 | 7 (1 hit) | -0.005 |
-| 20-25% | 0.178 | 0.206 | 25 (6 hit) | +0.028 ** |
+| 20-25% | 0.178 | 0.203 | 26 (6 hit) | +0.024 ** |
 | 25-30% | 0.238 | 0.331 | 40 (16 hit) | +0.093 ** |
 | 30-35% | 0.286 | 0.270 | 72 (19 hit) | -0.015 |
 | 35-40% | 0.354 | 0.368 | 162 (60 hit) | +0.014 |
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.440 | 442 (193 hit) | -0.056 ** |
 | 50-55% | 0.558 | 0.524 | 508 (265 hit) | -0.034 ** |
 | 55-60% | 0.605 | 0.614 | 387 (238 hit) | +0.009 |
-| 60-65% | 0.678 | 0.630 | 280 (175 hit) | -0.048 ** |
+| 60-65% | 0.678 | 0.632 | 279 (175 hit) | -0.046 ** |
 | 65-70% | 0.738 | 0.654 | 137 (87 hit) | -0.084 ** |
 | 70-75% | 0.814 | 0.745 | 78 (56 hit) | -0.069 ** |
 | 75-80% | 0.836 | 0.841 | 26 (22 hit) | +0.005 |
