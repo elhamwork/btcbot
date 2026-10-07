@@ -1,21 +1,21 @@
 # What the bot has learned
 
-Written 06 Oct 2026 7:15pm California time by `check.py --report`.
+Written 06 Oct 2026 7:20pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,703.00** (started $1,000, +70.3%) |
+| **paper account** | **$1,743.18** (started $1,000, +74.3%) |
 | best / worst it has been | $3,639.91 / $746.12 |
-| fees paid | $1,395.66 |
+| fees paid | $1,398.05 |
 | contracts looked at | 2545 |
 | of those, settled and learned from | 2544 |
 | actual calls (graded GOOD) | 545 |
-| calls that have settled | 544 |
+| calls that have settled | 545 |
 | alerts that reached the phone | 491 of 493  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
-| calls right | 448 of 544 (82%) |
+| calls right | 449 of 545 (82%) |
 | break-even needed | 80% |
 | paper P&L | +3.3% per dollar staked |
 
@@ -40,7 +40,7 @@ three lucky wins should not rewrite the table.
 | 5-10% | 0.044 | 0.041 | 2 (0 hit) | -0.003 |
 | 10-15% | 0.071 | 0.092 | 4 (1 hit) | +0.021 ** |
 | 15-20% | 0.167 | 0.154 | 9 (1 hit) | -0.013 |
-| 20-25% | 0.178 | 0.209 | 29 (7 hit) | +0.031 ** |
+| 20-25% | 0.178 | 0.206 | 30 (7 hit) | +0.027 ** |
 | 25-30% | 0.238 | 0.363 | 42 (19 hit) | +0.125 ** |
 | 30-35% | 0.286 | 0.246 | 70 (16 hit) | -0.040 ** |
 | 35-40% | 0.354 | 0.374 | 175 (66 hit) | +0.020 |
@@ -74,18 +74,8 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 | BAD (last 5 min) | 1 |
 
-Leaned YES 1516 times, NO 1029 times. Over 63 days of history the
+Leaned YES 1517 times, NO 1028 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
-
-## Open right now
-
-| placed | contract | side | price | risking | to win |
-|---|---|---|---|---|---|
-| 02:02 | KXBTC15M-26OCT062215-15 | NO | 0.80 | $170.30 | $40.18 |
-
-These have been called but have not settled yet. A 15-minute
-contract takes about that long, plus a minute or two for Kalshi to
-publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -635,6 +625,7 @@ publish the result, so this list is usually empty.
 | 19:34 | 2026-10-06 19:45 | YES | 0.75 | +52 | 11 | **wrong** | -181.28 | $1,600.33 |
 | 21:34 | 2026-10-06 21:45 | YES | 0.75 | +45 | 10 | RIGHT | +50.53 | $1,650.86 |
 | 01:03 | 2026-10-07 01:15 | NO | 0.75 | -93 | 12 | RIGHT | +52.14 | $1,703.00 |
+| 02:02 | 2026-10-07 02:15 | NO | 0.80 | -524 | 12 | RIGHT | +40.18 | $1,743.18 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
@@ -754,7 +745,7 @@ the bot being unlucky, and one with a big gap is it being wrong.
 
 | | n | avg price | avg edge | avg min left |
 |---|---|---|---|---|
-| won | 448 | 0.80 | 12% | 11 |
+| won | 449 | 0.80 | 12% | 11 |
 | lost | 96 | 0.78 | 11% | 11 |
 
 **Read this as a thermometer, not a filter.** A rule fitted to
