@@ -84955,8 +84955,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 49.22,
-   "bank_after": 2009.53,
+   "paid": 49.18,
+   "bank_after": 2009.49,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -85029,15 +85029,15 @@
   4.0,
   9.0,
   28.0,
-  40.0,
-  72.0,
+  41.0,
+  73.0,
   175.0,
   307.0,
-  446.0,
-  508.0,
-  387.0,
-  282.0,
-  139.0,
+  452.0,
+  514.0,
+  389.0,
+  284.0,
+  140.0,
   81.0,
   25.0,
   15.0,
@@ -85051,14 +85051,14 @@
   1.0,
   1.0,
   6.0,
-  18.0,
+  19.0,
   17.0,
   68.0,
   123.0,
-  195.0,
-  264.0,
-  240.0,
-  175.0,
+  198.0,
+  266.0,
+  241.0,
+  177.0,
   89.0,
   58.0,
   21.0,
@@ -105469,86 +105469,6 @@
   ],
   "KXBTC15M-26OCT071745-45": [
    {
-    "mins": 14.4,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 14.14,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.89,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.63,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.38,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 13.12,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.86,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.61,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.35,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.1,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.84,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.59,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 11.33,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 11.08,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.82,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.56,
-    "side": "NO",
-    "qual": true
-   },
-   {
     "mins": 10.31,
     "side": "NO",
     "qual": false
@@ -105667,11 +105587,91 @@
     "mins": 4.43,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 4.18,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 3.92,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 3.67,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 3.41,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 3.16,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.9,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.64,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.39,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.13,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.87,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.62,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.36,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.11,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.85,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.6,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.34,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 2009.53,
+  "cash": 2009.49,
   "start": 1000.0,
   "peak": 3639.91,
   "low": 746.12,
@@ -105749,7 +105749,6 @@
   "KXBTC15M-26OCT070645-45",
   "KXBTC15M-26OCT070830-30",
   "KXBTC15M-26OCT070845-45",
-  "KXBTC15M-26OCT071715-15",
   "KXBTC15M-26SEP262200-00",
   "KXBTC15M-26SEP270045-45",
   "KXBTC15M-26SEP270145-45",
@@ -105809,6 +105808,7 @@
   "KXBTC15M-26SEP301030-30",
   "KXBTC15M-26SEP301530-30",
   "KXBTC15M-26SEP301645-45",
-  "KXBTC15M-26SEP302015-15"
+  "KXBTC15M-26SEP302015-15",
+  "KXBTC15M-26OCT071715-15"
  ]
 }
