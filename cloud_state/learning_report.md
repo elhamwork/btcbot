@@ -1,12 +1,12 @@
 # What the bot has learned
 
-Written 10 Oct 2026 6:49am California time by `check.py --report`.
+Written 10 Oct 2026 6:54am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$2,221.18** (started $1,000, +122.1%) |
+| **paper account** | **$2,221.20** (started $1,000, +122.1%) |
 | best / worst it has been | $3,639.91 / $746.12 |
 | fees paid | $1,469.99 |
 | contracts looked at | 2571 |
@@ -44,11 +44,11 @@ three lucky wins should not rewrite the table.
 | 25-30% | 0.238 | 0.379 | 39 (19 hit) | +0.141 ** |
 | 30-35% | 0.286 | 0.258 | 73 (18 hit) | -0.028 ** |
 | 35-40% | 0.354 | 0.390 | 182 (72 hit) | +0.036 ** |
-| 40-45% | 0.384 | 0.382 | 325 (124 hit) | -0.003 |
+| 40-45% | 0.384 | 0.381 | 326 (124 hit) | -0.004 |
 | 45-50% | 0.497 | 0.427 | 447 (189 hit) | -0.069 ** |
 | 50-55% | 0.558 | 0.518 | 496 (256 hit) | -0.039 ** |
 | 55-60% | 0.605 | 0.633 | 386 (245 hit) | +0.028 ** |
-| 60-65% | 0.678 | 0.606 | 281 (168 hit) | -0.072 ** |
+| 60-65% | 0.678 | 0.604 | 282 (168 hit) | -0.074 ** |
 | 65-70% | 0.738 | 0.666 | 143 (93 hit) | -0.072 ** |
 | 70-75% | 0.814 | 0.758 | 88 (65 hit) | -0.056 ** |
 | 75-80% | 0.836 | 0.838 | 25 (21 hit) | +0.002 |
@@ -651,7 +651,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 04:04 | 2026-10-10 04:15 | YES | 0.84 | +103 | 11 | RIGHT | +35.75 | $2,030.24 |
 | 08:04 | 2026-10-10 08:15 | YES | 0.70 | +25 | 10 | RIGHT | +82.74 | $2,112.98 |
 | 10:48 | 2026-10-10 11:00 | YES | 0.76 | +25 | 11 | RIGHT | +63.18 | $2,176.16 |
-| 12:49 | 2026-10-10 13:00 | NO | 0.82 | -35 | 10 | RIGHT | +45.02 | $2,221.18 |
+| 12:49 | 2026-10-10 13:00 | NO | 0.82 | -35 | 10 | RIGHT | +45.04 | $2,221.20 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
