@@ -1,16 +1,16 @@
 # What the bot has learned
 
-Written 11 Oct 2026 8:16am California time by `check.py --report`.
+Written 11 Oct 2026 8:22am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,728.45** (started $1,000, +72.8%) |
+| **paper account** | **$1,728.49** (started $1,000, +72.8%) |
 | best / worst it has been | $3,639.91 / $746.12 |
 | fees paid | $1,503.37 |
 | contracts looked at | 2583 |
-| of those, settled and learned from | 2583 |
+| of those, settled and learned from | 2582 |
 | actual calls (graded GOOD) | 583 |
 | calls that have settled | 583 |
 | alerts that reached the phone | 529 of 531  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2583 live
+The 63-day study is worth 30 observations per row below. So 2582 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -61,10 +61,10 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1127 |
+| NONE (no disagreement) | 1128 |
 | GOOD | 568 |
 | BAD (cheap side) | 353 |
-| WEAK (50-70c) | 338 |
+| WEAK (50-70c) | 337 |
 | WEAK (small disagreement) | 175 |
 | ALMOST (not confirmed yet) | 9 |
 | WEAK (5-10 min) | 4 |
@@ -663,7 +663,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 05:04 | 2026-10-11 05:15 | YES | 0.85 | +39 | 10 | RIGHT | +30.03 | $1,839.25 |
 | 05:19 | 2026-10-11 05:30 | YES | 0.82 | +65 | 11 | RIGHT | +38.05 | $1,877.30 |
 | 06:02 | 2026-10-11 06:15 | YES | 0.74 | +28 | 12 | **wrong** | -191.15 | $1,686.15 |
-| 14:34 | 2026-10-11 14:45 | YES | 0.79 | +54 | 10 | RIGHT | +42.30 | $1,728.45 |
+| 14:34 | 2026-10-11 14:45 | YES | 0.79 | +54 | 10 | RIGHT | +42.34 | $1,728.49 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline

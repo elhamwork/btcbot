@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,728.45** &nbsp; +72.8% since $1,000 &nbsp;&middot;&nbsp; updated 11 Oct 8:16am California time
+**$1,728.49** &nbsp; +72.8% since $1,000 &nbsp;&middot;&nbsp; updated 11 Oct 8:22am California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Best $3,639.91, worst $746.12, fees paid $1,503.37.
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 11 Oct 7:45am | won | +42.30 | $1,728.45 | YES | 0.79 |
+| 11 Oct 7:45am | won | +42.34 | $1,728.49 | YES | 0.79 |
 | 10 Oct 11:15pm | **LOST** | -191.15 | $1,686.15 | YES | 0.74 |
 | 10 Oct 10:30pm | won | +38.05 | $1,877.30 | YES | 0.82 |
 | 10 Oct 10:15pm | won | +30.03 | $1,839.25 | YES | 0.85 |
@@ -32,7 +32,7 @@ Best $3,639.91, worst $746.12, fees paid $1,503.37.
 | 10 Oct 6:30pm | won | +50.68 | $1,745.84 | YES | 0.76 |
 | 10 Oct 6:00pm | **LOST** | -192.46 | $1,695.16 | YES | 0.72 |
 
-Collecting in the background: 185,044 order-book snapshots over 48 days (needs about three weeks).
+Collecting in the background: 185,060 order-book snapshots over 48 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
