@@ -86195,7 +86195,7 @@
    "dist": 16.88,
    "vol": 0.000191,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 7,
    "cross_30": 10,
@@ -86209,6 +86209,45 @@
    "ask_size": 1232.49,
    "volume": 90956.43,
    "open_interest": 64018.77
+  },
+  {
+   "asked": "2026-10-11T04:34:49.442178+00:00",
+   "ticker": "KXBTC15M-26OCT110045-45",
+   "close_time": "2026-10-11T04:45:00Z",
+   "raw": 0.5451247349791594,
+   "p": 0.5125573880597014,
+   "side": "YES",
+   "price": 0.86,
+   "edge": 0.13201583333333333,
+   "grade": "GOOD",
+   "mins": 10.2,
+   "spot": 82891.43,
+   "strike": 82824.63,
+   "dist": 66.8,
+   "vol": 0.000152,
+   "answered": true,
+   "outcome": null,
+   "bet": {
+    "stake": 178.2,
+    "contracts": 207.2,
+    "fee": 1.75,
+    "to_win": 27.26,
+    "bank_before": 1781.96
+   },
+   "cross_15": 3,
+   "cross_30": 3,
+   "move_5m": 0.000714,
+   "move_15m": 0.001089,
+   "move_60m": -0.000135,
+   "vol_ratio": 1.512,
+   "hour_utc": 4,
+   "spread": 0.01,
+   "bid_size": 2574.65,
+   "ask_size": 5589.26,
+   "volume": 811481.65,
+   "open_interest": 425893.83,
+   "call_alert": true,
+   "call_alert_detail": "HTTP 200"
   }
  ],
  "bins_n": [
@@ -86224,7 +86263,7 @@
   441.0,
   502.0,
   391.0,
-  279.0,
+  280.0,
   144.0,
   91.0,
   25.0,
@@ -86246,7 +86285,7 @@
   186.0,
   257.0,
   245.0,
-  166.0,
+  167.0,
   93.0,
   68.0,
   21.0,
@@ -126118,6 +126157,103 @@
     "side": "YES",
     "qual": false
    }
+  ],
+  "KXBTC15M-26OCT110045-45": [
+   {
+    "mins": 14.3,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.04,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.78,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.53,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.27,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.75,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.5,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.24,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.98,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.73,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.47,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.21,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 10.95,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.69,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.44,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.18,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 9.92,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.66,
+    "side": "YES",
+    "qual": false
+   }
   ]
  },
  "bank": {
@@ -126227,6 +126363,7 @@
   "KXBTC15M-26OCT102100-00",
   "KXBTC15M-26OCT102130-30",
   "KXBTC15M-26OCT102315-15",
+  "KXBTC15M-26OCT110045-45",
   "KXBTC15M-26SEP262200-00",
   "KXBTC15M-26SEP270045-45",
   "KXBTC15M-26SEP270145-45",
