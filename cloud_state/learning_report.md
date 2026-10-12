@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 11 Oct 2026 6:47pm California time by `check.py --report`.
+Written 11 Oct 2026 6:52pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 11 Oct 2026 6:47pm California time by `check.py --report`.
 | fees paid | $1,512.86 |
 | contracts looked at | 2588 |
 | of those, settled and learned from | 2587 |
-| actual calls (graded GOOD) | 588 |
+| actual calls (graded GOOD) | 589 |
 | calls that have settled | 588 |
-| alerts that reached the phone | 534 of 536  **2 FAILED** |
+| alerts that reached the phone | 535 of 537  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 484 of 588 (82%) |
 | break-even needed | 80% |
@@ -49,7 +49,7 @@ three lucky wins should not rewrite the table.
 | 50-55% | 0.558 | 0.514 | 505 (258 hit) | -0.044 ** |
 | 55-60% | 0.605 | 0.622 | 396 (247 hit) | +0.017 |
 | 60-65% | 0.678 | 0.613 | 282 (171 hit) | -0.065 ** |
-| 65-70% | 0.738 | 0.666 | 146 (95 hit) | -0.072 ** |
+| 65-70% | 0.738 | 0.669 | 145 (95 hit) | -0.069 ** |
 | 70-75% | 0.814 | 0.762 | 90 (67 hit) | -0.052 ** |
 | 75-80% | 0.836 | 0.838 | 25 (21 hit) | +0.002 |
 | 80-85% | 0.885 | 0.882 | 16 (14 hit) | -0.003 |
@@ -62,9 +62,9 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1120 |
-| GOOD | 573 |
+| GOOD | 574 |
 | BAD (cheap side) | 355 |
-| WEAK (50-70c) | 343 |
+| WEAK (50-70c) | 342 |
 | WEAK (small disagreement) | 174 |
 | ALMOST (not confirmed yet) | 10 |
 | WEAK (5-10 min) | 4 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1538 times, NO 1050 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 01:49 | KXBTC15M-26OCT112200-00 | NO | 0.89 | $164.45 | $19.06 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
