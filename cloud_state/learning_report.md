@@ -1,19 +1,19 @@
 # What the bot has learned
 
-Written 13 Oct 2026 5:17am California time by `check.py --report`.
+Written 13 Oct 2026 5:22am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,979.18** (started $1,000, +97.9%) |
+| **paper account** | **$1,979.21** (started $1,000, +97.9%) |
 | best / worst it has been | $3,639.91 / $746.12 |
 | fees paid | $1,546.63 |
 | contracts looked at | 2601 |
 | of those, settled and learned from | 2600 |
-| actual calls (graded GOOD) | 601 |
+| actual calls (graded GOOD) | 602 |
 | calls that have settled | 601 |
-| alerts that reached the phone | 547 of 549  **2 FAILED** |
+| alerts that reached the phone | 548 of 550  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 496 of 601 (83%) |
 | break-even needed | 80% |
@@ -62,9 +62,9 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1112 |
-| GOOD | 586 |
+| GOOD | 587 |
 | WEAK (50-70c) | 350 |
-| BAD (cheap side) | 349 |
+| BAD (cheap side) | 348 |
 | WEAK (small disagreement) | 178 |
 | ALMOST (not confirmed yet) | 13 |
 | WEAK (5-10 min) | 4 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1541 times, NO 1060 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 12:18 | KXBTC15M-26OCT130830-30 | NO | 0.72 | $197.92 | $73.09 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
@@ -681,7 +691,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 07:04 | 2026-10-13 07:15 | NO | 0.88 | -104 | 10 | RIGHT | +26.18 | $2,072.13 |
 | 07:19 | 2026-10-13 07:30 | YES | 0.83 | +107 | 11 | **wrong** | -209.68 | $1,862.45 |
 | 08:04 | 2026-10-13 08:15 | YES | 0.78 | +94 | 10 | RIGHT | +49.66 | $1,912.11 |
-| 12:04 | 2026-10-13 12:15 | NO | 0.73 | -72 | 11 | RIGHT | +67.07 | $1,979.18 |
+| 12:04 | 2026-10-13 12:15 | NO | 0.73 | -72 | 11 | RIGHT | +67.10 | $1,979.21 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
