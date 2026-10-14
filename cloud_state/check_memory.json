@@ -87792,7 +87792,7 @@
    "dist": -17.88,
    "vol": 0.000526,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 1,
    "cross_30": 1,
@@ -87849,11 +87849,11 @@
   72.0,
   185.0,
   316.0,
-  438.0,
+  439.0,
   506.0,
   419.0,
   278.0,
-  149.0,
+  148.0,
   90.0,
   28.0,
   18.0,
@@ -87871,11 +87871,11 @@
   17.0,
   69.0,
   117.0,
-  188.0,
+  189.0,
   253.0,
   258.0,
   167.0,
-  101.0,
+  100.0,
   68.0,
   24.0,
   16.0,
@@ -116773,6 +116773,106 @@
   "KXBTC15M-26OCT141715-15": [
    {
     "mins": 14.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.96,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.71,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.45,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.19,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.93,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.67,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.41,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.16,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.9,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.64,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.38,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.12,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.85,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.6,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.08,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.82,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.56,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.3,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.04,
     "side": "NO",
     "qual": false
    }
