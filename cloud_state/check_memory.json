@@ -87396,7 +87396,7 @@
    "dist": -30.6,
    "vol": 0.000466,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 7,
    "cross_30": 7,
@@ -87452,11 +87452,11 @@
   43.0,
   74.0,
   185.0,
-  318.0,
+  319.0,
   447.0,
   500.0,
   403.0,
-  280.0,
+  279.0,
   148.0,
   89.0,
   27.0,
@@ -87478,7 +87478,7 @@
   189.0,
   250.0,
   252.0,
-  171.0,
+  170.0,
   98.0,
   67.0,
   23.0,
@@ -121023,6 +121023,66 @@
   "KXBTC15M-26OCT132145-45": [
    {
     "mins": 14.38,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.12,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.86,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.6,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.83,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.57,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.05,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.8,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.54,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.28,
     "side": "NO",
     "qual": false
    }
