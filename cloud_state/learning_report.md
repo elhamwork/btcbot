@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 14 Oct 2026 6:14pm California time by `check.py --report`.
+Written 14 Oct 2026 6:19pm California time by `check.py --report`.
 
 ## The short version
 
@@ -49,7 +49,7 @@ three lucky wins should not rewrite the table.
 | 50-55% | 0.558 | 0.505 | 506 (254 hit) | -0.053 ** |
 | 55-60% | 0.605 | 0.614 | 420 (258 hit) | +0.009 |
 | 60-65% | 0.678 | 0.610 | 277 (167 hit) | -0.068 ** |
-| 65-70% | 0.738 | 0.686 | 148 (100 hit) | -0.052 ** |
+| 65-70% | 0.738 | 0.688 | 149 (101 hit) | -0.050 ** |
 | 70-75% | 0.814 | 0.756 | 91 (67 hit) | -0.058 ** |
 | 75-80% | 0.836 | 0.846 | 28 (24 hit) | +0.010 |
 | 80-85% | 0.885 | 0.886 | 18 (16 hit) | +0.001 |
@@ -74,7 +74,7 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1564 times, NO 1054 times. Over 63 days of history the
+Leaned YES 1563 times, NO 1055 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
