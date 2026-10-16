@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 16 Oct 2026 10:56am California time by `check.py --report`.
+Written 16 Oct 2026 11:02am California time by `check.py --report`.
 
 ## The short version
 
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.258 | 77 (19 hit) | -0.028 ** |
 | 35-40% | 0.354 | 0.375 | 193 (73 hit) | +0.021 ** |
 | 40-45% | 0.384 | 0.361 | 318 (114 hit) | -0.024 ** |
-| 45-50% | 0.497 | 0.433 | 455 (195 hit) | -0.064 ** |
+| 45-50% | 0.497 | 0.432 | 456 (195 hit) | -0.065 ** |
 | 50-55% | 0.558 | 0.510 | 491 (249 hit) | -0.048 ** |
 | 55-60% | 0.605 | 0.617 | 421 (260 hit) | +0.012 |
 | 60-65% | 0.678 | 0.618 | 265 (162 hit) | -0.060 ** |
@@ -61,9 +61,9 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1070 |
+| NONE (no disagreement) | 1069 |
 | GOOD | 618 |
-| WEAK (50-70c) | 386 |
+| WEAK (50-70c) | 387 |
 | BAD (cheap side) | 344 |
 | WEAK (small disagreement) | 186 |
 | ALMOST (not confirmed yet) | 16 |
@@ -74,7 +74,7 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1546 times, NO 1087 times. Over 63 days of history the
+Leaned YES 1547 times, NO 1086 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
