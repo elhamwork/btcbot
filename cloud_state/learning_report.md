@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 16 Oct 2026 8:03pm California time by `check.py --report`.
+Written 16 Oct 2026 8:08pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 16 Oct 2026 8:03pm California time by `check.py --report`.
 | fees paid | $1,653.58 |
 | contracts looked at | 2637 |
 | of those, settled and learned from | 2636 |
-| actual calls (graded GOOD) | 637 |
+| actual calls (graded GOOD) | 638 |
 | calls that have settled | 637 |
-| alerts that reached the phone | 583 of 585  **2 FAILED** |
+| alerts that reached the phone | 584 of 586  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 528 of 637 (83%) |
 | break-even needed | 80% |
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.433 | 453 (194 hit) | -0.064 ** |
 | 50-55% | 0.558 | 0.512 | 493 (251 hit) | -0.046 ** |
 | 55-60% | 0.605 | 0.615 | 422 (260 hit) | +0.010 |
-| 60-65% | 0.678 | 0.614 | 267 (162 hit) | -0.064 ** |
+| 60-65% | 0.678 | 0.613 | 266 (161 hit) | -0.065 ** |
 | 65-70% | 0.738 | 0.700 | 156 (108 hit) | -0.038 ** |
 | 70-75% | 0.814 | 0.754 | 86 (63 hit) | -0.060 ** |
 | 75-80% | 0.836 | 0.824 | 32 (26 hit) | -0.012 |
@@ -62,10 +62,10 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1063 |
-| GOOD | 622 |
+| GOOD | 623 |
 | WEAK (50-70c) | 391 |
 | BAD (cheap side) | 345 |
-| WEAK (small disagreement) | 187 |
+| WEAK (small disagreement) | 186 |
 | ALMOST (not confirmed yet) | 16 |
 | WEAK (5-10 min) | 4 |
 | REVENGE (50% of bank, market at 92c after a loss) | 3 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1552 times, NO 1085 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 03:04 | KXBTC15M-26OCT162315-15 | NO | 0.83 | $267.84 | $51.67 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
