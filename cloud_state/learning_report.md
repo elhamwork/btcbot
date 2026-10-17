@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 16 Oct 2026 11:16pm California time by `check.py --report`.
+Written 16 Oct 2026 11:21pm California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 16 Oct 2026 11:16pm California time by `check.py --report`.
 | best / worst it has been | $3,639.91 / $746.12 |
 | fees paid | $1,656.77 |
 | contracts looked at | 2638 |
-| of those, settled and learned from | 2636 |
+| of those, settled and learned from | 2637 |
 | actual calls (graded GOOD) | 638 |
 | calls that have settled | 638 |
 | alerts that reached the phone | 584 of 586  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2636 live
+The 63-day study is worth 30 observations per row below. So 2637 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -43,14 +43,14 @@ three lucky wins should not rewrite the table.
 | 20-25% | 0.178 | 0.175 | 29 (5 hit) | -0.003 |
 | 25-30% | 0.238 | 0.345 | 40 (17 hit) | +0.107 ** |
 | 30-35% | 0.286 | 0.257 | 81 (20 hit) | -0.028 ** |
-| 35-40% | 0.354 | 0.378 | 194 (74 hit) | +0.024 ** |
+| 35-40% | 0.354 | 0.381 | 195 (75 hit) | +0.026 ** |
 | 40-45% | 0.384 | 0.360 | 316 (113 hit) | -0.024 ** |
 | 45-50% | 0.497 | 0.433 | 453 (194 hit) | -0.064 ** |
 | 50-55% | 0.558 | 0.513 | 492 (251 hit) | -0.045 ** |
 | 55-60% | 0.605 | 0.612 | 421 (258 hit) | +0.007 |
 | 60-65% | 0.678 | 0.614 | 267 (162 hit) | -0.064 ** |
 | 65-70% | 0.738 | 0.705 | 156 (109 hit) | -0.033 ** |
-| 70-75% | 0.814 | 0.760 | 85 (63 hit) | -0.054 ** |
+| 70-75% | 0.814 | 0.758 | 84 (62 hit) | -0.056 ** |
 | 75-80% | 0.836 | 0.824 | 32 (26 hit) | -0.012 |
 | 80-85% | 0.885 | 0.893 | 21 (19 hit) | +0.008 |
 | 85-90% | 0.920 | 0.919 | 12 (11 hit) | -0.001 |
