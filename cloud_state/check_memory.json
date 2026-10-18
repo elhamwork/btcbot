@@ -89497,11 +89497,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 354.52,
+    "stake": 354.53,
     "contracts": 499.3,
     "fee": 7.2,
-    "to_win": 137.6,
-    "bank_before": 3545.23
+    "to_win": 137.61,
+    "bank_before": 3545.27
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -89518,8 +89518,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 137.58,
-   "bank_after": 3682.85,
+   "paid": 137.61,
+   "bank_after": 3682.88,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -125384,13 +125384,108 @@
     "mins": 13.13,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 12.87,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.61,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.09,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.84,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.58,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.31,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.06,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.8,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.54,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.28,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.76,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.5,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 9.24,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.99,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.73,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.47,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 8.21,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 3682.85,
+  "cash": 3682.88,
   "start": 1000.0,
-  "peak": 3682.85,
+  "peak": 3682.88,
   "low": 746.12,
   "settled": 654,
   "fees": 1731.63
