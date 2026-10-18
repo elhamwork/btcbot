@@ -11,18 +11,19 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$3,759.07** &nbsp; +275.9% since $1,000 &nbsp;&middot;&nbsp; updated 18 Oct 1:29pm California time
+**$3,376.05** &nbsp; +237.6% since $1,000 &nbsp;&middot;&nbsp; updated 18 Oct 1:34pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
-| 655 | 545 / 110 | 83.2% | 79.8% |
+| 656 | 545 / 111 | 83.1% | 79.7% |
 
-Best $3,759.07, worst $746.12, fees paid $1,736.28.
+Best $3,759.07, worst $746.12, fees paid $1,743.39.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
+| 18 Oct 1:30pm | **LOST** | -383.02 | $3,376.05 | NO | 0.73 |
 | 18 Oct 12:00pm | won | +76.19 | $3,759.07 | YES | 0.82 |
 | 18 Oct 4:15am | won | +137.61 | $3,682.88 | NO | 0.71 |
 | 18 Oct 4:00am | won | +81.74 | $3,545.27 | NO | 0.80 |
@@ -30,11 +31,8 @@ Best $3,759.07, worst $746.12, fees paid $1,736.28.
 | 18 Oct 1:45am | won | +77.77 | $3,373.58 | YES | 0.80 |
 | 18 Oct 12:15am | won | +117.37 | $3,295.80 | YES | 0.72 |
 | 17 Oct 11:45pm | won | +64.43 | $3,178.43 | YES | 0.82 |
-| 17 Oct 11:15pm | won | +110.90 | $3,114.00 | YES | 0.72 |
 
-1 call open right now.
-
-Collecting in the background: 213,769 order-book snapshots over 55 days (needs about three weeks).
+Collecting in the background: 213,783 order-book snapshots over 55 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
