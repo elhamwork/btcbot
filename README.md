@@ -11,24 +11,24 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$3,576.44** &nbsp; +257.6% since $1,000 &nbsp;&middot;&nbsp; updated 19 Oct 4:01am California time
+**$3,576.50** &nbsp; +257.6% since $1,000 &nbsp;&middot;&nbsp; updated 19 Oct 4:02am California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
 | 663 | 551 / 112 | 83.1% | 79.7% |
 
-Best $3,981.88, worst $746.12, fees paid $1,784.29.
+Best $3,981.94, worst $746.12, fees paid $1,784.29.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 19 Oct 3:45am | **LOST** | -405.44 | $3,576.44 | NO | 0.74 |
-| 19 Oct 12:30am | won | +141.76 | $3,981.88 | YES | 0.72 |
-| 18 Oct 11:15pm | won | +111.46 | $3,840.12 | YES | 0.76 |
-| 18 Oct 10:45pm | won | +38.38 | $3,728.66 | YES | 0.90 |
-| 18 Oct 10:00pm | won | +131.44 | $3,690.28 | YES | 0.72 |
-| 18 Oct 8:30pm | won | +126.76 | $3,558.84 | NO | 0.72 |
+| 19 Oct 3:45am | **LOST** | -405.44 | $3,576.50 | NO | 0.74 |
+| 19 Oct 12:30am | won | +141.81 | $3,981.94 | YES | 0.72 |
+| 18 Oct 11:15pm | won | +111.48 | $3,840.13 | YES | 0.76 |
+| 18 Oct 10:45pm | won | +38.41 | $3,728.65 | YES | 0.90 |
+| 18 Oct 10:00pm | won | +131.42 | $3,690.24 | YES | 0.72 |
+| 18 Oct 8:30pm | won | +126.74 | $3,558.82 | NO | 0.72 |
 | 18 Oct 2:00pm | won | +56.03 | $3,432.08 | YES | 0.85 |
 | 18 Oct 1:30pm | **LOST** | -383.02 | $3,376.05 | NO | 0.73 |
 
