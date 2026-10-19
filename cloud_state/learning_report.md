@@ -1,12 +1,12 @@
 # What the bot has learned
 
-Written 18 Oct 2026 10:02pm California time by `check.py --report`.
+Written 18 Oct 2026 10:03pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$3,690.26** (started $1,000, +269.0%) |
+| **paper account** | **$3,690.24** (started $1,000, +269.0%) |
 | best / worst it has been | $3,759.07 / $746.12 |
 | fees paid | $1,760.65 |
 | contracts looked at | 2659 |
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.438 | 467 (203 hit) | -0.058 ** |
 | 50-55% | 0.558 | 0.521 | 488 (253 hit) | -0.037 ** |
 | 55-60% | 0.605 | 0.604 | 429 (259 hit) | -0.001 |
-| 60-65% | 0.678 | 0.622 | 263 (162 hit) | -0.056 ** |
+| 60-65% | 0.678 | 0.624 | 262 (162 hit) | -0.054 ** |
 | 65-70% | 0.738 | 0.713 | 158 (112 hit) | -0.024 ** |
 | 70-75% | 0.814 | 0.758 | 88 (65 hit) | -0.056 ** |
 | 75-80% | 0.836 | 0.829 | 34 (28 hit) | -0.007 |
@@ -739,7 +739,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 20:18 | 2026-10-18 20:30 | NO | 0.73 | -81 | 12 | **wrong** | -383.02 | $3,376.05 |
 | 20:49 | 2026-10-18 21:00 | YES | 0.85 | +111 | 10 | RIGHT | +56.03 | $3,432.08 |
 | 03:19 | 2026-10-19 03:30 | NO | 0.72 | -48 | 10 | RIGHT | +126.74 | $3,558.82 |
-| 04:48 | 2026-10-19 05:00 | YES | 0.72 | +83 | 12 | RIGHT | +131.44 | $3,690.26 |
+| 04:48 | 2026-10-19 05:00 | YES | 0.72 | +83 | 12 | RIGHT | +131.42 | $3,690.24 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
