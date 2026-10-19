@@ -1,15 +1,15 @@
 # What the bot has learned
 
-Written 19 Oct 2026 3:33pm California time by `check.py --report`.
+Written 19 Oct 2026 3:38pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$2,666.98** (started $1,000, +166.7%) |
+| **paper account** | **$2,666.97** (started $1,000, +166.7%) |
 | best / worst it has been | $3,981.94 / $746.12 |
 | fees paid | $1,825.11 |
-| contracts looked at | 2671 |
+| contracts looked at | 2672 |
 | of those, settled and learned from | 2671 |
 | actual calls (graded GOOD) | 672 |
 | calls that have settled | 672 |
@@ -61,7 +61,7 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1047 |
+| NONE (no disagreement) | 1048 |
 | GOOD | 657 |
 | WEAK (50-70c) | 423 |
 | BAD (cheap side) | 342 |
@@ -74,7 +74,7 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1571 times, NO 1100 times. Over 63 days of history the
+Leaned YES 1571 times, NO 1101 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -752,7 +752,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 18:33 | 2026-10-19 18:45 | YES | 0.81 | +100 | 12 | RIGHT | +60.48 | $2,793.98 |
 | 21:48 | 2026-10-19 22:00 | NO | 0.75 | -34 | 12 | RIGHT | +88.24 | $2,882.22 |
 | 22:02 | 2026-10-19 22:15 | YES | 0.76 | +64 | 12 | RIGHT | +86.17 | $2,968.39 |
-| 22:18 | 2026-10-19 22:30 | YES | 0.78 | +77 | 12 | **wrong** | -301.41 | $2,666.98 |
+| 22:18 | 2026-10-19 22:30 | YES | 0.78 | +77 | 12 | **wrong** | -301.42 | $2,666.97 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
