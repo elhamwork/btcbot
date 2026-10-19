@@ -1,16 +1,16 @@
 # What the bot has learned
 
-Written 18 Oct 2026 10:33pm California time by `check.py --report`.
+Written 18 Oct 2026 10:37pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$3,690.24** (started $1,000, +269.0%) |
+| **paper account** | **$3,690.28** (started $1,000, +269.0%) |
 | best / worst it has been | $3,759.07 / $746.12 |
 | fees paid | $1,760.65 |
-| contracts looked at | 2660 |
-| of those, settled and learned from | 2659 |
+| contracts looked at | 2659 |
+| of those, settled and learned from | 2658 |
 | actual calls (graded GOOD) | 660 |
 | calls that have settled | 659 |
 | alerts that reached the phone | 606 of 608  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2659 live
+The 63-day study is worth 30 observations per row below. So 2658 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,15 +40,15 @@ three lucky wins should not rewrite the table.
 | 5-10% | 0.044 | 0.037 | 5 (0 hit) | -0.006 |
 | 10-15% | 0.071 | 0.063 | 4 (0 hit) | -0.008 |
 | 15-20% | 0.167 | 0.171 | 11 (2 hit) | +0.004 |
-| 20-25% | 0.178 | 0.183 | 32 (6 hit) | +0.005 |
-| 25-30% | 0.238 | 0.326 | 38 (15 hit) | +0.088 ** |
+| 20-25% | 0.178 | 0.180 | 33 (6 hit) | +0.002 |
+| 25-30% | 0.238 | 0.321 | 39 (15 hit) | +0.083 ** |
 | 30-35% | 0.286 | 0.264 | 82 (21 hit) | -0.022 ** |
-| 35-40% | 0.354 | 0.374 | 196 (74 hit) | +0.020 ** |
-| 40-45% | 0.384 | 0.366 | 313 (114 hit) | -0.018 |
-| 45-50% | 0.497 | 0.439 | 466 (203 hit) | -0.057 ** |
-| 50-55% | 0.558 | 0.521 | 488 (253 hit) | -0.037 ** |
-| 55-60% | 0.605 | 0.605 | 430 (260 hit) | -0.000 |
-| 60-65% | 0.678 | 0.624 | 262 (162 hit) | -0.054 ** |
+| 35-40% | 0.354 | 0.377 | 197 (75 hit) | +0.023 ** |
+| 40-45% | 0.384 | 0.368 | 317 (116 hit) | -0.017 |
+| 45-50% | 0.497 | 0.441 | 469 (205 hit) | -0.056 ** |
+| 50-55% | 0.558 | 0.517 | 492 (253 hit) | -0.041 ** |
+| 55-60% | 0.605 | 0.603 | 431 (260 hit) | -0.002 |
+| 60-65% | 0.678 | 0.620 | 264 (162 hit) | -0.058 ** |
 | 65-70% | 0.738 | 0.713 | 158 (112 hit) | -0.024 ** |
 | 70-75% | 0.814 | 0.758 | 88 (65 hit) | -0.056 ** |
 | 75-80% | 0.836 | 0.829 | 34 (28 hit) | -0.007 |
@@ -65,7 +65,7 @@ three lucky wins should not rewrite the table.
 | GOOD | 645 |
 | WEAK (50-70c) | 410 |
 | BAD (cheap side) | 349 |
-| WEAK (small disagreement) | 181 |
+| WEAK (small disagreement) | 180 |
 | ALMOST (not confirmed yet) | 16 |
 | WEAK (5-10 min) | 4 |
 | BAD (last 5 min) | 4 |
@@ -74,7 +74,7 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1558 times, NO 1102 times. Over 63 days of history the
+Leaned YES 1558 times, NO 1101 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Open right now
@@ -748,8 +748,8 @@ publish the result, so this list is usually empty.
 | 18:47 | 2026-10-18 19:00 | YES | 0.82 | +94 | 13 | RIGHT | +76.19 | $3,759.07 |
 | 20:18 | 2026-10-18 20:30 | NO | 0.73 | -81 | 12 | **wrong** | -383.02 | $3,376.05 |
 | 20:49 | 2026-10-18 21:00 | YES | 0.85 | +111 | 10 | RIGHT | +56.03 | $3,432.08 |
-| 03:19 | 2026-10-19 03:30 | NO | 0.72 | -48 | 10 | RIGHT | +126.74 | $3,558.82 |
-| 04:48 | 2026-10-19 05:00 | YES | 0.72 | +83 | 12 | RIGHT | +131.42 | $3,690.24 |
+| 03:19 | 2026-10-19 03:30 | NO | 0.72 | -48 | 10 | RIGHT | +126.76 | $3,558.84 |
+| 04:48 | 2026-10-19 05:00 | YES | 0.72 | +83 | 12 | RIGHT | +131.44 | $3,690.28 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
