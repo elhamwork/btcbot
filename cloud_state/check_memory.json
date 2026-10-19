@@ -90287,7 +90287,7 @@
    "dist": 77.0,
    "vol": 0.000257,
    "answered": true,
-   "outcome": null,
+   "outcome": 0,
    "bet": {
     "stake": 296.83,
     "contracts": 380.6,
@@ -90308,7 +90308,12 @@
    "volume": 454902.16,
    "open_interest": 234527.49,
    "call_alert": true,
-   "call_alert_detail": "HTTP 200"
+   "call_alert_detail": "HTTP 200",
+   "correct": false,
+   "paid": -301.41,
+   "bank_after": 2666.98,
+   "settle_alert": false,
+   "settle_alert_detail": "no topic set"
   }
  ],
  "bins_n": [
@@ -90325,7 +90330,7 @@
   490.0,
   433.0,
   259.0,
-  163.0,
+  164.0,
   90.0,
   36.0,
   21.0,
@@ -112670,12 +112675,12 @@
   ]
  },
  "bank": {
-  "cash": 2968.39,
+  "cash": 2666.98,
   "start": 1000.0,
   "peak": 3981.94,
   "low": 746.12,
-  "settled": 671,
-  "fees": 1820.53
+  "settled": 672,
+  "fees": 1825.11
  },
  "alerted": [
   "KXBTC15M-26OCT052000-00",
