@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 20 Oct 2026 2:11am California time by `check.py --report`.
+Written 20 Oct 2026 2:16am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 20 Oct 2026 2:11am California time by `check.py --report`.
 | best / worst it has been | $3,981.94 / $746.12 |
 | fees paid | $1,834.56 |
 | contracts looked at | 2675 |
-| of those, settled and learned from | 2674 |
+| of those, settled and learned from | 2673 |
 | actual calls (graded GOOD) | 675 |
 | calls that have settled | 675 |
 | alerts that reached the phone | 621 of 623  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2674 live
+The 63-day study is worth 30 observations per row below. So 2673 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -64,8 +64,8 @@ three lucky wins should not rewrite the table.
 | NONE (no disagreement) | 1044 |
 | GOOD | 660 |
 | WEAK (50-70c) | 428 |
-| BAD (cheap side) | 341 |
-| WEAK (small disagreement) | 172 |
+| BAD (cheap side) | 340 |
+| WEAK (small disagreement) | 173 |
 | ALMOST (not confirmed yet) | 16 |
 | WEAK (5-10 min) | 4 |
 | BAD (last 5 min) | 4 |
@@ -74,7 +74,7 @@ three lucky wins should not rewrite the table.
 | REVENGE (50% of bank, market at 95c after a loss) | 1 |
 | REVENGE (50% of bank, market at 97c after a loss) | 1 |
 
-Leaned YES 1560 times, NO 1115 times. Over 63 days of history the
+Leaned YES 1559 times, NO 1116 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
