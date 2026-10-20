@@ -17039,37 +17039,6 @@
    "settle_alert_detail": "HTTP 200"
   },
   {
-   "asked": "2026-09-26T12:30:25.648118+00:00",
-   "ticker": "KXBTC15M-26SEP260845-45",
-   "close_time": "2026-09-26T12:45:00Z",
-   "raw": 0.49192882323036596,
-   "p": 0.4528631020408163,
-   "side": "NO",
-   "price": 0.45999999999999996,
-   "edge": 0.08713689795918378,
-   "grade": "BAD (cheap side)",
-   "mins": 14.6,
-   "spot": 84090.77,
-   "strike": 84092.0,
-   "dist": -1.23,
-   "vol": 0.000189,
-   "answered": false,
-   "outcome": 0,
-   "bet": null,
-   "cross_15": 3,
-   "cross_30": 5,
-   "move_5m": -7.4e-05,
-   "move_15m": -0.0006,
-   "move_60m": -0.000902,
-   "vol_ratio": 2.168,
-   "hour_utc": 12,
-   "spread": 0.01,
-   "bid_size": 1751.75,
-   "ask_size": 1516.87,
-   "volume": 19098.71,
-   "open_interest": 16807.76
-  },
-  {
    "asked": "2026-09-26T12:45:34.538372+00:00",
    "ticker": "KXBTC15M-26SEP260900-00",
    "close_time": "2026-09-26T13:00:00Z",
@@ -90595,7 +90564,7 @@
    "dist": 11.42,
    "vol": 0.000241,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 0,
    "cross_30": 0,
@@ -90609,6 +90578,37 @@
    "ask_size": 3302.23,
    "volume": 76711.06,
    "open_interest": 58001.02
+  },
+  {
+   "asked": "2026-10-20T20:00:44.461687+00:00",
+   "ticker": "KXBTC15M-26OCT201615-15",
+   "close_time": "2026-10-20T20:15:00Z",
+   "raw": 0.3581287240543213,
+   "p": 0.37101172727272724,
+   "side": "NO",
+   "price": 0.55,
+   "edge": 0.07898827272727271,
+   "grade": "WEAK (50-70c)",
+   "mins": 14.3,
+   "spot": 82460.49,
+   "strike": 82486.91,
+   "dist": -26.42,
+   "vol": 0.000233,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 0,
+   "cross_30": 3,
+   "move_5m": -0.000523,
+   "move_15m": -8.3e-05,
+   "move_60m": 0.000742,
+   "vol_ratio": 1.493,
+   "hour_utc": 20,
+   "spread": 0.01,
+   "bid_size": 1536.27,
+   "ask_size": 10967.62,
+   "volume": 51480.36,
+   "open_interest": 27918.63
   }
  ],
  "bins_n": [
@@ -90623,7 +90623,7 @@
   309.0,
   481.0,
   489.0,
-  425.0,
+  426.0,
   264.0,
   158.0,
   91.0,
@@ -130140,36 +130140,6 @@
   ],
   "KXBTC15M-26OCT201600-00": [
    {
-    "mins": 11.62,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.36,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.11,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.85,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.59,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.34,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 10.08,
     "side": "YES",
     "qual": false
@@ -130337,6 +130307,98 @@
    {
     "mins": 1.57,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.31,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.05,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.8,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.54,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.28,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.02,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26OCT201615-15": [
+   {
+    "mins": 14.26,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.0,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 13.75,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.49,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.98,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.72,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.46,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.2,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.95,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.69,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.43,
+    "side": "NO",
     "qual": false
    }
   ]
