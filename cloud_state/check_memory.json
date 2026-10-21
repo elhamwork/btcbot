@@ -90484,8 +90484,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 66.86,
-   "bank_after": 2303.65,
+   "paid": 66.88,
+   "bank_after": 2303.67,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -90635,7 +90635,7 @@
     "contracts": 274.2,
     "fee": 2.59,
     "to_win": 41.29,
-    "bank_before": 2303.65
+    "bank_before": 2303.67
    },
    "cross_15": 2,
    "cross_30": 2,
@@ -90652,8 +90652,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 41.24,
-   "bank_after": 2344.89,
+   "paid": 41.29,
+   "bank_after": 2344.96,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -90768,11 +90768,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 234.49,
+    "stake": 234.5,
     "contracts": 282.5,
     "fee": 2.8,
     "to_win": 45.23,
-    "bank_before": 2344.89
+    "bank_before": 2344.96
    },
    "cross_15": 2,
    "cross_30": 4,
@@ -90789,8 +90789,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 45.21,
-   "bank_after": 2390.1,
+   "paid": 45.23,
+   "bank_after": 2390.19,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -90926,17 +90926,17 @@
   11.0,
   33.0,
   43.0,
-  85.0,
-  194.0,
-  312.0,
+  84.0,
+  192.0,
+  310.0,
   480.0,
-  489.0,
-  434.0,
-  270.0,
+  483.0,
+  429.0,
+  269.0,
   161.0,
   91.0,
-  35.0,
-  22.0,
+  34.0,
+  21.0,
   12.0,
   5.0,
   8.0
@@ -90952,13 +90952,13 @@
   73.0,
   116.0,
   210.0,
-  253.0,
-  259.0,
-  168.0,
+  250.0,
+  256.0,
+  167.0,
   113.0,
   67.0,
   29.0,
-  21.0,
+  20.0,
   11.0,
   4.0,
   8.0
@@ -118640,7 +118640,7 @@
   ]
  },
  "bank": {
-  "cash": 2390.1,
+  "cash": 2390.19,
   "start": 1000.0,
   "peak": 3981.94,
   "low": 746.12,
@@ -118785,6 +118785,9 @@
   "KXBTC15M-26OCT201730-30",
   "KXBTC15M-26OCT202000-00",
   "KXBTC15M-26OCT202030-30",
+  "KXBTC15M-26OCT202300-00",
+  "KXBTC15M-26OCT210015-15",
+  "KXBTC15M-26OCT210115-15",
   "KXBTC15M-26SEP262200-00",
   "KXBTC15M-26SEP270045-45",
   "KXBTC15M-26SEP270145-45",
@@ -118844,9 +118847,6 @@
   "KXBTC15M-26SEP301030-30",
   "KXBTC15M-26SEP301530-30",
   "KXBTC15M-26SEP301645-45",
-  "KXBTC15M-26SEP302015-15",
-  "KXBTC15M-26OCT202300-00",
-  "KXBTC15M-26OCT210015-15",
-  "KXBTC15M-26OCT210115-15"
+  "KXBTC15M-26SEP302015-15"
  ]
 }
