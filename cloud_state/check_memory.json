@@ -17259,37 +17259,6 @@
    "settle_alert_detail": "HTTP 200"
   },
   {
-   "asked": "2026-09-27T00:45:31.870548+00:00",
-   "ticker": "KXBTC15M-26SEP262100-00",
-   "close_time": "2026-09-27T01:00:00Z",
-   "raw": 0.5699112441056293,
-   "p": 0.6049780000000001,
-   "side": "YES",
-   "price": 0.57,
-   "edge": 0.034978000000000176,
-   "grade": "NONE (no disagreement)",
-   "mins": 14.5,
-   "spot": 84346.87,
-   "strike": 84329.21,
-   "dist": 17.66,
-   "vol": 0.000312,
-   "answered": false,
-   "outcome": 0,
-   "bet": null,
-   "cross_15": 4,
-   "cross_30": 4,
-   "move_5m": -5.9e-05,
-   "move_15m": 0.000992,
-   "move_60m": -0.000117,
-   "vol_ratio": 3.769,
-   "hour_utc": 0,
-   "spread": 0.01,
-   "bid_size": 2547.47,
-   "ask_size": 4349.15,
-   "volume": 75194.52,
-   "open_interest": 47927.32
-  },
-  {
    "asked": "2026-09-27T01:00:44.399430+00:00",
    "ticker": "KXBTC15M-26SEP262115-15",
    "close_time": "2026-09-27T01:15:00Z",
@@ -90903,7 +90872,7 @@
    "dist": -52.56,
    "vol": 0.000474,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 2,
    "cross_30": 2,
@@ -90917,6 +90886,37 @@
    "ask_size": 12819.92,
    "volume": 84216.3,
    "open_interest": 66269.39
+  },
+  {
+   "asked": "2026-10-21T08:45:27.035873+00:00",
+   "ticker": "KXBTC15M-26OCT210500-00",
+   "close_time": "2026-10-21T09:00:00Z",
+   "raw": 0.5136496327953489,
+   "p": 0.5189314396887159,
+   "side": "YES",
+   "price": 0.49,
+   "edge": 0.02893143968871592,
+   "grade": "BAD (cheap side)",
+   "mins": 14.6,
+   "spot": 83279.46,
+   "strike": 83272.38,
+   "dist": 7.08,
+   "vol": 0.000651,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 2,
+   "cross_30": 2,
+   "move_5m": 0.002064,
+   "move_15m": 0.001358,
+   "move_60m": 0.002378,
+   "vol_ratio": 2.446,
+   "hour_utc": 8,
+   "spread": 0.01,
+   "bid_size": 3964.55,
+   "ask_size": 100.04,
+   "volume": 5113.17,
+   "open_interest": 4804.87
   }
  ],
  "bins_n": [
@@ -90927,7 +90927,7 @@
   33.0,
   43.0,
   86.0,
-  192.0,
+  193.0,
   307.0,
   480.0,
   483.0,
@@ -90949,7 +90949,7 @@
   6.0,
   17.0,
   23.0,
-  73.0,
+  74.0,
   116.0,
   210.0,
   249.0,
@@ -120458,26 +120458,6 @@
   ],
   "KXBTC15M-26OCT210445-45": [
    {
-    "mins": 11.01,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.75,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.5,
-    "side": "NO",
-    "qual": true
-   },
-   {
-    "mins": 10.25,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 9.99,
     "side": "NO",
     "qual": false
@@ -120654,6 +120634,103 @@
    },
    {
     "mins": 1.08,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.82,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.57,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.31,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.06,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26OCT210500-00": [
+   {
+    "mins": 14.55,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.29,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.04,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.78,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.53,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.28,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.02,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.77,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.51,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.26,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.0,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.75,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.49,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.24,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.98,
     "side": "YES",
     "qual": false
    }
