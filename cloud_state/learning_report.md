@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 21 Oct 2026 10:56am California time by `check.py --report`.
+Written 21 Oct 2026 11:01am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 21 Oct 2026 10:56am California time by `check.py --report`.
 | best / worst it has been | $3,981.94 / $746.12 |
 | fees paid | $1,888.55 |
 | contracts looked at | 2691 |
-| of those, settled and learned from | 2690 |
+| of those, settled and learned from | 2689 |
 | actual calls (graded GOOD) | 691 |
 | calls that have settled | 691 |
 | alerts that reached the phone | 637 of 639  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2690 live
+The 63-day study is worth 30 observations per row below. So 2689 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -63,8 +63,8 @@ three lucky wins should not rewrite the table.
 |---|---|
 | NONE (no disagreement) | 1043 |
 | GOOD | 676 |
-| WEAK (50-70c) | 430 |
-| BAD (cheap side) | 335 |
+| WEAK (50-70c) | 429 |
+| BAD (cheap side) | 336 |
 | WEAK (small disagreement) | 177 |
 | ALMOST (not confirmed yet) | 17 |
 | BAD (last 5 min) | 4 |
