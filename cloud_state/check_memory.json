@@ -90916,7 +90916,7 @@
    "dist": -107.96,
    "vol": 0.000291,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 1,
    "cross_30": 1,
@@ -90966,14 +90966,14 @@
  "bins_n": [
   1.0,
   5.0,
-  5.0,
+  6.0,
   11.0,
   33.0,
   43.0,
   87.0,
   194.0,
   306.0,
-  477.0,
+  476.0,
   484.0,
   430.0,
   269.0,
@@ -90995,7 +90995,7 @@
   24.0,
   75.0,
   115.0,
-  208.0,
+  207.0,
   250.0,
   256.0,
   168.0,
@@ -123943,6 +123943,106 @@
    {
     "mins": 14.2,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.95,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.69,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.43,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.18,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.92,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.67,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.41,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.15,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.9,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.64,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.39,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.13,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.87,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.62,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.36,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.11,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 9.85,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.59,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.08,
+    "side": "NO",
     "qual": false
    }
   ]
