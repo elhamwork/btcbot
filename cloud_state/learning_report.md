@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 22 Oct 2026 9:32am California time by `check.py --report`.
+Written 22 Oct 2026 9:37am California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 22 Oct 2026 9:32am California time by `check.py --report`.
 | fees paid | $1,906.25 |
 | contracts looked at | 2696 |
 | of those, settled and learned from | 2695 |
-| actual calls (graded GOOD) | 696 |
+| actual calls (graded GOOD) | 697 |
 | calls that have settled | 696 |
-| alerts that reached the phone | 642 of 644  **2 FAILED** |
+| alerts that reached the phone | 643 of 645  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 576 of 696 (83%) |
 | break-even needed | 80% |
@@ -48,7 +48,7 @@ three lucky wins should not rewrite the table.
 | 45-50% | 0.497 | 0.442 | 474 (208 hit) | -0.054 ** |
 | 50-55% | 0.558 | 0.506 | 491 (247 hit) | -0.051 ** |
 | 55-60% | 0.605 | 0.598 | 437 (261 hit) | -0.007 |
-| 60-65% | 0.678 | 0.635 | 268 (169 hit) | -0.043 ** |
+| 60-65% | 0.678 | 0.638 | 267 (169 hit) | -0.040 ** |
 | 65-70% | 0.738 | 0.717 | 160 (114 hit) | -0.021 ** |
 | 70-75% | 0.814 | 0.756 | 91 (67 hit) | -0.058 ** |
 | 75-80% | 0.836 | 0.847 | 35 (30 hit) | +0.011 |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1065 |
-| GOOD | 681 |
+| NONE (no disagreement) | 1064 |
+| GOOD | 682 |
 | WEAK (50-70c) | 414 |
 | BAD (cheap side) | 329 |
 | WEAK (small disagreement) | 176 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1552 times, NO 1144 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 16:34 | KXBTC15M-26OCT221245-45 | NO | 0.86 | $273.89 | $41.90 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
