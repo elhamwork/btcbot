@@ -91532,7 +91532,7 @@
    "dist": -21.53,
    "vol": 0.000318,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 4,
    "cross_30": 4,
@@ -91588,8 +91588,8 @@
   46.0,
   87.0,
   197.0,
-  303.0,
-  478.0,
+  304.0,
+  477.0,
   488.0,
   438.0,
   267.0,
@@ -91611,7 +91611,7 @@
   24.0,
   71.0,
   110.0,
-  211.0,
+  210.0,
   244.0,
   261.0,
   169.0,
@@ -129806,6 +129806,56 @@
    {
     "mins": 14.25,
     "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.0,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.74,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.48,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.97,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.46,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.2,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.95,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.69,
+    "side": "YES",
     "qual": false
    }
   ]
