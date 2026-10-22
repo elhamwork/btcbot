@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 22 Oct 2026 3:33am California time by `check.py --report`.
+Written 22 Oct 2026 3:39am California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 22 Oct 2026 3:33am California time by `check.py --report`.
 | fees paid | $1,891.28 |
 | contracts looked at | 2692 |
 | of those, settled and learned from | 2691 |
-| actual calls (graded GOOD) | 692 |
+| actual calls (graded GOOD) | 693 |
 | calls that have settled | 692 |
-| alerts that reached the phone | 638 of 640  **2 FAILED** |
+| alerts that reached the phone | 639 of 641  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 572 of 692 (83%) |
 | break-even needed | 80% |
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.281 | 86 (24 hit) | -0.005 |
 | 35-40% | 0.354 | 0.371 | 193 (72 hit) | +0.016 |
 | 40-45% | 0.384 | 0.374 | 303 (113 hit) | -0.010 |
-| 45-50% | 0.497 | 0.437 | 475 (206 hit) | -0.059 ** |
+| 45-50% | 0.497 | 0.438 | 474 (206 hit) | -0.058 ** |
 | 50-55% | 0.558 | 0.510 | 493 (250 hit) | -0.048 ** |
 | 55-60% | 0.605 | 0.597 | 434 (259 hit) | -0.008 |
 | 60-65% | 0.678 | 0.633 | 269 (169 hit) | -0.045 ** |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1058 |
-| GOOD | 677 |
+| NONE (no disagreement) | 1057 |
+| GOOD | 678 |
 | WEAK (50-70c) | 416 |
 | BAD (cheap side) | 335 |
 | WEAK (small disagreement) | 176 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1558 times, NO 1134 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 10:34 | KXBTC15M-26OCT220645-45 | YES | 0.72 | $247.91 | $91.55 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
