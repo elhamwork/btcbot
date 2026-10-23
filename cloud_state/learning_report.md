@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 23 Oct 2026 1:18pm California time by `check.py --report`.
+Written 23 Oct 2026 1:23pm California time by `check.py --report`.
 
 ## The short version
 
@@ -11,9 +11,9 @@ Written 23 Oct 2026 1:18pm California time by `check.py --report`.
 | fees paid | $1,950.34 |
 | contracts looked at | 2710 |
 | of those, settled and learned from | 2709 |
-| actual calls (graded GOOD) | 710 |
+| actual calls (graded GOOD) | 711 |
 | calls that have settled | 710 |
-| alerts that reached the phone | 656 of 658  **2 FAILED** |
+| alerts that reached the phone | 657 of 659  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 588 of 710 (83%) |
 | break-even needed | 80% |
@@ -43,7 +43,7 @@ three lucky wins should not rewrite the table.
 | 20-25% | 0.178 | 0.172 | 36 (6 hit) | -0.006 |
 | 25-30% | 0.238 | 0.362 | 45 (20 hit) | +0.124 ** |
 | 30-35% | 0.286 | 0.295 | 87 (26 hit) | +0.010 |
-| 35-40% | 0.354 | 0.343 | 196 (67 hit) | -0.011 |
+| 35-40% | 0.354 | 0.345 | 195 (67 hit) | -0.009 |
 | 40-45% | 0.384 | 0.375 | 305 (114 hit) | -0.010 |
 | 45-50% | 0.497 | 0.442 | 481 (211 hit) | -0.055 ** |
 | 50-55% | 0.558 | 0.506 | 497 (250 hit) | -0.052 ** |
@@ -61,8 +61,8 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1071 |
-| GOOD | 695 |
+| NONE (no disagreement) | 1070 |
+| GOOD | 696 |
 | WEAK (50-70c) | 415 |
 | BAD (cheap side) | 317 |
 | WEAK (small disagreement) | 181 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1537 times, NO 1173 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 20:19 | KXBTC15M-26OCT231630-30 | NO | 0.75 | $273.14 | $86.27 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
