@@ -19855,37 +19855,6 @@
    "settle_alert_detail": "HTTP 200"
   },
   {
-   "asked": "2026-09-30T20:45:20.501853+00:00",
-   "ticker": "KXBTC15M-26SEP301700-00",
-   "close_time": "2026-09-30T21:00:00Z",
-   "raw": 0.5085391156221583,
-   "p": 0.5347393548387097,
-   "side": "YES",
-   "price": 0.49,
-   "edge": 0.04473935483870972,
-   "grade": "BAD (cheap side)",
-   "mins": 14.7,
-   "spot": 83647.21,
-   "strike": 83645.5,
-   "dist": 1.71,
-   "vol": 0.000249,
-   "answered": false,
-   "outcome": 0,
-   "bet": null,
-   "cross_15": 2,
-   "cross_30": 4,
-   "move_5m": -0.000395,
-   "move_15m": -0.000359,
-   "move_60m": -0.001613,
-   "vol_ratio": 1.238,
-   "hour_utc": 20,
-   "spread": 0.01,
-   "bid_size": 7443.42,
-   "ask_size": 2854.0,
-   "volume": 137.0,
-   "open_interest": 137.0
-  },
-  {
    "asked": "2026-09-30T21:00:42.194583+00:00",
    "ticker": "KXBTC15M-26SEP301715-15",
    "close_time": "2026-09-30T21:15:00Z",
@@ -93191,7 +93160,7 @@
    "dist": 53.17,
    "vol": 0.000316,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 1,
    "cross_30": 2,
@@ -93205,6 +93174,37 @@
    "ask_size": 2032.46,
    "volume": 8121.97,
    "open_interest": 7577.13
+  },
+  {
+   "asked": "2026-10-25T11:15:22.916881+00:00",
+   "ticker": "KXBTC15M-26OCT250730-30",
+   "close_time": "2026-10-25T11:30:00Z",
+   "raw": 0.5781672026602186,
+   "p": 0.5829435169491526,
+   "side": "YES",
+   "price": 0.61,
+   "edge": -0.027056483050847402,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.6,
+   "spot": 80265.97,
+   "strike": 80239.09,
+   "dist": 26.88,
+   "vol": 0.000444,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 3,
+   "cross_30": 4,
+   "move_5m": 0.000156,
+   "move_15m": 0.00065,
+   "move_60m": -0.000798,
+   "vol_ratio": 3.585,
+   "hour_utc": 11,
+   "spread": 0.01,
+   "bid_size": 5152.98,
+   "ask_size": 2468.78,
+   "volume": 1162.47,
+   "open_interest": 935.95
   }
  ],
  "bins_n": [
@@ -93222,7 +93222,7 @@
   441.0,
   268.0,
   163.0,
-  95.0,
+  96.0,
   36.0,
   20.0,
   14.0,
@@ -93244,7 +93244,7 @@
   256.0,
   172.0,
   114.0,
-  70.0,
+  71.0,
   29.0,
   20.0,
   13.0,
@@ -113607,6 +113607,98 @@
    },
    {
     "mins": 1.13,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26OCT250730-30": [
+   {
+    "mins": 14.62,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.36,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.11,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.85,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.6,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.34,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.09,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.83,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.58,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.32,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.07,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 11.81,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.56,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.3,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.05,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.8,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.54,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 10.28,
     "side": "YES",
     "qual": false
    }
