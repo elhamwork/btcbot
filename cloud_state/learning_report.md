@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 26 Oct 2026 7:27am California time by `check.py --report`.
+Written 26 Oct 2026 7:32am California time by `check.py --report`.
 
 ## The short version
 
@@ -10,7 +10,7 @@ Written 26 Oct 2026 7:27am California time by `check.py --report`.
 | best / worst it has been | $3,981.94 / $746.12 |
 | fees paid | $2,034.10 |
 | contracts looked at | 2749 |
-| of those, settled and learned from | 2749 |
+| of those, settled and learned from | 2748 |
 | actual calls (graded GOOD) | 749 |
 | calls that have settled | 749 |
 | alerts that reached the phone | 695 of 697  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2749 live
+The 63-day study is worth 30 observations per row below. So 2748 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -37,7 +37,7 @@ three lucky wins should not rewrite the table.
 | formula says | started at | now says | live results | moved |
 |---|---|---|---|---|
 | 0-5% | 0.019 | 0.017 | 4 (0 hit) | -0.002 |
-| 5-10% | 0.044 | 0.064 | 6 (1 hit) | +0.021 ** |
+| 5-10% | 0.044 | 0.062 | 7 (1 hit) | +0.019 |
 | 10-15% | 0.071 | 0.063 | 4 (0 hit) | -0.008 |
 | 15-20% | 0.167 | 0.159 | 14 (2 hit) | -0.008 |
 | 20-25% | 0.178 | 0.175 | 35 (6 hit) | -0.004 |
@@ -61,13 +61,13 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 1085 |
+| NONE (no disagreement) | 1084 |
 | GOOD | 734 |
 | WEAK (50-70c) | 405 |
 | BAD (cheap side) | 309 |
 | WEAK (small disagreement) | 188 |
 | ALMOST (not confirmed yet) | 14 |
-| BAD (last 5 min) | 5 |
+| BAD (last 5 min) | 6 |
 | REVENGE (50% of bank, market at 92c after a loss) | 3 |
 | WEAK (5-10 min) | 3 |
 | REVENGE (50% of bank, market at 98c after a loss) | 1 |
