@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,515.01** &nbsp; +51.5% since $1,000 &nbsp;&middot;&nbsp; updated 26 Oct 1:51pm California time
+**$1,515.00** &nbsp; +51.5% since $1,000 &nbsp;&middot;&nbsp; updated 26 Oct 1:52pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Best $3,981.94, worst $746.12, fees paid $2,039.61.
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
-| 26 Oct 1:15pm | won | +39.35 | $1,515.01 | NO | 0.78 |
+| 26 Oct 1:15pm | won | +39.34 | $1,515.00 | NO | 0.78 |
 | 26 Oct 10:15am | won | +22.23 | $1,475.66 | YES | 0.86 |
 | 26 Oct 8:30am | won | +29.46 | $1,453.43 | YES | 0.82 |
 | 26 Oct 6:45am | won | +32.83 | $1,423.97 | NO | 0.80 |
