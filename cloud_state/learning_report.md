@@ -11,9 +11,9 @@ Written 26 Oct 2026 1:03pm California time by `check.py --report`.
 | fees paid | $2,037.33 |
 | contracts looked at | 2751 |
 | of those, settled and learned from | 2750 |
-| actual calls (graded GOOD) | 751 |
+| actual calls (graded GOOD) | 752 |
 | calls that have settled | 751 |
-| alerts that reached the phone | 697 of 699  **2 FAILED** |
+| alerts that reached the phone | 698 of 700  **2 FAILED** |
 | calls made before delivery was recorded | 52 |
 | calls right | 617 of 751 (82%) |
 | break-even needed | 80% |
@@ -43,11 +43,11 @@ three lucky wins should not rewrite the table.
 | 20-25% | 0.178 | 0.175 | 35 (6 hit) | -0.004 |
 | 25-30% | 0.238 | 0.348 | 48 (20 hit) | +0.110 ** |
 | 30-35% | 0.286 | 0.301 | 85 (26 hit) | +0.015 |
-| 35-40% | 0.354 | 0.332 | 195 (64 hit) | -0.022 ** |
-| 40-45% | 0.384 | 0.387 | 302 (117 hit) | +0.003 |
-| 45-50% | 0.497 | 0.440 | 486 (212 hit) | -0.057 ** |
-| 50-55% | 0.558 | 0.514 | 518 (265 hit) | -0.044 ** |
-| 55-60% | 0.605 | 0.577 | 438 (252 hit) | -0.028 ** |
+| 35-40% | 0.354 | 0.333 | 197 (65 hit) | -0.021 ** |
+| 40-45% | 0.384 | 0.388 | 304 (118 hit) | +0.003 |
+| 45-50% | 0.497 | 0.437 | 489 (212 hit) | -0.060 ** |
+| 50-55% | 0.558 | 0.511 | 521 (265 hit) | -0.046 ** |
+| 55-60% | 0.605 | 0.578 | 444 (256 hit) | -0.027 ** |
 | 60-65% | 0.678 | 0.641 | 267 (170 hit) | -0.037 ** |
 | 65-70% | 0.738 | 0.708 | 165 (116 hit) | -0.029 ** |
 | 70-75% | 0.814 | 0.739 | 95 (68 hit) | -0.075 ** |
@@ -62,8 +62,8 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 1081 |
-| GOOD | 736 |
-| WEAK (50-70c) | 408 |
+| GOOD | 737 |
+| WEAK (50-70c) | 407 |
 | BAD (cheap side) | 308 |
 | WEAK (small disagreement) | 189 |
 | ALMOST (not confirmed yet) | 14 |
@@ -76,6 +76,16 @@ three lucky wins should not rewrite the table.
 
 Leaned YES 1562 times, NO 1189 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 20:03 | KXBTC15M-26OCT261615-15 | NO | 0.78 | $147.57 | $39.34 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
