@@ -93106,8 +93106,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 25.46,
-   "bank_after": 1256.16,
+   "paid": 25.47,
+   "bank_after": 1256.17,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -93288,7 +93288,7 @@
     "contracts": 147.8,
     "fee": 1.32,
     "to_win": 20.85,
-    "bank_before": 1256.16
+    "bank_before": 1256.17
    },
    "cross_15": 2,
    "cross_30": 3,
@@ -93305,8 +93305,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 20.85,
-   "bank_after": 1277.01,
+   "paid": 20.86,
+   "bank_after": 1277.03,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -93567,15 +93567,15 @@
   37.0,
   47.0,
   83.0,
-  195.0,
+  196.0,
   299.0,
-  490.0,
-  517.0,
-  438.0,
-  265.0,
+  492.0,
+  519.0,
+  442.0,
+  269.0,
   163.0,
   95.0,
-  36.0,
+  37.0,
   20.0,
   14.0,
   6.0,
@@ -93592,12 +93592,12 @@
   67.0,
   118.0,
   213.0,
-  262.0,
-  252.0,
-  168.0,
+  263.0,
+  256.0,
+  171.0,
   115.0,
   69.0,
-  29.0,
+  30.0,
   20.0,
   13.0,
   6.0,
@@ -129519,16 +129519,6 @@
   ],
   "KXBTC15M-26OCT260245-45": [
    {
-    "mins": 14.12,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 13.87,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 13.61,
     "side": "YES",
     "qual": false
@@ -129682,11 +129672,56 @@
     "mins": 5.96,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 5.7,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.45,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 5.19,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.94,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.68,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.42,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 4.17,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 3.92,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 3.66,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1277.01,
+  "cash": 1277.03,
   "start": 1000.0,
   "peak": 3981.94,
   "low": 746.12,
@@ -129832,8 +129867,6 @@
   "KXBTC15M-26OCT251145-45",
   "KXBTC15M-26OCT251215-15",
   "KXBTC15M-26OCT252100-00",
-  "KXBTC15M-26OCT252315-15",
-  "KXBTC15M-26OCT260045-45",
   "KXBTC15M-26SEP262200-00",
   "KXBTC15M-26SEP270045-45",
   "KXBTC15M-26SEP270145-45",
@@ -129893,6 +129926,8 @@
   "KXBTC15M-26SEP301030-30",
   "KXBTC15M-26SEP301530-30",
   "KXBTC15M-26SEP301645-45",
-  "KXBTC15M-26SEP302015-15"
+  "KXBTC15M-26SEP302015-15",
+  "KXBTC15M-26OCT252315-15",
+  "KXBTC15M-26OCT260045-45"
  ]
 }
