@@ -1,16 +1,16 @@
 # What the bot has learned
 
-Written 27 Oct 2026 10:16am California time by `check.py --report`.
+Written 27 Oct 2026 10:17am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,271.95** (started $1,000, +27.2%) |
+| **paper account** | **$1,272.03** (started $1,000, +27.2%) |
 | best / worst it has been | $3,981.94 / $746.12 |
 | fees paid | $2,062.35 |
 | contracts looked at | 2762 |
-| of those, settled and learned from | 2760 |
+| of those, settled and learned from | 2761 |
 | actual calls (graded GOOD) | 762 |
 | calls that have settled | 762 |
 | alerts that reached the phone | 708 of 710  **2 FAILED** |
@@ -28,7 +28,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 2760 live
+The 63-day study is worth 30 observations per row below. So 2761 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -37,18 +37,18 @@ three lucky wins should not rewrite the table.
 | formula says | started at | now says | live results | moved |
 |---|---|---|---|---|
 | 0-5% | 0.019 | 0.017 | 4 (0 hit) | -0.002 |
-| 5-10% | 0.044 | 0.062 | 7 (1 hit) | +0.019 |
+| 5-10% | 0.044 | 0.064 | 6 (1 hit) | +0.021 ** |
 | 10-15% | 0.071 | 0.063 | 4 (0 hit) | -0.008 |
 | 15-20% | 0.167 | 0.159 | 14 (2 hit) | -0.008 |
 | 20-25% | 0.178 | 0.172 | 36 (6 hit) | -0.006 |
 | 25-30% | 0.238 | 0.355 | 52 (22 hit) | +0.117 ** |
 | 30-35% | 0.286 | 0.318 | 88 (29 hit) | +0.033 ** |
 | 35-40% | 0.354 | 0.330 | 199 (65 hit) | -0.024 ** |
-| 40-45% | 0.384 | 0.389 | 313 (122 hit) | +0.005 |
-| 45-50% | 0.497 | 0.445 | 493 (218 hit) | -0.051 ** |
-| 50-55% | 0.558 | 0.512 | 530 (270 hit) | -0.046 ** |
-| 55-60% | 0.605 | 0.577 | 440 (253 hit) | -0.028 ** |
-| 60-65% | 0.678 | 0.639 | 271 (172 hit) | -0.039 ** |
+| 40-45% | 0.384 | 0.390 | 310 (121 hit) | +0.005 |
+| 45-50% | 0.497 | 0.443 | 487 (214 hit) | -0.054 ** |
+| 50-55% | 0.558 | 0.509 | 514 (260 hit) | -0.049 ** |
+| 55-60% | 0.605 | 0.581 | 433 (251 hit) | -0.024 ** |
+| 60-65% | 0.678 | 0.647 | 264 (170 hit) | -0.031 ** |
 | 65-70% | 0.738 | 0.719 | 165 (118 hit) | -0.019 |
 | 70-75% | 0.814 | 0.737 | 94 (67 hit) | -0.077 ** |
 | 75-80% | 0.836 | 0.819 | 36 (29 hit) | -0.016 |
@@ -836,13 +836,13 @@ split is 49.5% YES, so anything near half and half is normal.
 | 21:03 | 2026-10-26 21:15 | YES | 0.86 | +104 | 12 | RIGHT | +23.17 | $1,538.17 |
 | 03:48 | 2026-10-27 04:00 | NO | 0.74 | -56 | 11 | RIGHT | +51.24 | $1,589.41 |
 | 05:04 | 2026-10-27 05:15 | YES | 0.86 | +103 | 11 | RIGHT | +24.31 | $1,613.72 |
-| 08:49 | 2026-10-27 09:00 | YES | 0.86 | +76 | 10 | RIGHT | +24.64 | $1,638.36 |
-| 12:04 | 2026-10-27 12:15 | NO | 0.73 | -50 | 11 | RIGHT | +57.46 | $1,695.82 |
-| 12:17 | 2026-10-27 12:30 | YES | 0.87 | +109 | 13 | RIGHT | +23.77 | $1,719.59 |
-| 13:04 | 2026-10-27 13:15 | NO | 0.82 | -97 | 10 | RIGHT | +35.57 | $1,755.16 |
-| 13:34 | 2026-10-27 13:45 | NO | 0.74 | -96 | 11 | **wrong** | -178.72 | $1,576.44 |
-| 14:02 | 2026-10-27 14:15 | NO | 0.72 | -119 | 12 | **wrong** | -160.73 | $1,415.71 |
-| 15:02 | 2026-10-27 15:15 | YES | 0.78 | +114 | 12 | **wrong** | -143.76 | $1,271.95 |
+| 08:49 | 2026-10-27 09:00 | YES | 0.86 | +76 | 10 | RIGHT | +24.68 | $1,638.40 |
+| 12:04 | 2026-10-27 12:15 | NO | 0.73 | -50 | 11 | RIGHT | +57.50 | $1,695.90 |
+| 12:17 | 2026-10-27 12:30 | YES | 0.87 | +109 | 13 | RIGHT | +23.79 | $1,719.69 |
+| 13:04 | 2026-10-27 13:15 | NO | 0.82 | -97 | 10 | RIGHT | +35.58 | $1,755.27 |
+| 13:34 | 2026-10-27 13:45 | NO | 0.74 | -96 | 11 | **wrong** | -178.73 | $1,576.54 |
+| 14:02 | 2026-10-27 14:15 | NO | 0.72 | -119 | 12 | **wrong** | -160.74 | $1,415.80 |
+| 15:02 | 2026-10-27 15:15 | YES | 0.78 | +114 | 12 | **wrong** | -143.77 | $1,272.03 |
 
 **The 11 rows above dated before 24 Aug 19:00 UTC may show a stale
 "BTC vs target".** Until then a contract first seen as a decline
