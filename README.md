@@ -11,11 +11,11 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,000.00** &nbsp; +0.0% since $1,000 &nbsp;&middot;&nbsp; updated 28 Oct 8:48am California time
+**$1,000.00** &nbsp; +0.0% since $1,000 &nbsp;&middot;&nbsp; updated 28 Oct 8:53am California time
 
 No settled calls yet.
 
-Collecting in the background: 251,823 order-book snapshots over 65 days (needs about three weeks).
+Collecting in the background: 251,838 order-book snapshots over 65 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
