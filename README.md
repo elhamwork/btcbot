@@ -15,7 +15,7 @@ prices and sends notifications.
 
 No settled calls yet.
 
-Collecting in the background: 252,474 order-book snapshots over 65 days (needs about three weeks).
+Collecting in the background: 252,489 order-book snapshots over 65 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
