@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 28 Oct 2026 4:15pm California time by `check.py --report`.
+Written 28 Oct 2026 4:20pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 28 Oct 2026 4:15pm California time by `check.py --report`.
 | **paper account** | **$925.43** (started $1,000, -7.5%) |
 | best / worst it has been | $1,014.03 / $911.49 |
 | fees paid | $2.95 |
-| contracts looked at | 36 |
-| of those, settled and learned from | 35 |
+| contracts looked at | 37 |
+| of those, settled and learned from | 36 |
 | actual calls (graded GOOD) | 3 |
 | calls that have settled | 3 |
 | alerts that reached the phone | 3 of 3 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 35 live
+The 63-day study is worth 30 observations per row below. So 36 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -35,6 +35,7 @@ three lucky wins should not rewrite the table.
 
 | formula says | started at | now says | live results | moved |
 |---|---|---|---|---|
+| 15-20% | 0.167 | 0.194 | 1 (1 hit) | +0.027 ** |
 | 25-30% | 0.238 | 0.230 | 1 (0 hit) | -0.008 |
 | 30-35% | 0.286 | 0.276 | 1 (0 hit) | -0.009 |
 | 35-40% | 0.354 | 0.332 | 2 (0 hit) | -0.022 ** |
@@ -54,12 +55,12 @@ three lucky wins should not rewrite the table.
 |---|---|
 | NONE (no disagreement) | 11 |
 | WEAK (50-70c) | 10 |
-| BAD (cheap side) | 8 |
+| BAD (cheap side) | 9 |
 | WEAK (small disagreement) | 3 |
 | GOOD | 3 |
 | ALMOST (not confirmed yet) | 1 |
 
-Leaned YES 25 times, NO 11 times. Over 63 days of history the
+Leaned YES 26 times, NO 11 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
