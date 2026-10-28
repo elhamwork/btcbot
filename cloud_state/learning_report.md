@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 28 Oct 2026 12:27pm California time by `check.py --report`.
+Written 28 Oct 2026 12:33pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 28 Oct 2026 12:27pm California time by `check.py --report`.
 | **paper account** | **$1,000.00** (started $1,000, +0.0%) |
 | best / worst it has been | $1,000.00 / $1,000.00 |
 | fees paid | $0.00 |
-| contracts looked at | 21 |
-| of those, settled and learned from | 20 |
+| contracts looked at | 22 |
+| of those, settled and learned from | 21 |
 | actual calls (graded GOOD) | 0 |
 | calls that have settled | 0 |
 
@@ -23,7 +23,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 20 live
+The 63-day study is worth 30 observations per row below. So 21 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -36,7 +36,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.343 | 1 (0 hit) | -0.011 |
 | 40-45% | 0.384 | 0.372 | 1 (0 hit) | -0.012 |
 | 45-50% | 0.497 | 0.556 | 4 (4 hit) | +0.059 ** |
-| 50-55% | 0.558 | 0.598 | 3 (3 hit) | +0.040 ** |
+| 50-55% | 0.558 | 0.610 | 4 (4 hit) | +0.052 ** |
 | 55-60% | 0.605 | 0.593 | 4 (2 hit) | -0.012 |
 | 60-65% | 0.678 | 0.677 | 3 (2 hit) | -0.001 |
 | 65-70% | 0.738 | 0.714 | 1 (0 hit) | -0.024 ** |
@@ -46,12 +46,12 @@ three lucky wins should not rewrite the table.
 
 | grade | times |
 |---|---|
+| NONE (no disagreement) | 8 |
 | WEAK (50-70c) | 7 |
-| NONE (no disagreement) | 7 |
 | BAD (cheap side) | 6 |
 | WEAK (small disagreement) | 1 |
 
-Leaned YES 16 times, NO 5 times. Over 63 days of history the
+Leaned YES 17 times, NO 5 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## What would change the conclusion
