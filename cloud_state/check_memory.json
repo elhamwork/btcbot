@@ -543,7 +543,7 @@
    "dist": 54.41,
    "vol": 0.000465,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 1,
    "cross_30": 3,
@@ -557,6 +557,37 @@
    "ask_size": 8405.0,
    "volume": 31301.86,
    "open_interest": 23621.11
+  },
+  {
+   "asked": "2026-10-28T18:45:46.337783+00:00",
+   "ticker": "KXBTC15M-26OCT281500-00",
+   "close_time": "2026-10-28T19:00:00Z",
+   "raw": 0.300560820411205,
+   "p": 0.285521,
+   "side": "NO",
+   "price": 0.71,
+   "edge": 0.004479000000000011,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.2,
+   "spot": 80941.72,
+   "strike": 81153.52,
+   "dist": -211.8,
+   "vol": 0.001325,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 4,
+   "cross_30": 4,
+   "move_5m": 0.001274,
+   "move_15m": 0.003067,
+   "move_60m": 0.005683,
+   "vol_ratio": 2.852,
+   "hour_utc": 18,
+   "spread": 0.01,
+   "bid_size": 5331.7,
+   "ask_size": 11428.28,
+   "volume": 131576.28,
+   "open_interest": 95892.07
   }
  ],
  "bins_n": [
@@ -572,7 +603,7 @@
   3.0,
   3.0,
   4.0,
-  2.0,
+  3.0,
   1.0,
   0.0,
   1.0,
@@ -594,7 +625,7 @@
   3.0,
   3.0,
   2.0,
-  1.0,
+  2.0,
   0.0,
   0.0,
   1.0,
@@ -4237,6 +4268,63 @@
    {
     "mins": 1.75,
     "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26OCT281500-00": [
+   {
+    "mins": 14.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.98,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.72,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.47,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.22,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.96,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.46,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.2,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.95,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.7,
+    "side": "NO",
     "qual": false
    }
   ]
