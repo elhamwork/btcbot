@@ -1,5 +1,37 @@
 {
- "predictions": [],
+ "predictions": [
+  {
+   "asked": "2026-10-28T14:15:39.141324+00:00",
+   "ticker": "KXBTC15M-26OCT281030-30",
+   "close_time": "2026-10-28T14:30:00Z",
+   "raw": 0.4228748188745318,
+   "p": 0.384375,
+   "side": "NO",
+   "price": 0.51,
+   "edge": 0.10562499999999997,
+   "grade": "WEAK (50-70c)",
+   "mins": 14.4,
+   "spot": 80521.29,
+   "strike": 80559.58,
+   "dist": -38.29,
+   "vol": 0.000645,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 4,
+   "cross_30": 7,
+   "move_5m": -0.000469,
+   "move_15m": -0.001047,
+   "move_60m": -0.000994,
+   "vol_ratio": 2.112,
+   "hour_utc": 14,
+   "spread": 0.01,
+   "bid_size": 6917.05,
+   "ask_size": 8085.78,
+   "volume": 32936.61,
+   "open_interest": 25685.33
+  }
+ ],
  "bins_n": [
   0.0,
   0.0,
@@ -44,7 +76,115 @@
   0.0,
   0.0
  ],
- "polls": {},
+ "polls": {
+  "KXBTC15M-26OCT281030-30": [
+   {
+    "mins": 14.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.1,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.84,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.59,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.08,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.83,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.32,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.07,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.82,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.57,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.06,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.81,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.55,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.3,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.05,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.79,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.54,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.29,
+    "side": "NO",
+    "qual": false
+   }
+  ]
+ },
  "bank": {
   "cash": 1000.0,
   "start": 1000.0,
