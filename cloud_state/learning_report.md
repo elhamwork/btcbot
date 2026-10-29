@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 29 Oct 2026 4:44pm California time by `check.py --report`.
+Written 29 Oct 2026 4:50pm California time by `check.py --report`.
 
 ## The short version
 
@@ -9,11 +9,11 @@ Written 29 Oct 2026 4:44pm California time by `check.py --report`.
 | **paper account** | **$968.46** (started $1,000, -3.2%) |
 | best / worst it has been | $1,014.03 / $867.69 |
 | fees paid | $12.88 |
-| contracts looked at | 126 |
-| of those, settled and learned from | 125 |
-| actual calls (graded GOOD) | 10 |
+| contracts looked at | 127 |
+| of those, settled and learned from | 126 |
+| actual calls (graded GOOD) | 11 |
 | calls that have settled | 10 |
-| alerts that reached the phone | 10 of 10 |
+| alerts that reached the phone | 11 of 11 |
 | calls right | 8 of 10 (80%) |
 | break-even needed | 80% |
 | paper P&L | -0.5% per dollar staked |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 125 live
+The 63-day study is worth 30 observations per row below. So 126 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -40,7 +40,7 @@ three lucky wins should not rewrite the table.
 | 30-35% | 0.286 | 0.245 | 5 (0 hit) | -0.041 ** |
 | 35-40% | 0.354 | 0.351 | 6 (2 hit) | -0.003 |
 | 40-45% | 0.384 | 0.378 | 19 (7 hit) | -0.006 |
-| 45-50% | 0.497 | 0.443 | 24 (9 hit) | -0.054 ** |
+| 45-50% | 0.497 | 0.435 | 25 (9 hit) | -0.062 ** |
 | 50-55% | 0.558 | 0.514 | 24 (11 hit) | -0.044 ** |
 | 55-60% | 0.605 | 0.513 | 21 (8 hit) | -0.092 ** |
 | 60-65% | 0.678 | 0.701 | 9 (7 hit) | +0.023 ** |
@@ -57,11 +57,21 @@ three lucky wins should not rewrite the table.
 | WEAK (50-70c) | 25 |
 | BAD (cheap side) | 25 |
 | WEAK (small disagreement) | 15 |
-| GOOD | 10 |
+| GOOD | 11 |
 | ALMOST (not confirmed yet) | 3 |
 
-Leaned YES 81 times, NO 45 times. Over 63 days of history the
+Leaned YES 81 times, NO 46 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
+
+## Open right now
+
+| placed | contract | side | price | risking | to win |
+|---|---|---|---|---|---|
+| 23:48 | KXBTC15M-26OCT292000-00 | NO | 0.86 | $96.85 | $14.82 |
+
+These have been called but have not settled yet. A 15-minute
+contract takes about that long, plus a minute or two for Kalshi to
+publish the result, so this list is usually empty.
 
 ## Every call it has made
 
