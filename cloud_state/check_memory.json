@@ -1469,7 +1469,7 @@
     "contracts": 110.7,
     "fee": 0.94,
     "to_win": 14.55,
-    "bank_before": 951.6
+    "bank_before": 951.58
    },
    "cross_15": 3,
    "cross_30": 5,
@@ -1486,8 +1486,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.6,
-   "bank_after": 966.18,
+   "paid": 14.55,
+   "bank_after": 966.13,
    "settle_alert": false,
    "settle_alert_detail": "no topic set"
   },
@@ -10895,11 +10895,111 @@
     "mins": 13.13,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 12.87,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.62,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.37,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.11,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.86,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.61,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.36,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 11.1,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.85,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.59,
+    "side": "NO",
+    "qual": true
+   },
+   {
+    "mins": 10.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.08,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.83,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.32,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 9.07,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.82,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.57,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 8.06,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 966.18,
+  "cash": 966.13,
   "start": 1000.0,
   "peak": 1014.03,
   "low": 911.49,
