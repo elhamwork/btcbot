@@ -3522,8 +3522,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.55,
-   "bank_after": 950.19,
+   "paid": 15.5,
+   "bank_after": 950.14,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3948,11 +3948,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 95.02,
+    "stake": 95.01,
     "contracts": 114.5,
     "fee": 1.14,
     "to_win": 18.32,
-    "bank_before": 950.19
+    "bank_before": 950.14
    },
    "cross_15": 2,
    "cross_30": 3,
@@ -3969,8 +3969,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.34,
-   "bank_after": 968.53,
+   "paid": 18.32,
+   "bank_after": 968.46,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -29303,7 +29303,7 @@
   ]
  },
  "bank": {
-  "cash": 968.53,
+  "cash": 968.46,
   "start": 1000.0,
   "peak": 1014.03,
   "low": 867.69,
