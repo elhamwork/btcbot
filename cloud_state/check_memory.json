@@ -1411,8 +1411,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 26.17,
-   "bank_after": 951.6,
+   "paid": 26.15,
+   "bank_after": 951.58,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1469,7 +1469,7 @@
     "contracts": 110.7,
     "fee": 0.94,
     "to_win": 14.55,
-    "bank_before": 951.6
+    "bank_before": 951.58
    },
    "cross_15": 3,
    "cross_30": 5,
@@ -1486,8 +1486,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 14.6,
-   "bank_after": 966.2,
+   "paid": 14.55,
+   "bank_after": 966.13,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1664,11 +1664,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 96.62,
-    "contracts": 132.4,
+    "stake": 96.61,
+    "contracts": 132.3,
     "fee": 1.83,
-    "to_win": 33.91,
-    "bank_before": 966.2
+    "to_win": 33.9,
+    "bank_before": 966.13
    },
    "cross_15": 1,
    "cross_30": 1,
@@ -1685,8 +1685,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": false,
-   "paid": -98.45,
-   "bank_after": 867.75,
+   "paid": -98.44,
+   "bank_after": 867.69,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -1925,11 +1925,11 @@
    "answered": true,
    "outcome": 1,
    "bet": {
-    "stake": 86.78,
+    "stake": 86.77,
     "contracts": 120.5,
     "fee": 1.71,
-    "to_win": 32.04,
-    "bank_before": 867.75
+    "to_win": 32.03,
+    "bank_before": 867.69
    },
    "cross_15": 5,
    "cross_30": 5,
@@ -1946,8 +1946,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 32.01,
-   "bank_after": 899.76,
+   "paid": 32.03,
+   "bank_after": 899.72,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -17381,10 +17381,10 @@
   ]
  },
  "bank": {
-  "cash": 899.76,
+  "cash": 899.72,
   "start": 1000.0,
   "peak": 1014.03,
-  "low": 867.75,
+  "low": 867.69,
   "settled": 7,
   "fees": 8.92
  },
