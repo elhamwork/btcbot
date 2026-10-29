@@ -1,6 +1,6 @@
 # What the bot has learned
 
-Written 29 Oct 2026 11:29am California time by `check.py --report`.
+Written 29 Oct 2026 11:34am California time by `check.py --report`.
 
 ## The short version
 
@@ -9,8 +9,8 @@ Written 29 Oct 2026 11:29am California time by `check.py --report`.
 | **paper account** | **$934.64** (started $1,000, -6.5%) |
 | best / worst it has been | $1,014.03 / $867.69 |
 | fees paid | $10.75 |
-| contracts looked at | 105 |
-| of those, settled and learned from | 104 |
+| contracts looked at | 106 |
+| of those, settled and learned from | 105 |
 | actual calls (graded GOOD) | 8 |
 | calls that have settled | 8 |
 | alerts that reached the phone | 8 of 8 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 104 live
+The 63-day study is worth 30 observations per row below. So 105 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -46,21 +46,21 @@ three lucky wins should not rewrite the table.
 | 60-65% | 0.678 | 0.701 | 9 (7 hit) | +0.023 ** |
 | 65-70% | 0.738 | 0.701 | 3 (1 hit) | -0.037 ** |
 | 70-75% | 0.814 | 0.836 | 4 (4 hit) | +0.022 ** |
-| 75-80% | 0.836 | 0.815 | 2 (1 hit) | -0.021 ** |
+| 75-80% | 0.836 | 0.790 | 3 (1 hit) | -0.046 ** |
 | 85-90% | 0.920 | 0.891 | 1 (0 hit) | -0.030 ** |
 
 ## How it graded what it saw
 
 | grade | times |
 |---|---|
-| NONE (no disagreement) | 40 |
+| NONE (no disagreement) | 41 |
 | WEAK (50-70c) | 21 |
 | BAD (cheap side) | 21 |
 | WEAK (small disagreement) | 12 |
 | GOOD | 8 |
 | ALMOST (not confirmed yet) | 3 |
 
-Leaned YES 74 times, NO 31 times. Over 63 days of history the
+Leaned YES 75 times, NO 31 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
