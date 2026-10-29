@@ -3522,8 +3522,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 15.5,
-   "bank_after": 950.14,
+   "paid": 15.55,
+   "bank_after": 950.19,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -3948,11 +3948,11 @@
    "answered": true,
    "outcome": 0,
    "bet": {
-    "stake": 95.01,
+    "stake": 95.02,
     "contracts": 114.5,
     "fee": 1.14,
     "to_win": 18.32,
-    "bank_before": 950.14
+    "bank_before": 950.19
    },
    "cross_15": 2,
    "cross_30": 3,
@@ -3969,8 +3969,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 18.32,
-   "bank_after": 968.46,
+   "paid": 18.34,
+   "bank_after": 968.53,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -29101,16 +29101,6 @@
   ],
   "KXBTC15M-26OCT291930-30": [
    {
-    "mins": 12.01,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.75,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 11.5,
     "side": "YES",
     "qual": false
@@ -29299,11 +29289,21 @@
     "mins": 2.05,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 1.8,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.54,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 968.46,
+  "cash": 968.53,
   "start": 1000.0,
   "peak": 1014.03,
   "low": 867.69,
