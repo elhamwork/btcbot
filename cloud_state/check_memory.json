@@ -5967,7 +5967,7 @@
    "dist": 91.5,
    "vol": 0.000781,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 0,
    "cross_30": 0,
@@ -5981,6 +5981,37 @@
    "ask_size": 8589.53,
    "volume": 77460.15,
    "open_interest": 59654.14
+  },
+  {
+   "asked": "2026-10-30T15:15:27.776621+00:00",
+   "ticker": "KXBTC15M-26OCT301130-30",
+   "close_time": "2026-10-30T15:30:00Z",
+   "raw": 0.6050900730238965,
+   "p": 0.7156082926829268,
+   "side": "YES",
+   "price": 0.56,
+   "edge": 0.15560829268292675,
+   "grade": "WEAK (50-70c)",
+   "mins": 14.5,
+   "spot": 77612.29,
+   "strike": 77552.72,
+   "dist": 59.57,
+   "vol": 0.000755,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 3,
+   "cross_30": 3,
+   "move_5m": 0.00031,
+   "move_15m": 0.006808,
+   "move_60m": 0.01324,
+   "vol_ratio": 0.973,
+   "hour_utc": 15,
+   "spread": 0.01,
+   "bid_size": 14034.64,
+   "ask_size": 1799.64,
+   "volume": 164920.1,
+   "open_interest": 133355.96
   }
  ],
  "bins_n": [
@@ -5997,7 +6028,7 @@
   32.0,
   26.0,
   11.0,
-  7.0,
+  8.0,
   8.0,
   5.0,
   0.0,
@@ -6019,7 +6050,7 @@
   16.0,
   11.0,
   9.0,
-  4.0,
+  5.0,
   6.0,
   3.0,
   0.0,
@@ -43081,6 +43112,58 @@
     "mins": 2.34,
     "side": "YES",
     "qual": false
+   }
+  ],
+  "KXBTC15M-26OCT301130-30": [
+   {
+    "mins": 14.54,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.28,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.03,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.77,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.52,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.26,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 13.01,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.75,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.49,
+    "side": "YES",
+    "qual": true
+   },
+   {
+    "mins": 12.24,
+    "side": "YES",
+    "qual": true
    }
   ]
  },
