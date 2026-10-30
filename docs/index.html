@@ -61,28 +61,26 @@ a{color:var(--go)}
 <div class="wrap">
 <span class="flag">paper only</span>
 <h1 style="margin-top:14px">paper account</h1>
-<div class="big">$982.18</div>
-<div class="chg down">-1.8% since $1,000</div>
+<div class="big">$997.20</div>
+<div class="chg down">-0.3% since $1,000</div>
 <div class="sub">No money moves. Nothing is ordered. This is what $1,000 would have become if every call had been taken at 10% of the account.</div>
 <div class="grid">
-<div class="cell"><div class="k">calls settled</div><div class="v">17</div></div>
-<div class="cell"><div class="k">won / lost</div><div class="v"><span class="win">14</span> / <span class="loss">3</span></div></div>
-<div class="cell"><div class="k">win rate</div><div class="v">82.4%</div></div>
-<div class="cell"><div class="k">break-even</div><div class="v">81.2%</div></div>
+<div class="cell"><div class="k">calls settled</div><div class="v">18</div></div>
+<div class="cell"><div class="k">won / lost</div><div class="v"><span class="win">15</span> / <span class="loss">3</span></div></div>
+<div class="cell"><div class="k">win rate</div><div class="v">83.3%</div></div>
+<div class="cell"><div class="k">break-even</div><div class="v">81.5%</div></div>
 </div>
-<p class="note">Break-even is the win rate these prices require just to stand still. Winning 82.4% of the time against a 81.2% requirement is +1.1 points ahead &mdash; that gap is the whole business.</p>
+<p class="note">Break-even is the win rate these prices require just to stand still. Winning 83.3% of the time against a 81.5% requirement is +1.8 points ahead &mdash; that gap is the whole business.</p>
 <h2>the account, call by call</h2>
 <div class="card">
-<svg class="spark" viewBox="0 0 680 180" preserveAspectRatio="none" role="img" aria-label="paper account over time"><line x1="0" y1="64.5" x2="680" y2="64.5" class="base"/><polyline points="0.0,64.5 40.0,54.5 80.0,127.9 120.0,117.9 160.0,99.2 200.0,88.8 240.0,159.2 280.0,136.3 320.0,111.3 360.0,100.2 400.0,87.1 440.0,76.5 480.0,56.6 520.0,46.5 560.0,31.3 600.0,20.8 640.0,97.7 680.0,77.3" fill="none" stroke="var(--stop)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
-<p class="note">best $1,061.12 &nbsp;&middot;&nbsp; worst $867.69 &nbsp;&middot;&nbsp; fees paid $21.56</p>
+<svg class="spark" viewBox="0 0 680 180" preserveAspectRatio="none" role="img" aria-label="paper account over time"><line x1="0" y1="64.5" x2="680" y2="64.5" class="base"/><polyline points="0.0,64.5 37.8,54.5 75.6,127.9 113.3,117.9 151.1,99.2 188.9,88.8 226.7,159.2 264.4,136.3 302.2,111.3 340.0,100.2 377.8,87.1 415.6,76.5 453.3,56.6 491.1,46.5 528.9,31.3 566.7,20.8 604.4,97.7 642.2,77.3 680.0,66.5" fill="none" stroke="var(--stop)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+<p class="note">best $1,061.12 &nbsp;&middot;&nbsp; worst $867.69 &nbsp;&middot;&nbsp; fees paid $22.53</p>
 </div>
 <h2>open right now</h2>
-<div class="scroll"><table><tr><th>placed</th><th>contract</th><th>side</th><th class="num">price</th><th class="num">risking</th><th class="num">to win</th></tr>
-<tr><td>30 Oct 3:04am</td><td>KXBTC15M-26OCT300615-15</td><td>NO</td><td class="num">0.86</td><td class="num">$98.22</td><td class="num">$15.02</td></tr>
-</table></div>
-<p class="note">Called but not settled. A 15-minute contract takes about that long plus a minute for Kalshi to publish, so this list is usually empty.</p>
+<p class="none">Nothing open. Normal &mdash; calls last about fifteen minutes and the bot passes on most contracts.</p>
 <h2>every call, newest first</h2>
 <div class="scroll"><table><tr><th>closed</th><th>result</th><th class="num">paid</th><th class="num">account</th><th>side</th><th class="num">price</th><th class="num">btc vs target</th><th class="num">min left</th></tr>
+<tr><td>30 Oct 3:15am</td><td class="win">won</td><td class="num win">+15.02</td><td class="num">$997.20</td><td>NO</td><td class="num">0.86</td><td class="num">-194</td><td class="num">10</td></tr>
 <tr><td>30 Oct 12:30am</td><td class="win">won</td><td class="num win">+28.51</td><td class="num">$982.18</td><td>YES</td><td class="num">0.76</td><td class="num">+55</td><td class="num">11</td></tr>
 <tr><td>30 Oct 12:00am</td><td class="loss">LOST</td><td class="num loss">-107.45</td><td class="num">$953.67</td><td>NO</td><td class="num">0.82</td><td class="num">-99</td><td class="num">10</td></tr>
 <tr><td>29 Oct 8:45pm</td><td class="win">won</td><td class="num win">+14.68</td><td class="num">$1,061.12</td><td>YES</td><td class="num">0.87</td><td class="num">+159</td><td class="num">12</td></tr>
@@ -105,11 +103,11 @@ a{color:var(--go)}
 <h2>what this is measured against</h2>
 <div class="card">
 <p class="note" style="margin-top:0">Over 63 days of Kalshi history the shipped rule made 272 trades, won 89.3% of them against an 81.3% break-even, and returned +10.35% per dollar staked after fees. Its worst drawdown was 29%.</p>
-<p class="note">17 of the roughly 100 settled calls needed before the live win rate means much. Two or three losses in the first dozen is ordinary; four or more in twenty would say the model is wrong.</p>
-<p class="note">Contracts looked at: 165 &nbsp;&middot;&nbsp; settled and learned from: 164</p>
+<p class="note">18 of the roughly 100 settled calls needed before the live win rate means much. Two or three losses in the first dozen is ordinary; four or more in twenty would say the model is wrong.</p>
+<p class="note">Contracts looked at: 166 &nbsp;&middot;&nbsp; settled and learned from: 165</p>
 </div>
 <footer>
-Updated 30 Oct 3:14am California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
+Updated 30 Oct 3:19am California time, rebuilt each time the cloud watcher saves &mdash; about once an hour.<br>Paper trading only: no broker, no account, no orders. Source and raw state in <a href="https://github.com/elhamwork/btcbot">elhamwork/btcbot</a>.
 </footer>
 </div>
 </html>
