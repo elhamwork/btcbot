@@ -1,16 +1,16 @@
 # What the bot has learned
 
-Written 02 Nov 2026 9:42am California time by `check.py --report`.
+Written 02 Nov 2026 9:47am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$814.69** (started $1,000, -18.5%) |
+| **paper account** | **$814.67** (started $1,000, -18.5%) |
 | best / worst it has been | $1,061.12 / $749.31 |
 | fees paid | $60.94 |
-| contracts looked at | 457 |
-| of those, settled and learned from | 457 |
+| contracts looked at | 459 |
+| of those, settled and learned from | 458 |
 | actual calls (graded GOOD) | 51 |
 | calls that have settled | 51 |
 | alerts that reached the phone | 51 of 51 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 457 live
+The 63-day study is worth 30 observations per row below. So 458 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -37,7 +37,7 @@ three lucky wins should not rewrite the table.
 |---|---|---|---|---|
 | 0-5% | 0.019 | 0.019 | 1 (0 hit) | -0.001 |
 | 5-10% | 0.044 | 0.074 | 1 (1 hit) | +0.031 ** |
-| 10-15% | 0.071 | 0.067 | 2 (0 hit) | -0.004 |
+| 10-15% | 0.071 | 0.065 | 3 (0 hit) | -0.006 |
 | 15-20% | 0.167 | 0.194 | 1 (1 hit) | +0.027 ** |
 | 20-25% | 0.178 | 0.176 | 6 (1 hit) | -0.002 |
 | 25-30% | 0.238 | 0.223 | 11 (2 hit) | -0.015 |
@@ -62,12 +62,12 @@ three lucky wins should not rewrite the table.
 | WEAK (50-70c) | 87 |
 | BAD (cheap side) | 73 |
 | GOOD | 51 |
-| WEAK (small disagreement) | 45 |
+| WEAK (small disagreement) | 46 |
 | ALMOST (not confirmed yet) | 4 |
-| BAD (last 5 min) | 3 |
+| BAD (last 5 min) | 4 |
 | BAD (wide spread) | 1 |
 
-Leaned YES 213 times, NO 244 times. Over 63 days of history the
+Leaned YES 213 times, NO 246 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -124,7 +124,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 10:04 | 2026-11-02 10:15 | NO | 0.85 | -80 | 10 | RIGHT | +12.64 | $774.38 |
 | 11:19 | 2026-11-02 11:30 | NO | 0.83 | -103 | 10 | RIGHT | +14.93 | $789.31 |
 | 12:33 | 2026-11-02 12:45 | NO | 0.86 | -107 | 11 | RIGHT | +12.07 | $801.38 |
-| 13:19 | 2026-11-02 13:30 | NO | 0.85 | -125 | 10 | RIGHT | +13.31 | $814.69 |
+| 13:19 | 2026-11-02 13:30 | NO | 0.85 | -125 | 10 | RIGHT | +13.29 | $814.67 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
