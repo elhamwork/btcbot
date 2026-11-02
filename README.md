@@ -11,18 +11,19 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$801.38** &nbsp; -19.9% since $1,000 &nbsp;&middot;&nbsp; updated 02 Nov 5:24am California time
+**$814.69** &nbsp; -18.5% since $1,000 &nbsp;&middot;&nbsp; updated 02 Nov 9:42am California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
-| 50 | 40 / 10 | 80.0% | 81.2% |
+| 51 | 41 / 10 | 80.4% | 81.3% |
 
-Best $1,061.12, worst $749.31, fees paid $60.09.
+Best $1,061.12, worst $749.31, fees paid $60.94.
 
 ### Last 8 calls
 
 | closed | result | paid | account after | side | price |
 |---|---|---|---|---|---|
+| 02 Nov 5:30am | won | +13.31 | $814.69 | NO | 0.85 |
 | 02 Nov 4:45am | won | +12.07 | $801.38 | NO | 0.86 |
 | 02 Nov 3:30am | won | +14.93 | $789.31 | NO | 0.83 |
 | 02 Nov 2:15am | won | +12.64 | $774.38 | NO | 0.85 |
@@ -30,11 +31,8 @@ Best $1,061.12, worst $749.31, fees paid $60.09.
 | 01 Nov 8:00pm | **LOST** | -85.08 | $749.31 | YES | 0.72 |
 | 01 Nov 4:15pm | **LOST** | -94.46 | $834.39 | YES | 0.76 |
 | 01 Nov 3:45pm | won | +18.83 | $928.85 | YES | 0.82 |
-| 01 Nov 11:45am | won | +27.86 | $910.02 | NO | 0.75 |
 
-1 call open right now.
-
-50 of the roughly 100 settled calls needed before this win rate
+51 of the roughly 100 settled calls needed before this win rate
 means much. Two or three losses in the first dozen is ordinary;
 four or more in twenty would say the model is wrong.
 
