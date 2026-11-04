@@ -20660,8 +20660,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 28.44,
-   "bank_after": 1035.1,
+   "paid": 28.4,
+   "bank_after": 1035.06,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -20726,6 +20726,37 @@
    "ask_size": 900.93,
    "volume": 64238.91,
    "open_interest": 45865.36
+  },
+  {
+   "asked": "2026-11-04T16:45:40.802506+00:00",
+   "ticker": "KXBTC15M-26NOV041200-00",
+   "close_time": "2026-11-04T17:00:00Z",
+   "raw": 0.5141731487822131,
+   "p": 0.5189636111111111,
+   "side": "YES",
+   "price": 0.48,
+   "edge": 0.03896361111111113,
+   "grade": "BAD (cheap side)",
+   "mins": 14.3,
+   "spot": 80579.83,
+   "strike": 80574.18,
+   "dist": 5.65,
+   "vol": 0.000521,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 7,
+   "cross_30": 9,
+   "move_5m": -0.00011,
+   "move_15m": 0.000966,
+   "move_60m": 0.005086,
+   "vol_ratio": 0.829,
+   "hour_utc": 16,
+   "spread": 0.01,
+   "bid_size": 17295.39,
+   "ask_size": 1330.23,
+   "volume": 112638.86,
+   "open_interest": 78431.53
   }
  ],
  "bins_n": [
@@ -47468,10 +47499,32 @@
     "side": "YES",
     "qual": false
    }
+  ],
+  "KXBTC15M-26NOV041200-00": [
+   {
+    "mins": 14.32,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.07,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.81,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.55,
+    "side": "YES",
+    "qual": false
+   }
   ]
  },
  "bank": {
-  "cash": 1035.1,
+  "cash": 1035.06,
   "start": 1000.0,
   "peak": 1061.12,
   "low": 741.04,
@@ -47515,7 +47568,6 @@
   "KXBTC15M-26NOV040400-00",
   "KXBTC15M-26NOV040445-45",
   "KXBTC15M-26NOV040845-45",
-  "KXBTC15M-26NOV041115-15",
   "KXBTC15M-26OCT281545-45",
   "KXBTC15M-26OCT281615-15",
   "KXBTC15M-26OCT281800-00",
@@ -47551,6 +47603,7 @@
   "KXBTC15M-26OCT311630-30",
   "KXBTC15M-26OCT311900-00",
   "KXBTC15M-26OCT312015-15",
-  "KXBTC15M-26OCT312215-15"
+  "KXBTC15M-26OCT312215-15",
+  "KXBTC15M-26NOV041115-15"
  ]
 }
