@@ -1,16 +1,16 @@
 # What the bot has learned
 
-Written 04 Nov 2026 8:46am California time by `check.py --report`.
+Written 04 Nov 2026 8:47am California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,035.06** (started $1,000, +3.5%) |
+| **paper account** | **$1,035.10** (started $1,000, +3.5%) |
 | best / worst it has been | $1,061.12 / $741.04 |
 | fees paid | $86.82 |
 | contracts looked at | 639 |
-| of those, settled and learned from | 637 |
+| of those, settled and learned from | 638 |
 | actual calls (graded GOOD) | 73 |
 | calls that have settled | 73 |
 | alerts that reached the phone | 73 of 73 |
@@ -27,7 +27,7 @@ bot a better forecaster than Kalshi -- measured over 63 days, Kalshi's
 own price is the better forecast. The bot's only claim is a narrow
 band where its disagreement with Kalshi has been worth something.
 
-The 63-day study is worth 30 observations per row below. So 637 live
+The 63-day study is worth 30 observations per row below. So 638 live
 results spread over 20 rows moves things very little, on purpose --
 three lucky wins should not rewrite the table.
 
@@ -45,7 +45,7 @@ three lucky wins should not rewrite the table.
 | 35-40% | 0.354 | 0.411 | 47 (21 hit) | +0.057 ** |
 | 40-45% | 0.384 | 0.385 | 104 (40 hit) | +0.000 |
 | 45-50% | 0.497 | 0.493 | 132 (65 hit) | -0.004 |
-| 50-55% | 0.558 | 0.519 | 114 (58 hit) | -0.039 ** |
+| 50-55% | 0.558 | 0.522 | 115 (59 hit) | -0.035 ** |
 | 55-60% | 0.605 | 0.522 | 89 (44 hit) | -0.083 ** |
 | 60-65% | 0.678 | 0.645 | 45 (28 hit) | -0.033 ** |
 | 65-70% | 0.738 | 0.630 | 21 (10 hit) | -0.108 ** |
@@ -147,7 +147,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 08:48 | 2026-11-04 09:00 | YES | 0.77 | +82 | 11 | RIGHT | +26.24 | $955.02 |
 | 09:34 | 2026-11-04 09:45 | YES | 0.77 | +90 | 10 | RIGHT | +26.99 | $982.01 |
 | 13:32 | 2026-11-04 13:45 | NO | 0.79 | -142 | 12 | RIGHT | +24.65 | $1,006.66 |
-| 16:03 | 2026-11-04 16:15 | YES | 0.77 | +234 | 11 | RIGHT | +28.40 | $1,035.06 |
+| 16:03 | 2026-11-04 16:15 | YES | 0.77 | +234 | 11 | RIGHT | +28.44 | $1,035.10 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
