@@ -1,14 +1,14 @@
 # What the bot has learned
 
-Written 04 Nov 2026 7:02pm California time by `check.py --report`.
+Written 04 Nov 2026 7:03pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,150.26** (started $1,000, +15.0%) |
-| best / worst it has been | $1,150.26 / $741.04 |
-| fees paid | $93.95 |
+| **paper account** | **$1,150.28** (started $1,000, +15.0%) |
+| best / worst it has been | $1,150.28 / $741.04 |
+| fees paid | $93.96 |
 | contracts looked at | 680 |
 | of those, settled and learned from | 679 |
 | actual calls (graded GOOD) | 79 |
@@ -153,7 +153,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 19:49 | 2026-11-04 20:00 | NO | 0.82 | -89 | 10 | RIGHT | +21.97 | $1,083.84 |
 | 00:04 | 2026-11-05 00:15 | YES | 0.78 | +108 | 10 | RIGHT | +28.90 | $1,112.74 |
 | 01:19 | 2026-11-05 01:30 | NO | 0.88 | -216 | 11 | RIGHT | +14.23 | $1,126.97 |
-| 02:33 | 2026-11-05 02:45 | NO | 0.82 | -105 | 11 | RIGHT | +23.29 | $1,150.26 |
+| 02:33 | 2026-11-05 02:45 | NO | 0.82 | -105 | 11 | RIGHT | +23.31 | $1,150.28 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
