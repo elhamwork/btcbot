@@ -23717,8 +23717,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 45.71,
-   "bank_after": 1283.72,
+   "paid": 45.67,
+   "bank_after": 1283.68,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -52292,26 +52292,6 @@
   ],
   "KXBTC15M-26NOV051930-30": [
    {
-    "mins": 13.41,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 13.15,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.89,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.64,
-    "side": "YES",
-    "qual": false
-   },
-   {
     "mins": 12.38,
     "side": "YES",
     "qual": false
@@ -52490,13 +52470,33 @@
     "mins": 3.45,
     "side": "YES",
     "qual": false
+   },
+   {
+    "mins": 3.2,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.94,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.68,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.43,
+    "side": "YES",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1283.72,
+  "cash": 1283.68,
   "start": 1000.0,
-  "peak": 1283.72,
+  "peak": 1283.68,
   "low": 741.04,
   "settled": 84,
   "fees": 101.78
@@ -52549,7 +52549,6 @@
   "KXBTC15M-26NOV042315-15",
   "KXBTC15M-26NOV050130-30",
   "KXBTC15M-26NOV051215-15",
-  "KXBTC15M-26NOV051515-15",
   "KXBTC15M-26OCT281545-45",
   "KXBTC15M-26OCT281615-15",
   "KXBTC15M-26OCT281800-00",
@@ -52585,6 +52584,7 @@
   "KXBTC15M-26OCT311630-30",
   "KXBTC15M-26OCT311900-00",
   "KXBTC15M-26OCT312015-15",
-  "KXBTC15M-26OCT312215-15"
+  "KXBTC15M-26OCT312215-15",
+  "KXBTC15M-26NOV051515-15"
  ]
 }
