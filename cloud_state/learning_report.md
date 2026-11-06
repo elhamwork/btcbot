@@ -1,15 +1,15 @@
 # What the bot has learned
 
-Written 05 Nov 2026 11:10pm California time by `check.py --report`.
+Written 05 Nov 2026 11:15pm California time by `check.py --report`.
 
 ## The short version
 
 | | |
 |---|---|
-| **paper account** | **$1,387.92** (started $1,000, +38.8%) |
-| best / worst it has been | $1,387.92 / $741.04 |
+| **paper account** | **$1,387.89** (started $1,000, +38.8%) |
+| best / worst it has been | $1,387.89 / $741.04 |
 | fees paid | $107.20 |
-| contracts looked at | 770 |
+| contracts looked at | 772 |
 | of those, settled and learned from | 770 |
 | actual calls (graded GOOD) | 86 |
 | calls that have settled | 86 |
@@ -60,15 +60,15 @@ three lucky wins should not rewrite the table.
 | grade | times |
 |---|---|
 | NONE (no disagreement) | 358 |
-| BAD (cheap side) | 129 |
+| BAD (cheap side) | 130 |
 | WEAK (50-70c) | 127 |
 | GOOD | 86 |
 | WEAK (small disagreement) | 60 |
 | ALMOST (not confirmed yet) | 5 |
-| BAD (last 5 min) | 4 |
+| BAD (last 5 min) | 5 |
 | BAD (wide spread) | 1 |
 
-Leaned YES 365 times, NO 405 times. Over 63 days of history the
+Leaned YES 365 times, NO 407 times. Over 63 days of history the
 split is 49.5% YES, so anything near half and half is normal.
 
 ## Every call it has made
@@ -160,7 +160,7 @@ split is 49.5% YES, so anything near half and half is normal.
 | 17:04 | 2026-11-05 17:15 | NO | 0.85 | -235 | 10 | RIGHT | +20.21 | $1,238.01 |
 | 20:04 | 2026-11-05 20:15 | NO | 0.72 | -109 | 10 | RIGHT | +45.71 | $1,283.72 |
 | 03:32 | 2026-11-06 03:45 | NO | 0.70 | -82 | 12 | RIGHT | +52.32 | $1,336.04 |
-| 06:04 | 2026-11-06 06:15 | NO | 0.71 | -76 | 11 | RIGHT | +51.88 | $1,387.92 |
+| 06:04 | 2026-11-06 06:15 | NO | 0.71 | -76 | 11 | RIGHT | +51.85 | $1,387.89 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
