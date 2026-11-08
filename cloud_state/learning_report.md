@@ -6,7 +6,7 @@ Written 07 Nov 2026 7:55pm California time by `check.py --report`.
 
 | | |
 |---|---|
-| **paper account** | **$1,334.79** (started $1,000, +33.5%) |
+| **paper account** | **$1,334.81** (started $1,000, +33.5%) |
 | best / worst it has been | $1,527.06 / $741.04 |
 | fees paid | $148.51 |
 | contracts looked at | 940 |
@@ -189,7 +189,7 @@ publish the result, so this list is usually empty.
 | 20:34 | 2026-11-07 20:45 | NO | 0.79 | -41 | 10 | RIGHT | +34.43 | $1,405.67 |
 | 22:18 | 2026-11-07 22:30 | YES | 0.73 | +39 | 11 | **wrong** | -143.23 | $1,262.44 |
 | 23:34 | 2026-11-07 23:45 | YES | 0.77 | +48 | 10 | RIGHT | +35.67 | $1,298.11 |
-| 03:02 | 2026-11-08 03:15 | YES | 0.77 | +50 | 12 | RIGHT | +36.68 | $1,334.79 |
+| 03:02 | 2026-11-08 03:15 | YES | 0.77 | +50 | 12 | RIGHT | +36.70 | $1,334.81 |
 
 "BTC vs target" is how many dollars above (+) or below (-) the
 target BTC was when the call was made. That number, the minutes
