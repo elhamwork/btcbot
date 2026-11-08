@@ -11,7 +11,7 @@ prices and sends notifications.
 
 ## Live paper account
 
-**$1,334.79** &nbsp; +33.5% since $1,000 &nbsp;&middot;&nbsp; updated 07 Nov 7:50pm California time
+**$1,334.79** &nbsp; +33.5% since $1,000 &nbsp;&middot;&nbsp; updated 07 Nov 7:55pm California time
 
 | calls settled | won / lost | win rate | break-even it must beat |
 |---|---|---|---|
@@ -34,7 +34,7 @@ Best $1,527.06, worst $741.04, fees paid $148.51.
 
 1 call open right now.
 
-Collecting in the background: 290,928 order-book snapshots over 76 days (needs about three weeks).
+Collecting in the background: 290,943 order-book snapshots over 76 days (needs about three weeks).
 
 Paper only: no broker, no account, no orders. Full history in
 [`cloud_state/learning_report.md`](cloud_state/learning_report.md).
