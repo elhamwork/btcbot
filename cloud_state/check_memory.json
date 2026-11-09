@@ -33795,13 +33795,13 @@
    "dist": -152.99,
    "vol": 0.000569,
    "answered": true,
-   "outcome": null,
+   "outcome": 0,
    "bet": {
-    "stake": 174.96,
+    "stake": 174.97,
     "contracts": 208.3,
     "fee": 1.96,
     "to_win": 31.37,
-    "bank_before": 1749.61
+    "bank_before": 1749.65
    },
    "cross_15": 4,
    "cross_30": 7,
@@ -33816,7 +33816,12 @@
    "volume": 760045.46,
    "open_interest": 407482.96,
    "call_alert": true,
-   "call_alert_detail": "HTTP 200"
+   "call_alert_detail": "HTTP 200",
+   "correct": true,
+   "paid": 31.37,
+   "bank_after": 1781.02,
+   "settle_alert": true,
+   "settle_alert_detail": "HTTP 200"
   },
   {
    "asked": "2026-11-09T06:30:45.069842+00:00",
@@ -33856,7 +33861,7 @@
   3.0,
   1.0,
   11.0,
-  26.0,
+  27.0,
   38.0,
   70.0,
   145.0,
@@ -60316,16 +60321,86 @@
     "mins": 13.74,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 13.49,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.23,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.98,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.72,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.47,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.22,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.96,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.71,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.45,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.2,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.94,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.69,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.44,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 10.18,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1749.65,
+  "cash": 1781.02,
   "start": 1000.0,
-  "peak": 1749.65,
+  "peak": 1781.02,
   "low": 741.04,
-  "settled": 116,
-  "fees": 172.45
+  "settled": 117,
+  "fees": 174.41
  },
  "alerted": [
   "KXBTC15M-26NOV010100EST-00",
