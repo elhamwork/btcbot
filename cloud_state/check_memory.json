@@ -39784,8 +39784,8 @@
    "call_alert": true,
    "call_alert_detail": "HTTP 200",
    "correct": true,
-   "paid": 42.1,
-   "bank_after": 1621.26,
+   "paid": 42.14,
+   "bank_after": 1621.3,
    "settle_alert": true,
    "settle_alert_detail": "HTTP 200"
   },
@@ -64832,56 +64832,6 @@
   ],
   "KXBTC15M-26NOV111030-30": [
    {
-    "mins": 12.98,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.73,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.48,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 12.22,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.97,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.72,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.46,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 11.21,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.96,
-    "side": "NO",
-    "qual": false
-   },
-   {
-    "mins": 10.7,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 10.45,
     "side": "NO",
     "qual": false
@@ -65030,11 +64980,61 @@
     "mins": 3.11,
     "side": "NO",
     "qual": false
+   },
+   {
+    "mins": 2.86,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.6,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 2.1,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.84,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.59,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.34,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 1.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.83,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.58,
+    "side": "NO",
+    "qual": false
    }
   ]
  },
  "bank": {
-  "cash": 1621.26,
+  "cash": 1621.3,
   "start": 1000.0,
   "peak": 2014.87,
   "low": 741.04,
@@ -65135,7 +65135,6 @@
   "KXBTC15M-26NOV101615-15",
   "KXBTC15M-26NOV102015-15",
   "KXBTC15M-26NOV110415-15",
-  "KXBTC15M-26NOV110845-45",
   "KXBTC15M-26OCT281545-45",
   "KXBTC15M-26OCT281615-15",
   "KXBTC15M-26OCT281800-00",
@@ -65171,6 +65170,7 @@
   "KXBTC15M-26OCT311630-30",
   "KXBTC15M-26OCT311900-00",
   "KXBTC15M-26OCT312015-15",
-  "KXBTC15M-26OCT312215-15"
+  "KXBTC15M-26OCT312215-15",
+  "KXBTC15M-26NOV110845-45"
  ]
 }
