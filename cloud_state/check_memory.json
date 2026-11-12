@@ -42678,7 +42678,7 @@
    "dist": 149.53,
    "vol": 0.000773,
    "answered": false,
-   "outcome": null,
+   "outcome": 0,
    "bet": null,
    "cross_15": 2,
    "cross_30": 2,
@@ -42692,6 +42692,37 @@
    "ask_size": 504.85,
    "volume": 137386.32,
    "open_interest": 106405.37
+  },
+  {
+   "asked": "2026-11-12T14:45:14.876847+00:00",
+   "ticker": "KXBTC15M-26NOV121000-00",
+   "close_time": "2026-11-12T15:00:00Z",
+   "raw": 0.5261614967855647,
+   "p": 0.47896228187919465,
+   "side": "NO",
+   "price": 0.54,
+   "edge": -0.018962281879194687,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.8,
+   "spot": 71630.65,
+   "strike": 71604.44,
+   "dist": 26.21,
+   "vol": 0.001452,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 1,
+   "cross_30": 1,
+   "move_5m": -0.008153,
+   "move_15m": -0.003369,
+   "move_60m": -0.013415,
+   "vol_ratio": 2.005,
+   "hour_utc": 14,
+   "spread": 0.01,
+   "bid_size": 621.33,
+   "ask_size": 4636.75,
+   "volume": 11701.11,
+   "open_interest": 11674.11
   }
  ],
  "bins_n": [
@@ -42710,7 +42741,7 @@
   108.0,
   52.0,
   31.0,
-  18.0,
+  19.0,
   8.0,
   5.0,
   1.0,
@@ -64557,56 +64588,6 @@
   ],
   "KXBTC15M-26NOV120945-45": [
    {
-    "mins": 12.63,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.37,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 12.12,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.86,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.6,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 11.34,
-    "side": "YES",
-    "qual": true
-   },
-   {
-    "mins": 11.08,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.82,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.57,
-    "side": "YES",
-    "qual": false
-   },
-   {
-    "mins": 10.31,
-    "side": "YES",
-    "qual": true
-   },
-   {
     "mins": 10.05,
     "side": "YES",
     "qual": true
@@ -64754,6 +64735,108 @@
    {
     "mins": 2.59,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.34,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 2.08,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.82,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.56,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.31,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.05,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 0.79,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.53,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.27,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 0.02,
+    "side": "NO",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26NOV121000-00": [
+   {
+    "mins": 14.76,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 14.5,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 14.24,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 13.99,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.73,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.47,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.21,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.95,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.69,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.44,
+    "side": "NO",
     "qual": false
    }
   ]
