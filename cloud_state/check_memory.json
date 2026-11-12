@@ -42103,6 +42103,37 @@
    "ask_size": 8813.29,
    "volume": 63895.93,
    "open_interest": 39545.41
+  },
+  {
+   "asked": "2026-11-12T10:01:41.249466+00:00",
+   "ticker": "KXBTC15M-26NOV120515-15",
+   "close_time": "2026-11-12T10:15:00Z",
+   "raw": 0.3023095060734098,
+   "p": 0.3321160240963855,
+   "side": "NO",
+   "price": 0.6599999999999999,
+   "edge": 0.00788397590361456,
+   "grade": "NONE (no disagreement)",
+   "mins": 13.3,
+   "spot": 73369.14,
+   "strike": 73399.04,
+   "dist": -29.9,
+   "vol": 0.000216,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 2,
+   "cross_30": 3,
+   "move_5m": 0.000836,
+   "move_15m": 0.001103,
+   "move_60m": -0.000417,
+   "vol_ratio": 1.013,
+   "hour_utc": 10,
+   "spread": 0.01,
+   "bid_size": 9357.81,
+   "ask_size": 2262.81,
+   "volume": 16115.01,
+   "open_interest": 10696.74
   }
  ],
  "bins_n": [
@@ -80459,6 +80490,53 @@
    {
     "mins": 1.44,
     "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26NOV120515-15": [
+   {
+    "mins": 13.31,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.06,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.81,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.55,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.3,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.05,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.79,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.54,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 11.28,
+    "side": "NO",
     "qual": false
    }
   ]
