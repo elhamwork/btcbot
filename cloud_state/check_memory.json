@@ -46644,7 +46644,7 @@
    "dist": -113.29,
    "vol": 0.000694,
    "answered": false,
-   "outcome": null,
+   "outcome": 1,
    "bet": null,
    "cross_15": 1,
    "cross_30": 2,
@@ -46658,6 +46658,37 @@
    "ask_size": 8827.66,
    "volume": 81823.62,
    "open_interest": 65714.02
+  },
+  {
+   "asked": "2026-11-13T22:30:52.366958+00:00",
+   "ticker": "KXBTC15M-26NOV131745-45",
+   "close_time": "2026-11-13T22:45:00Z",
+   "raw": 0.47663431813150603,
+   "p": 0.4473108571428571,
+   "side": "NO",
+   "price": 0.6,
+   "edge": -0.0473108571428571,
+   "grade": "NONE (no disagreement)",
+   "mins": 14.1,
+   "spot": 68223.88,
+   "strike": 68237.15,
+   "dist": -13.27,
+   "vol": 0.000883,
+   "answered": false,
+   "outcome": null,
+   "bet": null,
+   "cross_15": 6,
+   "cross_30": 9,
+   "move_5m": -0.000736,
+   "move_15m": 0.002182,
+   "move_60m": -0.002325,
+   "vol_ratio": 1.976,
+   "hour_utc": 22,
+   "spread": 0.01,
+   "bid_size": 9335.45,
+   "ask_size": 2737.23,
+   "volume": 123087.16,
+   "open_interest": 71938.91
   }
  ],
  "bins_n": [
@@ -46666,7 +46697,7 @@
   5.0,
   1.0,
   15.0,
-  37.0,
+  38.0,
   62.0,
   97.0,
   183.0,
@@ -46688,7 +46719,7 @@
   1.0,
   1.0,
   4.0,
-  13.0,
+  14.0,
   22.0,
   38.0,
   72.0,
@@ -73251,11 +73282,6 @@
   ],
   "KXBTC15M-26NOV131730-30": [
    {
-    "mins": 11.3,
-    "side": "NO",
-    "qual": false
-   },
-   {
     "mins": 11.04,
     "side": "YES",
     "qual": false
@@ -73448,6 +73474,73 @@
    {
     "mins": 1.4,
     "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 1.15,
+    "side": "YES",
+    "qual": false
+   }
+  ],
+  "KXBTC15M-26NOV131745-45": [
+   {
+    "mins": 14.13,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.87,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.62,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.36,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 13.11,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.86,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.6,
+    "side": "YES",
+    "qual": false
+   },
+   {
+    "mins": 12.35,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 12.09,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.84,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.58,
+    "side": "NO",
+    "qual": false
+   },
+   {
+    "mins": 11.33,
+    "side": "NO",
     "qual": false
    }
   ]
